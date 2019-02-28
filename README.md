@@ -17,6 +17,7 @@ great, the monsters are deadly, and only the bravest Heroes
 stand a chance of surviving or defeating Strahd and his minions. 
 
 **Game Overview**
+
 The Dungeons & Dragons: Castle Ravenloft
 ™ Board Game is a
 cooperative adventure game. You and your fellow Heroes must
@@ -28,12 +29,11 @@ Fighter, Human Rogue, Dwarf Cleric, Eladrin Wizard, Human
 Ranger, or a Hero from another D&D® Adventure System
 board game. Heroes explore the dungeon beneath the castle,
 solve mysteries, fight Monsters, and uncover magic treasure.
-The game runs the Traps, Events, Monsters, and Villains con
--
-tained within the halls of Castle Ravenloft (with a little help
+The game runs the Traps, Events, Monsters, and Villains contained within the halls of Castle Ravenloft (with a little help
 from you).
 
 **Number of Players**
+
 The game can be played with any number of players, from 1 to
 5. Each player controls one Hero—and the game does the rest!
 
@@ -70,12 +70,12 @@ As a user/player:
 
 ## API (Client - Server)
 
-| Method  | Endpoint                | Usage                           | Response                                         |
-| ------- | ----------------------- | ------------------------------- | ------------------------------------------------ |
-| GET     | /api/v1/dungeon-tiles   | generte game play tiles         | an array of data for 1 tile                      |
-| GET     | /api/v1/encounter-cards | store all encounter cards       | an object containing data for that specific card |
-| GET     | /api/v1/monster-cards   | return object with data relvant |
-| to that |
+| Method | Endpoint                | Usage                                   | Response                                         |
+| ------ | ----------------------- | --------------------------------------- | ------------------------------------------------ |
+| GET    | /api/v1/dungeon-tiles   | generte game play tiles                 | an array of data for 1 tile                      |
+| GET    | /api/v1/encounter-cards | store all encounter cards               | an object containing data for that specific card |
+| GET    | /api/v1/monster-cards   | return object with data relvant to that |
+
 | GET     | /api/v1/power-cards     | generate power cards            | object of data relating to that card.            | **WIP** |
 
 DB (Server Side)
