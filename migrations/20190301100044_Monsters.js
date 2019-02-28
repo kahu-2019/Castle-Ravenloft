@@ -1,6 +1,6 @@
 
 exports.up = function (knex, Promise) {
-  return knex.schema.createTable('encounters', table => {
+  return knex.schema.createTable('monsters', t => {
     t.increments('id').primary()
     t.string('type')
     t.integer('AC')
