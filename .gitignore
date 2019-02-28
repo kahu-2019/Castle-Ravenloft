@@ -1,5 +1,10 @@
-# Database file
-*.sqlite3
+node_modules
+static
+npm-debug.log
+dev.sqlite3
+bundle.js
+bundle.js.map
+*bundle
 
 # Logs
 logs
@@ -62,3 +67,9 @@ typings/
 
 # next.js build output
 .next
+
+# package-lock.json
+# yarn.lock
+
+bundle.js.map~master
+bundle.js~master
