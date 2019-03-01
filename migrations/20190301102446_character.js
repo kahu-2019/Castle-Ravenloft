@@ -3,12 +3,13 @@ exports.up = function (knex, Promise) {
   return knex.schema.createTable('character', t => {
     t.increments('id').primary()
     t.string('name')
-    t.string('sub_title')
+    t.integer('level')
+    t.string('subtitle')
     t.text('description')
     t.integer('AC')
     t.integer('HP')
     t.integer('speed')
-    t.integer('surge')
+    t.integer('SurgeValue')
     t.text('ability')
   })
 };

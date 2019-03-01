@@ -5,8 +5,10 @@ exports.up = function(knex, Promise) {
       table.integer('type')
       table.string('name')
       table.boolean('play_imm')
-      table.string('action')
+      table.text('action')
       table.integer('discard')
+      table.integer('att')
+      table.integer('dmg')
   }))
 };
 
