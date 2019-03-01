@@ -2,6 +2,7 @@
 exports.up = function (knex, Promise) {
   return knex.schema.createTable('encounters', table => {
     t.increments('id').primary()
+    t.string('name')
     t.string('type')
     t.integer('AC')
     t.integer('HP')
