@@ -1,6 +1,8 @@
 const express = require('express')
+
 const encounters = require('../db/encounter')
 const character = require('../db/character')
+const monster = require('../db/monsters')
 
 const router = express.Router()
 
@@ -47,5 +49,27 @@ router.get('/characterCards/:id', (req, res) => {
         res.json(standardError)
     })
 })
+
+// GET /api/v1/getAllMonsters returns all monsters
+router.get('/getAllMonsters', (req, res) => {
+    monster.getAllMonsters().then(data => {
+        res.json(data)
+    })
+    .catch(err => {
+        res.json(standardError)
+    })
+})
+
+// GET /api/v1/getMonsterAttacks/:id returns all attacks for that monster
+router.get('/getMonsterAttacks/:id', (req, res) => {
+    monster.getAttacksByMonster(req.params.id).then(data => {
+        res.json(data)
+    })
+    .catch(err => {
+        console.log(err)
+        res.json(standardError)
+    })
+})
+
 
 module.exports = router

@@ -1,6 +1,7 @@
 exports.up = function (knex, Promise) {
   return knex.schema.createTable('monsters_att', t => {
     t.integer('id')
+    t.integer('monster_id')
     t.string('tactics')
     t.integer('att')
     t.integer('dmg')
