@@ -51,6 +51,7 @@ router.get('/characterCards/:id', (req, res) => {
         })
 })
 
+// GET /api/v1/randomMonster returns a random monster card
 router.get('/randomMonster', (req, res) => {
     randomMonster.getRandomMonster().then(data => {
         res.json(data)
