@@ -68,7 +68,7 @@ exports.seed = function (knex, Promise) {
           id: 7,
           monster_id: 5,
           tactics: "/game_assets/monster_tactics/gargoyle.js",
-          attack_name: "Whirlwind of bites",
+          attack_name: "Whirlwind of claws",
           att: 8,
           dmg: 2,
           miss_dmg: 1,
