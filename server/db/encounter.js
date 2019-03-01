@@ -1,7 +1,7 @@
 const connection = require('./connection')
 
 function getAllEncounters(db = connection) {
-  return db('encounters')
+    return db('encounters')
 }
 function getRandomEncounter(db = connection) {
     
