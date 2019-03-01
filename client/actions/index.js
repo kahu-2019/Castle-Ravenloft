@@ -5,6 +5,7 @@ export function getAllCharacters() {
     return dispatch => {
         return apiGetAllCharacters()
         .then(allCharacters => {
+            console.log(allCharacters)
          dispatch(saveAllCharacters(allCharacters))
       })
     }

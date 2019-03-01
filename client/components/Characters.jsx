@@ -19,7 +19,7 @@ class Characters extends Component {
       <div>
           characters jsux
         <ul>
-        {this.props.allCharacters.map(character => {
+        {this.props.characters.map(character => {
             return(
                 <li>
                     <h3>{character.name}</h3>
@@ -40,7 +40,7 @@ class Characters extends Component {
 
 function mapStateToProps(state){
     return {
-        allCharacters: state.allCharacters
+        characters: state.characters
     }
   } 
 
