@@ -5,9 +5,9 @@
 // 3 - trap
 
 exports.up = function (knex, Promise) {
-  return knex.schema.createTable('encounters', table => {
+  return knex.schema.createTable('encounters', t => {
     t.increments('id').primary()
-    t.integer('evt_type') 
+    t.integer('evt_type')
     t.string('name')
     t.string('flavour')
     t.string('description')
