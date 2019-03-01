@@ -28315,58 +28315,98 @@ var Characters = function (_Component) {
         value: function render() {
 
             return _react2.default.createElement(
-                'div',
+                _react.Fragment,
                 null,
-                'characters jsux',
                 _react2.default.createElement(
-                    'ul',
-                    null,
-                    this.props.characters.map(function (character) {
+                    'div',
+                    { className: 'card-columns' },
+                    this.props.characters.map(function (character, i) {
                         return _react2.default.createElement(
-                            'li',
-                            null,
+                            'div',
+                            { className: 'card ' + 'bg-' + character.name, key: i },
                             _react2.default.createElement(
-                                'h3',
-                                null,
-                                character.name
-                            ),
-                            _react2.default.createElement(
-                                'p',
-                                null,
+                                'div',
+                                { className: 'container-fluid' },
                                 _react2.default.createElement(
-                                    'em',
-                                    null,
-                                    character.subtitle
+                                    'div',
+                                    { className: 'card-body' },
+                                    _react2.default.createElement(
+                                        'div',
+                                        { className: 'row' },
+                                        _react2.default.createElement(
+                                            'h5',
+                                            { className: 'card-title card-text' },
+                                            character.name
+                                        ),
+                                        _react2.default.createElement(
+                                            'h6',
+                                            { className: 'card-subtitle mb-2 text-muted card-text' },
+                                            character.subtitle
+                                        ),
+                                        _react2.default.createElement(
+                                            'p',
+                                            { className: 'card-text card-text' },
+                                            character.description
+                                        )
+                                    ),
+                                    _react2.default.createElement(
+                                        'div',
+                                        { className: 'row' },
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'col attribs-title card-text' },
+                                            'AC'
+                                        ),
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'col attribs-title card-text' },
+                                            'HP'
+                                        ),
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'col attribs-title card-text' },
+                                            'Speed'
+                                        ),
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'col attribs-title card-text' },
+                                            'SurgeValue'
+                                        )
+                                    ),
+                                    _react2.default.createElement(
+                                        'div',
+                                        { className: 'row' },
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'col attribs card-text' },
+                                            character.AC
+                                        ),
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'col attribs card-text' },
+                                            character.HP
+                                        ),
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'col attribs card-text' },
+                                            character.speed
+                                        ),
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'col attribs card-text' },
+                                            character.SurgeValue
+                                        )
+                                    ),
+                                    _react2.default.createElement(
+                                        'div',
+                                        { className: 'row' },
+                                        _react2.default.createElement(
+                                            'p',
+                                            { className: 'card-text card-text' },
+                                            character.description
+                                        )
+                                    )
                                 )
-                            ),
-                            _react2.default.createElement(
-                                'p',
-                                null,
-                                character.description
-                            ),
-                            _react2.default.createElement(
-                                'p',
-                                null,
-                                'AC: ',
-                                character.AC
-                            ),
-                            _react2.default.createElement(
-                                'p',
-                                null,
-                                'HP: ',
-                                character.HP
-                            ),
-                            _react2.default.createElement(
-                                'p',
-                                null,
-                                'Speed: ',
-                                character.Speed
-                            ),
-                            _react2.default.createElement(
-                                'p',
-                                null,
-                                'SurgeValue: ',
-                                character.SurgeValue
                             )
                         );
                     })

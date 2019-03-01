@@ -2,3 +2,58 @@
   color: red;
   font-weight: bold;
 }
+
+.attribs{
+  text-align: center;
+  border-style: solid;
+  border-color:black;
+
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.attribs-title{
+  text-align: center;
+}
+
+
+.bg-Alisa {
+  background-color: #228B22!important;
+  -webkit-box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
+  -moz-box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
+  box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
+
+}
+
+.bg-Arjhan {
+  background-color: 	#800000!important;
+  -webkit-box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
+  -moz-box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
+  box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
+}
+
+.bg-Immeril {
+  background-color: #4f3584!important;
+  -webkit-box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
+  -moz-box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
+  box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
+}
+
+.bg-Kat {
+  background-color: #013554!important;
+  -webkit-box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
+  -moz-box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
+  box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
+}
+
+.bg-Thorgrim {
+  background-color: #9e8f0b!important;
+  -webkit-box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
+  -moz-box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
+  box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
+}
+
+.card-text{
+  color:rgb(223, 219, 219);
+  
+}
