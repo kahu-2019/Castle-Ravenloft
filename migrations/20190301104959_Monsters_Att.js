@@ -4,6 +4,8 @@ exports.up = function(knex, Promise) {
     t.string("tactics");
     t.integer("att");
     t.integer("dmg");
+    t.integer("miss_dmg");
+    t.text("special");
   });
 };
 
