@@ -1,10 +1,10 @@
 
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex('table_name').del()
+  return knex('character_cards').del()
     .then(function () {
       // Inserts seed entries
-      return knex('table_name').insert([
+      return knex('character_cards').insert([
         {id: 1, character_id: 1, type:'utility power', title:'Healing Word', subtitle:'You whisper a brief prayer, and a divine healing light washes over your companion.', instruction_1:'Use this power during your Hero Phase', instruction_2:'One hero regains Hit Points equal to his or her healing surge value', attack:null, damage:null, miss:null},
         {id: 3, character_id: 1, type:'utility power', title:'Bless', subtitle:'You call forth a holy blessing for you and your companions.', instruction_1:'Use this power during your Hero Phase', instruction_2:'Each Hero within 1 tile of you gains a +2 bonus to attack rolls until the end of your next Hero Phase', attack:null, damage:null, miss:null},
         {id: 2, character_id: 1, type:'utility power', title:'Consecrated Ground', subtitle:'You sanctify the ground around you, warding it from evil', instruction_1:'Use this power during your Hero Phase instead of attacking', instruction_2:'Choose a tile within 1 tile of you. If there is a marker on that tile, discard it. Place the Consecrated Ground marker on the chosen tile. The next time you would place an Encounter marker on that tile, discard that Encounter Card and do not draw the new Encounter Card. Then discard the Consecrated Ground marker', attack:null, damage:null, miss:null},
