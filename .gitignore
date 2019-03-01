@@ -5,6 +5,7 @@ dev.sqlite3
 bundle.js
 bundle.js.map
 *bundle
+.vscode
 
 # Logs
 logs
