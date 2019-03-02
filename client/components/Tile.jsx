@@ -20,7 +20,7 @@ class Tile extends Component {
         <div className='tile'>
             {this.state.tile.map((row, x) => {
                 return row.map((square, y) => {
-                    return <Square square={square} x={x} y={y} />
+                    return <Square key={`${x},${y}`} square={square} x={x} y={y} />
                 })
             })}
         </div>

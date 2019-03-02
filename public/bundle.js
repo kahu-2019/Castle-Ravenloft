@@ -30766,16 +30766,34 @@ var Board = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
+            var rows = 0;
+            var cols = 0;
+            this.state.sets.map(function (set) {
+                if (set.x > cols) cols = set.x;
+                if (set.y > rows) rows = set.y;
+            });
             return _react2.default.createElement(
                 'div',
-                { className: 'board' },
-                this.state.sets && this.state.sets.map(function (set, key) {
-                    return _react2.default.createElement(
-                        'div',
-                        { key: key, style: { 'gridColumnStart': set.x, 'gridColumnEnd': set.x + 1, 'gridRowStart': set.y, 'gridRowEnd': set.y + 1 } },
-                        _react2.default.createElement(_Tile2.default, { tile: set.grid })
-                    );
-                })
+                { style: {
+                        height: '100vh',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center' } },
+                _react2.default.createElement(
+                    'div',
+                    { style: { display: 'grid',
+                            width: 200 * cols + 'px',
+                            height: 200 * rows + 'px',
+                            gridTemplateRows: 'repeat(' + rows + ', 200px)',
+                            gridTemplateColumns: 'repeat(' + cols + ', 200px)' } },
+                    this.state.sets && this.state.sets.map(function (set, key) {
+                        return _react2.default.createElement(
+                            'div',
+                            { key: key, style: { 'gridColumnStart': set.x, 'gridColumnEnd': set.x + 1, 'gridRowStart': set.y, 'gridRowEnd': set.y + 1 } },
+                            _react2.default.createElement(_Tile2.default, { tile: set.grid })
+                        );
+                    })
+                )
             );
         }
     }]);
@@ -30842,7 +30860,7 @@ var Tile = function (_Component) {
                 { className: 'tile' },
                 this.state.tile.map(function (row, x) {
                     return row.map(function (square, y) {
-                        return _react2.default.createElement(_Square2.default, { square: square, x: x, y: y });
+                        return _react2.default.createElement(_Square2.default, { key: x + ',' + y, square: square, x: x, y: y });
                     });
                 })
             );

@@ -196,13 +196,29 @@ class Board extends Component {
     }
 
     render() {
+        let rows = 0
+        let cols = 0
+        this.state.sets.map(set => {
+            if(set.x > cols) cols = set.x
+            if(set.y > rows) rows = set.y
+        })
         return (
-        <div className='board'>
+        <div style={{
+            height: '100vh',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'}}>
+        <div style={{display:'grid',
+                    width: (200*cols)+'px',
+                    height: (200*rows)+'px',
+                    gridTemplateRows: `repeat(${rows}, 200px)`,
+                    gridTemplateColumns: `repeat(${cols}, 200px)`}}>
             {this.state.sets && this.state.sets.map((set, key) => {
                 return (<div key={key} style={{'gridColumnStart':set.x, 'gridColumnEnd':set.x+1, 'gridRowStart':set.y, 'gridRowEnd':set.y+1}}>
                     <Tile tile={set.grid} />
                     </div>)
             })}
+        </div>
         </div>
         )
     }
