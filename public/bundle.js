@@ -30559,6 +30559,14 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+/*  Main board component, renders tile and square sub-components
+
+    In state:
+        testSets should be replaced with the actual datasets used during play
+        sets is a temp set that should contain the player and monster positions
+        Player represents a single player
+*/
+
 var Board = function (_Component) {
     _inherits(Board, _Component);
 
@@ -30575,8 +30583,8 @@ var Board = function (_Component) {
 
             sets: [],
 
-            testsets: [{
-                grid: [[1, 1, 1, 1], [1, 0, 0, 0], [1, 0, 2, 0], [1, 0, 0, 0]],
+            testSets: [{
+                grid: [[0, 1, 1, 1], [0, 0, 0, 0], [0, 0, 2, 0], [1, 0, 0, 0]],
                 x: 1,
                 y: 1
             }, {
@@ -30596,6 +30604,9 @@ var Board = function (_Component) {
 
         _this.keypress = _this.keypress.bind(_this);
         _this.getPositionOfCharacter = _this.getPositionOfCharacter.bind(_this);
+        _this.addTile = _this.addTile.bind(_this);
+        _this.testAddTile = _this.testAddTile.bind(_this);
+
         return _this;
     }
 
@@ -30605,7 +30616,7 @@ var Board = function (_Component) {
             var _this2 = this;
 
             document.addEventListener("keydown", this.keypress, false);
-            this.setState({ sets: this.state.testsets }, function () {
+            this.setState({ sets: this.state.testSets }, function () {
                 _this2.getPositionOfCharacter(_this2.state.player, 'x', 0);
             });
         }
@@ -30623,46 +30634,90 @@ var Board = function (_Component) {
             switch (key) {
                 case "ArrowDown":
                     this.getPositionOfCharacter(this.state.player, 'y', 1);
-                    // this.setState(prevState => ({
-                    //     player: {
-                    //         ...prevState.player,
-                    //         y: prevState.player.y+1
-                    //     }
-                    // }), () => this.getPositionOfCharacter())
                     break;
                 case "ArrowUp":
                     this.getPositionOfCharacter(this.state.player, 'y', -1);
-                    // this.setState(prevState => ({
-                    //     player: {
-                    //         ...prevState.player,
-                    //         y: prevState.player.y-1
-                    //     }
-                    // }), () => this.getPositionOfCharacter())
                     break;
                 case "ArrowRight":
                     this.getPositionOfCharacter(this.state.player, 'x', 1);
-                    // this.setState(prevState => ({
-                    //     player: {
-                    //         ...prevState.player,
-                    //         x: prevState.player.x+1
-                    //     }
-                    // }), () => this.getPositionOfCharacter())
                     break;
                 case "ArrowLeft":
                     this.getPositionOfCharacter(this.state.player, 'x', -1);
-                    // this.setState(prevState => ({
-                    //     player: {
-                    //         ...prevState.player,
-                    //         x: prevState.player.x-1
-                    //     }
-                    // }), () => this.getPositionOfCharacter())
+                    break;
+                case "t":
+                    this.testAddTile();
                     break;
             }
         }
     }, {
+        key: 'testAddTile',
+        value: function testAddTile() {
+            var tile = [[1, 0, 0, 0], [0, 0, 0, 0], [0, 0, 2, 0], [0, 0, 0, 0]];
+            var position = {
+                x: 1,
+                y: 0
+            };
+            this.addTile(tile, position);
+        }
+    }, {
+        key: 'addTile',
+        value: function addTile(tile, position) {
+            var _this3 = this;
+
+            var tempSet = JSON.parse(JSON.stringify(this.state.testSets)); // Creates a deep copy of the array
+            var tempPlayer = this.state.player;
+
+            if (position.x === 0) {
+                for (var item in tempSet) {
+                    tempSet[item].x = tempSet[item].x + 1;
+                }
+                tempPlayer.x = tempPlayer.x + 4;
+                tempSet.push({
+                    grid: tile,
+                    x: position.x + 1,
+                    y: position.y
+                });
+                this.setState({
+                    player: tempPlayer,
+                    testSets: tempSet
+                }, function () {
+                    return _this3.getPositionOfCharacter(_this3.state.player, 'x', 0);
+                });
+                return;
+            } else if (position.y === 0) {
+                for (var _item in tempSet) {
+                    tempSet[_item].y = tempSet[_item].y + 1;
+                }
+                tempPlayer.y = tempPlayer.y + 4;
+                tempSet.push({
+                    grid: tile,
+                    x: position.x,
+                    y: position.y + 1
+                });
+                this.setState({
+                    player: tempPlayer,
+                    testSets: tempSet
+                }, function () {
+                    return _this3.getPositionOfCharacter(_this3.state.player, 'x', 0);
+                });
+                return;
+            }
+
+            tempSet.push({
+                grid: tile,
+                x: position.x,
+                y: position.y
+            });
+            this.setState({
+                testSets: tempSet
+            }, function () {
+                return _this3.getPositionOfCharacter(_this3.state.player, 'x', 0);
+            });
+        }
+    }, {
         key: 'getPositionOfCharacter',
         value: function getPositionOfCharacter(char, dir, val) {
-            var temp = JSON.parse(JSON.stringify(this.state.testsets)); // Creates a deep copy of the array
+            var temp = JSON.parse(JSON.stringify(this.state.testSets)); // Creates a deep copy of the array
             if (char[dir] + val < 1) return;
 
             char[dir] = char[dir] + val;
