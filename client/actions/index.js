@@ -1,4 +1,4 @@
-import {getAllCharacters as apiGetAllCharacters} from '../api/characters'
+import {getAllCharacters as apiGetAllCharacters, getCardsByCharacter as apiGetCardsByCharacter} from '../api/characters'
 
 
 export function getAllCharacters() {
@@ -22,4 +22,20 @@ export function addCharacterOrder(character){
       type:'ADD_CHARACTER_ORDER',
       character
     }
+}
+
+export function getCardsByCharacter(id){
+  return dispatch => {
+    return apiGetCardsByCharacter(id)
+    .then(powerCards => {
+      dispatch(savePowerCards(powerCards))
+    })
+  }
+}
+
+export function savePowerCards(powerCards){
+  return {
+    type: 'SAVE_POWER_CARDS',
+    powerCards
+  }
 }
