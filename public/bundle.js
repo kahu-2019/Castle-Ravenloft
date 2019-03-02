@@ -28444,18 +28444,18 @@ var Home = function (_Component) {
         _react2.default.createElement("img", { src: "./images/main/main-img.png", alt: "Responsive image" }),
         _react2.default.createElement(
           "div",
-          { className: "card", id: "main-card" },
+          { className: "display" },
           _react2.default.createElement(
             "div",
-            { className: "card-body1" },
+            { className: "display1", id: "square" },
             _react2.default.createElement(
               "h4",
-              { className: "card-title" },
+              null,
               "INTRODUCTION"
             ),
             _react2.default.createElement(
               "p",
-              { className: "card-text" },
+              null,
               _react2.default.createElement(
                 "i",
                 null,
@@ -28464,42 +28464,37 @@ var Home = function (_Component) {
             ),
             _react2.default.createElement(
               "h4",
-              { className: "card-subtitle mb-2 text-muted" },
+              null,
               "Castle Ravenloft"
             ),
             _react2.default.createElement(
               "p",
-              { className: "card-text" },
+              null,
               "The master of Castle Ravenloft is having quests for dinner-and you are invited! ",
               _react2.default.createElement("br", null),
               "The castle rises over the dark forests of the land of Barovia, looking down upon a sad,frightened village surrounded by an endless sea of dense fog and mist. The master of the castle, Count Strahd, is a vampire,and the night and its creatures belong to him. As long as Strahd exists, Barovia and the land around it will never be safe. ",
               _react2.default.createElement("br", null),
               " A group of Heroes has recently arrived in Barovia, stepping out of the mists to find themselves caught up in the evil emanating from Castle Ravenloft. These Heroes have chosen to enter the castle and discover the secrets waiting within. The dangers are great, the monsters are deadly,and only the bravest Heroes stand a chance of surviving of defeating Strahd and his minions"
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "display2", id: "square" },
+            _react2.default.createElement(
+              "h4",
+              null,
+              "GAME OVERVIEW"
             ),
             _react2.default.createElement(
-              "div",
-              { className: "card", id: "main-card" },
+              "p",
+              null,
+              "The ",
               _react2.default.createElement(
-                "div",
-                { className: "card-body2" },
-                _react2.default.createElement(
-                  "h4",
-                  { className: "card-title" },
-                  "GAME OVERVIEW"
-                ),
-                _react2.default.createElement(
-                  "p",
-                  { className: "card-text" },
-                  "The ",
-                  _react2.default.createElement(
-                    "i",
-                    null,
-                    "Dengeons & Dragons:Castle Ravenloft Board Game"
-                  ),
-                  " is a cooperative adventure game. You and your fellow Heroes must work as a team to succeed in the adventures that unfold within the castle. You either win together or lose togather Each player selects a Hero, who has come to Barovia to discover the secrets of Catle Ravenloft. Choose from the Dragonborn Fighter, Human Rogue, Dwarf Cleric, Eladrin Wizard, Human Ranger, or a Hero from another D&D Adventure System board game. Heroes explore the dungeon beneath the castle, solve mysteries, fight Monster, and Villains contained within the halls of Castle Ravenloft(with a littel help from you)."
-                ),
-                _react2.default.createElement("div", { className: "overview" })
-              )
+                "i",
+                null,
+                "Dengeons & Dragons:Castle Ravenloft Board Game"
+              ),
+              " is a cooperative adventure game. You and your fellow Heroes must work as a team to succeed in the adventures that unfold within the castle. You either win together or lose togather Each player selects a Hero, who has come to Barovia to discover the secrets of Catle Ravenloft. Choose from the Dragonborn Fighter, Human Rogue, Dwarf Cleric, Eladrin Wizard, Human Ranger, or a Hero from another D&D Adventure System board game. Heroes explore the dungeon beneath the castle, solve mysteries, fight Monster, and Villains contained within the halls of Castle Ravenloft(with a littel help from you)."
             )
           )
         )

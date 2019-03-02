@@ -5,10 +5,11 @@ class Home extends Component {
     return (
       <div className="home">
         <img src="./images/main/main-img.png" alt="Responsive image" />
-        <div className="card" id="main-card">
-          <div className="card-body1">
-            <h4 className="card-title">INTRODUCTION</h4>
-            <p className="card-text">
+
+        <div className="display">
+          <div className="display1" id="square">
+            <h4>INTRODUCTION</h4>
+            <p>
               <i>
                 In an ancient time and place,magic permeates the land and
                 monsters stalk the shadows that gather along the edges of
@@ -20,8 +21,8 @@ class Home extends Component {
                 place called Castle Ravenloft.
               </i>
             </p>
-            <h4 className="card-subtitle mb-2 text-muted">Castle Ravenloft</h4>
-            <p className="card-text">
+            <h4>Castle Ravenloft</h4>
+            <p>
               The master of Castle Ravenloft is having quests for dinner-and you
               are invited! <br />
               The castle rises over the dark forests of the land of Barovia,
@@ -37,25 +38,22 @@ class Home extends Component {
               Heroes stand a chance of surviving of defeating Strahd and his
               minions
             </p>
-            <div className="card" id="main-card">
-              <div className="card-body2">
-                <h4 className="card-title">GAME OVERVIEW</h4>
-                <p className="card-text">
-                  The <i>Dengeons & Dragons:Castle Ravenloft Board Game</i> is a
-                  cooperative adventure game. You and your fellow Heroes must
-                  work as a team to succeed in the adventures that unfold within
-                  the castle. You either win together or lose togather Each
-                  player selects a Hero, who has come to Barovia to discover the
-                  secrets of Catle Ravenloft. Choose from the Dragonborn
-                  Fighter, Human Rogue, Dwarf Cleric, Eladrin Wizard, Human
-                  Ranger, or a Hero from another D&D Adventure System board
-                  game. Heroes explore the dungeon beneath the castle, solve
-                  mysteries, fight Monster, and Villains contained within the
-                  halls of Castle Ravenloft(with a littel help from you).
-                </p>
-                <div className="overview" />
-              </div>
-            </div>
+          </div>
+          <div className="display2" id="square">
+            <h4>GAME OVERVIEW</h4>
+            <p>
+              The <i>Dengeons & Dragons:Castle Ravenloft Board Game</i> is a
+              cooperative adventure game. You and your fellow Heroes must work
+              as a team to succeed in the adventures that unfold within the
+              castle. You either win together or lose togather Each player
+              selects a Hero, who has come to Barovia to discover the secrets of
+              Catle Ravenloft. Choose from the Dragonborn Fighter, Human Rogue,
+              Dwarf Cleric, Eladrin Wizard, Human Ranger, or a Hero from another
+              D&D Adventure System board game. Heroes explore the dungeon
+              beneath the castle, solve mysteries, fight Monster, and Villains
+              contained within the halls of Castle Ravenloft(with a littel help
+              from you).
+            </p>
           </div>
         </div>
       </div>
