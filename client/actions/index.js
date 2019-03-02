@@ -5,7 +5,6 @@ export function getAllCharacters() {
     return dispatch => {
         return apiGetAllCharacters()
         .then(allCharacters => {
-            console.log(allCharacters)
          dispatch(saveAllCharacters(allCharacters))
       })
     }
@@ -15,5 +14,12 @@ export function getAllCharacters() {
     return {
         type: 'SAVE_ALL_CHARACTERS',
         allCharacters
+    }
+}
+
+export function addCharacterOrder(character){
+    return {
+      type:'ADD_CHARACTER_ORDER',
+      character
     }
 }

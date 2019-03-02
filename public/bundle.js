@@ -541,6 +541,24 @@ module.exports = g;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Provider__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__connect_connect__ = __webpack_require__(40);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Provider", function() { return __WEBPACK_IMPORTED_MODULE_0__components_Provider__["b"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createProvider", function() { return __WEBPACK_IMPORTED_MODULE_0__components_Provider__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "connectAdvanced", function() { return __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "connect", function() { return __WEBPACK_IMPORTED_MODULE_2__connect_connect__["a"]; });
+
+
+
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = warning;
 /**
  * Prints a warning in the console if it exists.
@@ -568,7 +586,7 @@ function warning(message) {
 }
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -592,7 +610,7 @@ function _extends() {
 }
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -613,7 +631,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 }
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1265,7 +1283,7 @@ if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' 
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(0)))
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1278,24 +1296,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-/* 12 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Provider__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__connect_connect__ = __webpack_require__(40);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Provider", function() { return __WEBPACK_IMPORTED_MODULE_0__components_Provider__["b"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createProvider", function() { return __WEBPACK_IMPORTED_MODULE_0__components_Provider__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "connectAdvanced", function() { return __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "connect", function() { return __WEBPACK_IMPORTED_MODULE_2__connect_connect__["a"]; });
-
-
-
-
 
 /***/ }),
 /* 13 */
@@ -1365,8 +1365,8 @@ var storeShape = __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.shape({
 /* WEBPACK VAR INJECTION */(function(process) {/* harmony export (immutable) */ __webpack_exports__["a"] = connectAdvanced;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_inheritsLoose__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_assertThisInitialized__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__babel_runtime_helpers_esm_extends__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__babel_runtime_helpers_esm_extends__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_hoist_non_react_statics__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_hoist_non_react_statics___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_hoist_non_react_statics__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_invariant__ = __webpack_require__(38);
@@ -1754,7 +1754,7 @@ function wrapMapToPropsFunc(mapToProps, methodName) {
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = verifyPlainObject;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__isPlainObject__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__warning__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__warning__ = __webpack_require__(8);
 
 
 function verifyPlainObject(value, displayName, methodName) {
@@ -1798,9 +1798,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = __webpack_require__(23);
 
-var _reactRedux = __webpack_require__(12);
+var _reactRedux = __webpack_require__(7);
 
-var _redux = __webpack_require__(10);
+var _redux = __webpack_require__(11);
 
 var _reduxThunk = __webpack_require__(51);
 
@@ -1810,7 +1810,7 @@ var _reducers = __webpack_require__(52);
 
 var _reducers2 = _interopRequireDefault(_reducers);
 
-var _App = __webpack_require__(54);
+var _App = __webpack_require__(55);
 
 var _App2 = _interopRequireDefault(_App);
 
@@ -3831,7 +3831,7 @@ if (process.env.NODE_ENV === 'production') {
 /*
  Modernizr 3.0.0pre (Custom Build) | MIT
 */
-var aa=__webpack_require__(1),n=__webpack_require__(2),r=__webpack_require__(11);function ba(a,b,c,d,e,f,g,h){if(!a){a=void 0;if(void 0===b)a=Error("Minified exception occurred; use the non-minified dev environment for the full error message and additional helpful warnings.");else{var l=[c,d,e,f,g,h],k=0;a=Error(b.replace(/%s/g,function(){return l[k++]}));a.name="Invariant Violation"}a.framesToPop=1;throw a;}}
+var aa=__webpack_require__(1),n=__webpack_require__(2),r=__webpack_require__(12);function ba(a,b,c,d,e,f,g,h){if(!a){a=void 0;if(void 0===b)a=Error("Minified exception occurred; use the non-minified dev environment for the full error message and additional helpful warnings.");else{var l=[c,d,e,f,g,h],k=0;a=Error(b.replace(/%s/g,function(){return l[k++]}));a.name="Invariant Violation"}a.framesToPop=1;throw a;}}
 function x(a){for(var b=arguments.length-1,c="https://reactjs.org/docs/error-decoder.html?invariant="+a,d=0;d<b;d++)c+="&args[]="+encodeURIComponent(arguments[d+1]);ba(!1,"Minified React error #"+a+"; visit %s for the full message or use the non-minified dev environment for full errors and additional helpful warnings. ",c)}aa?void 0:x("227");function ca(a,b,c,d,e,f,g,h,l){var k=Array.prototype.slice.call(arguments,3);try{b.apply(c,k)}catch(m){this.onError(m)}}
 var da=!1,ea=null,fa=!1,ha=null,ia={onError:function(a){da=!0;ea=a}};function ja(a,b,c,d,e,f,g,h,l){da=!1;ea=null;ca.apply(ia,arguments)}function ka(a,b,c,d,e,f,g,h,l){ja.apply(this,arguments);if(da){if(da){var k=ea;da=!1;ea=null}else x("198"),k=void 0;fa||(fa=!0,ha=k)}}var la=null,ma={};
 function na(){if(la)for(var a in ma){var b=ma[a],c=la.indexOf(a);-1<c?void 0:x("96",a);if(!oa[c]){b.extractEvents?void 0:x("97",a);oa[c]=b;c=b.eventTypes;for(var d in c){var e=void 0;var f=c[d],g=b,h=d;pa.hasOwnProperty(h)?x("99",h):void 0;pa[h]=f;var l=f.phasedRegistrationNames;if(l){for(e in l)l.hasOwnProperty(e)&&qa(l[e],g,h);e=!0}else f.registrationName?(qa(f.registrationName,g,h),e=!0):e=!1;e?void 0:x("98",d,a)}}}}
@@ -4851,7 +4851,7 @@ if (process.env.NODE_ENV !== "production") {
 var React = __webpack_require__(1);
 var _assign = __webpack_require__(2);
 var checkPropTypes = __webpack_require__(4);
-var scheduler = __webpack_require__(11);
+var scheduler = __webpack_require__(12);
 var tracing = __webpack_require__(28);
 
 /**
@@ -26383,7 +26383,7 @@ exports.unstable_unsubscribe = unstable_unsubscribe;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_PropTypes__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_warning__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_warning__ = __webpack_require__(8);
 
 
 
@@ -27664,8 +27664,8 @@ function () {
 
 "use strict";
 /* unused harmony export createConnect */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_extends__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_extends__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_connectAdvanced__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_shallowEqual__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mapDispatchToProps__ = __webpack_require__(42);
@@ -27815,7 +27815,7 @@ function shallowEqual(objA, objB) {
 /* unused harmony export whenMapDispatchToPropsIsFunction */
 /* unused harmony export whenMapDispatchToPropsIsMissing */
 /* unused harmony export whenMapDispatchToPropsIsObject */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__wrapMapToProps__ = __webpack_require__(17);
 
 
@@ -27970,7 +27970,7 @@ function whenMapStateToPropsIsMissing(mapStateToProps) {
 /* unused harmony export wrapMergePropsFunc */
 /* unused harmony export whenMergePropsIsFunction */
 /* unused harmony export whenMergePropsIsOmitted */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_extends__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_extends__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_verifyPlainObject__ = __webpack_require__(18);
 
 
@@ -28018,7 +28018,7 @@ function whenMergePropsIsOmitted(mergeProps) {
 /* WEBPACK VAR INJECTION */(function(process) {/* unused harmony export impureFinalPropsSelectorFactory */
 /* unused harmony export pureFinalPropsSelectorFactory */
 /* harmony export (immutable) */ __webpack_exports__["a"] = finalPropsSelectorFactory;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__verifySubselectors__ = __webpack_require__(50);
 
 
@@ -28115,7 +28115,7 @@ function finalPropsSelectorFactory(dispatch, _ref2) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = verifySubselectors;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_warning__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_warning__ = __webpack_require__(8);
 
 
 function verify(selector, methodName, displayName) {
@@ -28172,16 +28172,21 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _redux = __webpack_require__(10);
+var _redux = __webpack_require__(11);
 
 var _characters = __webpack_require__(53);
 
 var _characters2 = _interopRequireDefault(_characters);
 
+var _characterOrder = __webpack_require__(54);
+
+var _characterOrder2 = _interopRequireDefault(_characterOrder);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _redux.combineReducers)({
-    characters: _characters2.default
+    characters: _characters2.default,
+    characterOrder: _characterOrder2.default
 });
 
 /***/ }),
@@ -28218,6 +28223,35 @@ exports.default = reducer;
 
 
 Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var initialState = [];
+
+var reducer = function reducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+    var action = arguments[1];
+
+    switch (action.type) {
+        case 'ADD_CHARACTER_ORDER':
+            return [].concat(_toConsumableArray(state), [action.character]);
+        default:
+            return state;
+    }
+};
+
+exports.default = reducer;
+
+/***/ }),
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
@@ -28227,7 +28261,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Characters = __webpack_require__(55);
+var _Characters = __webpack_require__(56);
 
 var _Characters2 = _interopRequireDefault(_Characters);
 
@@ -28253,7 +28287,7 @@ var App = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'container-fluid' },
         _react2.default.createElement(_Characters2.default, null)
       );
     }
@@ -28265,7 +28299,7 @@ var App = function (_Component) {
 exports.default = App;
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28281,11 +28315,17 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(12);
+var _reactRedux = __webpack_require__(7);
 
-var _actions = __webpack_require__(56);
+var _actions = __webpack_require__(57);
+
+var _CharacterOrder = __webpack_require__(65);
+
+var _CharacterOrder2 = _interopRequireDefault(_CharacterOrder);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -28301,7 +28341,14 @@ var Characters = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (Characters.__proto__ || Object.getPrototypeOf(Characters)).call(this, props));
 
-        _this.state = {};
+        _this.state = {
+            characterChosen1: false,
+            characterChosen2: false,
+            characterChosen3: false,
+            characterChosen4: false,
+            characterChosen5: false
+        };
+        _this.characterOrder = _this.characterOrder.bind(_this);
         return _this;
     }
 
@@ -28311,8 +28358,16 @@ var Characters = function (_Component) {
             this.props.dispatch((0, _actions.getAllCharacters)());
         }
     }, {
+        key: 'characterOrder',
+        value: function characterOrder(character) {
+            var id = character.id;
+            this.props.dispatch((0, _actions.addCharacterOrder)(character));
+            this.setState(_defineProperty({}, 'characterChosen' + id, true));
+        }
+    }, {
         key: 'render',
         value: function render() {
+            var _this2 = this;
 
             return _react2.default.createElement(
                 _react.Fragment,
@@ -28321,95 +28376,108 @@ var Characters = function (_Component) {
                     'div',
                     { className: 'card-columns' },
                     this.props.characters.map(function (character, i) {
-                        return _react2.default.createElement(
-                            'div',
-                            { className: 'card ' + 'bg-' + character.name, key: i },
-                            _react2.default.createElement(
+                        var id = character.id;
+                        if (!_this2.state['characterChosen' + id]) {
+                            return _react2.default.createElement(
                                 'div',
-                                { className: 'container-fluid' },
+                                { className: 'card ' + 'bg-' + character.name, key: i, onClick: function onClick() {
+                                        return _this2.characterOrder(character);
+                                    } },
                                 _react2.default.createElement(
                                     'div',
-                                    { className: 'card-body' },
+                                    { className: 'container-fluid' },
                                     _react2.default.createElement(
                                         'div',
-                                        { className: 'row' },
-                                        _react2.default.createElement(
-                                            'h5',
-                                            { className: 'card-title card-text' },
-                                            character.name
-                                        ),
-                                        _react2.default.createElement(
-                                            'h6',
-                                            { className: 'card-subtitle mb-2 text-muted card-text' },
-                                            character.subtitle
-                                        ),
-                                        _react2.default.createElement(
-                                            'p',
-                                            { className: 'card-text card-text' },
-                                            character.description
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: 'row' },
+                                        { className: 'card-body' },
                                         _react2.default.createElement(
                                             'div',
-                                            { className: 'col attribs-title card-text' },
-                                            'AC'
+                                            { className: 'row' },
+                                            _react2.default.createElement(
+                                                'h5',
+                                                { className: 'card-title card-text' },
+                                                character.name
+                                            ),
+                                            _react2.default.createElement(
+                                                'h6',
+                                                { className: 'card-subtitle mb-2 text-muted card-text' },
+                                                character.subtitle
+                                            ),
+                                            _react2.default.createElement(
+                                                'p',
+                                                { className: 'card-text card-text' },
+                                                character.description
+                                            )
                                         ),
                                         _react2.default.createElement(
                                             'div',
-                                            { className: 'col attribs-title card-text' },
-                                            'HP'
+                                            { className: 'row' },
+                                            _react2.default.createElement(
+                                                'div',
+                                                { className: 'col attribs-title card-text' },
+                                                'AC'
+                                            ),
+                                            _react2.default.createElement(
+                                                'div',
+                                                { className: 'col attribs-title card-text' },
+                                                'HP'
+                                            ),
+                                            _react2.default.createElement(
+                                                'div',
+                                                { className: 'col attribs-title card-text' },
+                                                'Speed'
+                                            ),
+                                            _react2.default.createElement(
+                                                'div',
+                                                { className: 'col attribs-title card-text' },
+                                                'SurgeValue'
+                                            )
                                         ),
                                         _react2.default.createElement(
                                             'div',
-                                            { className: 'col attribs-title card-text' },
-                                            'Speed'
+                                            { className: 'row' },
+                                            _react2.default.createElement(
+                                                'div',
+                                                { className: 'col attribs card-text' },
+                                                character.AC
+                                            ),
+                                            _react2.default.createElement(
+                                                'div',
+                                                { className: 'col attribs card-text' },
+                                                character.HP
+                                            ),
+                                            _react2.default.createElement(
+                                                'div',
+                                                { className: 'col attribs card-text' },
+                                                character.speed
+                                            ),
+                                            _react2.default.createElement(
+                                                'div',
+                                                { className: 'col attribs card-text' },
+                                                '+ ',
+                                                character.SurgeValue
+                                            )
                                         ),
                                         _react2.default.createElement(
                                             'div',
-                                            { className: 'col attribs-title card-text' },
-                                            'SurgeValue'
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: 'row' },
-                                        _react2.default.createElement(
-                                            'div',
-                                            { className: 'col attribs card-text' },
-                                            character.AC
-                                        ),
-                                        _react2.default.createElement(
-                                            'div',
-                                            { className: 'col attribs card-text' },
-                                            character.HP
-                                        ),
-                                        _react2.default.createElement(
-                                            'div',
-                                            { className: 'col attribs card-text' },
-                                            character.speed
-                                        ),
-                                        _react2.default.createElement(
-                                            'div',
-                                            { className: 'col attribs card-text' },
-                                            character.SurgeValue
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: 'row' },
-                                        _react2.default.createElement(
-                                            'p',
-                                            { className: 'card-text card-text' },
-                                            character.description
+                                            { className: 'row' },
+                                            _react2.default.createElement(
+                                                'p',
+                                                { className: 'card-text card-text' },
+                                                character.description
+                                            )
                                         )
                                     )
                                 )
-                            )
-                        );
+                            );
+                        } else {
+                            return '';
+                        }
                     })
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'row' },
+                    _react2.default.createElement(_CharacterOrder2.default, null)
                 )
             );
         }
@@ -28427,7 +28495,7 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(Characters);
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28438,13 +28506,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getAllCharacters = getAllCharacters;
 exports.saveAllCharacters = saveAllCharacters;
+exports.addCharacterOrder = addCharacterOrder;
 
-var _characters = __webpack_require__(57);
+var _characters = __webpack_require__(58);
 
 function getAllCharacters() {
     return function (dispatch) {
         return (0, _characters.getAllCharacters)().then(function (allCharacters) {
-            console.log(allCharacters);
             dispatch(saveAllCharacters(allCharacters));
         });
     };
@@ -28457,8 +28525,15 @@ function saveAllCharacters(allCharacters) {
     };
 }
 
+function addCharacterOrder(character) {
+    return {
+        type: 'ADD_CHARACTER_ORDER',
+        character: character
+    };
+}
+
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28469,7 +28544,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getAllCharacters = getAllCharacters;
 
-var _superagent = __webpack_require__(58);
+var _superagent = __webpack_require__(59);
 
 var _superagent2 = _interopRequireDefault(_superagent);
 
@@ -28482,7 +28557,7 @@ function getAllCharacters() {
 }
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -28499,11 +28574,11 @@ if (typeof window !== 'undefined') { // Browser window
   root = this;
 }
 
-const Emitter = __webpack_require__(59);
-const RequestBase = __webpack_require__(60);
+const Emitter = __webpack_require__(60);
+const RequestBase = __webpack_require__(61);
 const isObject = __webpack_require__(19);
-const ResponseBase = __webpack_require__(61);
-const Agent = __webpack_require__(63);
+const ResponseBase = __webpack_require__(62);
+const Agent = __webpack_require__(64);
 
 /**
  * Noop.
@@ -29407,7 +29482,7 @@ request.put = (url, data, fn) => {
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -29576,7 +29651,7 @@ Emitter.prototype.hasListeners = function(event){
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30286,7 +30361,7 @@ RequestBase.prototype._setTimeouts = function() {
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30296,7 +30371,7 @@ RequestBase.prototype._setTimeouts = function() {
  * Module dependencies.
  */
 
-const utils = __webpack_require__(62);
+const utils = __webpack_require__(63);
 
 /**
  * Expose `ResponseBase`.
@@ -30429,7 +30504,7 @@ ResponseBase.prototype._setStatusProperties = function(status){
 
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30501,7 +30576,7 @@ exports.cleanHeader = (header, changesOrigin) => {
 
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports) {
 
 function Agent() {
@@ -30525,6 +30600,100 @@ Agent.prototype._setDefaults = function(req) {
 
 module.exports = Agent;
 
+
+/***/ }),
+/* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(7);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var CharacterOrder = function (_Component) {
+    _inherits(CharacterOrder, _Component);
+
+    function CharacterOrder(props) {
+        _classCallCheck(this, CharacterOrder);
+
+        var _this = _possibleConstructorReturn(this, (CharacterOrder.__proto__ || Object.getPrototypeOf(CharacterOrder)).call(this, props));
+
+        _this.state = {};
+        return _this;
+    }
+
+    _createClass(CharacterOrder, [{
+        key: "render",
+        value: function render() {
+
+            return _react2.default.createElement(
+                _react.Fragment,
+                null,
+                _react2.default.createElement(
+                    "div",
+                    { className: "col" },
+                    _react2.default.createElement(
+                        "h2",
+                        null,
+                        "Order:"
+                    )
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "col" },
+                    _react2.default.createElement(
+                        "ul",
+                        { className: "list-inline" },
+                        this.props.characterOrder.map(function (character, i) {
+                            return _react2.default.createElement(
+                                "li",
+                                { className: "list-inline-item", key: i },
+                                character.name
+                            );
+                        })
+                    )
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "col" },
+                    _react2.default.createElement(
+                        "button",
+                        null,
+                        "Choose Powers"
+                    )
+                )
+            );
+        }
+    }]);
+
+    return CharacterOrder;
+}(_react.Component);
+
+function mapStateToProps(state) {
+    return {
+        characterOrder: state.characterOrder
+    };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(CharacterOrder);
 
 /***/ })
 /******/ ]);

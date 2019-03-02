@@ -16,42 +16,48 @@
   text-align: center;
 }
 
-
-.bg-Alisa {
-  background-color: #228B22!important;
+.card{
   -webkit-box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
   -moz-box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
   box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
+}
 
+.bg-Alisa {
+  background-color: #228B22!important;
 }
 
 .bg-Arjhan {
   background-color: 	#800000!important;
-  -webkit-box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
-  -moz-box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
-  box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
 }
 
 .bg-Immeril {
   background-color: #4f3584!important;
-  -webkit-box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
-  -moz-box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
-  box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
 }
 
 .bg-Kat {
   background-color: #013554!important;
-  -webkit-box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
-  -moz-box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
-  box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
 }
 
 .bg-Thorgrim {
   background-color: #9e8f0b!important;
-  -webkit-box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
-  -moz-box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
-  box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
 }
+
+/* .character-card{
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+  outline: inherit;
+} */
+
+.character-card{
+  animation:scale-out-center 0.2s cubic-bezier(.55,.085,.68,.53) both
+}
+/* .scale-out-center{} */
+
+ @keyframes scale-out-center{0%{transform:scale(1);opacity:1}100%{transform:scale(0);opacity:1}}
 
 .card-text{
   color:rgb(223, 219, 219);
