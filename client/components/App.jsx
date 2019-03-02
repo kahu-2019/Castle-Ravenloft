@@ -1,14 +1,16 @@
-import React, { Component } from 'react'
-import Characters from './Characters';
+import React, { Component } from "react";
+// import Characters from "./Characters";
+import TimeTract from "./TimeTract";
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Characters />
+        {/* <Characters /> */}
+        <TimeTract />
       </div>
-    )
+    );
   }
 }
 
-export default App
+export default App;
