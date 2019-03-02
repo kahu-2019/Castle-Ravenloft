@@ -28209,6 +28209,10 @@ var _TimeTract = __webpack_require__(54);
 
 var _TimeTract2 = _interopRequireDefault(_TimeTract);
 
+var _Home = __webpack_require__(55);
+
+var _Home2 = _interopRequireDefault(_Home);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -28234,7 +28238,7 @@ var App = function (_Component) {
       return _react2.default.createElement(
         "div",
         null,
-        _react2.default.createElement(_TimeTract2.default, null)
+        _react2.default.createElement(_Home2.default, null)
       );
     }
   }]);
@@ -28396,6 +28400,117 @@ var TimeTract = function (_Component) {
 }(_react.Component);
 
 exports.default = TimeTract;
+
+/***/ }),
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Home = function (_Component) {
+  _inherits(Home, _Component);
+
+  function Home() {
+    _classCallCheck(this, Home);
+
+    return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).apply(this, arguments));
+  }
+
+  _createClass(Home, [{
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "div",
+        { className: "home" },
+        _react2.default.createElement("img", { src: "./images/main/main-img.png", alt: "Responsive image" }),
+        _react2.default.createElement(
+          "div",
+          { className: "card", id: "main-card" },
+          _react2.default.createElement(
+            "div",
+            { className: "card-body1" },
+            _react2.default.createElement(
+              "h4",
+              { className: "card-title" },
+              "INTRODUCTION"
+            ),
+            _react2.default.createElement(
+              "p",
+              { className: "card-text" },
+              _react2.default.createElement(
+                "i",
+                null,
+                "In an ancient time and place,magic permeates the land and monsters stalk the shadows that gather along the edges of civilization. in this age of dungeons and dragons, the world needs Heroes. Encased in varied types of armor and armed with swords, bows, staves, and spells, these Heroes explore ancient ruins, take on daring quests, and challenge the most fearsome monsters. One such quest takes Heroes to a dark and mysterious place called Castle Ravenloft."
+              )
+            ),
+            _react2.default.createElement(
+              "h4",
+              { className: "card-subtitle mb-2 text-muted" },
+              "Castle Ravenloft"
+            ),
+            _react2.default.createElement(
+              "p",
+              { className: "card-text" },
+              "The master of Castle Ravenloft is having quests for dinner-and you are invited! ",
+              _react2.default.createElement("br", null),
+              "The castle rises over the dark forests of the land of Barovia, looking down upon a sad,frightened village surrounded by an endless sea of dense fog and mist. The master of the castle, Count Strahd, is a vampire,and the night and its creatures belong to him. As long as Strahd exists, Barovia and the land around it will never be safe. ",
+              _react2.default.createElement("br", null),
+              " A group of Heroes has recently arrived in Barovia, stepping out of the mists to find themselves caught up in the evil emanating from Castle Ravenloft. These Heroes have chosen to enter the castle and discover the secrets waiting within. The dangers are great, the monsters are deadly,and only the bravest Heroes stand a chance of surviving of defeating Strahd and his minions"
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "card", id: "main-card" },
+              _react2.default.createElement(
+                "div",
+                { className: "card-body2" },
+                _react2.default.createElement(
+                  "h4",
+                  { className: "card-title" },
+                  "GAME OVERVIEW"
+                ),
+                _react2.default.createElement(
+                  "p",
+                  { className: "card-text" },
+                  "The ",
+                  _react2.default.createElement(
+                    "i",
+                    null,
+                    "Dengeons & Dragons:Castle Ravenloft Board Game"
+                  ),
+                  " is a cooperative adventure game. You and your fellow Heroes must work as a team to succeed in the adventures that unfold within the castle. You either win together or lose togather Each player selects a Hero, who has come to Barovia to discover the secrets of Catle Ravenloft. Choose from the Dragonborn Fighter, Human Rogue, Dwarf Cleric, Eladrin Wizard, Human Ranger, or a Hero from another D&D Adventure System board game. Heroes explore the dungeon beneath the castle, solve mysteries, fight Monster, and Villains contained within the halls of Castle Ravenloft(with a littel help from you)."
+                ),
+                _react2.default.createElement("div", { className: "overview" })
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Home;
+}(_react.Component);
+
+exports.default = Home;
 
 /***/ })
 /******/ ]);

@@ -115,3 +115,18 @@ span {
 .h6 {
   margin-top: 30px important;
 }
+
+.home {
+  background-color: black;
+}
+.home img {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: center;
+  max-width: 100%;
+}
+
+#main-card {
+  width: 18rem;
+}
