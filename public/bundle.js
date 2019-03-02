@@ -28231,6 +28231,10 @@ var _Characters = __webpack_require__(55);
 
 var _Characters2 = _interopRequireDefault(_Characters);
 
+var _Board = __webpack_require__(64);
+
+var _Board2 = _interopRequireDefault(_Board);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -28254,7 +28258,7 @@ var App = function (_Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_Characters2.default, null)
+        _react2.default.createElement(_Board2.default, null)
       );
     }
   }]);
@@ -30525,6 +30529,351 @@ Agent.prototype._setDefaults = function(req) {
 
 module.exports = Agent;
 
+
+/***/ }),
+/* 64 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Tile = __webpack_require__(65);
+
+var _Tile2 = _interopRequireDefault(_Tile);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Board = function (_Component) {
+    _inherits(Board, _Component);
+
+    function Board(props) {
+        _classCallCheck(this, Board);
+
+        var _this = _possibleConstructorReturn(this, (Board.__proto__ || Object.getPrototypeOf(Board)).call(this, props));
+
+        _this.state = {
+            player: {
+                x: 6,
+                y: 2
+            },
+
+            sets: [],
+
+            testsets: [{
+                grid: [[1, 1, 1, 1], [1, 0, 0, 0], [1, 0, 2, 0], [1, 0, 0, 0]],
+                x: 1,
+                y: 1
+            }, {
+                grid: [[1, 1, 1, 1], [0, 0, 0, 2], [0, 0, 0, 0], [0, 0, 0, 0]],
+                x: 2,
+                y: 1
+            }, {
+                grid: [[1, 2, 0, 0], [1, 0, 0, 0], [1, 0, 0, 0], [1, 0, 0, 0]],
+                x: 1,
+                y: 2
+            }]
+        };
+
+        _this.keypress = _this.keypress.bind(_this);
+        _this.getPositionOfCharacter = _this.getPositionOfCharacter.bind(_this);
+        return _this;
+    }
+
+    _createClass(Board, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            document.addEventListener("keydown", this.keypress, false);
+            this.getPositionOfCharacter();
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            document.removeEventListener("keydown", this.keypress, false);
+        }
+    }, {
+        key: 'keypress',
+        value: function keypress(event) {
+            var _this2 = this;
+
+            event.preventDefault();
+            var key = event.key;
+
+            switch (key) {
+                case "ArrowDown":
+                    this.setState(function (prevState) {
+                        return {
+                            player: _extends({}, prevState.player, {
+                                y: prevState.player.y + 1
+                            })
+                        };
+                    }, function () {
+                        return _this2.getPositionOfCharacter();
+                    });
+                    break;
+                case "ArrowUp":
+                    this.setState(function (prevState) {
+                        return {
+                            player: _extends({}, prevState.player, {
+                                y: prevState.player.y - 1
+                            })
+                        };
+                    }, function () {
+                        return _this2.getPositionOfCharacter();
+                    });
+                    break;
+                case "ArrowRight":
+                    this.setState(function (prevState) {
+                        return {
+                            player: _extends({}, prevState.player, {
+                                x: prevState.player.x + 1
+                            })
+                        };
+                    }, function () {
+                        return _this2.getPositionOfCharacter();
+                    });
+                    break;
+                case "ArrowLeft":
+                    this.setState(function (prevState) {
+                        return {
+                            player: _extends({}, prevState.player, {
+                                x: prevState.player.x - 1
+                            })
+                        };
+                    }, function () {
+                        return _this2.getPositionOfCharacter();
+                    });
+                    break;
+            }
+        }
+    }, {
+        key: 'getPositionOfCharacter',
+        value: function getPositionOfCharacter() {
+            var temp = JSON.parse(JSON.stringify(this.state.testsets)); // Creates a deep copy of the array
+            var tileX = Math.floor(this.state.player.x / 4) + (this.state.player.x % 4 === 0 ? 0 : 1);
+            var squareX = (this.state.player.x - 1) % 4;
+            var tileY = Math.floor(this.state.player.y / 4) + (this.state.player.y % 4 === 0 ? 0 : 1);
+            var squareY = (this.state.player.y - 1) % 4;
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = temp[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var item = _step.value;
+
+                    if (tileX === item.x && tileY === item.y) {
+                        item.grid[squareY][squareX] = 11;
+                        break;
+                    }
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            this.setState({ sets: temp });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                { className: 'board' },
+                this.state.sets.map(function (set, key) {
+                    return _react2.default.createElement(
+                        'div',
+                        { key: key, style: { 'gridColumnStart': set.x, 'gridColumnEnd': set.x + 1, 'gridRowStart': set.y, 'gridRowEnd': set.y + 1 } },
+                        _react2.default.createElement(_Tile2.default, { tile: set.grid })
+                    );
+                })
+            );
+        }
+    }]);
+
+    return Board;
+}(_react.Component);
+
+exports.default = Board;
+
+/***/ }),
+/* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Square = __webpack_require__(66);
+
+var _Square2 = _interopRequireDefault(_Square);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Tile = function (_Component) {
+    _inherits(Tile, _Component);
+
+    function Tile(props) {
+        _classCallCheck(this, Tile);
+
+        var _this = _possibleConstructorReturn(this, (Tile.__proto__ || Object.getPrototypeOf(Tile)).call(this, props));
+
+        _this.state = {
+            tile: _this.props.tile
+
+        };
+        return _this;
+    }
+
+    _createClass(Tile, [{
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(props) {
+            this.setState({ tile: props.tile });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                { className: 'tile' },
+                this.state.tile.map(function (row, x) {
+                    return row.map(function (square, y) {
+                        return _react2.default.createElement(_Square2.default, { square: square, x: x, y: y });
+                    });
+                })
+            );
+        }
+    }]);
+
+    return Tile;
+}(_react.Component);
+
+exports.default = Tile;
+
+/***/ }),
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Square = function (_Component) {
+    _inherits(Square, _Component);
+
+    function Square(props) {
+        _classCallCheck(this, Square);
+
+        var _this = _possibleConstructorReturn(this, (Square.__proto__ || Object.getPrototypeOf(Square)).call(this, props));
+
+        _this.state = {
+            type: _this.props.square,
+            x: _this.props.x + 1,
+            y: _this.props.y + 1,
+
+            style: {}
+        };
+
+        _this.updateStyle = _this.updateStyle.bind(_this);
+        return _this;
+    }
+
+    _createClass(Square, [{
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(props) {
+            var _this2 = this;
+
+            this.setState({ type: props.square }, function () {
+                return _this2.updateStyle();
+            });
+        }
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.updateStyle();
+        }
+    }, {
+        key: 'updateStyle',
+        value: function updateStyle() {
+            this.setState({ style: {
+                    'backgroundColor': this.state.type === 11 ? 'green' : this.state.type === 0 ? 'grey' : this.state.type === 1 ? 'black' : 'red',
+                    'gridColumnStart': this.state.y,
+                    'gridColumnEnd': this.state.y + 1,
+                    'gridRowStart': this.state.x,
+                    'gridRowEnd': this.state.x + 1
+                } });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement('div', { style: this.state.style });
+        }
+    }]);
+
+    return Square;
+}(_react.Component);
+
+exports.default = Square;
 
 /***/ })
 /******/ ]);
