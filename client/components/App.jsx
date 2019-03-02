@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { Component } from 'react'
+import Characters from './Characters';
 
-const App = () => (
-  <div className='app'>
-    sup eh
-  </div>
-)
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <Characters />
+      </div>
+    )
+  }
+}
 
 export default App
