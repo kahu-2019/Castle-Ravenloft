@@ -43,6 +43,16 @@ class Board extends Component {
                     ],
                     x:1,
                     y:2,
+                },
+                {
+                    grid:[
+                    [0,0,0,0],
+                    [0,1,0,0],
+                    [0,0,1,0],
+                    [0,0,0,0]
+                    ],
+                    x:2,
+                    y:2,
                 }
     
             ]
@@ -54,7 +64,9 @@ class Board extends Component {
 
     componentDidMount(){
         document.addEventListener("keydown", this.keypress, false);
-        this.getPositionOfCharacter()
+        this.setState({sets: this.state.testsets}, () => {
+            this.getPositionOfCharacter(this.state.player, 'x', 0)
+        })
     }
     componentWillUnmount(){
         document.removeEventListener("keydown", this.keypress, false);
@@ -66,51 +78,66 @@ class Board extends Component {
 
         switch(key){
             case "ArrowDown":
-                this.setState(prevState => ({
-                    player: {
-                        ...prevState.player,
-                        y: prevState.player.y+1
-                    }
-                }), () => this.getPositionOfCharacter())
+                this.getPositionOfCharacter(this.state.player, 'y', 1)
+                // this.setState(prevState => ({
+                //     player: {
+                //         ...prevState.player,
+                //         y: prevState.player.y+1
+                //     }
+                // }), () => this.getPositionOfCharacter())
                 break
             case "ArrowUp":
-                this.setState(prevState => ({
-                    player: {
-                        ...prevState.player,
-                        y: prevState.player.y-1
-                    }
-                }), () => this.getPositionOfCharacter())
+                this.getPositionOfCharacter(this.state.player, 'y', -1)
+                // this.setState(prevState => ({
+                //     player: {
+                //         ...prevState.player,
+                //         y: prevState.player.y-1
+                //     }
+                // }), () => this.getPositionOfCharacter())
                 break
             case "ArrowRight":
-                this.setState(prevState => ({
-                    player: {
-                        ...prevState.player,
-                        x: prevState.player.x+1
-                    }
-                }), () => this.getPositionOfCharacter())
+                this.getPositionOfCharacter(this.state.player, 'x', 1)
+                // this.setState(prevState => ({
+                //     player: {
+                //         ...prevState.player,
+                //         x: prevState.player.x+1
+                //     }
+                // }), () => this.getPositionOfCharacter())
                 break
             case "ArrowLeft":
-                this.setState(prevState => ({
-                    player: {
-                        ...prevState.player,
-                        x: prevState.player.x-1
-                    }
-                }), () => this.getPositionOfCharacter())
+                this.getPositionOfCharacter(this.state.player, 'x', -1)
+                // this.setState(prevState => ({
+                //     player: {
+                //         ...prevState.player,
+                //         x: prevState.player.x-1
+                //     }
+                // }), () => this.getPositionOfCharacter())
                 break
         }
     }
 
-    getPositionOfCharacter(){
+    getPositionOfCharacter(char, dir, val){
         let temp = JSON.parse(JSON.stringify(this.state.testsets)) // Creates a deep copy of the array
-        let tileX = Math.floor(this.state.player.x/4) + ((this.state.player.x % 4 === 0) ? 0 : 1)
-        let squareX = (this.state.player.x-1) % 4 
-        let tileY = Math.floor(this.state.player.y/4) + ((this.state.player.y % 4 === 0) ? 0 : 1)
-        let squareY = (this.state.player.y-1) % 4 
+        if(char[dir]+val < 1) return
+
+        char[dir] = char[dir] + val
+
+        let tileX = Math.floor(char.x/4) + ((char.x % 4 === 0) ? 0 : 1)
+        let squareX = (char.x-1) % 4 
+        let tileY = Math.floor(char.y/4) + ((char.y % 4 === 0) ? 0 : 1)
+        let squareY = (char.y-1) % 4 
 
         for(let item of temp){
             if(tileX === item.x && tileY === item.y){
-                item.grid[squareY][squareX] = 11
-                break
+                if(item.grid[squareY][squareX] === 1) {
+                    char[dir] = char[dir] - val
+                    temp = this.state.sets
+                    break
+                }
+                else{
+                    item.grid[squareY][squareX] = 11
+                    break
+                }
             }
         }
         this.setState({sets: temp})
@@ -119,7 +146,7 @@ class Board extends Component {
     render() {
         return (
         <div className='board'>
-            {this.state.sets.map((set, key) => {
+            {this.state.sets && this.state.sets.map((set, key) => {
                 return (<div key={key} style={{'gridColumnStart':set.x, 'gridColumnEnd':set.x+1, 'gridRowStart':set.y, 'gridRowEnd':set.y+1}}>
                     <Tile tile={set.grid} />
                     </div>)

@@ -30541,8 +30541,6 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(1);
@@ -30589,6 +30587,10 @@ var Board = function (_Component) {
                 grid: [[1, 2, 0, 0], [1, 0, 0, 0], [1, 0, 0, 0], [1, 0, 0, 0]],
                 x: 1,
                 y: 2
+            }, {
+                grid: [[0, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 0]],
+                x: 2,
+                y: 2
             }]
         };
 
@@ -30600,8 +30602,12 @@ var Board = function (_Component) {
     _createClass(Board, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
+            var _this2 = this;
+
             document.addEventListener("keydown", this.keypress, false);
-            this.getPositionOfCharacter();
+            this.setState({ sets: this.state.testsets }, function () {
+                _this2.getPositionOfCharacter(_this2.state.player, 'x', 0);
+            });
         }
     }, {
         key: 'componentWillUnmount',
@@ -30611,66 +30617,60 @@ var Board = function (_Component) {
     }, {
         key: 'keypress',
         value: function keypress(event) {
-            var _this2 = this;
-
             event.preventDefault();
             var key = event.key;
 
             switch (key) {
                 case "ArrowDown":
-                    this.setState(function (prevState) {
-                        return {
-                            player: _extends({}, prevState.player, {
-                                y: prevState.player.y + 1
-                            })
-                        };
-                    }, function () {
-                        return _this2.getPositionOfCharacter();
-                    });
+                    this.getPositionOfCharacter(this.state.player, 'y', 1);
+                    // this.setState(prevState => ({
+                    //     player: {
+                    //         ...prevState.player,
+                    //         y: prevState.player.y+1
+                    //     }
+                    // }), () => this.getPositionOfCharacter())
                     break;
                 case "ArrowUp":
-                    this.setState(function (prevState) {
-                        return {
-                            player: _extends({}, prevState.player, {
-                                y: prevState.player.y - 1
-                            })
-                        };
-                    }, function () {
-                        return _this2.getPositionOfCharacter();
-                    });
+                    this.getPositionOfCharacter(this.state.player, 'y', -1);
+                    // this.setState(prevState => ({
+                    //     player: {
+                    //         ...prevState.player,
+                    //         y: prevState.player.y-1
+                    //     }
+                    // }), () => this.getPositionOfCharacter())
                     break;
                 case "ArrowRight":
-                    this.setState(function (prevState) {
-                        return {
-                            player: _extends({}, prevState.player, {
-                                x: prevState.player.x + 1
-                            })
-                        };
-                    }, function () {
-                        return _this2.getPositionOfCharacter();
-                    });
+                    this.getPositionOfCharacter(this.state.player, 'x', 1);
+                    // this.setState(prevState => ({
+                    //     player: {
+                    //         ...prevState.player,
+                    //         x: prevState.player.x+1
+                    //     }
+                    // }), () => this.getPositionOfCharacter())
                     break;
                 case "ArrowLeft":
-                    this.setState(function (prevState) {
-                        return {
-                            player: _extends({}, prevState.player, {
-                                x: prevState.player.x - 1
-                            })
-                        };
-                    }, function () {
-                        return _this2.getPositionOfCharacter();
-                    });
+                    this.getPositionOfCharacter(this.state.player, 'x', -1);
+                    // this.setState(prevState => ({
+                    //     player: {
+                    //         ...prevState.player,
+                    //         x: prevState.player.x-1
+                    //     }
+                    // }), () => this.getPositionOfCharacter())
                     break;
             }
         }
     }, {
         key: 'getPositionOfCharacter',
-        value: function getPositionOfCharacter() {
+        value: function getPositionOfCharacter(char, dir, val) {
             var temp = JSON.parse(JSON.stringify(this.state.testsets)); // Creates a deep copy of the array
-            var tileX = Math.floor(this.state.player.x / 4) + (this.state.player.x % 4 === 0 ? 0 : 1);
-            var squareX = (this.state.player.x - 1) % 4;
-            var tileY = Math.floor(this.state.player.y / 4) + (this.state.player.y % 4 === 0 ? 0 : 1);
-            var squareY = (this.state.player.y - 1) % 4;
+            if (char[dir] + val < 1) return;
+
+            char[dir] = char[dir] + val;
+
+            var tileX = Math.floor(char.x / 4) + (char.x % 4 === 0 ? 0 : 1);
+            var squareX = (char.x - 1) % 4;
+            var tileY = Math.floor(char.y / 4) + (char.y % 4 === 0 ? 0 : 1);
+            var squareY = (char.y - 1) % 4;
 
             var _iteratorNormalCompletion = true;
             var _didIteratorError = false;
@@ -30681,8 +30681,14 @@ var Board = function (_Component) {
                     var item = _step.value;
 
                     if (tileX === item.x && tileY === item.y) {
-                        item.grid[squareY][squareX] = 11;
-                        break;
+                        if (item.grid[squareY][squareX] === 1) {
+                            char[dir] = char[dir] - val;
+                            temp = this.state.sets;
+                            break;
+                        } else {
+                            item.grid[squareY][squareX] = 11;
+                            break;
+                        }
                     }
                 }
             } catch (err) {
@@ -30708,7 +30714,7 @@ var Board = function (_Component) {
             return _react2.default.createElement(
                 'div',
                 { className: 'board' },
-                this.state.sets.map(function (set, key) {
+                this.state.sets && this.state.sets.map(function (set, key) {
                     return _react2.default.createElement(
                         'div',
                         { key: key, style: { 'gridColumnStart': set.x, 'gridColumnEnd': set.x + 1, 'gridRowStart': set.y, 'gridRowEnd': set.y + 1 } },
