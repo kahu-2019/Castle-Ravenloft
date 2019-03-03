@@ -14,10 +14,22 @@ class Board extends Component {
         super(props)
 
         this.state = {
-            player : {
-                x: 6,
-                y: 2
-            },
+            players : [
+                {
+                    x: 6,
+                    y: 2
+                },
+
+                {
+                    x: 4,
+                    y: 3
+                },
+                
+                {
+                    x: 2,
+                    y: 3
+                }
+            ],
 
             sets: [],
 
@@ -70,13 +82,14 @@ class Board extends Component {
         this.getPositionOfCharacter = this.getPositionOfCharacter.bind(this)
         this.addTile = this.addTile.bind(this)
         this.testAddTile = this.testAddTile.bind(this)
-
+        this.nextPlayer = this.nextPlayer.bind(this)
+        this.processCharacters = this.processCharacters.bind(this)
     }
 
     componentDidMount(){
         document.addEventListener("keydown", this.keypress, false);
         this.setState({sets: this.state.testSets}, () => {
-            this.getPositionOfCharacter(this.state.player, 'x', 0)
+            this.processCharacters()
         })
     }
 
@@ -88,23 +101,32 @@ class Board extends Component {
         event.preventDefault()
         let key = event.key
 
+
         switch(key){
             case "ArrowDown":
-                this.getPositionOfCharacter(this.state.player, 'y', 1)
+                this.getPositionOfCharacter(this.state.players[0], 'y', 1)
                 break
             case "ArrowUp":
-                this.getPositionOfCharacter(this.state.player, 'y', -1)
+                this.getPositionOfCharacter(this.state.players[0], 'y', -1)
                 break
             case "ArrowRight":
-                this.getPositionOfCharacter(this.state.player, 'x', 1)
+                this.getPositionOfCharacter(this.state.players[0], 'x', 1)
                 break
             case "ArrowLeft":
-                this.getPositionOfCharacter(this.state.player, 'x', -1)
+                this.getPositionOfCharacter(this.state.players[0], 'x', -1)
                 break
             case "t":
                 this.testAddTile()
                 break
+            case "s":
+                this.nextPlayer()
         }
+    }
+
+    nextPlayer(){
+        let temp = this.state.players
+        temp.push(temp.shift())
+        this.setState({players:temp})
     }
 
     testAddTile(){
@@ -115,37 +137,41 @@ class Board extends Component {
             [0,0,0,0]
         ]
         let position = {
-            x:1,
-            y:0
+            x:0,
+            y:1
         }
         this.addTile(tile, position)
     }
 
     addTile(tile, position){
         let tempSet = JSON.parse(JSON.stringify(this.state.testSets)) // Creates a deep copy of the array
-        let tempPlayer = this.state.player
+        let tempPlayers = this.state.players
 
         if(position.x === 0){
             for(let item in tempSet){
                 tempSet[item].x = tempSet[item].x + 1
             }
-            tempPlayer.x = tempPlayer.x + 4
+            tempPlayers.map(player => {
+                return player.x = player.x + 4
+            })
             tempSet.push({
                 grid:tile,
                 x: position.x+1,
                 y: position.y
             })
             this.setState({
-                player: tempPlayer,
+                players: tempPlayers,
                 testSets: tempSet
-            }, () => this.getPositionOfCharacter(this.state.player, 'x', 0))
+            }, () => this.processCharacters())
             return
         }
         else if(position.y === 0){
             for(let item in tempSet){
                 tempSet[item].y = tempSet[item].y + 1
             }
-            tempPlayer.y = tempPlayer.y + 4
+            tempPlayers.map(player => {
+                return player.y = player.y + 4
+            })
             tempSet.push({
                 grid:tile,
                 x: position.x,
@@ -154,7 +180,7 @@ class Board extends Component {
             this.setState({
                 player: tempPlayer,
                 testSets: tempSet
-            }, () => this.getPositionOfCharacter(this.state.player, 'x', 0))
+            }, () => this.processCharacters())
             return
         }
 
@@ -165,11 +191,10 @@ class Board extends Component {
         })
         this.setState({
             testSets: tempSet
-        }, () => this.getPositionOfCharacter(this.state.player, 'x', 0))
+        }, () => this.processCharacters())
     }
 
     getPositionOfCharacter(char, dir, val){
-        let temp = JSON.parse(JSON.stringify(this.state.testSets)) // Creates a deep copy of the array
         if(char[dir]+val < 1) return
 
         char[dir] = char[dir] + val
@@ -179,22 +204,40 @@ class Board extends Component {
         let tileY = Math.floor(char.y/4) + ((char.y % 4 === 0) ? 0 : 1)
         let squareY = (char.y-1) % 4 
 
-        for(let item of temp){
+        for(let item of this.state.testSets){
             if(tileX === item.x && tileY === item.y){
                 if(item.grid[squareY][squareX] === 1) {
                     char[dir] = char[dir] - val
-                    temp = this.state.sets
-                    break
-                }
-                else{
-                    item.grid[squareY][squareX] = 11
                     break
                 }
             }
         }
-        this.setState({sets: temp})
+        let tempPlayers = this.state.players
+        tempPlayers[0] = char
+        this.setState({players: tempPlayers}, () => this.processCharacters())
     }
+    
+    processCharacters(){
+        let tempSet = JSON.parse(JSON.stringify(this.state.testSets)) // Creates a deep copy of the array
 
+        outerloop:
+        for(let char of this.state.players){
+
+            let tileX = Math.floor(char.x/4) + ((char.x % 4 === 0) ? 0 : 1)
+            let squareX = (char.x-1) % 4 
+            let tileY = Math.floor(char.y/4) + ((char.y % 4 === 0) ? 0 : 1)
+            let squareY = (char.y-1) % 4 
+
+            for(let item of tempSet){
+                if(tileX === item.x && tileY === item.y){
+                    item.grid[squareY][squareX] = 11
+                    continue outerloop
+                }
+            }
+        }
+        this.setState({sets: tempSet})
+    }
+    
     render() {
         let rows = 0
         let cols = 0
@@ -203,11 +246,7 @@ class Board extends Component {
             if(set.y > rows) rows = set.y
         })
         return (
-        <div style={{
-            height: '100vh',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'}}>
+        <div className='board-container'>
         <div style={{display:'grid',
                     width: (200*cols)+'px',
                     height: (200*rows)+'px',

@@ -1,3 +1,10 @@
+.board-container{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .tile {
     display:grid;
     grid-template-rows: repeat(4, 50px);

@@ -30576,10 +30576,16 @@ var Board = function (_Component) {
         var _this = _possibleConstructorReturn(this, (Board.__proto__ || Object.getPrototypeOf(Board)).call(this, props));
 
         _this.state = {
-            player: {
+            players: [{
                 x: 6,
                 y: 2
-            },
+            }, {
+                x: 4,
+                y: 3
+            }, {
+                x: 2,
+                y: 3
+            }],
 
             sets: [],
 
@@ -30606,7 +30612,8 @@ var Board = function (_Component) {
         _this.getPositionOfCharacter = _this.getPositionOfCharacter.bind(_this);
         _this.addTile = _this.addTile.bind(_this);
         _this.testAddTile = _this.testAddTile.bind(_this);
-
+        _this.nextPlayer = _this.nextPlayer.bind(_this);
+        _this.processCharacters = _this.processCharacters.bind(_this);
         return _this;
     }
 
@@ -30617,7 +30624,7 @@ var Board = function (_Component) {
 
             document.addEventListener("keydown", this.keypress, false);
             this.setState({ sets: this.state.testSets }, function () {
-                _this2.getPositionOfCharacter(_this2.state.player, 'x', 0);
+                _this2.processCharacters();
             });
         }
     }, {
@@ -30633,29 +30640,38 @@ var Board = function (_Component) {
 
             switch (key) {
                 case "ArrowDown":
-                    this.getPositionOfCharacter(this.state.player, 'y', 1);
+                    this.getPositionOfCharacter(this.state.players[0], 'y', 1);
                     break;
                 case "ArrowUp":
-                    this.getPositionOfCharacter(this.state.player, 'y', -1);
+                    this.getPositionOfCharacter(this.state.players[0], 'y', -1);
                     break;
                 case "ArrowRight":
-                    this.getPositionOfCharacter(this.state.player, 'x', 1);
+                    this.getPositionOfCharacter(this.state.players[0], 'x', 1);
                     break;
                 case "ArrowLeft":
-                    this.getPositionOfCharacter(this.state.player, 'x', -1);
+                    this.getPositionOfCharacter(this.state.players[0], 'x', -1);
                     break;
                 case "t":
                     this.testAddTile();
                     break;
+                case "s":
+                    this.nextPlayer();
             }
+        }
+    }, {
+        key: 'nextPlayer',
+        value: function nextPlayer() {
+            var temp = this.state.players;
+            temp.push(temp.shift());
+            this.setState({ players: temp });
         }
     }, {
         key: 'testAddTile',
         value: function testAddTile() {
             var tile = [[1, 0, 0, 0], [0, 0, 0, 0], [0, 0, 2, 0], [0, 0, 0, 0]];
             var position = {
-                x: 1,
-                y: 0
+                x: 0,
+                y: 1
             };
             this.addTile(tile, position);
         }
@@ -30665,30 +30681,34 @@ var Board = function (_Component) {
             var _this3 = this;
 
             var tempSet = JSON.parse(JSON.stringify(this.state.testSets)); // Creates a deep copy of the array
-            var tempPlayer = this.state.player;
+            var tempPlayers = this.state.players;
 
             if (position.x === 0) {
                 for (var item in tempSet) {
                     tempSet[item].x = tempSet[item].x + 1;
                 }
-                tempPlayer.x = tempPlayer.x + 4;
+                tempPlayers.map(function (player) {
+                    return player.x = player.x + 4;
+                });
                 tempSet.push({
                     grid: tile,
                     x: position.x + 1,
                     y: position.y
                 });
                 this.setState({
-                    player: tempPlayer,
+                    players: tempPlayers,
                     testSets: tempSet
                 }, function () {
-                    return _this3.getPositionOfCharacter(_this3.state.player, 'x', 0);
+                    return _this3.processCharacters();
                 });
                 return;
             } else if (position.y === 0) {
                 for (var _item in tempSet) {
                     tempSet[_item].y = tempSet[_item].y + 1;
                 }
-                tempPlayer.y = tempPlayer.y + 4;
+                tempPlayers.map(function (player) {
+                    return player.y = player.y + 4;
+                });
                 tempSet.push({
                     grid: tile,
                     x: position.x,
@@ -30698,7 +30718,7 @@ var Board = function (_Component) {
                     player: tempPlayer,
                     testSets: tempSet
                 }, function () {
-                    return _this3.getPositionOfCharacter(_this3.state.player, 'x', 0);
+                    return _this3.processCharacters();
                 });
                 return;
             }
@@ -30711,13 +30731,14 @@ var Board = function (_Component) {
             this.setState({
                 testSets: tempSet
             }, function () {
-                return _this3.getPositionOfCharacter(_this3.state.player, 'x', 0);
+                return _this3.processCharacters();
             });
         }
     }, {
         key: 'getPositionOfCharacter',
         value: function getPositionOfCharacter(char, dir, val) {
-            var temp = JSON.parse(JSON.stringify(this.state.testSets)); // Creates a deep copy of the array
+            var _this4 = this;
+
             if (char[dir] + val < 1) return;
 
             char[dir] = char[dir] + val;
@@ -30732,16 +30753,12 @@ var Board = function (_Component) {
             var _iteratorError = undefined;
 
             try {
-                for (var _iterator = temp[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                for (var _iterator = this.state.testSets[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                     var item = _step.value;
 
                     if (tileX === item.x && tileY === item.y) {
                         if (item.grid[squareY][squareX] === 1) {
                             char[dir] = char[dir] - val;
-                            temp = this.state.sets;
-                            break;
-                        } else {
-                            item.grid[squareY][squareX] = 11;
                             break;
                         }
                     }
@@ -30761,7 +30778,75 @@ var Board = function (_Component) {
                 }
             }
 
-            this.setState({ sets: temp });
+            var tempPlayers = this.state.players;
+            tempPlayers[0] = char;
+            this.setState({ players: tempPlayers }, function () {
+                return _this4.processCharacters();
+            });
+        }
+    }, {
+        key: 'processCharacters',
+        value: function processCharacters() {
+            var tempSet = JSON.parse(JSON.stringify(this.state.testSets)); // Creates a deep copy of the array
+
+            var _iteratorNormalCompletion2 = true;
+            var _didIteratorError2 = false;
+            var _iteratorError2 = undefined;
+
+            try {
+                outerloop: for (var _iterator2 = this.state.players[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                    var char = _step2.value;
+
+
+                    var tileX = Math.floor(char.x / 4) + (char.x % 4 === 0 ? 0 : 1);
+                    var squareX = (char.x - 1) % 4;
+                    var tileY = Math.floor(char.y / 4) + (char.y % 4 === 0 ? 0 : 1);
+                    var squareY = (char.y - 1) % 4;
+
+                    var _iteratorNormalCompletion3 = true;
+                    var _didIteratorError3 = false;
+                    var _iteratorError3 = undefined;
+
+                    try {
+                        for (var _iterator3 = tempSet[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                            var item = _step3.value;
+
+                            if (tileX === item.x && tileY === item.y) {
+                                item.grid[squareY][squareX] = 11;
+                                continue outerloop;
+                            }
+                        }
+                    } catch (err) {
+                        _didIteratorError3 = true;
+                        _iteratorError3 = err;
+                    } finally {
+                        try {
+                            if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                                _iterator3.return();
+                            }
+                        } finally {
+                            if (_didIteratorError3) {
+                                throw _iteratorError3;
+                            }
+                        }
+                    }
+                }
+            } catch (err) {
+                _didIteratorError2 = true;
+                _iteratorError2 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                        _iterator2.return();
+                    }
+                } finally {
+                    if (_didIteratorError2) {
+                        throw _iteratorError2;
+                    }
+                }
+            }
+
+            this.setState({ sets: tempSet });
         }
     }, {
         key: 'render',
@@ -30774,11 +30859,7 @@ var Board = function (_Component) {
             });
             return _react2.default.createElement(
                 'div',
-                { style: {
-                        height: '100vh',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center' } },
+                { className: 'board-container' },
                 _react2.default.createElement(
                     'div',
                     { style: { display: 'grid',
