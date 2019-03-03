@@ -9,23 +9,25 @@ import { connect } from 'react-redux'
         this.state={
             surgeTokens:2
         }
-        
+        this.updateHP = this.updateHP.bind(this)
     }
 
-    // componentWillMount = () => {
-    //     this.props.dispatch (getAllCharacters())
-           
-    // }
+    
 
-     
+
+    updateHP (id) {
+        var character = this.props.characters.find(character => character.id == id)
+
+        character.HP = character.SurgeValue
+    }
+
        buttonClicked = () => {
         this.setState({surgeTokens: this.state.surgeTokens - 1}, () => {
-            // this.state.characters.map(character,i) => () {
-
-            // }
+            
+            
+            this.updateHP(2)
         })
-        this.state.characters
-        
+
 
        }
     
@@ -36,7 +38,7 @@ import { connect } from 'react-redux'
 
   render() {
 
-    console.log(this.props.characters   )
+    console.log(this.props.characters)
     if(this.state.surgeTokens == 2){
         return(
         <div>
