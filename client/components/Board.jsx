@@ -95,6 +95,7 @@ class Board extends Component {
         this.mouseDown = this.mouseDown.bind(this)
         this.mouseUp = this.mouseUp.bind(this)
         this.mouseMove = this.mouseMove.bind(this)
+        this.getTileAndSquareForCharacter = this.getTileAndSquareForCharacter.bind(this)
     }
 
     componentDidMount(){
@@ -204,7 +205,11 @@ class Board extends Component {
         }
       
         return rotateTile(inputArray, num-1)
-      }
+    }
+
+    prepTileForAdding(){
+
+    }
 
     //  Adds a tile to a given position, tile should be a 2d array, position should be an object with x and y keys
     addTile(tile, position){
@@ -258,22 +263,29 @@ class Board extends Component {
         }, () => this.processCharacters())
     }
 
+    //  Calculates the tile and square that a character is on
+    getTileAndSquareForCharacter(char){
+        return {
+            tileX: Math.floor(char.x/4) + ((char.x % 4 === 0) ? 0 : 1),
+            squareX: (char.x-1) % 4,
+            tileY: Math.floor(char.y/4) + ((char.y % 4 === 0) ? 0 : 1),
+            squareY: (char.y-1) % 4 
+        }
+    }
+
     //  Updates position of character, includes wall and edge detection
     getPositionOfCharacter(char, dir, val){
         if(char[dir]+val < 1) return
 
         char[dir] = char[dir] + val
 
-        let tileX = Math.floor(char.x/4) + ((char.x % 4 === 0) ? 0 : 1)
-        let squareX = (char.x-1) % 4 
-        let tileY = Math.floor(char.y/4) + ((char.y % 4 === 0) ? 0 : 1)
-        let squareY = (char.y-1) % 4 
+        let position = this.getTileAndSquareForCharacter(char)
 
         let tileExists = false
         for(let item of this.state.testSets){
-            if(tileX === item.x && tileY === item.y){
+            if(position.tileX === item.x && position.tileY === item.y){
                 tileExists = true
-                if(item.grid[squareY][squareX] === 1) {
+                if(item.grid[position.squareY][position.squareX] === 1) {
                     char[dir] = char[dir] - val
                     break
                 }
@@ -292,14 +304,11 @@ class Board extends Component {
         outerloop:
         for(let char of this.state.players){
 
-            let tileX = Math.floor(char.x/4) + ((char.x % 4 === 0) ? 0 : 1)
-            let squareX = (char.x-1) % 4 
-            let tileY = Math.floor(char.y/4) + ((char.y % 4 === 0) ? 0 : 1)
-            let squareY = (char.y-1) % 4 
+            let position = this.getTileAndSquareForCharacter(char)
 
             for(let item of tempSet){
-                if(tileX === item.x && tileY === item.y){
-                    item.grid[squareY][squareX] = 11
+                if(position.tileX === item.x && position.tileY === item.y){
+                    item.grid[position.squareY][position.squareX] = 11
                     continue outerloop
                 }
             }
@@ -315,6 +324,7 @@ class Board extends Component {
             if(set.y > rows) rows = set.y
         })    
         return (
+        <React.Fragment>
             <div className='board-container'>
                 <div style={{display:'grid',
                             width: (200*cols)+'px',
@@ -330,6 +340,7 @@ class Board extends Component {
                     })}
                 </div>
             </div>
+        </React.Fragment>
         )
     }
 }
