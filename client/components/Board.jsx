@@ -96,6 +96,7 @@ class Board extends Component {
         this.mouseUp = this.mouseUp.bind(this)
         this.mouseMove = this.mouseMove.bind(this)
         this.getTileAndSquareForCharacter = this.getTileAndSquareForCharacter.bind(this)
+        this.rotateTile = this.rotateTile.bind(this)
     }
 
     componentDidMount(){
@@ -204,11 +205,85 @@ class Board extends Component {
           }
         }
       
-        return rotateTile(inputArray, num-1)
+        return this.rotateTile(inputArray, num-1)
     }
 
-    prepTileForAdding(){
-
+    prepTileForAdding(side){
+        // get a new tile
+        let testTile = [
+            [1,0,0,0],
+            [0,0,0,0],
+            [0,0,2,0],
+            [0,0,0,0]
+        ]
+        
+        let playerPos = this.getTileAndSquareForCharacter(this.state.players[0])
+        switch(side){
+            case 0:
+                if(playerPos.squareY === 0){
+                    let tileAlreadyExists = false
+                    for(let item of this.state.testSets){
+                        if(item.y === playerPos.tileY-1 && item.x === playerPos.tileX){
+                            tileAlreadyExists = true
+                            break
+                        }
+                    }
+                    if(!tileAlreadyExists){
+                        let tile = this.rotateTile(testTile, side)
+                        this.addTile(tile, {x: playerPos.tileX, y: playerPos.tileY-1})
+                        return
+                    }
+                }
+                break
+            case 1:
+                if(playerPos.squareX === 3){
+                    let tileAlreadyExists = false
+                    for(let item of this.state.testSets){
+                        if(item.y === playerPos.tileY && item.x === playerPos.tileX+1){
+                            tileAlreadyExists = true
+                            break
+                        }
+                    }
+                    if(!tileAlreadyExists){
+                        let tile = this.rotateTile(testTile, side)
+                        this.addTile(tile, {x: playerPos.tileX+1, y: playerPos.tileY})
+                        return
+                    }
+                }
+                break
+            case 2:
+                if(playerPos.squareY === 3){
+                    let tileAlreadyExists = false
+                    for(let item of this.state.testSets){
+                        if(item.y === playerPos.tileY+1 && item.x === playerPos.tileX){
+                            tileAlreadyExists = true
+                            break
+                        }
+                    }
+                    if(!tileAlreadyExists){
+                        let tile = this.rotateTile(testTile, side)
+                        this.addTile(tile, {x: playerPos.tileX, y: playerPos.tileY+1})
+                        return
+                    }
+                }
+                break
+            case 3:
+                if(playerPos.squareX === 0){
+                    let tileAlreadyExists = false
+                    for(let item of this.state.testSets){
+                        if(item.y === playerPos.tileY && item.x === playerPos.tileX-1){
+                            tileAlreadyExists = true
+                            break
+                        }
+                    }
+                    if(!tileAlreadyExists){
+                        let tile = this.rotateTile(testTile, side)
+                        this.addTile(tile, {x: playerPos.tileX-1, y: playerPos.tileY})
+                        return
+                    }
+                }
+                break
+        }
     }
 
     //  Adds a tile to a given position, tile should be a 2d array, position should be an object with x and y keys
@@ -339,6 +414,12 @@ class Board extends Component {
                             </div>)
                     })}
                 </div>
+            </div>
+            <div style={{position:'absolute', top:'10px', left:'10px'}}>
+                <button onClick={() => this.prepTileForAdding(3)}>Explore left</button>
+                <button onClick={() => this.prepTileForAdding(1)}>Explore right</button>
+                <button onClick={() => this.prepTileForAdding(0)}>Explore top</button>
+                <button onClick={() => this.prepTileForAdding(2)}>Explore bottom</button>
             </div>
         </React.Fragment>
         )
