@@ -1,20 +1,18 @@
 import React, { Component } from "react";
+import {connect} from 'react-redux'
 
 class TimeTract extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      sunTrack: 3
-    };
   }
 
   render() {
+    console.log(this.props.characters)
     return (
       <div className="Time-tract">
         <div className="title">
           <h2>
-            <strong>TIME TRACT</strong>
+            <strong>TIME TRACKER</strong>
           </h2>
         </div>
         <div className="containers">
@@ -27,13 +25,9 @@ class TimeTract extends Component {
           <div className="contaniner1">
             <div className="contaniner" id="circle">
               <h3>1</h3>
-              {this.state.sunTrack === 1 && (
+              {this.props.sunTrack === 1 && (
                 <img height="40" src="/images/icons/sun.png" />
               )}
-              <span>
-                Place the Sun totken on this circle at the start of the
-                adventure
-              </span>
               <div className="time">
                 <h6>
                   <strong>MORNING</strong>
@@ -43,25 +37,25 @@ class TimeTract extends Component {
 
             <div className="contaniner" id="circle">
               <h3>2</h3>
-              {this.state.sunTrack === 2 && (
+              {this.props.sunTrack === 2 && (
                 <img height="40" src="/images/icons/sun.png" />
               )}
             </div>
             <div className="contaniner" id="circle">
               <h3>3</h3>
-              {this.state.sunTrack === 3 && (
+              {this.props.sunTrack === 3 && (
                 <img height="40" src="/images/icons/sun.png" />
               )}
             </div>
             <div className="contaniner" id="circle">
               <h3>4</h3>
-              {this.state.sunTrack === 4 && (
-                <img height="40" src="/images/icons/sun.png" />
+              {this.props.sunTrack === 4 && (
+                <img height="60" src="/images/icons/sun2.png" />
               )}
             </div>
             <div className="contaniner" id="circle">
               <h3>5</h3>
-              {this.state.sunTrack === 5 && (
+              {this.props.sunTrack === 5 && (
                 <img height="40" src="/images/icons/sun.png" />
               )}
               <span>Strahd wakes up!</span>
@@ -78,4 +72,11 @@ class TimeTract extends Component {
   }
 }
 
-export default TimeTract;
+
+function mapStateToProps(state){
+  return {
+      sunTrack: state.sunTracker
+  }
+} 
+
+export default connect(mapStateToProps)(TimeTract)
