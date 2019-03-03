@@ -204,14 +204,17 @@ class Board extends Component {
         let tileY = Math.floor(char.y/4) + ((char.y % 4 === 0) ? 0 : 1)
         let squareY = (char.y-1) % 4 
 
+        let tileExists = false
         for(let item of this.state.testSets){
             if(tileX === item.x && tileY === item.y){
+                tileExists = true
                 if(item.grid[squareY][squareX] === 1) {
                     char[dir] = char[dir] - val
                     break
                 }
             }
         }
+        if(!tileExists)char[dir] = char[dir] - val
         let tempPlayers = this.state.players
         tempPlayers[0] = char
         this.setState({players: tempPlayers}, () => this.processCharacters())
