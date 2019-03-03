@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
-import Characters from './Characters';
 import Board from './Board'
 
 class App extends Component {
   render() {
     return (
-      <div style={{overflow:'hidden'}}>
+      <div style={{ overflow: 'hidden' }}>
         <Board />
       </div>
     )
   }
 }
 
-export default App
+export default App 
