@@ -1,20 +1,16 @@
-import React, { Component } from "react";
-// import Characters from "./Characters";
-// import TimeTract from "./TimeTract";
-import EncounterTreasure from "./EncounterTreasure";
-// import Home from "./Home";
+import React, { Component } from 'react'
+import Characters from './Characters';
+import SurgeTokens from './SurgeTokens'
 
 class App extends Component {
   render() {
     return (
       <div>
-        {/* <Characters /> */}
-        {/* <TimeTract /> */}
-        {/* <Home /> */}
-        <EncounterTreasure />
+        <Characters />
+        <SurgeTokens />
       </div>
     );
   }
 }
 
-export default App;
+export default App 

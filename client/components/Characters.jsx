@@ -2,6 +2,7 @@ import React, { Component,Fragment } from 'react'
 import { connect } from "react-redux";
 import { getAllCharacters } from '../actions';
 
+
 class Characters extends Component {
     constructor(props){
         super(props)
