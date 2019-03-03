@@ -31,6 +31,14 @@ class Board extends Component {
                 }
             ],
 
+            transform: {
+                dragging: false,
+                startX: undefined,
+                endX: undefined,
+                x: 0,
+                y: 0
+            },
+
             sets: [],
 
             testSets: [
@@ -84,9 +92,15 @@ class Board extends Component {
         this.testAddTile = this.testAddTile.bind(this)
         this.nextPlayer = this.nextPlayer.bind(this)
         this.processCharacters = this.processCharacters.bind(this)
+        this.mouseDown = this.mouseDown.bind(this)
+        this.mouseUp = this.mouseUp.bind(this)
+        this.mouseMove = this.mouseMove.bind(this)
     }
 
     componentDidMount(){
+        window.oncontextmenu = (e) => {
+            e.preventDefault();
+          }
         document.addEventListener("keydown", this.keypress, false);
         this.setState({sets: this.state.testSets}, () => {
             this.processCharacters()
@@ -97,10 +111,41 @@ class Board extends Component {
         document.removeEventListener("keydown", this.keypress, false);
     }
 
+    mouseDown(event){
+        if(event.button === 2){
+            event.stopPropagation()
+            event.preventDefault()
+            let temp = this.state.transform
+            temp.dragging=true
+            temp.startX = event.screenX - this.state.transform.x
+            temp.startY = event.screenY - this.state.transform.y
+            this.setState({transform: temp})
+        }
+    }
+
+    mouseUp(event){
+        if(event.button === 2){
+            event.stopPropagation()
+            event.preventDefault()
+            let temp = this.state.transform
+            temp.dragging = false
+            this.setState({transform: temp})
+        }
+    }
+
+    mouseMove(event){
+        if(this.state.transform.dragging){
+            let temp = this.state.transform
+            temp.x = event.screenX - this.state.transform.startX
+            temp.y = event.screenY - this.state.transform.startY
+            this.setState({transform: temp})
+        }
+    }
+
+    //  Processes keypress events
     keypress(event) {
         event.preventDefault()
         let key = event.key
-
 
         switch(key){
             case "ArrowDown":
@@ -123,6 +168,8 @@ class Board extends Component {
         }
     }
 
+    //  Changes the positions of players in the 'players' array stored in state
+    //  The player in first position gets placed last, i.e: [1,2,3,4] -> [2,3,4,]
     nextPlayer(){
         let temp = this.state.players
         temp.push(temp.shift())
@@ -137,12 +184,29 @@ class Board extends Component {
             [0,0,0,0]
         ]
         let position = {
-            x:0,
-            y:1
+            x:2,
+            y:0
         }
         this.addTile(tile, position)
     }
 
+    //  Rotates 2d arrays of size n*n (equal on both sides)
+    rotateTile(inputArray, num){
+        if(num === 0) return inputArray
+        
+        inputArray.reverse()
+        for(var n = 0; n < inputArray.length; n++){
+          for(var i = 0; i < n; i++){
+            let temp = inputArray[n][i]
+            inputArray[n][i] = inputArray[i][n]
+            inputArray[i][n] = temp
+          }
+        }
+      
+        return rotateTile(inputArray, num-1)
+      }
+
+    //  Adds a tile to a given position, tile should be a 2d array, position should be an object with x and y keys
     addTile(tile, position){
         let tempSet = JSON.parse(JSON.stringify(this.state.testSets)) // Creates a deep copy of the array
         let tempPlayers = this.state.players
@@ -178,7 +242,7 @@ class Board extends Component {
                 y: position.y+1
             })
             this.setState({
-                player: tempPlayer,
+                players: tempPlayers,
                 testSets: tempSet
             }, () => this.processCharacters())
             return
@@ -194,6 +258,7 @@ class Board extends Component {
         }, () => this.processCharacters())
     }
 
+    //  Updates position of character, includes wall and edge detection
     getPositionOfCharacter(char, dir, val){
         if(char[dir]+val < 1) return
 
@@ -220,6 +285,7 @@ class Board extends Component {
         this.setState({players: tempPlayers}, () => this.processCharacters())
     }
     
+    //  Gets the position of every character, and puts them on the 'sets' stored in state
     processCharacters(){
         let tempSet = JSON.parse(JSON.stringify(this.state.testSets)) // Creates a deep copy of the array
 
@@ -247,21 +313,23 @@ class Board extends Component {
         this.state.sets.map(set => {
             if(set.x > cols) cols = set.x
             if(set.y > rows) rows = set.y
-        })
+        })    
         return (
-        <div className='board-container'>
-        <div style={{display:'grid',
-                    width: (200*cols)+'px',
-                    height: (200*rows)+'px',
-                    gridTemplateRows: `repeat(${rows}, 200px)`,
-                    gridTemplateColumns: `repeat(${cols}, 200px)`}}>
-            {this.state.sets && this.state.sets.map((set, key) => {
-                return (<div key={key} style={{'gridColumnStart':set.x, 'gridColumnEnd':set.x+1, 'gridRowStart':set.y, 'gridRowEnd':set.y+1}}>
-                    <Tile tile={set.grid} />
-                    </div>)
-            })}
-        </div>
-        </div>
+            <div className='board-container'>
+                <div style={{display:'grid',
+                            width: (200*cols)+'px',
+                            height: (200*rows)+'px',
+                            gridTemplateRows: `repeat(${rows}, 200px)`,
+                            gridTemplateColumns: `repeat(${cols}, 200px)`,
+                            transform: `translate(${this.state.transform.x}px, ${this.state.transform.y}px)`}}
+                            onMouseDown={this.mouseDown} onMouseUp={this.mouseUp} onMouseMove={this.mouseMove}>
+                    {this.state.sets && this.state.sets.map((set, key) => {
+                        return (<div key={key} style={{'gridColumnStart':set.x, 'gridColumnEnd':set.x+1, 'gridRowStart':set.y, 'gridRowEnd':set.y+1}}>
+                            <Tile tile={set.grid} />
+                            </div>)
+                    })}
+                </div>
+            </div>
         )
     }
 }
