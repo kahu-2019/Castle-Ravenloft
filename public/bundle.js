@@ -28287,7 +28287,28 @@ var EncounterTreasure = function (_Component) {
   _createClass(EncounterTreasure, [{
     key: "render",
     value: function render() {
-      return;
+      return _react2.default.createElement(
+        _react.Fragment,
+        null,
+        _react2.default.createElement(
+          "div",
+          { className: "container-fluid" },
+          _react2.default.createElement(
+            "div",
+            { className: "row" },
+            _react2.default.createElement(
+              "div",
+              { className: "Encounter" },
+              _react2.default.createElement("img", { src: "./images/card/encounter-card.jpeg" })
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "Treasure" },
+              _react2.default.createElement("img", { src: "./images/card/treasure-card1.jpg" })
+            )
+          )
+        )
+      );
     }
   }]);
 

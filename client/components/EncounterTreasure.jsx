@@ -6,7 +6,20 @@ class EncounterTreasure extends Component {
     this.state = {};
   }
   render() {
-    return;
+    return (
+      <Fragment>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="Encounter">
+              <img src="./images/card/encounter-card.jpeg" />
+            </div>
+            <div className="Treasure">
+              <img src="./images/card/treasure-card1.jpg" />
+            </div>
+          </div>
+        </div>
+      </Fragment>
+    );
   }
 }
 
