@@ -32361,7 +32361,13 @@ var Powers = function (_Component) {
         key: 'handleChange',
         value: function handleChange(event) {
             var powerType = event.target.name;
-            if (powerType == 'atWillResults' && event.target.checked) {
+
+            // doesn't check when they've chosen two
+            if (powerType == 'atWillResults' && this.state.atWillResults.length >= 2) {
+                event.target.checked = false;
+            }
+
+            if (powerType == 'atWillResults' && event.target.checked && this.state.atWillResults.length < 2) {
                 event.persist();
                 this.setState(function (state) {
                     var atWill = JSON.parse(event.target.value);
@@ -32374,7 +32380,7 @@ var Powers = function (_Component) {
                     return power.id != atWill.atWill.id;
                 });
                 this.setState({ atWillResults: updatedArr });
-            } else {
+            } else if (powerType != 'atWillResults') {
                 this.setState(_defineProperty({}, event.target.name, JSON.parse(event.target.value)));
             }
         }
@@ -32387,7 +32393,11 @@ var Powers = function (_Component) {
                 utility: this.state.utilityResult,
                 atWill: this.state.atWillResults
             };
-            console.log(cards);
+            if (cards.atWill.length < 2) {
+                alert("You must pick 2 At Will powers");
+            } else {
+                console.log(cards);
+            }
         }
     }, {
         key: 'render',

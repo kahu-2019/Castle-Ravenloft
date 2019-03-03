@@ -49,7 +49,13 @@ class Powers extends Component {
     
     handleChange(event){
         var powerType = event.target.name
-        if(powerType == 'atWillResults' && event.target.checked){
+
+        // doesn't check when they've chosen two
+        if(powerType == 'atWillResults' && this.state.atWillResults.length >= 2){
+            event.target.checked = false
+        }
+
+        if(powerType == 'atWillResults' && event.target.checked && this.state.atWillResults.length < 2){
             event.persist()
             this.setState(state => {
                 var atWill = JSON.parse(event.target.value)
@@ -60,7 +66,7 @@ class Powers extends Component {
             var atWill = JSON.parse(event.target.value)
             var updatedArr = this.state.atWillResults.filter(power =>  power.id != atWill.atWill.id)
             this.setState({atWillResults:updatedArr})
-        }else{
+        }else if(powerType != 'atWillResults'){
             this.setState({ [event.target.name]: JSON.parse(event.target.value )});
         }   
     }
@@ -72,7 +78,11 @@ class Powers extends Component {
             utility: this.state.utilityResult,
             atWill: this.state.atWillResults
         }
-        console.log(cards)
+        if(cards.atWill.length < 2){
+            alert("You must pick 2 At Will powers")
+        }else{
+            console.log(cards)
+        }
     }
 
 
