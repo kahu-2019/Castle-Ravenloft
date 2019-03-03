@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Characters from './Characters';
 import SurgeTokens from './SurgeTokens'
+import XpCounter from './XpCounter'
 
 class App extends Component {
   render() {
@@ -8,6 +9,7 @@ class App extends Component {
       <div>
         <Characters />
         <SurgeTokens />
+        <XpCounter />
       </div>
     )
   }

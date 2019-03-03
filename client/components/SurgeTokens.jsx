@@ -42,15 +42,15 @@ import { connect } from 'react-redux'
     if(this.state.surgeTokens == 2){
         return(
         <div>
-        <button type="button" class="btn btn-primary" onClick={ this.buttonClicked } >Surge Token</button>
-        <button type="button" class="btn btn-primary" onClick={ this.buttonClicked }>Surge Token</button>
+        <button type="button" className="btn btn-primary" onClick={ this.buttonClicked } >Surge Token</button>
+        <button type="button" className="btn btn-primary" onClick={ this.buttonClicked }>Surge Token</button>
         </div>)
         
        
    }
    else if (this.state.surgeTokens == 1) {
        return(
-       <button type="button" class="btn btn-primary" onClick={ this.buttonClicked }>Surge Token</button>
+       <button type="button" className="btn btn-primary" onClick={ this.buttonClicked }>Surge Token</button>
        )
        
    }
