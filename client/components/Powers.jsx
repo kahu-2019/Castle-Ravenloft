@@ -290,7 +290,7 @@ class Powers extends Component {
                     }
                     {this.state.playGame &&
                         <div className='col'>
-                            <a href='#' className="btn btn-secondary">Play Game!</a>
+                            <Link to='/board' className="btn btn-secondary">Play Game!</Link>
                         </div>
                     }
             </div>

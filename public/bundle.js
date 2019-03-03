@@ -34815,8 +34815,8 @@ var Powers = function (_Component) {
                             'div',
                             { className: 'col' },
                             _react2.default.createElement(
-                                'a',
-                                { href: '#', className: 'btn btn-secondary' },
+                                _reactRouterDom.Link,
+                                { to: '/board', className: 'btn btn-secondary' },
                                 'Play Game!'
                             )
                         )
