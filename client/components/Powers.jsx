@@ -1,5 +1,6 @@
 import React, { Component,Fragment } from 'react'
 import { connect } from "react-redux";
+import {Link} from 'react-router-dom'
 import { getCardsByCharacter, addPowerCards } from '../actions';
 
 class Powers extends Component {
@@ -12,19 +13,51 @@ class Powers extends Component {
             atWill:[],
             dailyResult:{},
             utilityResult:{},
-            atWillResults:[]
+            atWillResults:[],
+            nextCharacter:false,
+            nextCharId:1,
+            playGame:false
         }
         this.filterCards = this.filterCards.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
+        this.nextCharacter = this.nextCharacter.bind(this)
     }
 
     componentDidMount(){
         var id = this.props.match.params.id
         var character = this.props.characters.find(character => character.id == id)
         this.setState({character})
-        this.props.dispatch(getCardsByCharacter(id)).then(powerCards => this.filterCards(powerCards))
+        this.props.dispatch(getCardsByCharacter(id)).then(powerCards =>  this.filterCards(powerCards))
     }
+
+    componentWillReceiveProps(nextProps) {
+        var reset = true
+
+        var initialState = {
+            dailyResult:{},
+            utilityResult:{},
+            atWillResults:[],
+            nextCharacter:false
+        }
+
+        if(nextProps.match.params.id != this.props.match.params.id){
+            if(reset){
+                reset = !reset
+                this.setState({
+                    dailyResult:initialState.dailyResult,
+                    utilityResult:initialState.utilityResult,
+                    atWillResults:initialState.atWillResults,
+                    nextCharacter:initialState.nextCharacter
+                })
+            }
+            var id = nextProps.match.params.id
+            var character = this.props.characters.find(character => character.id == id)
+            this.setState({character})
+            nextProps.dispatch(getCardsByCharacter(id)).then(powerCards => this.filterCards(powerCards))
+    }
+
+   }
 
     filterCards(powerCards){
         var daily = powerCards.filter(powerCard => {
@@ -49,7 +82,7 @@ class Powers extends Component {
     
     handleChange(event){
         var powerType = event.target.name
-
+        
         // doesn't check when they've chosen two
         if(powerType == 'atWillResults' && this.state.atWillResults.length >= 2){
             event.target.checked = false
@@ -79,12 +112,26 @@ class Powers extends Component {
             utility: this.state.utilityResult,
             atWill: this.state.atWillResults
         }
+
         if(cards.atWill.length < 2){
             alert("You must pick 2 At Will powers")
         }else{
-            console.log(cards)
             this.props.dispatch(addPowerCards(id,cards))
         }
+
+        this.nextCharacter()
+    }
+
+    nextCharacter(){
+        var id = this.props.match.params.id
+        var pos = this.props.characterOrder.findIndex(character => character.id == id)
+        if(pos + 1 < this.props.characterOrder.length){
+            var nextCharId = this.props.characterOrder[pos+1].id
+            this.setState({nextCharacter:true,nextCharId})
+        }else if(pos + 1 == this.props.characterOrder.length){
+            this.setState({playGame:true,nextCharacter:false})
+        }
+        
     }
 
 
@@ -93,7 +140,7 @@ class Powers extends Component {
       <Fragment>
           <h1>{this.state.character.name}</h1>
           <h2>{this.state.character.subtitle}</h2>
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit={this.onSubmit} action={`/powers/${this.state.nextCharId}`}>
             <div className="form-group">
                     <h2 className='power-titles'>Daily</h2>
                 <div className="row">
@@ -189,7 +236,7 @@ class Powers extends Component {
                             <div className="col">
                                 <div className="form-check form-check-inline">
                                     <label className="form-check-label">
-                                        <input className="form-check-input" type="checkbox" id={`inlineCheckbox3${i}`} value={JSON.stringify({atWill})} name='atWillResults' onChange={this.handleChange}/>
+                                        <input className="form-check-input" type="checkbox" id={`inlineCheckbox3${i}`} value={JSON.stringify({atWill})} name='atWillResults' onChange={this.handleChange} />
 
                                             <div className="card">
                                                 <div className='container-fluid'>
@@ -224,7 +271,21 @@ class Powers extends Component {
                     })}
                 </div>
             </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
+            <div className='row'>
+                    <div className='col'>
+                        <button type="submit" className="btn btn-primary">Submit</button>
+                    </div>
+                    {this.state.nextCharacter && 
+                        <div className='col'>
+                            <Link to={`/powers/${this.state.nextCharId}`} className="btn btn-secondary">Next character</Link>
+                        </div>
+                    }
+                    {this.state.playGame &&
+                        <div className='col'>
+                            <button className="btn btn-secondary">Play Game!</button>
+                        </div>
+                    }
+            </div>
         </form>
       </Fragment>
     )
@@ -234,7 +295,8 @@ class Powers extends Component {
 function mapStateToProps(state){
     return {
         characters: state.characters,
-        powerCards: state.powerCards
+        powerCards: state.powerCards,
+        characterOrder: state.characterOrder
     }
 }
 
