@@ -32117,7 +32117,7 @@ module.exports = Agent;
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -32128,6 +32128,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(8);
 
+var _reactRouterDom = __webpack_require__(84);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -32137,68 +32139,79 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var CharacterOrder = function (_Component) {
-    _inherits(CharacterOrder, _Component);
+  _inherits(CharacterOrder, _Component);
 
-    function CharacterOrder(props) {
-        _classCallCheck(this, CharacterOrder);
+  function CharacterOrder(props) {
+    _classCallCheck(this, CharacterOrder);
 
-        var _this = _possibleConstructorReturn(this, (CharacterOrder.__proto__ || Object.getPrototypeOf(CharacterOrder)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (CharacterOrder.__proto__ || Object.getPrototypeOf(CharacterOrder)).call(this, props));
 
-        _this.state = {};
-        return _this;
+    _this.state = {};
+    _this.choosePowersLink = _this.choosePowersLink.bind(_this);
+    return _this;
+  }
+
+  _createClass(CharacterOrder, [{
+    key: 'choosePowersLink',
+    value: function choosePowersLink() {
+      var charOrder = this.props.characterOrder;
+      if (charOrder && charOrder.length > 0) {
+        return '/powers/' + this.props.characterOrder[0].id;
+      } else {
+        return '/char-select';
+      }
     }
+  }, {
+    key: 'render',
+    value: function render() {
 
-    _createClass(CharacterOrder, [{
-        key: "render",
-        value: function render() {
+      return _react2.default.createElement(
+        _react.Fragment,
+        null,
+        _react2.default.createElement(
+          'div',
+          { className: 'col' },
+          _react2.default.createElement(
+            'h2',
+            null,
+            'Order:'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'col' },
+          _react2.default.createElement(
+            'ul',
+            { className: 'list-inline' },
+            this.props.characterOrder.map(function (character, i) {
+              return _react2.default.createElement(
+                'li',
+                { className: 'list-inline-item', key: i },
+                character.name
+              );
+            })
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'col' },
+          _react2.default.createElement(
+            _reactRouterDom.Link,
+            { className: 'btn btn-outline-secondary', to: this.choosePowersLink() },
+            'Choose Powers'
+          )
+        )
+      );
+    }
+  }]);
 
-            return _react2.default.createElement(
-                _react.Fragment,
-                null,
-                _react2.default.createElement(
-                    "div",
-                    { className: "col" },
-                    _react2.default.createElement(
-                        "h2",
-                        null,
-                        "Order:"
-                    )
-                ),
-                _react2.default.createElement(
-                    "div",
-                    { className: "col" },
-                    _react2.default.createElement(
-                        "ul",
-                        { className: "list-inline" },
-                        this.props.characterOrder.map(function (character, i) {
-                            return _react2.default.createElement(
-                                "li",
-                                { className: "list-inline-item", key: i },
-                                character.name
-                            );
-                        })
-                    )
-                ),
-                _react2.default.createElement(
-                    "div",
-                    { className: "col" },
-                    _react2.default.createElement(
-                        "button",
-                        null,
-                        "Choose Powers"
-                    )
-                )
-            );
-        }
-    }]);
-
-    return CharacterOrder;
+  return CharacterOrder;
 }(_react.Component);
 
 function mapStateToProps(state) {
-    return {
-        characterOrder: state.characterOrder
-    };
+  return {
+    characterOrder: state.characterOrder
+  };
 }
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(CharacterOrder);
@@ -32278,6 +32291,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -32293,11 +32308,17 @@ var Powers = function (_Component) {
         var _this = _possibleConstructorReturn(this, (Powers.__proto__ || Object.getPrototypeOf(Powers)).call(this, props));
 
         _this.state = {
+            character: {},
             daily: [],
             utility: [],
-            atWill: []
+            atWill: [],
+            dailyResult: {},
+            utilityResult: {},
+            atWillResults: []
         };
         _this.filterCards = _this.filterCards.bind(_this);
+        _this.handleChange = _this.handleChange.bind(_this);
+        _this.onSubmit = _this.onSubmit.bind(_this);
         return _this;
     }
 
@@ -32307,6 +32328,10 @@ var Powers = function (_Component) {
             var _this2 = this;
 
             var id = this.props.match.params.id;
+            var character = this.props.characters.find(function (character) {
+                return character.id == id;
+            });
+            this.setState({ character: character });
             this.props.dispatch((0, _actions.getCardsByCharacter)(id)).then(function (powerCards) {
                 return _this2.filterCards(powerCards);
             });
@@ -32333,17 +32358,61 @@ var Powers = function (_Component) {
             });
         }
     }, {
+        key: 'handleChange',
+        value: function handleChange(event) {
+            var powerType = event.target.name;
+            if (powerType == 'atWillResults' && event.target.checked) {
+                event.persist();
+                this.setState(function (state) {
+                    var atWill = JSON.parse(event.target.value);
+                    var atWillResults = [].concat(_toConsumableArray(state.atWillResults), [atWill.atWill]);
+                    return { atWillResults: atWillResults };
+                });
+            } else if (powerType == 'atWillResults' && !event.target.checked) {
+                var atWill = JSON.parse(event.target.value);
+                var updatedArr = this.state.atWillResults.filter(function (power) {
+                    return power.id != atWill.atWill.id;
+                });
+                this.setState({ atWillResults: updatedArr });
+            } else {
+                this.setState(_defineProperty({}, event.target.name, JSON.parse(event.target.value)));
+            }
+        }
+    }, {
+        key: 'onSubmit',
+        value: function onSubmit(e) {
+            e.preventDefault();
+            var cards = {
+                daily: this.state.dailyResult,
+                utility: this.state.utilityResult,
+                atWill: this.state.atWillResults
+            };
+            console.log(cards);
+        }
+    }, {
         key: 'render',
         value: function render() {
+            var _this3 = this;
+
             return _react2.default.createElement(
                 _react.Fragment,
                 null,
                 _react2.default.createElement(
-                    'form',
+                    'h1',
                     null,
+                    this.state.character.name
+                ),
+                _react2.default.createElement(
+                    'h2',
+                    null,
+                    this.state.character.subtitle
+                ),
+                _react2.default.createElement(
+                    'form',
+                    { onSubmit: this.onSubmit },
                     _react2.default.createElement(
                         'div',
-                        { 'class': 'form-group' },
+                        { className: 'form-group' },
                         _react2.default.createElement(
                             'h2',
                             { className: 'power-titles' },
@@ -32355,32 +32424,32 @@ var Powers = function (_Component) {
                             this.state.daily.map(function (daily, i) {
                                 return _react2.default.createElement(
                                     _react.Fragment,
-                                    null,
+                                    { key: i },
                                     _react2.default.createElement(
                                         'div',
-                                        { className: 'col', key: i },
+                                        { className: 'col' },
                                         _react2.default.createElement(
                                             'div',
-                                            { 'class': 'form-check form-check-inline' },
+                                            { className: 'form-check form-check-inline' },
                                             _react2.default.createElement(
                                                 'label',
-                                                { 'class': 'form-check-label' },
-                                                _react2.default.createElement('input', _defineProperty({ 'class': 'form-check-input', type: 'radio', name: 'inlineRadioOptions', id: 'inlineRadio1' + i, value: 'option' + i }, 'name', 'daily')),
+                                                { className: 'form-check-label' },
+                                                _react2.default.createElement('input', { className: 'form-check-input', type: 'radio', id: 'inlineRadio1' + i, value: JSON.stringify(daily), name: 'dailyResult', onChange: _this3.handleChange }),
                                                 _react2.default.createElement(
                                                     'div',
-                                                    { 'class': 'card' },
+                                                    { className: 'card' },
                                                     _react2.default.createElement(
                                                         'div',
                                                         { className: 'container-fluid' },
                                                         _react2.default.createElement(
                                                             'div',
-                                                            { 'class': 'card-body' },
+                                                            { className: 'card-body' },
                                                             _react2.default.createElement(
                                                                 'div',
                                                                 { className: 'row' },
                                                                 _react2.default.createElement(
                                                                     'h5',
-                                                                    { 'class': 'card-title' },
+                                                                    { className: 'card-title' },
                                                                     daily.title
                                                                 ),
                                                                 _react2.default.createElement(
@@ -32427,12 +32496,24 @@ var Powers = function (_Component) {
                                                                     _react2.default.createElement(
                                                                         'div',
                                                                         { className: 'col attribs card-text' },
+                                                                        '+ ',
                                                                         daily.attack
                                                                     ),
                                                                     _react2.default.createElement(
                                                                         'div',
                                                                         { className: 'col attribs card-text' },
-                                                                        daily.damage
+                                                                        daily.damage,
+                                                                        daily.miss && _react2.default.createElement(
+                                                                            _react.Fragment,
+                                                                            null,
+                                                                            _react2.default.createElement(
+                                                                                'p',
+                                                                                null,
+                                                                                'Miss: ',
+                                                                                daily.miss,
+                                                                                ' Damage'
+                                                                            )
+                                                                        )
                                                                     )
                                                                 )
                                                             ),
@@ -32441,7 +32522,7 @@ var Powers = function (_Component) {
                                                                 null,
                                                                 _react2.default.createElement(
                                                                     'small',
-                                                                    { 'class': 'text-muted' },
+                                                                    { className: 'text-muted' },
                                                                     'FILP THIS CARD AFTER USE'
                                                                 )
                                                             )
@@ -32457,7 +32538,7 @@ var Powers = function (_Component) {
                     ),
                     _react2.default.createElement(
                         'div',
-                        { 'class': 'form-group' },
+                        { className: 'form-group' },
                         _react2.default.createElement(
                             'h2',
                             { className: 'power-titles' },
@@ -32469,32 +32550,32 @@ var Powers = function (_Component) {
                             this.state.utility.map(function (utility, i) {
                                 return _react2.default.createElement(
                                     _react.Fragment,
-                                    null,
+                                    { key: i },
                                     _react2.default.createElement(
                                         'div',
-                                        { className: 'col', key: i },
+                                        { className: 'col' },
                                         _react2.default.createElement(
                                             'div',
-                                            { 'class': 'form-check form-check-inline' },
+                                            { className: 'form-check form-check-inline' },
                                             _react2.default.createElement(
                                                 'label',
-                                                { 'class': 'form-check-label' },
-                                                _react2.default.createElement('input', _defineProperty({ 'class': 'form-check-input', type: 'radio', name: 'inlineRadioOptions', id: 'inlineRadio2' + i, value: 'option' + i }, 'name', 'utility')),
+                                                { className: 'form-check-label' },
+                                                _react2.default.createElement('input', { className: 'form-check-input', type: 'radio', id: 'inlineRadio2' + i, value: JSON.stringify(utility), name: 'utilityResult', onChange: _this3.handleChange }),
                                                 _react2.default.createElement(
                                                     'div',
-                                                    { 'class': 'card' },
+                                                    { className: 'card' },
                                                     _react2.default.createElement(
                                                         'div',
                                                         { className: 'container-fluid' },
                                                         _react2.default.createElement(
                                                             'div',
-                                                            { 'class': 'card-body' },
+                                                            { className: 'card-body' },
                                                             _react2.default.createElement(
                                                                 'div',
                                                                 { className: 'row' },
                                                                 _react2.default.createElement(
                                                                     'h5',
-                                                                    { 'class': 'card-title' },
+                                                                    { className: 'card-title' },
                                                                     utility.title
                                                                 ),
                                                                 _react2.default.createElement(
@@ -32523,7 +32604,7 @@ var Powers = function (_Component) {
                                                                 null,
                                                                 _react2.default.createElement(
                                                                     'small',
-                                                                    { 'class': 'text-muted' },
+                                                                    { className: 'text-muted' },
                                                                     'FILP THIS CARD OVER AFTER YOU USE THE POWER'
                                                                 )
                                                             )
@@ -32539,7 +32620,7 @@ var Powers = function (_Component) {
                     ),
                     _react2.default.createElement(
                         'div',
-                        { 'class': 'form-group' },
+                        { className: 'form-group' },
                         _react2.default.createElement(
                             'h2',
                             { className: 'power-titles' },
@@ -32551,32 +32632,32 @@ var Powers = function (_Component) {
                             this.state.atWill.map(function (atWill, i) {
                                 return _react2.default.createElement(
                                     _react.Fragment,
-                                    null,
+                                    { key: i },
                                     _react2.default.createElement(
                                         'div',
-                                        { className: 'col', key: i },
+                                        { className: 'col' },
                                         _react2.default.createElement(
                                             'div',
-                                            { 'class': 'form-check form-check-inline' },
+                                            { className: 'form-check form-check-inline' },
                                             _react2.default.createElement(
                                                 'label',
-                                                { 'class': 'form-check-label' },
-                                                _react2.default.createElement('input', { 'class': 'form-check-input', type: 'checkbox', id: 'inlineCheckbox3' + i, value: 'option' + i }),
+                                                { className: 'form-check-label' },
+                                                _react2.default.createElement('input', { className: 'form-check-input', type: 'checkbox', id: 'inlineCheckbox3' + i, value: JSON.stringify({ atWill: atWill }), name: 'atWillResults', onChange: _this3.handleChange }),
                                                 _react2.default.createElement(
                                                     'div',
-                                                    { 'class': 'card' },
+                                                    { className: 'card' },
                                                     _react2.default.createElement(
                                                         'div',
                                                         { className: 'container-fluid' },
                                                         _react2.default.createElement(
                                                             'div',
-                                                            { 'class': 'card-body' },
+                                                            { className: 'card-body' },
                                                             _react2.default.createElement(
                                                                 'div',
                                                                 { className: 'row' },
                                                                 _react2.default.createElement(
                                                                     'h5',
-                                                                    { 'class': 'card-title' },
+                                                                    { className: 'card-title' },
                                                                     atWill.title
                                                                 ),
                                                                 _react2.default.createElement(
@@ -32623,6 +32704,7 @@ var Powers = function (_Component) {
                                                                     _react2.default.createElement(
                                                                         'div',
                                                                         { className: 'col attribs card-text' },
+                                                                        '+ ',
                                                                         atWill.attack
                                                                     ),
                                                                     _react2.default.createElement(
@@ -32637,7 +32719,7 @@ var Powers = function (_Component) {
                                                                 null,
                                                                 _react2.default.createElement(
                                                                     'small',
-                                                                    { 'class': 'text-muted' },
+                                                                    { className: 'text-muted' },
                                                                     'FILP THIS CARD AFTER USE'
                                                                 )
                                                             )
@@ -32650,6 +32732,11 @@ var Powers = function (_Component) {
                                 );
                             })
                         )
+                    ),
+                    _react2.default.createElement(
+                        'button',
+                        { type: 'submit', className: 'btn btn-primary' },
+                        'Submit'
                     )
                 )
             );

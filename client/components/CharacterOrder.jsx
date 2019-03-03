@@ -1,5 +1,6 @@
 import React, { Component,Fragment } from 'react'
 import { connect } from "react-redux";
+import { Link } from 'react-router-dom'
 
 class CharacterOrder extends Component {
     constructor(props){
@@ -7,9 +8,17 @@ class CharacterOrder extends Component {
         this.state={
 
         }
+        this.choosePowersLink = this.choosePowersLink.bind(this)
     }
 
 
+
+    choosePowersLink(){
+      var charOrder = this.props.characterOrder
+      if(charOrder && charOrder.length > 0){
+        return '/powers/' + this.props.characterOrder[0].id
+      } else{return '/char-select'}
+    }
 
   render() {
       
@@ -28,7 +37,7 @@ class CharacterOrder extends Component {
             </ul>
           </div>
           <div className="col">
-            <button>Choose Powers</button>
+            <Link className='btn btn-outline-secondary' to={this.choosePowersLink()}>Choose Powers</Link>
           </div>
       </Fragment>
     )
