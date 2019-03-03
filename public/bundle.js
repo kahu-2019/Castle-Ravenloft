@@ -28205,13 +28205,9 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _TimeTract = __webpack_require__(54);
+var _EncounterTreasure = __webpack_require__(54);
 
-var _TimeTract2 = _interopRequireDefault(_TimeTract);
-
-var _Home = __webpack_require__(55);
-
-var _Home2 = _interopRequireDefault(_Home);
+var _EncounterTreasure2 = _interopRequireDefault(_EncounterTreasure);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28221,7 +28217,10 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 // import Characters from "./Characters";
+// import TimeTract from "./TimeTract";
 
+
+// import Home from "./Home";
 
 var App = function (_Component) {
   _inherits(App, _Component);
@@ -28238,7 +28237,7 @@ var App = function (_Component) {
       return _react2.default.createElement(
         "div",
         null,
-        _react2.default.createElement(_Home2.default, null)
+        _react2.default.createElement(_EncounterTreasure2.default, null)
       );
     }
   }]);
@@ -28273,239 +28272,29 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var TimeTract = function (_Component) {
-  _inherits(TimeTract, _Component);
+var EncounterTreasure = function (_Component) {
+  _inherits(EncounterTreasure, _Component);
 
-  function TimeTract(props) {
-    _classCallCheck(this, TimeTract);
+  function EncounterTreasure(props) {
+    _classCallCheck(this, EncounterTreasure);
 
-    return _possibleConstructorReturn(this, (TimeTract.__proto__ || Object.getPrototypeOf(TimeTract)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (EncounterTreasure.__proto__ || Object.getPrototypeOf(EncounterTreasure)).call(this, props));
+
+    _this.state = {};
+    return _this;
   }
 
-  _createClass(TimeTract, [{
+  _createClass(EncounterTreasure, [{
     key: "render",
     value: function render() {
-      return _react2.default.createElement(
-        "div",
-        { className: "Time-tract" },
-        _react2.default.createElement(
-          "h2",
-          null,
-          _react2.default.createElement(
-            "strong",
-            null,
-            "TIME TRACT"
-          )
-        ),
-        _react2.default.createElement(
-          "div",
-          { className: "containers" },
-          _react2.default.createElement("img", {
-            src: "./images/time-track/time-track1.png",
-            alt: "time-track",
-            height: "350",
-            width: "900"
-          }),
-          _react2.default.createElement(
-            "div",
-            { className: "contaniner1" },
-            _react2.default.createElement(
-              "div",
-              { className: "contaniner", id: "circle" },
-              _react2.default.createElement(
-                "h3",
-                null,
-                "1"
-              ),
-              _react2.default.createElement(
-                "span",
-                null,
-                "Place the Sun totken on this circle at the start of the adventure"
-              ),
-              _react2.default.createElement(
-                "div",
-                { className: "time" },
-                _react2.default.createElement(
-                  "h6",
-                  null,
-                  _react2.default.createElement(
-                    "strong",
-                    null,
-                    "MORNING"
-                  )
-                )
-              )
-            ),
-            _react2.default.createElement(
-              "div",
-              { className: "contaniner", id: "circle" },
-              _react2.default.createElement(
-                "h3",
-                null,
-                "2"
-              )
-            ),
-            _react2.default.createElement(
-              "div",
-              { className: "contaniner", id: "circle" },
-              _react2.default.createElement(
-                "h3",
-                null,
-                "3"
-              )
-            ),
-            _react2.default.createElement(
-              "div",
-              { className: "contaniner", id: "circle" },
-              _react2.default.createElement(
-                "h3",
-                null,
-                "4"
-              )
-            ),
-            _react2.default.createElement(
-              "div",
-              { className: "contaniner", id: "circle" },
-              _react2.default.createElement(
-                "h3",
-                null,
-                "5"
-              ),
-              _react2.default.createElement(
-                "span",
-                null,
-                "Strahd wakes up!"
-              ),
-              _react2.default.createElement(
-                "div",
-                { className: "time1" },
-                _react2.default.createElement(
-                  "h6",
-                  null,
-                  _react2.default.createElement(
-                    "strong",
-                    null,
-                    "SUNSET"
-                  )
-                )
-              )
-            )
-          )
-        )
-      );
+      return;
     }
   }]);
 
-  return TimeTract;
+  return EncounterTreasure;
 }(_react.Component);
 
-exports.default = TimeTract;
-
-/***/ }),
-/* 55 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Home = function (_Component) {
-  _inherits(Home, _Component);
-
-  function Home() {
-    _classCallCheck(this, Home);
-
-    return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).apply(this, arguments));
-  }
-
-  _createClass(Home, [{
-    key: "render",
-    value: function render() {
-      return _react2.default.createElement(
-        "div",
-        { className: "home" },
-        _react2.default.createElement("img", { src: "./images/main/main-img2.png", alt: "Responsive image" }),
-        _react2.default.createElement(
-          "div",
-          { className: "display" },
-          _react2.default.createElement(
-            "div",
-            { className: "display1", id: "square" },
-            _react2.default.createElement(
-              "h4",
-              null,
-              "INTRODUCTION"
-            ),
-            _react2.default.createElement(
-              "p",
-              null,
-              _react2.default.createElement(
-                "i",
-                null,
-                "In an ancient time and place,magic permeates the land and monsters stalk the shadows that gather along the edges of civilization. in this age of dungeons and dragons, the world needs Heroes. Encased in varied types of armor and armed with swords, bows, staves, and spells, these Heroes explore ancient ruins, take on daring quests, and challenge the most fearsome monsters. One such quest takes Heroes to a dark and mysterious place called Castle Ravenloft."
-              )
-            ),
-            _react2.default.createElement(
-              "h4",
-              null,
-              "Castle Ravenloft"
-            ),
-            _react2.default.createElement(
-              "p",
-              null,
-              "The master of Castle Ravenloft is having quests for dinner-and you are invited! ",
-              _react2.default.createElement("br", null),
-              "The castle rises over the dark forests of the land of Barovia, looking down upon a sad,frightened village surrounded by an endless sea of dense fog and mist. The master of the castle, Count Strahd, is a vampire,and the night and its creatures belong to him. As long as Strahd exists, Barovia and the land around it will never be safe. ",
-              _react2.default.createElement("br", null),
-              " A group of Heroes has recently arrived in Barovia, stepping out of the mists to find themselves caught up in the evil emanating from Castle Ravenloft. These Heroes have chosen to enter the castle and discover the secrets waiting within. The dangers are great, the monsters are deadly,and only the bravest Heroes stand a chance of surviving of defeating Strahd and his minions"
-            )
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "display2", id: "square" },
-            _react2.default.createElement(
-              "h4",
-              null,
-              "GAME OVERVIEW"
-            ),
-            _react2.default.createElement(
-              "p",
-              null,
-              "The ",
-              _react2.default.createElement(
-                "i",
-                null,
-                "Dengeons & Dragons:Castle Ravenloft Board Game"
-              ),
-              " is a cooperative adventure game. You and your fellow Heroes must work as a team to succeed in the adventures that unfold within the castle. You either win together or lose togather Each player selects a Hero, who has come to Barovia to discover the secrets of Catle Ravenloft. Choose from the Dragonborn Fighter, Human Rogue, Dwarf Cleric, Eladrin Wizard, Human Ranger, or a Hero from another D&D Adventure System board game. Heroes explore the dungeon beneath the castle, solve mysteries, fight Monster, and Villains contained within the halls of Castle Ravenloft(with a littel help from you)."
-            )
-          )
-        )
-      );
-    }
-  }]);
-
-  return Home;
-}(_react.Component);
-
-exports.default = Home;
+exports.default = EncounterTreasure;
 
 /***/ })
 /******/ ]);

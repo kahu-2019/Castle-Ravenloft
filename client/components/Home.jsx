@@ -9,7 +9,7 @@ class Home extends Component {
         <div className="display">
           <div className="display1" id="square">
             <h4>INTRODUCTION</h4>
-            <p>
+            <p className="ptext">
               <i>
                 In an ancient time and place,magic permeates the land and
                 monsters stalk the shadows that gather along the edges of
@@ -22,7 +22,7 @@ class Home extends Component {
               </i>
             </p>
             <h4>Castle Ravenloft</h4>
-            <p>
+            <p className="ptext">
               The master of Castle Ravenloft is having quests for dinner-and you
               are invited! <br />
               The castle rises over the dark forests of the land of Barovia,
@@ -41,7 +41,7 @@ class Home extends Component {
           </div>
           <div className="display2" id="square">
             <h4>GAME OVERVIEW</h4>
-            <p>
+            <p className="ptext">
               The <i>Dengeons & Dragons:Castle Ravenloft Board Game</i> is a
               cooperative adventure game. You and your fellow Heroes must work
               as a team to succeed in the adventures that unfold within the

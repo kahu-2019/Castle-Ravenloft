@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 // import Characters from "./Characters";
-import TimeTract from "./TimeTract";
-import Home from "./Home";
+// import TimeTract from "./TimeTract";
+import EncounterTreasure from "./EncounterTreasure";
+// import Home from "./Home";
 
 class App extends Component {
   render() {
@@ -9,7 +10,8 @@ class App extends Component {
       <div>
         {/* <Characters /> */}
         {/* <TimeTract /> */}
-        <Home />
+        {/* <Home /> */}
+        <EncounterTreasure />
       </div>
     );
   }
