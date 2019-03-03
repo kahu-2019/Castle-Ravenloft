@@ -100,6 +100,7 @@ class Board extends Component {
         this.getTileAndSquareForCharacter = this.getTileAndSquareForCharacter.bind(this)
         this.rotateTile = this.rotateTile.bind(this)
         this.checkSidesOfCharacter = this.checkSidesOfCharacter.bind(this)
+        this.diceRoll = this.diceRoll.bind(this)
     }
 
     componentDidMount(){
@@ -168,6 +169,11 @@ class Board extends Component {
             case "s":
                 this.nextPlayer()
         }
+    }
+
+    //  Generates a random number between 1 and 20 inclusive
+    diceRoll(){
+        return Math.floor(Math.random()*20) + 1
     }
 
     //  Changes the positions of players in the 'players' array stored in state
