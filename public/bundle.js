@@ -2442,6 +2442,7 @@ exports.saveAllCharacters = saveAllCharacters;
 exports.addCharacterOrder = addCharacterOrder;
 exports.getCardsByCharacter = getCardsByCharacter;
 exports.savePowerCards = savePowerCards;
+exports.addPowerCards = addPowerCards;
 
 var _characters = __webpack_require__(74);
 
@@ -2479,6 +2480,14 @@ function getCardsByCharacter(id) {
 function savePowerCards(powerCards) {
   return {
     type: 'SAVE_POWER_CARDS',
+    powerCards: powerCards
+  };
+}
+
+function addPowerCards(id, powerCards) {
+  return {
+    type: 'ADD_POWER_CARDS',
+    id: id,
     powerCards: powerCards
   };
 }
@@ -29701,12 +29710,27 @@ var reducer = function reducer() {
     switch (action.type) {
         case 'SAVE_ALL_CHARACTERS':
             return action.allCharacters;
+        case 'ADD_POWER_CARDS':
+            return updateCharacter(action.id, action.powerCards, state);
         default:
             return state;
     }
 };
 
 exports.default = reducer;
+
+
+function updateCharacter(id, cards, characters) {
+    var updatedCharacters = characters.map(function (character) {
+        if (character.id == id) {
+            character.cards = cards;
+            return character;
+        } else {
+            return character;
+        }
+    });
+    return updatedCharacters;
+}
 
 /***/ }),
 /* 70 */
@@ -32388,6 +32412,7 @@ var Powers = function (_Component) {
         key: 'onSubmit',
         value: function onSubmit(e) {
             e.preventDefault();
+            var id = this.props.match.params.id;
             var cards = {
                 daily: this.state.dailyResult,
                 utility: this.state.utilityResult,
@@ -32397,6 +32422,7 @@ var Powers = function (_Component) {
                 alert("You must pick 2 At Will powers");
             } else {
                 console.log(cards);
+                this.props.dispatch((0, _actions.addPowerCards)(id, cards));
             }
         }
     }, {

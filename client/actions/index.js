@@ -40,3 +40,11 @@ export function savePowerCards(powerCards){
     powerCards
   }
 }
+
+export function addPowerCards(id,powerCards){
+  return {
+    type: 'ADD_POWER_CARDS',
+    id,
+    powerCards
+  }
+}

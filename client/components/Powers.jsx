@@ -1,6 +1,6 @@
 import React, { Component,Fragment } from 'react'
 import { connect } from "react-redux";
-import { getCardsByCharacter } from '../actions';
+import { getCardsByCharacter, addPowerCards } from '../actions';
 
 class Powers extends Component {
     constructor(props){
@@ -73,6 +73,7 @@ class Powers extends Component {
 
     onSubmit(e){
         e.preventDefault()
+        var id = this.props.match.params.id
         var cards = {
             daily:this.state.dailyResult,
             utility: this.state.utilityResult,
@@ -82,6 +83,7 @@ class Powers extends Component {
             alert("You must pick 2 At Will powers")
         }else{
             console.log(cards)
+            this.props.dispatch(addPowerCards(id,cards))
         }
     }
 
