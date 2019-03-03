@@ -23,11 +23,6 @@ class Board extends Component {
                 {
                     x: 4,
                     y: 3
-                },
-                
-                {
-                    x: 2,
-                    y: 3
                 }
             ],
 
@@ -89,7 +84,6 @@ class Board extends Component {
         this.keypress = this.keypress.bind(this)
         this.getPositionOfCharacter = this.getPositionOfCharacter.bind(this)
         this.addTile = this.addTile.bind(this)
-        this.testAddTile = this.testAddTile.bind(this)
         this.nextPlayer = this.nextPlayer.bind(this)
         this.processCharacters = this.processCharacters.bind(this)
         this.mouseDown = this.mouseDown.bind(this)
@@ -162,9 +156,6 @@ class Board extends Component {
             case "ArrowLeft":
                 this.getPositionOfCharacter(this.state.players[0], 'x', -1)
                 break
-            case "t":
-                this.testAddTile()
-                break
             case "s":
                 this.nextPlayer()
         }
@@ -176,20 +167,6 @@ class Board extends Component {
         let temp = this.state.players
         temp.push(temp.shift())
         this.setState({players:temp})
-    }
-
-    testAddTile(){
-        let tile = [
-            [1,0,0,0],
-            [0,0,0,0],
-            [0,0,2,0],
-            [0,0,0,0]
-        ]
-        let position = {
-            x:2,
-            y:0
-        }
-        this.addTile(tile, position)
     }
 
     //  Rotates 2d arrays of size n*n (equal on both sides)
@@ -208,6 +185,7 @@ class Board extends Component {
         return this.rotateTile(inputArray, num-1)
     }
 
+    //  Preps tile for adding, includes checks to see if space available, rotating tile to correct orientation
     prepTileForAdding(side){
         // get a new tile
         let testTile = [
@@ -216,7 +194,7 @@ class Board extends Component {
             [0,0,2,0],
             [0,0,0,0]
         ]
-        
+
         let playerPos = this.getTileAndSquareForCharacter(this.state.players[0])
         switch(side){
             case 0:
@@ -397,7 +375,7 @@ class Board extends Component {
         this.state.sets.map(set => {
             if(set.x > cols) cols = set.x
             if(set.y > rows) rows = set.y
-        })    
+        })
         return (
         <React.Fragment>
             <div className='board-container'>
