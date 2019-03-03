@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Tile from './Tile'
+import { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } from 'constants';
 
 /*  Main board component, renders tile and square sub-components
 
@@ -32,6 +33,13 @@ class Board extends Component {
                 endX: undefined,
                 x: 0,
                 y: 0
+            },
+
+            explore: {
+                top: false,
+                bottom: false,
+                left: false,
+                right: false
             },
 
             sets: [],
@@ -91,6 +99,7 @@ class Board extends Component {
         this.mouseMove = this.mouseMove.bind(this)
         this.getTileAndSquareForCharacter = this.getTileAndSquareForCharacter.bind(this)
         this.rotateTile = this.rotateTile.bind(this)
+        this.checkSidesOfCharacter = this.checkSidesOfCharacter.bind(this)
     }
 
     componentDidMount(){
@@ -166,7 +175,7 @@ class Board extends Component {
     nextPlayer(){
         let temp = this.state.players
         temp.push(temp.shift())
-        this.setState({players:temp})
+        this.setState({players:temp}, () => this.checkSidesOfCharacter())
     }
 
     //  Rotates 2d arrays of size n*n (equal on both sides)
@@ -185,7 +194,7 @@ class Board extends Component {
         return this.rotateTile(inputArray, num-1)
     }
 
-    //  Preps tile for adding, includes checks to see if space available, rotating tile to correct orientation
+    //  Preps tile for adding, checks should already be done in this.checkSidesOfPlayer(), rotating tile to correct orientation
     prepTileForAdding(side){
         // get a new tile
         let testTile = [
@@ -195,71 +204,25 @@ class Board extends Component {
             [0,0,0,0]
         ]
 
+        let tile = undefined
+
         let playerPos = this.getTileAndSquareForCharacter(this.state.players[0])
         switch(side){
             case 0:
-                if(playerPos.squareY === 0){
-                    let tileAlreadyExists = false
-                    for(let item of this.state.testSets){
-                        if(item.y === playerPos.tileY-1 && item.x === playerPos.tileX){
-                            tileAlreadyExists = true
-                            break
-                        }
-                    }
-                    if(!tileAlreadyExists){
-                        let tile = this.rotateTile(testTile, side)
-                        this.addTile(tile, {x: playerPos.tileX, y: playerPos.tileY-1})
-                        return
-                    }
-                }
+                 tile = this.rotateTile(testTile, side)
+                this.addTile(tile, {x: playerPos.tileX, y: playerPos.tileY-1})
                 break
             case 1:
-                if(playerPos.squareX === 3){
-                    let tileAlreadyExists = false
-                    for(let item of this.state.testSets){
-                        if(item.y === playerPos.tileY && item.x === playerPos.tileX+1){
-                            tileAlreadyExists = true
-                            break
-                        }
-                    }
-                    if(!tileAlreadyExists){
-                        let tile = this.rotateTile(testTile, side)
-                        this.addTile(tile, {x: playerPos.tileX+1, y: playerPos.tileY})
-                        return
-                    }
-                }
+                 tile = this.rotateTile(testTile, side)
+                this.addTile(tile, {x: playerPos.tileX+1, y: playerPos.tileY})
                 break
             case 2:
-                if(playerPos.squareY === 3){
-                    let tileAlreadyExists = false
-                    for(let item of this.state.testSets){
-                        if(item.y === playerPos.tileY+1 && item.x === playerPos.tileX){
-                            tileAlreadyExists = true
-                            break
-                        }
-                    }
-                    if(!tileAlreadyExists){
-                        let tile = this.rotateTile(testTile, side)
-                        this.addTile(tile, {x: playerPos.tileX, y: playerPos.tileY+1})
-                        return
-                    }
-                }
+                 tile = this.rotateTile(testTile, side)
+                this.addTile(tile, {x: playerPos.tileX, y: playerPos.tileY+1})
                 break
             case 3:
-                if(playerPos.squareX === 0){
-                    let tileAlreadyExists = false
-                    for(let item of this.state.testSets){
-                        if(item.y === playerPos.tileY && item.x === playerPos.tileX-1){
-                            tileAlreadyExists = true
-                            break
-                        }
-                    }
-                    if(!tileAlreadyExists){
-                        let tile = this.rotateTile(testTile, side)
-                        this.addTile(tile, {x: playerPos.tileX-1, y: playerPos.tileY})
-                        return
-                    }
-                }
+                 tile = this.rotateTile(testTile, side)
+                this.addTile(tile, {x: playerPos.tileX-1, y: playerPos.tileY})
                 break
         }
     }
@@ -283,7 +246,7 @@ class Board extends Component {
             })
             this.setState({
                 players: tempPlayers,
-                testSets: tempSet
+                testSets: tempSet,
             }, () => this.processCharacters())
             return
         }
@@ -331,6 +294,7 @@ class Board extends Component {
         if(char[dir]+val < 1) return
 
         char[dir] = char[dir] + val
+        let tempChar = JSON.parse(JSON.stringify(char))
 
         let position = this.getTileAndSquareForCharacter(char)
 
@@ -344,10 +308,66 @@ class Board extends Component {
                 }
             }
         }
-        if(!tileExists)char[dir] = char[dir] - val
+        if(!tileExists) char[dir] = char[dir] - val
+
         let tempPlayers = this.state.players
         tempPlayers[0] = char
         this.setState({players: tempPlayers}, () => this.processCharacters())
+    }
+
+    //  Checks each side of the current character, returns an object with values showing if they are on an unexplored edge
+    checkSidesOfCharacter(){
+        let sides = {top:false,right:false,bottom:false,left:false}
+        let playerPos = this.getTileAndSquareForCharacter(this.state.players[0])
+        for(let side = 0; side < 4; side++){
+            switch(side){
+                case 0:
+                    if(playerPos.squareY === 0){
+                        let tileAlreadyExists = false
+                        for(let item of this.state.testSets){
+                            if(item.y === playerPos.tileY-1 && item.x === playerPos.tileX){
+                                tileAlreadyExists = true
+                                break
+                            }
+                        }
+                        if(!tileAlreadyExists) sides.top = true
+                    }
+                case 1:
+                    if(playerPos.squareX === 3){
+                        let tileAlreadyExists = false
+                        for(let item of this.state.testSets){
+                            if(item.y === playerPos.tileY && item.x === playerPos.tileX+1){
+                                tileAlreadyExists = true
+                                break
+                            }
+                        }
+                        if(!tileAlreadyExists) sides.right = true
+                    }
+                case 2:
+                    if(playerPos.squareY === 3){
+                        let tileAlreadyExists = false
+                        for(let item of this.state.testSets){
+                            if(item.y === playerPos.tileY+1 && item.x === playerPos.tileX){
+                                tileAlreadyExists = true
+                                break
+                            }
+                        }
+                        if(!tileAlreadyExists) sides.bottom = true
+                    }
+                case 3:
+                    if(playerPos.squareX === 0){
+                        let tileAlreadyExists = false
+                        for(let item of this.state.testSets){
+                            if(item.y === playerPos.tileY && item.x === playerPos.tileX-1){
+                                tileAlreadyExists = true
+                                break
+                            }
+                        }
+                        if(!tileAlreadyExists) sides.left = true
+                    }
+            }
+        }
+        this.setState({explore: sides})
     }
     
     //  Gets the position of every character, and puts them on the 'sets' stored in state
@@ -366,7 +386,7 @@ class Board extends Component {
                 }
             }
         }
-        this.setState({sets: tempSet})
+        this.setState({sets: tempSet}, this.checkSidesOfCharacter())
     }
     
     render() {
@@ -394,10 +414,10 @@ class Board extends Component {
                 </div>
             </div>
             <div style={{position:'absolute', top:'10px', left:'10px'}}>
-                <button onClick={() => this.prepTileForAdding(3)}>Explore left</button>
-                <button onClick={() => this.prepTileForAdding(1)}>Explore right</button>
-                <button onClick={() => this.prepTileForAdding(0)}>Explore top</button>
-                <button onClick={() => this.prepTileForAdding(2)}>Explore bottom</button>
+                {this.state.explore.left   && <button onClick={() => this.prepTileForAdding(3)}>Explore left</button>}
+                {this.state.explore.right  && <button onClick={() => this.prepTileForAdding(1)}>Explore right</button>}
+                {this.state.explore.top    && <button onClick={() => this.prepTileForAdding(0)}>Explore top</button>}
+                {this.state.explore.bottom && <button onClick={() => this.prepTileForAdding(2)}>Explore bottom</button>}
             </div>
         </React.Fragment>
         )
