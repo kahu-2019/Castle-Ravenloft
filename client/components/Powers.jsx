@@ -16,7 +16,7 @@ class Powers extends Component {
             atWillResults:[],
             nextCharacter:false,
             nextCharId:1,
-            playGame:false
+            playGame:false,
         }
         this.filterCards = this.filterCards.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -48,9 +48,16 @@ class Powers extends Component {
                     dailyResult:initialState.dailyResult,
                     utilityResult:initialState.utilityResult,
                     atWillResults:initialState.atWillResults,
-                    nextCharacter:initialState.nextCharacter
+                    nextCharacter:initialState.nextCharacter,
                 })
             }
+
+            for(let i = 0; i < 4; i++){
+                if(document.getElementById(`inlineCheckbox3${i}`) !== null) document.getElementById(`inlineCheckbox3${i}`).checked = 'checked'
+                if(document.getElementById(`inlineRadio1${i}`) !== null) document.getElementById(`inlineRadio1${i}`).checked = 'checked'
+                if(document.getElementById(`inlineRadio2${i}`) !== null) document.getElementById(`inlineRadio2${i}`).checked = 'checked'
+            }
+            document.getElementById("powersForm").reset();
             var id = nextProps.match.params.id
             var character = this.props.characters.find(character => character.id == id)
             this.setState({character})
@@ -83,6 +90,8 @@ class Powers extends Component {
     handleChange(event){
         var powerType = event.target.name
         
+        if(powerType == 'atWillResults'){
+        }
         // doesn't check when they've chosen two
         if(powerType == 'atWillResults' && this.state.atWillResults.length >= 2){
             event.target.checked = false
@@ -101,7 +110,7 @@ class Powers extends Component {
             this.setState({atWillResults:updatedArr})
         }else if(powerType != 'atWillResults'){
             this.setState({ [event.target.name]: JSON.parse(event.target.value )});
-        }   
+        }
     }
 
     onSubmit(e){
@@ -140,7 +149,7 @@ class Powers extends Component {
       <Fragment>
           <h1>{this.state.character.name}</h1>
           <h2>{this.state.character.subtitle}</h2>
-        <form onSubmit={this.onSubmit} action={`/powers/${this.state.nextCharId}`}>
+        <form onSubmit={this.onSubmit} action={`/powers/${this.state.nextCharId}`} id='powersForm'>
             <div className="form-group">
                     <h2 className='power-titles'>Daily</h2>
                 <div className="row">
@@ -236,7 +245,7 @@ class Powers extends Component {
                             <div className="col">
                                 <div className="form-check form-check-inline">
                                     <label className="form-check-label">
-                                        <input className="form-check-input" type="checkbox" id={`inlineCheckbox3${i}`} value={JSON.stringify({atWill})} name='atWillResults' onChange={this.handleChange} />
+                                        <input className="form-check-input" type="checkbox" id={`inlineCheckbox3${i}`} value={JSON.stringify({atWill})} name='atWillResults' onChange={this.handleChange}/>
 
                                             <div className="card">
                                                 <div className='container-fluid'>
@@ -282,7 +291,7 @@ class Powers extends Component {
                     }
                     {this.state.playGame &&
                         <div className='col'>
-                            <button className="btn btn-secondary">Play Game!</button>
+                            <a href='#' className="btn btn-secondary">Play Game!</a>
                         </div>
                     }
             </div>

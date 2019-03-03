@@ -34321,7 +34321,7 @@ var Powers = function (_Component) {
             });
             this.setState({ character: character });
             this.props.dispatch((0, _actions.getCardsByCharacter)(id)).then(function (powerCards) {
-                console.log(powerCards);_this2.filterCards(powerCards);
+                return _this2.filterCards(powerCards);
             });
         }
     }, {
@@ -34348,6 +34348,13 @@ var Powers = function (_Component) {
                         nextCharacter: initialState.nextCharacter
                     });
                 }
+
+                for (var i = 0; i < 4; i++) {
+                    if (document.getElementById('inlineCheckbox3' + i) !== null) document.getElementById('inlineCheckbox3' + i).checked = 'checked';
+                    if (document.getElementById('inlineRadio1' + i) !== null) document.getElementById('inlineRadio1' + i).checked = 'checked';
+                    if (document.getElementById('inlineRadio2' + i) !== null) document.getElementById('inlineRadio2' + i).checked = 'checked';
+                }
+                document.getElementById("powersForm").reset();
                 var id = nextProps.match.params.id;
                 var character = this.props.characters.find(function (character) {
                     return character.id == id;
@@ -34384,6 +34391,7 @@ var Powers = function (_Component) {
         value: function handleChange(event) {
             var powerType = event.target.name;
 
+            if (powerType == 'atWillResults') {}
             // doesn't check when they've chosen two
             if (powerType == 'atWillResults' && this.state.atWillResults.length >= 2) {
                 event.target.checked = false;
@@ -34432,13 +34440,10 @@ var Powers = function (_Component) {
             var pos = this.props.characterOrder.findIndex(function (character) {
                 return character.id == id;
             });
-            console.log('current pos', pos);
-            console.log('arr length', this.props.characterOrder.length);
             if (pos + 1 < this.props.characterOrder.length) {
                 var nextCharId = this.props.characterOrder[pos + 1].id;
                 this.setState({ nextCharacter: true, nextCharId: nextCharId });
             } else if (pos + 1 == this.props.characterOrder.length) {
-                console.log('this is hit');
                 this.setState({ playGame: true, nextCharacter: false });
             }
         }
@@ -34462,7 +34467,7 @@ var Powers = function (_Component) {
                 ),
                 _react2.default.createElement(
                     'form',
-                    { onSubmit: this.onSubmit, action: '/powers/' + this.state.nextCharId },
+                    { onSubmit: this.onSubmit, action: '/powers/' + this.state.nextCharId, id: 'powersForm' },
                     _react2.default.createElement(
                         'div',
                         { className: 'form-group' },
@@ -34811,8 +34816,8 @@ var Powers = function (_Component) {
                             'div',
                             { className: 'col' },
                             _react2.default.createElement(
-                                'button',
-                                { className: 'btn btn-secondary' },
+                                'a',
+                                { href: '#', className: 'btn btn-secondary' },
                                 'Play Game!'
                             )
                         )
