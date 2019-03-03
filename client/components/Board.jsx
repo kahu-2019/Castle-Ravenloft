@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Tile from './Tile'
-import { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } from 'constants';
+import { connect } from "react-redux";
 
 /*  Main board component, renders tile and square sub-components
 
@@ -17,13 +17,8 @@ class Board extends Component {
         this.state = {
             players : [
                 {
-                    x: 6,
-                    y: 2
-                },
-
-                {
-                    x: 4,
-                    y: 3
+                    x: 2,
+                    y: 4
                 }
             ],
 
@@ -46,44 +41,34 @@ class Board extends Component {
 
             testSets: [
                 {
-                    grid:[
-                    [0,1,1,1],
-                    [0,0,0,0],
-                    [0,0,2,0],
-                    [1,0,0,0]
+                    "id": 40,
+                    "image":"images/tiles/35start.jpg",           
+                    "grid": [
+                        [0,0,0,0],
+                        [2,0,0,0],
+                        [0,0,0,0],
+                        [0,0,0,0]
                     ],
+                    "arrow":false,
+                    "skull":false,
+                    "name": "Start 2",
                     x:1,
-                    y:1,
+                    y:1
                 },
                 {
-                    grid:[
-                    [1,1,1,1],
-                    [0,0,0,2],
-                    [0,0,0,0],
-                    [0,0,0,0]
+                    "id": 41,
+                    "image":"images/tiles/34start.jpg",           
+                    "grid": [
+                        [0,0,0,0],
+                        [0,0,0,2],
+                        [0,0,0,0],
+                        [1,1,1,1]
                     ],
-                    x:2,
-                    y:1,
-                },
-                {
-                    grid:[
-                    [1,2,0,0],
-                    [1,0,0,0],
-                    [1,0,0,0],
-                    [1,0,0,0]
-                    ],
+                    "arrow":false,
+                    "skull":false,
+                    "name": "Start",
                     x:1,
-                    y:2,
-                },
-                {
-                    grid:[
-                    [0,0,0,0],
-                    [0,1,0,0],
-                    [0,0,1,0],
-                    [0,0,0,0]
-                    ],
-                    x:2,
-                    y:2,
+                    y:2
                 }
     
             ]
@@ -203,32 +188,47 @@ class Board extends Component {
     //  Preps tile for adding, checks should already be done in this.checkSidesOfPlayer(), rotating tile to correct orientation
     prepTileForAdding(side){
         // get a new tile
-        let testTile = [
-            [1,0,0,0],
-            [0,0,0,0],
-            [0,0,2,0],
-            [0,0,0,0]
-        ]
+        let testTile = {
+            "id": 1,
+            "image":"images/tiles/39.jpg",           
+            "grid": [
+                [1,1,1,1],
+                [0,0,0,0],
+                [0,0,2,0],
+                [1,0,0,1]
+            ],
+            "arrow":true,
+            "skull":false,
+            "name":  null
+        }
 
         let tile = undefined
 
         let playerPos = this.getTileAndSquareForCharacter(this.state.players[0])
         switch(side){
             case 0:
-                 tile = this.rotateTile(testTile, side)
-                this.addTile(tile, {x: playerPos.tileX, y: playerPos.tileY-1})
+                tile = this.rotateTile(testTile.grid, side)
+                testTile.grid = tile
+                testTile.rotation = 0
+                this.addTile(testTile, {x: playerPos.tileX, y: playerPos.tileY-1})
                 break
             case 1:
-                 tile = this.rotateTile(testTile, side)
-                this.addTile(tile, {x: playerPos.tileX+1, y: playerPos.tileY})
+                tile = this.rotateTile(testTile.grid, side)
+                testTile.grid = tile
+                testTile.rotation = 1
+                this.addTile(testTile, {x: playerPos.tileX+1, y: playerPos.tileY})
                 break
             case 2:
-                 tile = this.rotateTile(testTile, side)
-                this.addTile(tile, {x: playerPos.tileX, y: playerPos.tileY+1})
+                tile = this.rotateTile(testTile.grid, side)
+                testTile.grid = tile
+                testTile.rotation = 2
+                this.addTile(testTile, {x: playerPos.tileX, y: playerPos.tileY+1})
                 break
             case 3:
-                 tile = this.rotateTile(testTile, side)
-                this.addTile(tile, {x: playerPos.tileX-1, y: playerPos.tileY})
+                tile = this.rotateTile(testTile.grid, side)
+                testTile.grid = tile
+                testTile.rotation = 3
+                this.addTile(testTile, {x: playerPos.tileX-1, y: playerPos.tileY})
                 break
         }
     }
@@ -245,11 +245,9 @@ class Board extends Component {
             tempPlayers.map(player => {
                 return player.x = player.x + 4
             })
-            tempSet.push({
-                grid:tile,
-                x: position.x+1,
-                y: position.y
-            })
+            tile.x = position.x+1
+            tile.y = position.y
+            tempSet.push(tile)
             this.setState({
                 players: tempPlayers,
                 testSets: tempSet,
@@ -263,11 +261,9 @@ class Board extends Component {
             tempPlayers.map(player => {
                 return player.y = player.y + 4
             })
-            tempSet.push({
-                grid:tile,
-                x: position.x,
-                y: position.y+1
-            })
+            tile.x = position.x
+            tile.y = position.y+1
+            tempSet.push(tile)
             this.setState({
                 players: tempPlayers,
                 testSets: tempSet
@@ -275,11 +271,10 @@ class Board extends Component {
             return
         }
 
-        tempSet.push({
-            grid:tile,
-            x: position.x,
-            y: position.y
-        })
+        tile.x = position.x
+        tile.y = position.y
+        tempSet.push(tile)
+
         this.setState({
             testSets: tempSet
         }, () => this.processCharacters())
@@ -412,14 +407,15 @@ class Board extends Component {
                             gridTemplateColumns: `repeat(${cols}, 200px)`,
                             transform: `translate(${this.state.transform.x}px, ${this.state.transform.y}px)`}}
                             onMouseDown={this.mouseDown} onMouseUp={this.mouseUp} onMouseMove={this.mouseMove}>
-                    {this.state.sets && this.state.sets.map((set, key) => {
-                        return (<div key={key} style={{'gridColumnStart':set.x, 'gridColumnEnd':set.x+1, 'gridRowStart':set.y, 'gridRowEnd':set.y+1}}>
-                            <Tile tile={set.grid} />
+                    {this.state.sets && this.state.sets.map((tile, key) => {
+                        return (<div key={key} style={{'gridColumnStart':tile.x, 'gridColumnEnd':tile.x+1, 'gridRowStart':tile.y, 'gridRowEnd':tile.y+1}}>
+                            <Tile tile={tile} />
                             </div>)
                     })}
                 </div>
             </div>
             <div style={{position:'absolute', top:'10px', left:'10px'}}>
+                {/* <img src='images/tiles/1.jpg' /> */}
                 {this.state.explore.left   && <button onClick={() => this.prepTileForAdding(3)}>Explore left</button>}
                 {this.state.explore.right  && <button onClick={() => this.prepTileForAdding(1)}>Explore right</button>}
                 {this.state.explore.top    && <button onClick={() => this.prepTileForAdding(0)}>Explore top</button>}
