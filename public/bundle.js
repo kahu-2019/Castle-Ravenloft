@@ -30357,13 +30357,21 @@ var _characters = __webpack_require__(68);
 
 var _characters2 = _interopRequireDefault(_characters);
 
+var _characterOrder = __webpack_require__(107);
+
+var _characterOrder2 = _interopRequireDefault(_characterOrder);
+
+var _powerCards = __webpack_require__(108);
+
+var _powerCards2 = _interopRequireDefault(_powerCards);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var reducers = (0, _redux.combineReducers)({
-  characters: _characters2.default
+exports.default = (0, _redux.combineReducers)({
+  characters: _characters2.default,
+  characterOrder: _characterOrder2.default,
+  powerCards: _powerCards2.default
 });
-
-exports.default = reducers;
 
 /***/ }),
 /* 68 */
@@ -30384,12 +30392,27 @@ var reducer = function reducer() {
     switch (action.type) {
         case 'SAVE_ALL_CHARACTERS':
             return action.allCharacters;
+        case 'ADD_POWER_CARDS':
+            return updateCharacter(action.id, action.powerCards, state);
         default:
             return state;
     }
 };
 
 exports.default = reducer;
+
+
+function updateCharacter(id, cards, characters) {
+    var updatedCharacters = characters.map(function (character) {
+        if (character.id == id) {
+            character.cards = cards;
+            return character;
+        } else {
+            return character;
+        }
+    });
+    return updatedCharacters;
+}
 
 /***/ }),
 /* 69 */,
@@ -30423,6 +30446,14 @@ var _Home = __webpack_require__(106);
 
 var _Home2 = _interopRequireDefault(_Home);
 
+var _Characters = __webpack_require__(109);
+
+var _Characters2 = _interopRequireDefault(_Characters);
+
+var _Powers = __webpack_require__(111);
+
+var _Powers2 = _interopRequireDefault(_Powers);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -30445,7 +30476,7 @@ var App = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         "div",
-        null,
+        { className: "container-fluid" },
         _react2.default.createElement(
           _reactRouterDom.HashRouter,
           null,
@@ -30453,8 +30484,10 @@ var App = function (_Component) {
             _react.Fragment,
             null,
             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/", component: _Home2.default }),
-            _react2.default.createElement(_reactRouterDom.Route, { path: "/encounter-treasure", component: _EncounterTreasure2.default }),
-            _react2.default.createElement(_reactRouterDom.Route, { path: "/timetract", component: _TimeTract2.default })
+            _react2.default.createElement(_reactRouterDom.Route, { path: "/char-select", component: _Characters2.default }),
+            _react2.default.createElement(_reactRouterDom.Route, { path: "/powers/:id", component: _Powers2.default }),
+            _react2.default.createElement(_reactRouterDom.Route, { path: "/timetract", component: _TimeTract2.default }),
+            _react2.default.createElement(_reactRouterDom.Route, { path: "/encounter-treasure", component: _EncounterTreasure2.default })
           )
         )
       );
@@ -32732,30 +32765,18 @@ exports.default = (0, _reactRedux.connect)()(EncounterTreasure);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getAllCharacters = getAllCharacters;
-exports.saveAllCharacters = saveAllCharacters;
 exports.getRandomEncounter = getRandomEncounter;
 exports.saveRandomEncounter = saveRandomEncounter;
-
-var _characters = __webpack_require__(99);
+exports.getAllCharacters = getAllCharacters;
+exports.saveAllCharacters = saveAllCharacters;
+exports.addCharacterOrder = addCharacterOrder;
+exports.getCardsByCharacter = getCardsByCharacter;
+exports.savePowerCards = savePowerCards;
+exports.addPowerCards = addPowerCards;
 
 var _ecounter = __webpack_require__(105);
 
-function getAllCharacters() {
-  return function (dispatch) {
-    return (0, _characters.getAllCharacters)().then(function (allCharacters) {
-      console.log(allCharacters);
-      dispatch(saveAllCharacters(allCharacters));
-    });
-  };
-}
-
-function saveAllCharacters(allCharacters) {
-  return {
-    type: "SAVE_ALL_CHARACTERS",
-    allCharacters: allCharacters
-  };
-}
+var _characters = __webpack_require__(99);
 
 function getRandomEncounter() {
   return function (dispatch) {
@@ -32773,6 +32794,52 @@ function saveRandomEncounter(randomEncounter) {
   };
 }
 
+function getAllCharacters() {
+  return function (dispatch) {
+    return (0, _characters.getAllCharacters)().then(function (allCharacters) {
+      dispatch(saveAllCharacters(allCharacters));
+    });
+  };
+}
+
+function saveAllCharacters(allCharacters) {
+  return {
+    type: "SAVE_ALL_CHARACTERS",
+    allCharacters: allCharacters
+  };
+}
+
+function addCharacterOrder(character) {
+  return {
+    type: "ADD_CHARACTER_ORDER",
+    character: character
+  };
+}
+
+function getCardsByCharacter(id) {
+  return function (dispatch) {
+    return (0, _characters.getCardsByCharacter)(id).then(function (powerCards) {
+      dispatch(savePowerCards(powerCards));
+      return powerCards;
+    });
+  };
+}
+
+function savePowerCards(powerCards) {
+  return {
+    type: "SAVE_POWER_CARDS",
+    powerCards: powerCards
+  };
+}
+
+function addPowerCards(id, powerCards) {
+  return {
+    type: "ADD_POWER_CARDS",
+    id: id,
+    powerCards: powerCards
+  };
+}
+
 /***/ }),
 /* 99 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -32784,6 +32851,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.getAllCharacters = getAllCharacters;
+exports.getCardsByCharacter = getCardsByCharacter;
 
 var _superagent = __webpack_require__(35);
 
@@ -32793,6 +32861,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function getAllCharacters() {
     return _superagent2.default.get('/api/v1/allCharacters').then(function (res) {
+        return res.body;
+    });
+}
+
+function getCardsByCharacter(id) {
+    return _superagent2.default.get('/api/v1/characterCards/' + id).then(function (res) {
         return res.body;
     });
 }
@@ -34046,6 +34120,955 @@ var Home = function (_Component) {
 }(_react.Component);
 
 exports.default = Home;
+
+/***/ }),
+/* 107 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var initialState = [];
+
+var reducer = function reducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+    var action = arguments[1];
+
+    switch (action.type) {
+        case 'ADD_CHARACTER_ORDER':
+            return [].concat(_toConsumableArray(state), [action.character]);
+        default:
+            return state;
+    }
+};
+
+exports.default = reducer;
+
+/***/ }),
+/* 108 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var initialState = [];
+
+var reducer = function reducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+    var action = arguments[1];
+
+    switch (action.type) {
+        case 'SAVE_POWER_CARDS':
+            return action.powerCards;
+        default:
+            return state;
+    }
+};
+
+exports.default = reducer;
+
+/***/ }),
+/* 109 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(23);
+
+var _actions = __webpack_require__(98);
+
+var _CharacterOrder = __webpack_require__(110);
+
+var _CharacterOrder2 = _interopRequireDefault(_CharacterOrder);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Characters = function (_Component) {
+    _inherits(Characters, _Component);
+
+    function Characters(props) {
+        _classCallCheck(this, Characters);
+
+        var _this = _possibleConstructorReturn(this, (Characters.__proto__ || Object.getPrototypeOf(Characters)).call(this, props));
+
+        _this.state = {
+            characterChosen1: false,
+            characterChosen2: false,
+            characterChosen3: false,
+            characterChosen4: false,
+            characterChosen5: false
+        };
+        _this.characterOrder = _this.characterOrder.bind(_this);
+        return _this;
+    }
+
+    _createClass(Characters, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.props.dispatch((0, _actions.getAllCharacters)());
+        }
+    }, {
+        key: 'characterOrder',
+        value: function characterOrder(character) {
+            var id = character.id;
+            this.props.dispatch((0, _actions.addCharacterOrder)(character));
+            this.setState(_defineProperty({}, 'characterChosen' + id, true));
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            return _react2.default.createElement(
+                _react.Fragment,
+                null,
+                _react2.default.createElement(
+                    'div',
+                    { className: 'card-columns' },
+                    this.props.characters.map(function (character, i) {
+                        var id = character.id;
+                        if (!_this2.state['characterChosen' + id]) {
+                            return _react2.default.createElement(
+                                'div',
+                                { className: 'card ' + 'bg-' + character.name, key: i, onClick: function onClick() {
+                                        return _this2.characterOrder(character);
+                                    } },
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'container-fluid' },
+                                    _react2.default.createElement(
+                                        'div',
+                                        { className: 'card-body' },
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'row' },
+                                            _react2.default.createElement(
+                                                'h5',
+                                                { className: 'card-title card-text char-card' },
+                                                character.name
+                                            ),
+                                            _react2.default.createElement(
+                                                'h6',
+                                                { className: 'card-subtitle mb-2 text-muted card-text char-card' },
+                                                character.subtitle
+                                            ),
+                                            _react2.default.createElement(
+                                                'p',
+                                                { className: 'card-text char-card' },
+                                                character.description
+                                            )
+                                        ),
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'row' },
+                                            _react2.default.createElement(
+                                                'div',
+                                                { className: 'col attribs-title card-text char-card' },
+                                                'AC'
+                                            ),
+                                            _react2.default.createElement(
+                                                'div',
+                                                { className: 'col attribs-title card-text char-card' },
+                                                'HP'
+                                            ),
+                                            _react2.default.createElement(
+                                                'div',
+                                                { className: 'col attribs-title card-text char-card' },
+                                                'Speed'
+                                            ),
+                                            _react2.default.createElement(
+                                                'div',
+                                                { className: 'col attribs-title card-text char-card' },
+                                                'SurgeValue'
+                                            )
+                                        ),
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'row' },
+                                            _react2.default.createElement(
+                                                'div',
+                                                { className: 'col attribs card-text char-card' },
+                                                character.AC
+                                            ),
+                                            _react2.default.createElement(
+                                                'div',
+                                                { className: 'col attribs card-text char-card' },
+                                                character.HP
+                                            ),
+                                            _react2.default.createElement(
+                                                'div',
+                                                { className: 'col attribs card-text char-card' },
+                                                character.speed
+                                            ),
+                                            _react2.default.createElement(
+                                                'div',
+                                                { className: 'col attribs card-text char-card' },
+                                                '+ ',
+                                                character.SurgeValue
+                                            )
+                                        ),
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'row' },
+                                            _react2.default.createElement(
+                                                'p',
+                                                { className: 'card-text char-card' },
+                                                character.description
+                                            )
+                                        )
+                                    )
+                                )
+                            );
+                        } else {
+                            return '';
+                        }
+                    })
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'row' },
+                    _react2.default.createElement(_CharacterOrder2.default, null)
+                )
+            );
+        }
+    }]);
+
+    return Characters;
+}(_react.Component);
+
+function mapStateToProps(state) {
+    return {
+        characters: state.characters
+    };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(Characters);
+
+/***/ }),
+/* 110 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(23);
+
+var _reactRouterDom = __webpack_require__(71);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var CharacterOrder = function (_Component) {
+  _inherits(CharacterOrder, _Component);
+
+  function CharacterOrder(props) {
+    _classCallCheck(this, CharacterOrder);
+
+    var _this = _possibleConstructorReturn(this, (CharacterOrder.__proto__ || Object.getPrototypeOf(CharacterOrder)).call(this, props));
+
+    _this.state = {};
+    _this.choosePowersLink = _this.choosePowersLink.bind(_this);
+    return _this;
+  }
+
+  _createClass(CharacterOrder, [{
+    key: 'choosePowersLink',
+    value: function choosePowersLink() {
+      var charOrder = this.props.characterOrder;
+      if (charOrder && charOrder.length > 0) {
+        return '/powers/' + this.props.characterOrder[0].id;
+      } else {
+        return '/char-select';
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+
+      return _react2.default.createElement(
+        _react.Fragment,
+        null,
+        _react2.default.createElement(
+          'div',
+          { className: 'col' },
+          _react2.default.createElement(
+            'h2',
+            null,
+            'Order:'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'col' },
+          _react2.default.createElement(
+            'ul',
+            { className: 'list-inline' },
+            this.props.characterOrder.map(function (character, i) {
+              return _react2.default.createElement(
+                'li',
+                { className: 'list-inline-item', key: i },
+                character.name
+              );
+            })
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'col' },
+          _react2.default.createElement(
+            _reactRouterDom.Link,
+            { className: 'btn btn-outline-secondary', to: this.choosePowersLink() },
+            'Choose Powers'
+          )
+        )
+      );
+    }
+  }]);
+
+  return CharacterOrder;
+}(_react.Component);
+
+function mapStateToProps(state) {
+  return {
+    characterOrder: state.characterOrder
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(CharacterOrder);
+
+/***/ }),
+/* 111 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(23);
+
+var _reactRouterDom = __webpack_require__(71);
+
+var _actions = __webpack_require__(98);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Powers = function (_Component) {
+    _inherits(Powers, _Component);
+
+    function Powers(props) {
+        _classCallCheck(this, Powers);
+
+        var _this = _possibleConstructorReturn(this, (Powers.__proto__ || Object.getPrototypeOf(Powers)).call(this, props));
+
+        _this.state = {
+            character: {},
+            daily: [],
+            utility: [],
+            atWill: [],
+            dailyResult: {},
+            utilityResult: {},
+            atWillResults: [],
+            nextCharacter: false,
+            nextCharId: 1,
+            playGame: false
+        };
+        _this.filterCards = _this.filterCards.bind(_this);
+        _this.handleChange = _this.handleChange.bind(_this);
+        _this.onSubmit = _this.onSubmit.bind(_this);
+        _this.nextCharacter = _this.nextCharacter.bind(_this);
+        return _this;
+    }
+
+    _createClass(Powers, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
+
+            var id = this.props.match.params.id;
+            var character = this.props.characters.find(function (character) {
+                return character.id == id;
+            });
+            this.setState({ character: character });
+            this.props.dispatch((0, _actions.getCardsByCharacter)(id)).then(function (powerCards) {
+                return _this2.filterCards(powerCards);
+            });
+        }
+    }, {
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(nextProps) {
+            var _this3 = this;
+
+            var reset = true;
+
+            var initialState = {
+                dailyResult: {},
+                utilityResult: {},
+                atWillResults: [],
+                nextCharacter: false
+            };
+
+            if (nextProps.match.params.id != this.props.match.params.id) {
+                if (reset) {
+                    reset = !reset;
+                    this.setState({
+                        dailyResult: initialState.dailyResult,
+                        utilityResult: initialState.utilityResult,
+                        atWillResults: initialState.atWillResults,
+                        nextCharacter: initialState.nextCharacter
+                    });
+                }
+
+                for (var i = 0; i < 4; i++) {
+                    if (document.getElementById('inlineCheckbox3' + i) !== null) document.getElementById('inlineCheckbox3' + i).checked = 'checked';
+                    if (document.getElementById('inlineRadio1' + i) !== null) document.getElementById('inlineRadio1' + i).checked = 'checked';
+                    if (document.getElementById('inlineRadio2' + i) !== null) document.getElementById('inlineRadio2' + i).checked = 'checked';
+                }
+                document.getElementById("powersForm").reset();
+                var id = nextProps.match.params.id;
+                var character = this.props.characters.find(function (character) {
+                    return character.id == id;
+                });
+                this.setState({ character: character });
+                nextProps.dispatch((0, _actions.getCardsByCharacter)(id)).then(function (powerCards) {
+                    return _this3.filterCards(powerCards);
+                });
+            }
+        }
+    }, {
+        key: 'filterCards',
+        value: function filterCards(powerCards) {
+            var daily = powerCards.filter(function (powerCard) {
+                return powerCard.type == 'Daily-Power';
+            });
+
+            var utility = powerCards.filter(function (powerCard) {
+                return powerCard.type == 'utility power';
+            });
+
+            var atWill = powerCards.filter(function (powerCard) {
+                return powerCard.type == 'At-Will-Power';
+            });
+
+            this.setState({
+                daily: daily,
+                utility: utility,
+                atWill: atWill
+            });
+        }
+    }, {
+        key: 'handleChange',
+        value: function handleChange(event) {
+            var powerType = event.target.name;
+
+            // doesn't check when they've chosen two
+            if (powerType == 'atWillResults' && this.state.atWillResults.length >= 2) {
+                event.target.checked = false;
+            }
+
+            if (powerType == 'atWillResults' && event.target.checked && this.state.atWillResults.length < 2) {
+                event.persist();
+                this.setState(function (state) {
+                    var atWill = JSON.parse(event.target.value);
+                    var atWillResults = [].concat(_toConsumableArray(state.atWillResults), [atWill.atWill]);
+                    return { atWillResults: atWillResults };
+                });
+            } else if (powerType == 'atWillResults' && !event.target.checked) {
+                var atWill = JSON.parse(event.target.value);
+                var updatedArr = this.state.atWillResults.filter(function (power) {
+                    return power.id != atWill.atWill.id;
+                });
+                this.setState({ atWillResults: updatedArr });
+            } else if (powerType != 'atWillResults') {
+                this.setState(_defineProperty({}, event.target.name, JSON.parse(event.target.value)));
+            }
+        }
+    }, {
+        key: 'onSubmit',
+        value: function onSubmit(e) {
+            e.preventDefault();
+            var id = this.props.match.params.id;
+            var cards = {
+                daily: this.state.dailyResult,
+                utility: this.state.utilityResult,
+                atWill: this.state.atWillResults
+            };
+
+            if (cards.atWill.length < 2) {
+                alert("You must pick 2 At Will powers");
+            } else {
+                this.props.dispatch((0, _actions.addPowerCards)(id, cards));
+            }
+
+            this.nextCharacter();
+        }
+    }, {
+        key: 'nextCharacter',
+        value: function nextCharacter() {
+            var id = this.props.match.params.id;
+            var pos = this.props.characterOrder.findIndex(function (character) {
+                return character.id == id;
+            });
+            if (pos + 1 < this.props.characterOrder.length) {
+                var nextCharId = this.props.characterOrder[pos + 1].id;
+                this.setState({ nextCharacter: true, nextCharId: nextCharId });
+            } else if (pos + 1 == this.props.characterOrder.length) {
+                this.setState({ playGame: true, nextCharacter: false });
+            }
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this4 = this;
+
+            return _react2.default.createElement(
+                _react.Fragment,
+                null,
+                _react2.default.createElement(
+                    'h1',
+                    null,
+                    this.state.character.name
+                ),
+                _react2.default.createElement(
+                    'h2',
+                    null,
+                    this.state.character.subtitle
+                ),
+                _react2.default.createElement(
+                    'form',
+                    { onSubmit: this.onSubmit, action: '/powers/' + this.state.nextCharId, id: 'powersForm' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'form-group' },
+                        _react2.default.createElement(
+                            'h2',
+                            { className: 'power-titles' },
+                            'Daily'
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'row' },
+                            this.state.daily.map(function (daily, i) {
+                                return _react2.default.createElement(
+                                    _react.Fragment,
+                                    { key: i },
+                                    _react2.default.createElement(
+                                        'div',
+                                        { className: 'col' },
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'form-check form-check-inline' },
+                                            _react2.default.createElement(
+                                                'label',
+                                                { className: 'form-check-label' },
+                                                _react2.default.createElement('input', { className: 'form-check-input', type: 'radio', id: 'inlineRadio1' + i, value: JSON.stringify(daily), name: 'dailyResult', onChange: _this4.handleChange }),
+                                                _react2.default.createElement(
+                                                    'div',
+                                                    { className: 'card' },
+                                                    _react2.default.createElement(
+                                                        'div',
+                                                        { className: 'container-fluid' },
+                                                        _react2.default.createElement(
+                                                            'div',
+                                                            { className: 'card-body' },
+                                                            _react2.default.createElement(
+                                                                'div',
+                                                                { className: 'row' },
+                                                                _react2.default.createElement(
+                                                                    'h5',
+                                                                    { className: 'card-title' },
+                                                                    daily.title
+                                                                ),
+                                                                _react2.default.createElement(
+                                                                    'p',
+                                                                    { className: 'card-subtitle mb-2 text-muted card-text' },
+                                                                    _react2.default.createElement(
+                                                                        'b',
+                                                                        null,
+                                                                        daily.subtitle
+                                                                    )
+                                                                ),
+                                                                _react2.default.createElement(
+                                                                    'p',
+                                                                    null,
+                                                                    _react2.default.createElement(
+                                                                        'b',
+                                                                        null,
+                                                                        daily.instruction_1
+                                                                    ),
+                                                                    ' ',
+                                                                    daily.instruction_2
+                                                                )
+                                                            ),
+                                                            daily.damage && _react2.default.createElement(
+                                                                _react.Fragment,
+                                                                null,
+                                                                _react2.default.createElement(
+                                                                    'div',
+                                                                    { className: 'row' },
+                                                                    _react2.default.createElement(
+                                                                        'div',
+                                                                        { className: 'col attribs-title card-text' },
+                                                                        'Attack'
+                                                                    ),
+                                                                    _react2.default.createElement(
+                                                                        'div',
+                                                                        { className: 'col attribs-title card-text' },
+                                                                        'Damage'
+                                                                    )
+                                                                ),
+                                                                _react2.default.createElement(
+                                                                    'div',
+                                                                    { className: 'row' },
+                                                                    _react2.default.createElement(
+                                                                        'div',
+                                                                        { className: 'col attribs card-text' },
+                                                                        '+ ',
+                                                                        daily.attack
+                                                                    ),
+                                                                    _react2.default.createElement(
+                                                                        'div',
+                                                                        { className: 'col attribs card-text' },
+                                                                        daily.damage,
+                                                                        daily.miss && _react2.default.createElement(
+                                                                            _react.Fragment,
+                                                                            null,
+                                                                            _react2.default.createElement(
+                                                                                'p',
+                                                                                null,
+                                                                                'Miss: ',
+                                                                                daily.miss,
+                                                                                ' Damage'
+                                                                            )
+                                                                        )
+                                                                    )
+                                                                )
+                                                            ),
+                                                            _react2.default.createElement(
+                                                                'p',
+                                                                null,
+                                                                _react2.default.createElement(
+                                                                    'small',
+                                                                    { className: 'text-muted' },
+                                                                    'FILP THIS CARD AFTER USE'
+                                                                )
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                );
+                            })
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'form-group' },
+                        _react2.default.createElement(
+                            'h2',
+                            { className: 'power-titles' },
+                            'Utility'
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'row' },
+                            this.state.utility.map(function (utility, i) {
+                                return _react2.default.createElement(
+                                    _react.Fragment,
+                                    { key: i },
+                                    _react2.default.createElement(
+                                        'div',
+                                        { className: 'col' },
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'form-check form-check-inline' },
+                                            _react2.default.createElement(
+                                                'label',
+                                                { className: 'form-check-label' },
+                                                _react2.default.createElement('input', { className: 'form-check-input', type: 'radio', id: 'inlineRadio2' + i, value: JSON.stringify(utility), name: 'utilityResult', onChange: _this4.handleChange }),
+                                                _react2.default.createElement(
+                                                    'div',
+                                                    { className: 'card' },
+                                                    _react2.default.createElement(
+                                                        'div',
+                                                        { className: 'container-fluid' },
+                                                        _react2.default.createElement(
+                                                            'div',
+                                                            { className: 'card-body' },
+                                                            _react2.default.createElement(
+                                                                'div',
+                                                                { className: 'row' },
+                                                                _react2.default.createElement(
+                                                                    'h5',
+                                                                    { className: 'card-title' },
+                                                                    utility.title
+                                                                ),
+                                                                _react2.default.createElement(
+                                                                    'p',
+                                                                    { className: 'card-subtitle mb-2 text-muted card-text' },
+                                                                    _react2.default.createElement(
+                                                                        'b',
+                                                                        null,
+                                                                        utility.subtitle
+                                                                    )
+                                                                ),
+                                                                _react2.default.createElement(
+                                                                    'p',
+                                                                    null,
+                                                                    _react2.default.createElement(
+                                                                        'b',
+                                                                        null,
+                                                                        utility.instruction_1
+                                                                    ),
+                                                                    ' ',
+                                                                    utility.instruction_2
+                                                                )
+                                                            ),
+                                                            _react2.default.createElement(
+                                                                'p',
+                                                                null,
+                                                                _react2.default.createElement(
+                                                                    'small',
+                                                                    { className: 'text-muted' },
+                                                                    'FILP THIS CARD OVER AFTER YOU USE THE POWER'
+                                                                )
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                );
+                            })
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'form-group' },
+                        _react2.default.createElement(
+                            'h2',
+                            { className: 'power-titles' },
+                            'At Will'
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'row' },
+                            this.state.atWill.map(function (atWill, i) {
+                                return _react2.default.createElement(
+                                    _react.Fragment,
+                                    { key: i },
+                                    _react2.default.createElement(
+                                        'div',
+                                        { className: 'col' },
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'form-check form-check-inline' },
+                                            _react2.default.createElement(
+                                                'label',
+                                                { className: 'form-check-label' },
+                                                _react2.default.createElement('input', { className: 'form-check-input', type: 'checkbox', id: 'inlineCheckbox3' + i, value: JSON.stringify({ atWill: atWill }), name: 'atWillResults', onChange: _this4.handleChange }),
+                                                _react2.default.createElement(
+                                                    'div',
+                                                    { className: 'card' },
+                                                    _react2.default.createElement(
+                                                        'div',
+                                                        { className: 'container-fluid' },
+                                                        _react2.default.createElement(
+                                                            'div',
+                                                            { className: 'card-body' },
+                                                            _react2.default.createElement(
+                                                                'div',
+                                                                { className: 'row' },
+                                                                _react2.default.createElement(
+                                                                    'h5',
+                                                                    { className: 'card-title' },
+                                                                    atWill.title
+                                                                ),
+                                                                _react2.default.createElement(
+                                                                    'p',
+                                                                    { className: 'card-subtitle mb-2 text-muted card-text' },
+                                                                    _react2.default.createElement(
+                                                                        'b',
+                                                                        null,
+                                                                        atWill.subtitle
+                                                                    )
+                                                                ),
+                                                                _react2.default.createElement(
+                                                                    'p',
+                                                                    null,
+                                                                    _react2.default.createElement(
+                                                                        'b',
+                                                                        null,
+                                                                        atWill.instruction_1
+                                                                    ),
+                                                                    ' ',
+                                                                    atWill.instruction_2
+                                                                )
+                                                            ),
+                                                            atWill.damage && _react2.default.createElement(
+                                                                _react.Fragment,
+                                                                null,
+                                                                _react2.default.createElement(
+                                                                    'div',
+                                                                    { className: 'row' },
+                                                                    _react2.default.createElement(
+                                                                        'div',
+                                                                        { className: 'col attribs-title card-text' },
+                                                                        'Attack'
+                                                                    ),
+                                                                    _react2.default.createElement(
+                                                                        'div',
+                                                                        { className: 'col attribs-title card-text' },
+                                                                        'Damage'
+                                                                    )
+                                                                ),
+                                                                _react2.default.createElement(
+                                                                    'div',
+                                                                    { className: 'row' },
+                                                                    _react2.default.createElement(
+                                                                        'div',
+                                                                        { className: 'col attribs card-text' },
+                                                                        '+ ',
+                                                                        atWill.attack
+                                                                    ),
+                                                                    _react2.default.createElement(
+                                                                        'div',
+                                                                        { className: 'col attribs card-text' },
+                                                                        atWill.damage
+                                                                    )
+                                                                )
+                                                            ),
+                                                            _react2.default.createElement(
+                                                                'p',
+                                                                null,
+                                                                _react2.default.createElement(
+                                                                    'small',
+                                                                    { className: 'text-muted' },
+                                                                    'FILP THIS CARD AFTER USE'
+                                                                )
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                );
+                            })
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'row' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'col' },
+                            _react2.default.createElement(
+                                'button',
+                                { type: 'submit', className: 'btn btn-primary' },
+                                'Submit'
+                            )
+                        ),
+                        this.state.nextCharacter && _react2.default.createElement(
+                            'div',
+                            { className: 'col' },
+                            _react2.default.createElement(
+                                _reactRouterDom.Link,
+                                { to: '/powers/' + this.state.nextCharId, className: 'btn btn-secondary' },
+                                'Next character'
+                            )
+                        ),
+                        this.state.playGame && _react2.default.createElement(
+                            'div',
+                            { className: 'col' },
+                            _react2.default.createElement(
+                                _reactRouterDom.Link,
+                                { to: '/board', className: 'btn btn-secondary' },
+                                'Play Game!'
+                            )
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return Powers;
+}(_react.Component);
+
+function mapStateToProps(state) {
+    return {
+        characters: state.characters,
+        powerCards: state.powerCards,
+        characterOrder: state.characterOrder
+    };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(Powers);
 
 /***/ })
 /******/ ]);
