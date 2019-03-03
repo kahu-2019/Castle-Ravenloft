@@ -28441,7 +28441,7 @@ var Home = function (_Component) {
       return _react2.default.createElement(
         "div",
         { className: "home" },
-        _react2.default.createElement("img", { src: "./images/main/main-img.png", alt: "Responsive image" }),
+        _react2.default.createElement("img", { src: "./images/main/main-img2.png", alt: "Responsive image" }),
         _react2.default.createElement(
           "div",
           { className: "display" },
