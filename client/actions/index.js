@@ -29,6 +29,7 @@ export function getCardsByCharacter(id){
     return apiGetCardsByCharacter(id)
     .then(powerCards => {
       dispatch(savePowerCards(powerCards))
+      return powerCards
     })
   }
 }

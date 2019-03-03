@@ -59,7 +59,58 @@
 
  @keyframes scale-out-center{0%{transform:scale(1);opacity:1}100%{transform:scale(0);opacity:1}}
 
-.card-text{
+.char-card{
   color:rgb(223, 219, 219);
   
+}
+
+/* HIDE RADIO */
+[type=radio] { 
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* IMAGE STYLES */
+[type=radio] + .card {
+  cursor: pointer;
+}
+
+[type=radio]:hover + .card {
+  outline: 2px solid lightblue;
+  
+}
+
+/* CHECKED STYLES */
+[type=radio]:checked + .card {
+  outline: 2px solid greenyellow;
+}
+
+
+/* HIDE CHECK */
+[type=checkbox] { 
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* IMAGE STYLES */
+[type=checkbox] + .card {
+  cursor: pointer;
+}
+
+[type=checkbox]:hover + .card {
+  outline: 2px solid lightblue;
+  
+}
+
+/* CHECKED STYLES */
+[type=checkbox]:checked + .card {
+  outline: 2px solid greenyellow;
+}
+
+.power-titles{
+  text-align: center;
 }

@@ -40,26 +40,26 @@ class Characters extends Component {
                 <div className="container-fluid">
                     <div className="card-body">
                         <div className="row">
-                            <h5 className="card-title card-text">{character.name}</h5>
-                            <h6 className="card-subtitle mb-2 text-muted card-text">{character.subtitle}</h6>
-                            <p className="card-text card-text">{character.description}</p>
+                            <h5 className="card-title card-text char-card">{character.name}</h5>
+                            <h6 className="card-subtitle mb-2 text-muted card-text char-card">{character.subtitle}</h6>
+                            <p className="card-text char-card">{character.description}</p>
                         </div>
                             <div className="row">
-                                <div className="col attribs-title card-text">AC</div>
-                                <div className="col attribs-title card-text">HP</div>
-                                <div className="col attribs-title card-text">Speed</div>
-                                <div className="col attribs-title card-text">SurgeValue</div>
+                                <div className="col attribs-title card-text char-card">AC</div>
+                                <div className="col attribs-title card-text char-card">HP</div>
+                                <div className="col attribs-title card-text char-card">Speed</div>
+                                <div className="col attribs-title card-text char-card">SurgeValue</div>
                             </div>
                             <div className="row">
-                                <div className="col attribs card-text">{character.AC}</div>
-                                <div className="col attribs card-text">{character.HP}</div>
-                                <div className="col attribs card-text">{character.speed}</div>
-                                <div className="col attribs card-text">+ {character.SurgeValue}</div>
+                                <div className="col attribs card-text char-card">{character.AC}</div>
+                                <div className="col attribs card-text char-card">{character.HP}</div>
+                                <div className="col attribs card-text char-card">{character.speed}</div>
+                                <div className="col attribs card-text char-card">+ {character.SurgeValue}</div>
                         </div>
 
 
                         <div className="row">
-                            <p className="card-text card-text">{character.description}</p>
+                            <p className="card-text char-card">{character.description}</p>
                         </div>
                     </div>                
                 </div>

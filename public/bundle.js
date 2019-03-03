@@ -426,11 +426,11 @@ module.exports = warning;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createBrowserHistory__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createBrowserHistory__ = __webpack_require__(86);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__createBrowserHistory__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__createHashHistory__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__createHashHistory__ = __webpack_require__(89);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__createHashHistory__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__createMemoryHistory__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__createMemoryHistory__ = __webpack_require__(90);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_2__createMemoryHistory__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__LocationUtils__ = __webpack_require__(11);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_3__LocationUtils__["a"]; });
@@ -724,8 +724,8 @@ module.exports = warning;
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return createLocation; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return locationsAreEqual; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_resolve_pathname__ = __webpack_require__(86);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_value_equal__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_resolve_pathname__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_value_equal__ = __webpack_require__(88);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PathUtils__ = __webpack_require__(7);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -2443,7 +2443,7 @@ exports.addCharacterOrder = addCharacterOrder;
 exports.getCardsByCharacter = getCardsByCharacter;
 exports.savePowerCards = savePowerCards;
 
-var _characters = __webpack_require__(73);
+var _characters = __webpack_require__(74);
 
 function getAllCharacters() {
   return function (dispatch) {
@@ -2471,6 +2471,7 @@ function getCardsByCharacter(id) {
   return function (dispatch) {
     return (0, _characters.getCardsByCharacter)(id).then(function (powerCards) {
       dispatch(savePowerCards(powerCards));
+      return powerCards;
     });
   };
 }
@@ -2856,7 +2857,7 @@ Route.childContextTypes = {
 /* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isarray = __webpack_require__(94)
+var isarray = __webpack_require__(95)
 
 /**
  * Expose `pathToRegexp`.
@@ -3354,7 +3355,7 @@ var _reducers = __webpack_require__(68);
 
 var _reducers2 = _interopRequireDefault(_reducers);
 
-var _App = __webpack_require__(71);
+var _App = __webpack_require__(72);
 
 var _App2 = _interopRequireDefault(_App);
 
@@ -29669,7 +29670,7 @@ var _characterOrder = __webpack_require__(70);
 
 var _characterOrder2 = _interopRequireDefault(_characterOrder);
 
-var _powerCards = __webpack_require__(108);
+var _powerCards = __webpack_require__(71);
 
 var _powerCards2 = _interopRequireDefault(_powerCards);
 
@@ -29744,6 +29745,32 @@ exports.default = reducer;
 
 
 Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var initialState = [];
+
+var reducer = function reducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+    var action = arguments[1];
+
+    switch (action.type) {
+        case 'SAVE_POWER_CARDS':
+            return action.powerCards;
+        default:
+            return state;
+    }
+};
+
+exports.default = reducer;
+
+/***/ }),
+/* 72 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
@@ -29753,19 +29780,19 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Characters = __webpack_require__(72);
+var _Characters = __webpack_require__(73);
 
 var _Characters2 = _interopRequireDefault(_Characters);
 
-var _Home = __webpack_require__(81);
+var _Home = __webpack_require__(82);
 
 var _Home2 = _interopRequireDefault(_Home);
 
-var _Powers = __webpack_require__(82);
+var _Powers = __webpack_require__(83);
 
 var _Powers2 = _interopRequireDefault(_Powers);
 
-var _reactRouterDom = __webpack_require__(83);
+var _reactRouterDom = __webpack_require__(84);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29811,7 +29838,7 @@ var App = function (_Component) {
 exports.default = App;
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29831,7 +29858,7 @@ var _reactRedux = __webpack_require__(8);
 
 var _actions = __webpack_require__(29);
 
-var _CharacterOrder = __webpack_require__(80);
+var _CharacterOrder = __webpack_require__(81);
 
 var _CharacterOrder2 = _interopRequireDefault(_CharacterOrder);
 
@@ -29906,17 +29933,17 @@ var Characters = function (_Component) {
                                             { className: 'row' },
                                             _react2.default.createElement(
                                                 'h5',
-                                                { className: 'card-title card-text' },
+                                                { className: 'card-title card-text char-card' },
                                                 character.name
                                             ),
                                             _react2.default.createElement(
                                                 'h6',
-                                                { className: 'card-subtitle mb-2 text-muted card-text' },
+                                                { className: 'card-subtitle mb-2 text-muted card-text char-card' },
                                                 character.subtitle
                                             ),
                                             _react2.default.createElement(
                                                 'p',
-                                                { className: 'card-text card-text' },
+                                                { className: 'card-text char-card' },
                                                 character.description
                                             )
                                         ),
@@ -29925,22 +29952,22 @@ var Characters = function (_Component) {
                                             { className: 'row' },
                                             _react2.default.createElement(
                                                 'div',
-                                                { className: 'col attribs-title card-text' },
+                                                { className: 'col attribs-title card-text char-card' },
                                                 'AC'
                                             ),
                                             _react2.default.createElement(
                                                 'div',
-                                                { className: 'col attribs-title card-text' },
+                                                { className: 'col attribs-title card-text char-card' },
                                                 'HP'
                                             ),
                                             _react2.default.createElement(
                                                 'div',
-                                                { className: 'col attribs-title card-text' },
+                                                { className: 'col attribs-title card-text char-card' },
                                                 'Speed'
                                             ),
                                             _react2.default.createElement(
                                                 'div',
-                                                { className: 'col attribs-title card-text' },
+                                                { className: 'col attribs-title card-text char-card' },
                                                 'SurgeValue'
                                             )
                                         ),
@@ -29949,22 +29976,22 @@ var Characters = function (_Component) {
                                             { className: 'row' },
                                             _react2.default.createElement(
                                                 'div',
-                                                { className: 'col attribs card-text' },
+                                                { className: 'col attribs card-text char-card' },
                                                 character.AC
                                             ),
                                             _react2.default.createElement(
                                                 'div',
-                                                { className: 'col attribs card-text' },
+                                                { className: 'col attribs card-text char-card' },
                                                 character.HP
                                             ),
                                             _react2.default.createElement(
                                                 'div',
-                                                { className: 'col attribs card-text' },
+                                                { className: 'col attribs card-text char-card' },
                                                 character.speed
                                             ),
                                             _react2.default.createElement(
                                                 'div',
-                                                { className: 'col attribs card-text' },
+                                                { className: 'col attribs card-text char-card' },
                                                 '+ ',
                                                 character.SurgeValue
                                             )
@@ -29974,7 +30001,7 @@ var Characters = function (_Component) {
                                             { className: 'row' },
                                             _react2.default.createElement(
                                                 'p',
-                                                { className: 'card-text card-text' },
+                                                { className: 'card-text char-card' },
                                                 character.description
                                             )
                                         )
@@ -30007,7 +30034,7 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(Characters);
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30019,7 +30046,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.getAllCharacters = getAllCharacters;
 exports.getCardsByCharacter = getCardsByCharacter;
 
-var _superagent = __webpack_require__(74);
+var _superagent = __webpack_require__(75);
 
 var _superagent2 = _interopRequireDefault(_superagent);
 
@@ -30038,7 +30065,7 @@ function getCardsByCharacter(id) {
 }
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -30055,11 +30082,11 @@ if (typeof window !== 'undefined') { // Browser window
   root = this;
 }
 
-const Emitter = __webpack_require__(75);
-const RequestBase = __webpack_require__(76);
+const Emitter = __webpack_require__(76);
+const RequestBase = __webpack_require__(77);
 const isObject = __webpack_require__(30);
-const ResponseBase = __webpack_require__(77);
-const Agent = __webpack_require__(79);
+const ResponseBase = __webpack_require__(78);
+const Agent = __webpack_require__(80);
 
 /**
  * Noop.
@@ -30963,7 +30990,7 @@ request.put = (url, data, fn) => {
 
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -31132,7 +31159,7 @@ Emitter.prototype.hasListeners = function(event){
 
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31842,7 +31869,7 @@ RequestBase.prototype._setTimeouts = function() {
 
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31852,7 +31879,7 @@ RequestBase.prototype._setTimeouts = function() {
  * Module dependencies.
  */
 
-const utils = __webpack_require__(78);
+const utils = __webpack_require__(79);
 
 /**
  * Expose `ResponseBase`.
@@ -31985,7 +32012,7 @@ ResponseBase.prototype._setStatusProperties = function(status){
 
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32057,7 +32084,7 @@ exports.cleanHeader = (header, changesOrigin) => {
 
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports) {
 
 function Agent() {
@@ -32083,7 +32110,7 @@ module.exports = Agent;
 
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32177,7 +32204,7 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(CharacterOrder);
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32227,7 +32254,7 @@ var Home = function (_Component) {
 exports.default = Home;
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32249,6 +32276,8 @@ var _actions = __webpack_require__(29);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -32263,23 +32292,366 @@ var Powers = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (Powers.__proto__ || Object.getPrototypeOf(Powers)).call(this, props));
 
-        _this.state = {};
+        _this.state = {
+            daily: [],
+            utility: [],
+            atWill: []
+        };
+        _this.filterCards = _this.filterCards.bind(_this);
         return _this;
     }
 
     _createClass(Powers, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
+            var _this2 = this;
+
             var id = this.props.match.params.id;
-            this.props.dispatch((0, _actions.getCardsByCharacter)(id));
+            this.props.dispatch((0, _actions.getCardsByCharacter)(id)).then(function (powerCards) {
+                return _this2.filterCards(powerCards);
+            });
+        }
+    }, {
+        key: 'filterCards',
+        value: function filterCards(powerCards) {
+            var daily = powerCards.filter(function (powerCard) {
+                return powerCard.type == 'Daily-Power';
+            });
+
+            var utility = powerCards.filter(function (powerCard) {
+                return powerCard.type == 'utility power';
+            });
+
+            var atWill = powerCards.filter(function (powerCard) {
+                return powerCard.type == 'At-Will-Power';
+            });
+
+            this.setState({
+                daily: daily,
+                utility: utility,
+                atWill: atWill
+            });
         }
     }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
-                'div',
+                _react.Fragment,
                 null,
-                'Powers'
+                _react2.default.createElement(
+                    'form',
+                    null,
+                    _react2.default.createElement(
+                        'div',
+                        { 'class': 'form-group' },
+                        _react2.default.createElement(
+                            'h2',
+                            { className: 'power-titles' },
+                            'Daily'
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'row' },
+                            this.state.daily.map(function (daily, i) {
+                                return _react2.default.createElement(
+                                    _react.Fragment,
+                                    null,
+                                    _react2.default.createElement(
+                                        'div',
+                                        { className: 'col', key: i },
+                                        _react2.default.createElement(
+                                            'div',
+                                            { 'class': 'form-check form-check-inline' },
+                                            _react2.default.createElement(
+                                                'label',
+                                                { 'class': 'form-check-label' },
+                                                _react2.default.createElement('input', _defineProperty({ 'class': 'form-check-input', type: 'radio', name: 'inlineRadioOptions', id: 'inlineRadio1' + i, value: 'option' + i }, 'name', 'daily')),
+                                                _react2.default.createElement(
+                                                    'div',
+                                                    { 'class': 'card' },
+                                                    _react2.default.createElement(
+                                                        'div',
+                                                        { className: 'container-fluid' },
+                                                        _react2.default.createElement(
+                                                            'div',
+                                                            { 'class': 'card-body' },
+                                                            _react2.default.createElement(
+                                                                'div',
+                                                                { className: 'row' },
+                                                                _react2.default.createElement(
+                                                                    'h5',
+                                                                    { 'class': 'card-title' },
+                                                                    daily.title
+                                                                ),
+                                                                _react2.default.createElement(
+                                                                    'p',
+                                                                    { className: 'card-subtitle mb-2 text-muted card-text' },
+                                                                    _react2.default.createElement(
+                                                                        'b',
+                                                                        null,
+                                                                        daily.subtitle
+                                                                    )
+                                                                ),
+                                                                _react2.default.createElement(
+                                                                    'p',
+                                                                    null,
+                                                                    _react2.default.createElement(
+                                                                        'b',
+                                                                        null,
+                                                                        daily.instruction_1
+                                                                    ),
+                                                                    ' ',
+                                                                    daily.instruction_2
+                                                                )
+                                                            ),
+                                                            daily.damage && _react2.default.createElement(
+                                                                _react.Fragment,
+                                                                null,
+                                                                _react2.default.createElement(
+                                                                    'div',
+                                                                    { className: 'row' },
+                                                                    _react2.default.createElement(
+                                                                        'div',
+                                                                        { className: 'col attribs-title card-text' },
+                                                                        'Attack'
+                                                                    ),
+                                                                    _react2.default.createElement(
+                                                                        'div',
+                                                                        { className: 'col attribs-title card-text' },
+                                                                        'Damage'
+                                                                    )
+                                                                ),
+                                                                _react2.default.createElement(
+                                                                    'div',
+                                                                    { className: 'row' },
+                                                                    _react2.default.createElement(
+                                                                        'div',
+                                                                        { className: 'col attribs card-text' },
+                                                                        daily.attack
+                                                                    ),
+                                                                    _react2.default.createElement(
+                                                                        'div',
+                                                                        { className: 'col attribs card-text' },
+                                                                        daily.damage
+                                                                    )
+                                                                )
+                                                            ),
+                                                            _react2.default.createElement(
+                                                                'p',
+                                                                null,
+                                                                _react2.default.createElement(
+                                                                    'small',
+                                                                    { 'class': 'text-muted' },
+                                                                    'FILP THIS CARD AFTER USE'
+                                                                )
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                );
+                            })
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { 'class': 'form-group' },
+                        _react2.default.createElement(
+                            'h2',
+                            { className: 'power-titles' },
+                            'Utility'
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'row' },
+                            this.state.utility.map(function (utility, i) {
+                                return _react2.default.createElement(
+                                    _react.Fragment,
+                                    null,
+                                    _react2.default.createElement(
+                                        'div',
+                                        { className: 'col', key: i },
+                                        _react2.default.createElement(
+                                            'div',
+                                            { 'class': 'form-check form-check-inline' },
+                                            _react2.default.createElement(
+                                                'label',
+                                                { 'class': 'form-check-label' },
+                                                _react2.default.createElement('input', _defineProperty({ 'class': 'form-check-input', type: 'radio', name: 'inlineRadioOptions', id: 'inlineRadio2' + i, value: 'option' + i }, 'name', 'utility')),
+                                                _react2.default.createElement(
+                                                    'div',
+                                                    { 'class': 'card' },
+                                                    _react2.default.createElement(
+                                                        'div',
+                                                        { className: 'container-fluid' },
+                                                        _react2.default.createElement(
+                                                            'div',
+                                                            { 'class': 'card-body' },
+                                                            _react2.default.createElement(
+                                                                'div',
+                                                                { className: 'row' },
+                                                                _react2.default.createElement(
+                                                                    'h5',
+                                                                    { 'class': 'card-title' },
+                                                                    utility.title
+                                                                ),
+                                                                _react2.default.createElement(
+                                                                    'p',
+                                                                    { className: 'card-subtitle mb-2 text-muted card-text' },
+                                                                    _react2.default.createElement(
+                                                                        'b',
+                                                                        null,
+                                                                        utility.subtitle
+                                                                    )
+                                                                ),
+                                                                _react2.default.createElement(
+                                                                    'p',
+                                                                    null,
+                                                                    _react2.default.createElement(
+                                                                        'b',
+                                                                        null,
+                                                                        utility.instruction_1
+                                                                    ),
+                                                                    ' ',
+                                                                    utility.instruction_2
+                                                                )
+                                                            ),
+                                                            _react2.default.createElement(
+                                                                'p',
+                                                                null,
+                                                                _react2.default.createElement(
+                                                                    'small',
+                                                                    { 'class': 'text-muted' },
+                                                                    'FILP THIS CARD OVER AFTER YOU USE THE POWER'
+                                                                )
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                );
+                            })
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { 'class': 'form-group' },
+                        _react2.default.createElement(
+                            'h2',
+                            { className: 'power-titles' },
+                            'At Will'
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'row' },
+                            this.state.atWill.map(function (atWill, i) {
+                                return _react2.default.createElement(
+                                    _react.Fragment,
+                                    null,
+                                    _react2.default.createElement(
+                                        'div',
+                                        { className: 'col', key: i },
+                                        _react2.default.createElement(
+                                            'div',
+                                            { 'class': 'form-check form-check-inline' },
+                                            _react2.default.createElement(
+                                                'label',
+                                                { 'class': 'form-check-label' },
+                                                _react2.default.createElement('input', { 'class': 'form-check-input', type: 'checkbox', id: 'inlineCheckbox3' + i, value: 'option' + i }),
+                                                _react2.default.createElement(
+                                                    'div',
+                                                    { 'class': 'card' },
+                                                    _react2.default.createElement(
+                                                        'div',
+                                                        { className: 'container-fluid' },
+                                                        _react2.default.createElement(
+                                                            'div',
+                                                            { 'class': 'card-body' },
+                                                            _react2.default.createElement(
+                                                                'div',
+                                                                { className: 'row' },
+                                                                _react2.default.createElement(
+                                                                    'h5',
+                                                                    { 'class': 'card-title' },
+                                                                    atWill.title
+                                                                ),
+                                                                _react2.default.createElement(
+                                                                    'p',
+                                                                    { className: 'card-subtitle mb-2 text-muted card-text' },
+                                                                    _react2.default.createElement(
+                                                                        'b',
+                                                                        null,
+                                                                        atWill.subtitle
+                                                                    )
+                                                                ),
+                                                                _react2.default.createElement(
+                                                                    'p',
+                                                                    null,
+                                                                    _react2.default.createElement(
+                                                                        'b',
+                                                                        null,
+                                                                        atWill.instruction_1
+                                                                    ),
+                                                                    ' ',
+                                                                    atWill.instruction_2
+                                                                )
+                                                            ),
+                                                            atWill.damage && _react2.default.createElement(
+                                                                _react.Fragment,
+                                                                null,
+                                                                _react2.default.createElement(
+                                                                    'div',
+                                                                    { className: 'row' },
+                                                                    _react2.default.createElement(
+                                                                        'div',
+                                                                        { className: 'col attribs-title card-text' },
+                                                                        'Attack'
+                                                                    ),
+                                                                    _react2.default.createElement(
+                                                                        'div',
+                                                                        { className: 'col attribs-title card-text' },
+                                                                        'Damage'
+                                                                    )
+                                                                ),
+                                                                _react2.default.createElement(
+                                                                    'div',
+                                                                    { className: 'row' },
+                                                                    _react2.default.createElement(
+                                                                        'div',
+                                                                        { className: 'col attribs card-text' },
+                                                                        atWill.attack
+                                                                    ),
+                                                                    _react2.default.createElement(
+                                                                        'div',
+                                                                        { className: 'col attribs card-text' },
+                                                                        atWill.damage
+                                                                    )
+                                                                )
+                                                            ),
+                                                            _react2.default.createElement(
+                                                                'p',
+                                                                null,
+                                                                _react2.default.createElement(
+                                                                    'small',
+                                                                    { 'class': 'text-muted' },
+                                                                    'FILP THIS CARD AFTER USE'
+                                                                )
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                );
+                            })
+                        )
+                    )
+                )
             );
         }
     }]);
@@ -32289,6 +32661,7 @@ var Powers = function (_Component) {
 
 function mapStateToProps(state) {
     return {
+        characters: state.characters,
         powerCards: state.powerCards
     };
 }
@@ -32296,38 +32669,38 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(Powers);
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__ = __webpack_require__(85);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "BrowserRouter", function() { return __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HashRouter__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HashRouter__ = __webpack_require__(91);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "HashRouter", function() { return __WEBPACK_IMPORTED_MODULE_1__HashRouter__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Link__ = __webpack_require__(32);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Link", function() { return __WEBPACK_IMPORTED_MODULE_2__Link__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__ = __webpack_require__(92);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "MemoryRouter", function() { return __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__NavLink__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__NavLink__ = __webpack_require__(94);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "NavLink", function() { return __WEBPACK_IMPORTED_MODULE_4__NavLink__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Prompt__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Prompt__ = __webpack_require__(96);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Prompt", function() { return __WEBPACK_IMPORTED_MODULE_5__Prompt__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__(98);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Redirect", function() { return __WEBPACK_IMPORTED_MODULE_6__Redirect__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__(33);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Route", function() { return __WEBPACK_IMPORTED_MODULE_7__Route__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Router__ = __webpack_require__(20);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Router", function() { return __WEBPACK_IMPORTED_MODULE_8__Router__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__StaticRouter__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__StaticRouter__ = __webpack_require__(100);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "StaticRouter", function() { return __WEBPACK_IMPORTED_MODULE_9__StaticRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Switch__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Switch__ = __webpack_require__(102);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Switch", function() { return __WEBPACK_IMPORTED_MODULE_10__Switch__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__generatePath__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__generatePath__ = __webpack_require__(104);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "generatePath", function() { return __WEBPACK_IMPORTED_MODULE_11__generatePath__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__matchPath__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__matchPath__ = __webpack_require__(105);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "matchPath", function() { return __WEBPACK_IMPORTED_MODULE_12__matchPath__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__withRouter__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__withRouter__ = __webpack_require__(106);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "withRouter", function() { return __WEBPACK_IMPORTED_MODULE_13__withRouter__["a"]; });
 
 
@@ -32359,7 +32732,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -32425,7 +32798,7 @@ BrowserRouter.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (BrowserRouter);
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -32729,7 +33102,7 @@ var createBrowserHistory = function createBrowserHistory() {
 /* harmony default export */ __webpack_exports__["a"] = (createBrowserHistory);
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -32805,7 +33178,7 @@ function resolvePathname(to) {
 /* harmony default export */ __webpack_exports__["a"] = (resolvePathname);
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -32849,7 +33222,7 @@ function valueEqual(a, b) {
 /* harmony default export */ __webpack_exports__["a"] = (valueEqual);
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -33170,7 +33543,7 @@ var createHashHistory = function createHashHistory() {
 /* harmony default export */ __webpack_exports__["a"] = (createHashHistory);
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -33338,7 +33711,7 @@ var createMemoryHistory = function createMemoryHistory() {
 /* harmony default export */ __webpack_exports__["a"] = (createMemoryHistory);
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -33403,18 +33776,18 @@ HashRouter.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (HashRouter);
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_MemoryRouter__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_MemoryRouter__ = __webpack_require__(93);
 // Written in this round about way for babel-transform-imports
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_MemoryRouter__["a" /* default */]);
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -33480,7 +33853,7 @@ MemoryRouter.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (MemoryRouter);
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -33566,7 +33939,7 @@ NavLink.defaultProps = {
 /* harmony default export */ __webpack_exports__["a"] = (NavLink);
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports) {
 
 module.exports = Array.isArray || function (arr) {
@@ -33575,18 +33948,18 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Prompt__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Prompt__ = __webpack_require__(97);
 // Written in this round about way for babel-transform-imports
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_Prompt__["a" /* default */]);
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -33677,18 +34050,18 @@ Prompt.contextTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (Prompt);
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Redirect__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Redirect__ = __webpack_require__(99);
 // Written in this round about way for babel-transform-imports
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_Redirect__["a" /* default */]);
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -33817,18 +34190,18 @@ Redirect.contextTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (Redirect);
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_StaticRouter__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_StaticRouter__ = __webpack_require__(101);
 // Written in this round about way for babel-transform-imports
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_StaticRouter__["a" /* default */]);
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -33994,18 +34367,18 @@ StaticRouter.childContextTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (StaticRouter);
 
 /***/ }),
-/* 101 */
+/* 102 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Switch__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Switch__ = __webpack_require__(103);
 // Written in this round about way for babel-transform-imports
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_Switch__["a" /* default */]);
 
 /***/ }),
-/* 102 */
+/* 103 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -34097,7 +34470,7 @@ Switch.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (Switch);
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -34108,7 +34481,7 @@ Switch.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_generatePath__["a" /* default */]);
 
 /***/ }),
-/* 104 */
+/* 105 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -34119,18 +34492,18 @@ Switch.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_matchPath__["a" /* default */]);
 
 /***/ }),
-/* 105 */
+/* 106 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_withRouter__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_withRouter__ = __webpack_require__(107);
 // Written in this round about way for babel-transform-imports
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_withRouter__["a" /* default */]);
 
 /***/ }),
-/* 106 */
+/* 107 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -34138,7 +34511,7 @@ Switch.propTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_hoist_non_react_statics__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_hoist_non_react_statics__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_hoist_non_react_statics___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_hoist_non_react_statics__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Route__ = __webpack_require__(34);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -34179,7 +34552,7 @@ var withRouter = function withRouter(Component) {
 /* harmony default export */ __webpack_exports__["a"] = (withRouter);
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34252,32 +34625,6 @@ function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
 
 module.exports = hoistNonReactStatics;
 
-
-/***/ }),
-/* 108 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var initialState = [];
-
-var reducer = function reducer() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-    var action = arguments[1];
-
-    switch (action.type) {
-        case 'SAVE_POWER_CARDS':
-            return action.powerCards;
-        default:
-            return state;
-    }
-};
-
-exports.default = reducer;
 
 /***/ })
 /******/ ]);
