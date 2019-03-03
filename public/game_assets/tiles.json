@@ -1,7 +1,7 @@
 [
     {
         "id": 0,
-        "image": "images/tiles/0.jpg",
+        "image": "images/tiles/38.jpg",
         "grid": [
             [0,0,0,0],
             [0,0,0,0],
@@ -16,7 +16,7 @@
 
     {
         "id": 1,
-        "image":"images/tiles/0.jpg",           
+        "image":"images/tiles/39.jpg",           
         "grid": [
             [1,1,1,1],
             [0,0,0,0],
@@ -30,23 +30,23 @@
 
     {
         "id": 2,
-        "image":"images/tiles/0.jpg",           
+        "image":"images/tiles/11.jpg",           
         "grid": [
             [1,1,1,1],
-            [1,0,0,0],
-            [1,2,0,0],
-            [1,0,0,0]
+            [0,0,2,1],
+            [0,0,0,1],
+            [0,0,0,1]
         ],
-        "arrow":true,
+        "arrow":false,
         "skull":true,
-        "name":  "Crypt Corner 11-15"
+        "name":  "Crypt Corner 6-10"
     },
 
    
 
     {
         "id": 3,
-        "image":"images/tiles/0.jpg",           
+        "image":"images/tiles/37.jpg",           
         "grid": [
             [1,0,2,0],
             [1,0,0,0],
@@ -60,7 +60,7 @@
 
     {
         "id": 4,
-        "image":"images/tiles/0.jpg",           
+        "image":"images/tiles/42.jpg",           
         "grid": [
             [0,0,0,1],
             [0,2,0,1],
@@ -74,7 +74,7 @@
 
     {
         "id": 5,
-        "image":"images/tiles/0.jpg",           
+        "image":"images/tiles/40.jpg",           
         "grid": [
             [1,0,0,1],
             [1,2,0,0],
@@ -88,7 +88,7 @@
 
     {
         "id": 6,
-        "image":"images/tiles/0.jpg",           
+        "image":"images/tiles/5.jpg",           
         "grid": [
             [0,0,0,1],
             [0,2,0,0],
@@ -102,7 +102,7 @@
 
     {
         "id": 7,
-        "image":"images/tiles/0.jpg",           
+        "image":"images/tiles/3.jpg",           
         "grid": [
             [1,1,1,1],
             [0,0,0,0],
@@ -116,21 +116,21 @@
 
     {
         "id": 8 ,
-        "image":"images/tiles/0.jpg",           
+        "image":"images/tiles/28.jpg",           
         "grid": [
             [1,1,1,1],
             [0,0,0,1],
-            [0,0,2,1],
+            [0,2,0,1],
             [0,0,0,1]
         ],
         "arrow":true,
-        "skull":true,
-        "name": "Crypt of Sergei Von Zarovich"
+        "skull":false,
+        "name": "Crypt of Artimus"
     },
 
     {
         "id": 9,
-        "image":"images/tiles/0.jpg",           
+        "image":"images/tiles/6.jpg",           
         "grid": [
             [0,0,0,0],
             [0,2,0,0],
@@ -144,11 +144,11 @@
 
     {
         "id": 10,
-        "image":"images/tiles/0.jpg",           
+        "image":"images/tiles/21.jpg",           
         "grid": [
-            [1,1,1,1],
-            [1,0,2,0],
-            [1,2,0,0],
+            [1,0,0,1],
+            [0,0,2,1],
+            [0,0,0,1],
             [1,0,0,1]
         ],
         "arrow":false,
@@ -158,7 +158,7 @@
 
     {
         "id": 11,
-        "image":"images/tiles/0.jpg",           
+        "image":"images/tiles/2.jpg",           
         "grid": [
             [1,1,1,1],
             [1,0,0,0],
@@ -172,21 +172,21 @@
 
     {
         "id": 12,
-        "image":"images/tiles/0.jpg",           
+        "image":"images/tiles/41.jpg",           
         "grid": [
             [1,1,1,1],
-            [0,0,2,1],
-            [0,0,0,1],
-            [0,0,0,1]
+            [1,0,0,0],
+            [1,2,0,0],
+            [1,0,0,0]
         ],
-        "arrow":false,
+        "arrow":true,
         "skull":true,
-        "name": "Crypt Corner 6-10"
+        "name": "Crypt Corner 11-15"
         },
 
         {
             "id": 13,
-            "image":"images/tiles/0.jpg",           
+            "image":"images/tiles/9.jpg",           
             "grid": [
                 [0,2,0,1],
                 [0,0,0,1],
@@ -200,21 +200,21 @@
 
         {
             "id": 14,
-            "image":"images/tiles/0.jpg",           
+            "image":"images/tiles/36.jpg",           
             "grid": [
                 [1,0,0,1],
-                [0,0,0,1],
                 [0,2,0,1],
-                [0,0,0,1]
+                [0,0,0,1],
+                [1,0,0,1]
             ],
-            "arrow":true,
+            "arrow":false,
             "skull":true,
             "name": null
         },
 
         {
             "id": 15,
-            "image":"images/tiles/0.jpg",           
+            "image":"images/tiles/12.jpg",           
             "grid": [
                 [1,0,0,1],
                 [0,0,0,0],
@@ -228,21 +228,21 @@
 
         {
             "id": 16,
-            "image":"images/tiles/0.jpg",           
+            "image":"images/tiles/1.jpg",           
             "grid": [
                 [1,1,1,1],
-                [1,0,2,1],
-                [1,2,0,1],
+                [0,0,0,1],
+                [0,0,2,1],
                 [1,0,0,1]
             ],
-            "arrow":false,
+            "arrow":true,
             "skull":true,
-            "name": null
+            "name": "Crypt Corner 16-20"
         },
 
         {
             "id": 17,
-            "image":"images/tiles/0.jpg",           
+            "image":"images/tiles/8.jpg",           
             "grid": [
                 [1,0,0,1],
                 [0,0,2,0],
@@ -256,7 +256,7 @@
 
         {
             "id": 18,
-            "image":"images/tiles/0.jpg",           
+            "image":"images/tiles/17.jpg",           
             "grid": [
                 [1,1,1,1],
                 [0,0,0,0],
@@ -270,7 +270,7 @@
 
         {
             "id": 19,
-            "image":"images/tiles/0.jpg",           
+            "image":"images/tiles/15.jpg",           
             "grid": [
                 [1,1,1,1],
                 [1,0,0,0],
@@ -284,21 +284,21 @@
 
         {
             "id": 20,
-            "image":"images/tiles/0.jpg",           
+            "image":"images/tiles/7.jpg",           
             "grid": [
-                [1,1,1,1],
-                [1,0,0,0],
-                [1,0,2,0],
-                [1,0,0,0]
+                [1,0,0,1],
+                [0,0,0,1],
+                [0,2,0,1],
+                [0,0,0,1]
             ],
-            "arrow":false,
-            "skull":false,
+            "arrow":true,
+            "skull":true,
             "name": null
         },
 
         {
             "id": 21,
-            "image":"images/tiles/0.jpg",           
+            "image":"images/tiles/18.jpg",           
             "grid": [
                 [1,0,0,1],
                 [1,0,0,0],
@@ -312,7 +312,7 @@
 
         {
             "id": 22,
-            "image":"images/tiles/0.jpg",           
+            "image":"images/tiles/16.jpg",           
             "grid": [
                 [1,0,0,0],
                 [0,0,2,0],
@@ -326,9 +326,9 @@
 
         {
             "id": 23,
-            "image":"images/tiles/0.jpg",           
+            "image":"images/tiles/14.jpg",           
             "grid": [
-                [0,1,1,1],
+                [0,0,0,1],
                 [0,0,0,1],
                 [2,0,0,1],
                 [0,0,0,1]
@@ -340,7 +340,7 @@
 
         {
             "id": 24,
-            "image":"images/tiles/0.jpg",           
+            "image":"images/tiles/23.jpg",           
             "grid": [
                 [1,0,0,0],
                 [1,0,0,0],
@@ -354,11 +354,11 @@
 
         {
             "id": 25,
-            "image":"images/tiles/0.jpg",           
+            "image":"images/tiles/4.jpg",           
             "grid": [
                 [1,0,0,1],
-                [0,0,2,1],
-                [0,0,0,1],
+                [1,0,2,0],
+                [1,0,0,0],
                 [1,0,0,1]
             ],
             "arrow":false,
@@ -368,21 +368,21 @@
 
         {
             "id": 26,
-            "image":"images/tiles/0.jpg",           
+            "image":"images/tiles/13.jpg",           
             "grid": [
                 [1,0,0,1],
                 [1,0,0,1],
                 [1,0,2,1],
                 [1,0,0,1]
             ],
-            "arrow":true,
+            "arrow":false,
             "skull":false,
             "name": null
         },
 
         {
             "id": 27,
-            "image":"images/tiles/0.jpg",           
+            "image":"images/tiles/24.jpg",           
             "grid": [
                 [1,0,0,1],
                 [1,0,2,1],
@@ -396,7 +396,7 @@
 
         {
             "id": 28,
-            "image":"images/tiles/0.jpg",           
+            "image":"images/tiles/22.jpg",           
             "grid": [
                 [1,0,0,1],
                 [1,0,2,1],
@@ -410,7 +410,7 @@
 
         {
             "id": 29,
-            "image":"images/tiles/0.jpg",           
+            "image":"images/tiles/20.jpg",           
             "grid": [
                 [1,1,1,1],
                 [0,0,0,0],
@@ -424,7 +424,7 @@
 
         {
             "id": 30,
-            "image":"images/tiles/0.jpg",           
+            "image":"images/tiles/29.jpg",           
             "grid": [
                 [1,1,1,1],
                 [0,0,0,1],
@@ -438,12 +438,12 @@
 
         {
             "id": 31,
-            "image":"images/tiles/0.jpg",           
+            "image":"images/tiles/27.jpg",           
             "grid": [
                 [1,1,1,1],
-                [1,2,0,1],
-                [1,0,0,1],
-                [1,0,0,1]
+                [1,2,0,0],
+                [1,0,0,0],
+                [1,0,0,0]
             ],
             "arrow":false,
             "skull":true,
@@ -452,11 +452,11 @@
 
         {
             "id": 32,
-            "image":"images/tiles/0.jpg",           
+            "image":"images/tiles/19.jpg",           
             "grid": [
                 [1,0,0,1],
-                [1,2,0,1],
                 [1,0,0,1],
+                [1,0,2,1],
                 [1,0,0,1]
             ],
             "arrow":true,
@@ -466,7 +466,21 @@
 
         {
             "id": 33,
-            "image":"images/tiles/0.jpg",           
+            "image":"images/tiles/10.jpg",           
+            "grid": [
+                [1,0,0,1],
+                [1,0,2,1],
+                [1,0,0,1],
+                [1,0,0,1]
+            ],
+            "arrow":false,
+            "skull":true,
+            "name": null
+        },
+
+        {
+            "id": 34,
+            "image":"images/tiles/30.jpg",           
             "grid": [
                 [1,0,0,1],
                 [1,0,0,1],
@@ -479,22 +493,8 @@
         },
 
         {
-            "id": 34,
-            "image":"images/tiles/0.jpg",           
-            "grid": [
-                [1,1,1,1],
-                [0,0,0,1],
-                [0,2,0,1],
-                [0,0,0,1]
-            ],
-            "arrow":true,
-            "skull":false,
-            "name": "City of Artemis"
-        },
-
-        {
             "id": 35,
-            "image":"images/tiles/0.jpg",           
+            "image":"images/tiles/26.jpg",           
             "grid": [
                 [1,1,1,1],
                 [0,0,0,2],
@@ -508,21 +508,21 @@
 
         {
             "id": 36,
-            "image":"images/tiles/0.jpg",           
+            "image":"images/tiles/25.jpg",           
             "grid": [
                 [1,0,0,1],
-                [0,2,0,1],
-                [0,0,0,1],
+                [1,2,0,1],
+                [1,0,0,1],
                 [1,0,0,1]
             ],
-            "arrow":false,
-            "skull":true,
+            "arrow":true,
+            "skull":false,
             "name": null
         },
 
         {
             "id": 37,
-            "image":"images/tiles/0.jpg",           
+            "image":"images/tiles/33.jpg",           
             "grid": [
                 [0,0,0,0],
                 [0,0,2,0],
@@ -536,7 +536,7 @@
 
         {
             "id": 38,
-            "image":"images/tiles/0.jpg",           
+            "image":"images/tiles/31.jpg",           
             "grid": [
                 [1,1,1,1],
                 [0,2,0,0],
@@ -547,29 +547,9 @@
             "skull":true,
             "name": "Fetid Den"
         },
-
         {
             "id": 39,
-            "image":"images/tiles/0.jpg",           
-            "grid": [
-                [0,0,0,0],
-                [2,0,0,0],
-                [0,0,0,0],
-                [0,0,0,0],
-
-                [0,0,0,0],
-                [0,0,0,2],
-                [0,0,0,0],
-                [1,1,1,1]
-            ],
-            "arrow":false,
-            "skull":false,
-            "name": "Start"
-        },
-
-        {
-            "id": 40,
-            "image":"images/tiles/0.jpg",           
+            "image":"images/tiles/32.jpg",           
             "grid": [
                 [1,0,0,0],
                 [1,0,0,0],
@@ -579,17 +559,31 @@
             "arrow":false,
             "skull":true,
             "name": null
+        },
+        {
+            "id": 40,
+            "image":"images/tiles/35start.jpg",           
+            "grid": [
+                [0,0,0,0],
+                [2,0,0,0],
+                [0,0,0,0],
+                [0,0,0,0]
+            ],
+            "arrow":false,
+            "skull":false,
+            "name": "Start 2"
+        },
+        {
+            "id": 41,
+            "image":"images/tiles/34start.jpg",           
+            "grid": [
+                [0,0,0,0],
+                [0,0,0,2],
+                [0,0,0,0],
+                [1,1,1,1]
+            ],
+            "arrow":false,
+            "skull":false,
+            "name": "Start"
         }
-
-
-
-
-
-    
-
-
-
-
-
-
 ]
