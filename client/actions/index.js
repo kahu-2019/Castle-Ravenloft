@@ -18,9 +18,9 @@ export function getAllCharacters() {
     }
 }
 
-  export function increaseSunTracker(sunTracker){
+  export function increaseSunTracker(){
     return {
       type: 'ADD_SUNTRACKER',
-      sunTracker: sunTracker
+      sunTracker: 1
     }
   }
