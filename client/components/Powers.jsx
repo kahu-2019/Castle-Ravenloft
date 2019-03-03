@@ -89,9 +89,7 @@ class Powers extends Component {
     
     handleChange(event){
         var powerType = event.target.name
-        
-        if(powerType == 'atWillResults'){
-        }
+
         // doesn't check when they've chosen two
         if(powerType == 'atWillResults' && this.state.atWillResults.length >= 2){
             event.target.checked = false
@@ -111,6 +109,7 @@ class Powers extends Component {
         }else if(powerType != 'atWillResults'){
             this.setState({ [event.target.name]: JSON.parse(event.target.value )});
         }
+
     }
 
     onSubmit(e){

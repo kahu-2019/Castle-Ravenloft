@@ -34391,7 +34391,6 @@ var Powers = function (_Component) {
         value: function handleChange(event) {
             var powerType = event.target.name;
 
-            if (powerType == 'atWillResults') {}
             // doesn't check when they've chosen two
             if (powerType == 'atWillResults' && this.state.atWillResults.length >= 2) {
                 event.target.checked = false;
