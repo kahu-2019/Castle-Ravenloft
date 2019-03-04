@@ -1,5 +1,4 @@
 //Test data
-var heroAc = 15
 var heroes = [{id: 1, name:'Karl', AC:20},{id: 2,name:'Sam',AC:15},{id: 3,name:'Miju',AC:10}]
 
 var tileAdjacent = true
@@ -20,6 +19,7 @@ var movement = {
 }
 
 var diceRoll = null
+
 //attack and move
 if(tileAdjacent){
     var characters = []
