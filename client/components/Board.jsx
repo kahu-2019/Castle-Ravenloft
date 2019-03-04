@@ -5,8 +5,8 @@ import { connect } from "react-redux";
 /*  Main board component, renders tile and square sub-components
 
     In state:
-        testSets should be replaced with the actual datasets used during play
-        sets is a temp set that should contain the player and monster positions
+        cleanTileSet should be replaced with the actual datasets used during play
+        dataSet is a temp set that should contain the player and monster positions
         Player represents a single player
 */
 
@@ -15,16 +15,7 @@ class Board extends Component {
         super(props)
 
         this.state = {
-            players : [
-                {
-                    x: 2,
-                    y: 4
-                },
-                {
-                    x: 3,
-                    y: 5
-                }
-            ],
+            players: this.props.characters,
 
             transform: {
                 dragging: false,
@@ -41,40 +32,24 @@ class Board extends Component {
                 right: false
             },
 
-            sets: [],
+            dataSet: [],
 
-            testSets: [
+            cleanTileSet: [
                 {
-                    "id": 40,
-                    "image":"images/tiles/35start.jpg",           
+                    "id": 29,
+                    "image":"images/tiles/20.jpg",           
                     "grid": [
+                        [1,1,1,1],
                         [0,0,0,0],
-                        [2,0,0,0],
-                        [0,0,0,0],
+                        [0,2,0,0],
                         [0,0,0,0]
                     ],
                     "arrow":false,
-                    "skull":false,
-                    "name": "Start 2",
-                    x:1,
-                    y:1
+                    "skull":true,
+                    "name": "Strahds Crypt",
+                    x: 1,
+                    y: 1
                 },
-                {
-                    "id": 41,
-                    "image":"images/tiles/34start.jpg",           
-                    "grid": [
-                        [0,0,0,0],
-                        [0,0,0,2],
-                        [0,0,0,0],
-                        [1,1,1,1]
-                    ],
-                    "arrow":false,
-                    "skull":false,
-                    "name": "Start",
-                    x:1,
-                    y:2
-                }
-    
             ]
         }
 
@@ -97,7 +72,7 @@ class Board extends Component {
             e.preventDefault();
           }
         document.addEventListener("keydown", this.keypress, false);
-        this.setState({sets: this.state.testSets}, () => {
+        this.setState({dataSet: this.state.cleanTileSet}, () => {
             this.processCharacters()
         })
     }
@@ -239,7 +214,7 @@ class Board extends Component {
 
     //  Adds a tile to a given position, tile should be a 2d array, position should be an object with x and y keys
     addTile(tile, position){
-        let tempSet = JSON.parse(JSON.stringify(this.state.testSets)) // Creates a deep copy of the array
+        let tempSet = JSON.parse(JSON.stringify(this.state.cleanTileSet)) // Creates a deep copy of the array
         let tempPlayers = this.state.players
 
         if(position.x === 0){
@@ -254,7 +229,7 @@ class Board extends Component {
             tempSet.push(tile)
             this.setState({
                 players: tempPlayers,
-                testSets: tempSet,
+                cleanTileSet: tempSet,
             }, () => this.processCharacters())
             return
         }
@@ -270,7 +245,7 @@ class Board extends Component {
             tempSet.push(tile)
             this.setState({
                 players: tempPlayers,
-                testSets: tempSet
+                cleanTileSet: tempSet
             }, () => this.processCharacters())
             return
         }
@@ -280,7 +255,7 @@ class Board extends Component {
         tempSet.push(tile)
 
         this.setState({
-            testSets: tempSet
+            cleanTileSet: tempSet
         }, () => this.processCharacters())
     }
 
@@ -304,7 +279,7 @@ class Board extends Component {
         let position = this.getTileAndSquareForCharacter(char)
 
         let tileExists = false
-        for(let item of this.state.testSets){
+        for(let item of this.state.cleanTileSet){
             if(position.tileX === item.x && position.tileY === item.y){
                 tileExists = true
                 if(item.grid[position.squareY][position.squareX] === 1) {
@@ -329,7 +304,7 @@ class Board extends Component {
                 case 0:
                     if(playerPos.squareY === 0){
                         let tileAlreadyExists = false
-                        for(let item of this.state.testSets){
+                        for(let item of this.state.cleanTileSet){
                             if(item.y === playerPos.tileY-1 && item.x === playerPos.tileX){
                                 tileAlreadyExists = true
                                 break
@@ -340,7 +315,7 @@ class Board extends Component {
                 case 1:
                     if(playerPos.squareX === 3){
                         let tileAlreadyExists = false
-                        for(let item of this.state.testSets){
+                        for(let item of this.state.cleanTileSet){
                             if(item.y === playerPos.tileY && item.x === playerPos.tileX+1){
                                 tileAlreadyExists = true
                                 break
@@ -351,7 +326,7 @@ class Board extends Component {
                 case 2:
                     if(playerPos.squareY === 3){
                         let tileAlreadyExists = false
-                        for(let item of this.state.testSets){
+                        for(let item of this.state.cleanTileSet){
                             if(item.y === playerPos.tileY+1 && item.x === playerPos.tileX){
                                 tileAlreadyExists = true
                                 break
@@ -362,7 +337,7 @@ class Board extends Component {
                 case 3:
                     if(playerPos.squareX === 0){
                         let tileAlreadyExists = false
-                        for(let item of this.state.testSets){
+                        for(let item of this.state.cleanTileSet){
                             if(item.y === playerPos.tileY && item.x === playerPos.tileX-1){
                                 tileAlreadyExists = true
                                 break
@@ -375,9 +350,9 @@ class Board extends Component {
         this.setState({explore: sides})
     }
     
-    //  Gets the position of every character, and puts them on the 'sets' stored in state
+    //  Gets the position of every character, and puts them on the 'dataSet' stored in state
     processCharacters(){
-        let tempSet = JSON.parse(JSON.stringify(this.state.testSets)) // Creates a deep copy of the array
+        let tempSet = JSON.parse(JSON.stringify(this.state.cleanTileSet)) // Creates a deep copy of the array
 
         outerloop:
         for(let char of this.state.players){
@@ -391,17 +366,17 @@ class Board extends Component {
                 }
             }
         }
-        this.setState({sets: tempSet}, this.checkSidesOfCharacter())
+        this.setState({dataSet: tempSet}, this.checkSidesOfCharacter())
     }
     
     render() {
-        console.log(this.props.characters)
         let rows = 0
         let cols = 0
-        this.state.sets.map(set => {
+        this.state.dataSet.map(set => {
             if(set.x > cols) cols = set.x
             if(set.y > rows) rows = set.y
         })
+        console.log(this.state.players)
         return (
         <React.Fragment>
             <div className='board-container'>
@@ -412,7 +387,7 @@ class Board extends Component {
                             gridTemplateColumns: `repeat(${cols}, 200px)`,
                             transform: `translate(${this.state.transform.x}px, ${this.state.transform.y}px)`}}
                             onMouseDown={this.mouseDown} onMouseUp={this.mouseUp} onMouseMove={this.mouseMove}>
-                    {this.state.sets && this.state.sets.map((tile, key) => {
+                    {this.state.dataSet && this.state.dataSet.map((tile, key) => {
                         return (<div key={key} style={{'gridColumnStart':tile.x, 'gridColumnEnd':tile.x+1, 'gridRowStart':tile.y, 'gridRowEnd':tile.y+1}}>
                             <Tile tile={tile} />
                             </div>)
@@ -431,6 +406,16 @@ class Board extends Component {
 }
 
 function mapStateToProps(state){
+    for(let index in state.characterOrder){
+        if(index > 3){
+            state.characterOrder[index].x = 1
+            state.characterOrder[index].y = 3
+        }
+        else {
+            state.characterOrder[index].x = Number(index)+1
+            state.characterOrder[index].y = 4
+        }
+    }
     return {
         characters: state.characterOrder
     }
