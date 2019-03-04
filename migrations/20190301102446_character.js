@@ -11,6 +11,7 @@ exports.up = function (knex, Promise) {
     t.integer('speed')
     t.integer('SurgeValue')
     t.text('ability')
+    t.string('image')
   })
 };
 
