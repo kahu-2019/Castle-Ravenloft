@@ -7,22 +7,22 @@ export class xpCounter extends Component {
             monsterXP:[1,2,3],
             pooledXP:0
         }
+    }
 
-poolXp = () => {
+    poolXp = () => {
     this.state.monsterXP.map(xpValue)
 
     this.state.pooledXP + xpValue
-}
+    }
 
-  render() {
-      console.log(this.state.pooledXP)
+    render() {
+    console.log(this.state.pooledXP)
     return (
       <div>
         dfedf
       </div>
     )
   }
-}
 }
 
 export default xpCounter
