@@ -1,4 +1,3 @@
-import React, { Component } from 'react'
 import Board from './Board'
 import React, { Component, Fragment } from "react";
 import { HashRouter as Router, Route } from "react-router-dom";
@@ -12,7 +11,6 @@ class App extends Component {
   render() {
     return (
       <div style={{ overflow: 'hidden' }}>
-        <Board />
         <div className="container-fluid">
           <Router>
             <Fragment>
@@ -21,6 +19,7 @@ class App extends Component {
               <Route path="/powers/:id" component={Powers} />
               <Route path="/timetract" component={TimeTract} />
               <Route path="/encounter-treasure" component={EncounterTreasure} />
+              <Route path="/board" component={Board} />
             </Fragment>
           </Router>
         </div>
