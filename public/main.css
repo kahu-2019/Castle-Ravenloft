@@ -1,3 +1,17 @@
+.board-container{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.tile {
+    display:grid;
+    grid-template-rows: repeat(4, 50px);
+    grid-template-columns: repeat(4, 50px);
+}
+
 .error {
   color: red;
   font-weight: bold;
@@ -69,6 +83,8 @@
   transform: translate(-50%, -50%);
   text-align: center;
   font-family: 'IM Fell DW Pica', serif;
+  padding-left: 50px;
+  padding-right: 50px
 }
 
 .sealButton{

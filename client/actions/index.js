@@ -24,3 +24,10 @@ export function getAllCharacters() {
       sunTracker: 1
     }
   }
+
+  export function scrollTextViewChange(scrollTextView){
+    return {
+      type: 'SCROLL_TEXT_VIEW',
+      scrollTextView
+    }
+  }

@@ -1,12 +1,15 @@
 import React from 'react'
+import { connect } from "react-redux";
+import {scrollTextViewChange} from '../actions'
 
-class StrahdAwokenText extends React.Component {
+class ScrollStrahdAwoken extends React.Component {
     constructor(props){
         super(props)
     this.handleClick = this.handleClick.bind(this)
     }
 handleClick(e){
     console.log('click')
+    this.props.dispatch(scrollTextViewChange('none'))
 }
     render(){
         return(
@@ -19,7 +22,8 @@ handleClick(e){
 <br/>
 
 
-<h1>Strahd has woken from his Nap-nap</h1>
+<h1>Strahd has woken.</h1>
+<h1>Run for the Exit.</h1>
 <br/>
 <br/>
 <img src="./images/seal3.png" className='sealButton' onClick={this.handleClick}/>
@@ -30,4 +34,10 @@ handleClick(e){
         
     }
 }
-export default StrahdAwokenText
+function mapStateToProps(state){
+    return {
+    }
+  } 
+
+
+export default connect(mapStateToProps)(ScrollStrahdAwoken)

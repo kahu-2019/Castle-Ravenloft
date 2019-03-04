@@ -52,6 +52,7 @@ class Characters extends Component {
                 </div>
             )
         })}
+        <p></p>
         </div>
       </Fragment>
     )
