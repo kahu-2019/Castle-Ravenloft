@@ -57,8 +57,14 @@ class Powers extends Component {
                 if(document.getElementById(`inlineRadio1${i}`) !== null) document.getElementById(`inlineRadio1${i}`).checked = 'checked'
                 if(document.getElementById(`inlineRadio2${i}`) !== null) document.getElementById(`inlineRadio2${i}`).checked = 'checked'
             }
+            //resets form
             document.getElementById("powersForm").reset();
+            
+
+            window.scrollTo(0,0)
+            
             var id = nextProps.match.params.id
+
             var character = this.props.characters.find(character => character.id == id)
             this.setState({character})
             nextProps.dispatch(getCardsByCharacter(id)).then(powerCards => this.filterCards(powerCards))
@@ -125,9 +131,9 @@ class Powers extends Component {
             alert("You must pick 2 At Will powers")
         }else{
             this.props.dispatch(addPowerCards(id,cards))
+            this.nextCharacter()
         }
 
-        this.nextCharacter()
     }
 
     nextCharacter(){
