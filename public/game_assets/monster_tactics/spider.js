@@ -23,6 +23,7 @@ var movement = {
     moveValue: 2
 }
 console.log('dice roll:', diceRoll)
+
 //Right next to hero, bite
 if (squareAdjacent && diceRoll + bite.att > heroAc){
     console.log('next to', bite.dmg)
@@ -32,6 +33,7 @@ if (squareAdjacent && diceRoll + bite.att > heroAc){
     console.log('next to, miss', bite.miss)
     return bite.miss
 
+//Close to hero, web
 } else if(tileAdjacent && diceRoll + web.att > heroAc){
     console.log('he webbed, you receive', web.dmg + ' and you are slowed:' + web.isSlowed)
     return {
