@@ -1,6 +1,5 @@
 //Test data
 var hero = {id:1,name:'Imerril',AC:15}
-var heroes = [{id: 1, name:'Karl', AC:20},{id: 2,name:'Sam',AC:15},{id: 3,name:'Miju',AC:10}]
 
 var diceRoll = 1
 
@@ -29,7 +28,7 @@ if(squareAdjacent && diceRoll + scimitar.att > hero.AC){
         damage:scimitar.dmg
     }
 //Right next to and miss, don't move
-} else if(squareAdjacent && diceRoll + scimitar.att < hero.AC){
+} else if(squareAdjacent && diceRoll + scimitar.att <= hero.AC){
     console.log('luckily he missed the scimi hit')
     return {
         movement:{
@@ -49,7 +48,7 @@ if(squareAdjacent && diceRoll + scimitar.att > hero.AC){
         damage:slice.dmg
     }
 //Close to and miss, move next to
-}else if(tileAdjacent && diceRoll + slice.att < hero.AC){
+}else if(tileAdjacent && diceRoll + slice.att <= hero.AC){
     console.log('he missed but now he close...')
     return {
         movement:{

@@ -1,5 +1,6 @@
 //Test data
-var heroAc = 15
+var hero = {id:1,name:'Imerril',AC:15}
+
 var diceRoll = 1
 
 var tileAdjacent = false
@@ -25,29 +26,46 @@ var movement = {
 console.log('dice roll:', diceRoll)
 
 //Right next to hero, bite
-if (squareAdjacent && diceRoll + bite.att > heroAc){
+if (squareAdjacent && diceRoll + bite.att > hero.AC){
     console.log('next to', bite.dmg)
-    return bite.dmg
+    return {
+        id:hero.id,
+        damage:bite.dmg
+    }
 
-} else if(squareAdjacent && diceRoll + bite.att < heroAc){
+} else if(squareAdjacent && diceRoll + bite.att <= hero.AC){
     console.log('next to, miss', bite.miss)
-    return bite.miss
+    return {
+        id:hero.id,
+        damage:bite.miss
+    }
 
 //Close to hero, web
-} else if(tileAdjacent && diceRoll + web.att > heroAc){
+} else if(tileAdjacent && diceRoll + web.att > hero.AC){
     console.log('he webbed, you receive', web.dmg + ' and you are slowed:' + web.isSlowed)
     return {
+        id:hero.id,
         damage:web.dmg,
-        slowed:web.isSlowed,
-        move:{
-            instruction:movement.instruction,
-            moveValue:1
+        effect:'slowed',
+        movement:{
+            x:0,
+            y:0
         }
     }
-}else if(tileAdjacent && diceRoll + web.att < heroAc){
+}else if(tileAdjacent && diceRoll + web.att <= hero.AC){
     console.log('he missed, but he is close now')
-    return movement
+    return {
+        movement:{
+            x:0,
+            y:0
+        }
+    }
 } else {
     console.log('he be closer')
-    return movement
+    return {
+        movement:{
+            x:0,
+            y:0
+        }
+    }
 }

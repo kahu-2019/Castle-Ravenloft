@@ -37,18 +37,13 @@ if(tileAdjacent){
                 damage:whirlwindOfClaws.dmg,
                 effect:'slowed'
             })
-        } else if(diceRoll + whirlwindOfClaws.att < heroes[i].AC){
+        } else if(diceRoll + whirlwindOfClaws.att <= heroes[i].AC){
             console.log('Oh no!', heroes[i].name + ' got hurt with ' + whirlwindOfClaws.miss + ' damage!')
             characters.push({
                 id:heroes[i].id,
                 damage:whirlwindOfClaws.miss
             })
-        } else{
-            characters.push({
-                id:heroes[i].id,
-                damage:whirlwindOfClaws.miss
-            })
-        }
+        } 
     }
     console.log('character data:',characters)
     //still need to figure out movement
