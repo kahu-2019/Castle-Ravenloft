@@ -28,7 +28,6 @@ class Square extends Component {
     
     updateStyle(){
         this.setState({style: {
-            // 'backgroundColor':(this.state.type === 11 ? 'green' : 'rgba(0,0,0,0)'),
             'gridColumnStart':this.state.x,
             'gridColumnEnd':this.state.x+1,
             'gridRowStart':this.state.y,

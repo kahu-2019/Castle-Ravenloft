@@ -40,10 +40,12 @@ class Tile extends Component {
                     return row.map((square, x) => {
                         let tempPlayer =undefined
 
-                        for(let player of this.state.players){
-                            if(player.x === x && player.y === y){
-                                tempPlayer = player
-                                break
+                        if(this.state.players){
+                            for(let player of this.state.players){
+                                if(player.x === x && player.y === y){
+                                    tempPlayer = player
+                                    break
+                                }
                             }
                         }
 
