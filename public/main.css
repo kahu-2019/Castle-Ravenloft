@@ -139,8 +139,8 @@
 }
 .contaniner1 {
   z-index: 2;
-  top: 120px;
-  height: 5em;
+  /* top: 120px; */
+  /* height: 5em; */
 }
 
 .time {
@@ -174,8 +174,12 @@ span {
   margin-top: 30px important;
 }
 
-.container-fluid {
-  background-image: url(./images/main/main-img1.png);
+/* .container-fluid {
+  height: 100vh;
+  width: 100%;
+} */
+.home {
+  background-image: url(./images/main/main-img1.png) !important;
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
@@ -190,16 +194,17 @@ span {
   margin: 0 auto;
   flex-direction: row;
   padding: 15px;
+  width: 100%;
   align-items: flex-end;
 }
-/* .display1 {
+.display1 {
   background-color: rgba(247, 241, 224, 0.85) !important;
   width: 45%;
   margin-right: 10%;
   padding: 25px;
   border-radius: 5px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-  margin-top: 25%;
+  margin-top: 20%;
 }
 .display2 {
   background-color: rgba(247, 241, 224, 0.85) !important;
@@ -207,9 +212,9 @@ span {
   padding: 15px;
   border-radius: 5px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-} */
+}
 
-.display1 {
+/* .display1 {
   position: absolute;
   left: 8% !important;
   top: 38%;
@@ -231,4 +236,31 @@ span {
   padding: 15px;
   border-radius: 15px;
   background-color: rgb(247, 241, 224) !important;
+} */
+
+/* 
+timetract
+*/
+
+/* time-tract.jsx parent container  */
+.time-tractcontainer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.timetractchildcontainers {
+  background-image: url(./images/time-track/time-track1.png);
+  width: 900px;
+  height: 350px;
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.timecontainer1 {
+  left: 23% !important;
+  margin-right: 0 !important;
 }

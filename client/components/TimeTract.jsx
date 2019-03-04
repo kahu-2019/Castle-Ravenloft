@@ -17,14 +17,14 @@ class TimeTract extends Component {
             <strong>TIME TRACT</strong>
           </h2>
         </div>
-        <div className="containers">
-          <img
+        <div className="timetractchildcontainers">
+          {/* <img
             src="./images/time-track/time-track1.png"
             alt="time-track"
             height="350"
             width="900"
-          />
-          <div className="contaniner1">
+          /> */}
+          <div className="contaniner1 timecontainer1">
             <div className="contaniner" id="circle">
               <h3>1</h3>
               {this.state.sunTrack === 1 && (

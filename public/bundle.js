@@ -30678,7 +30678,7 @@ var App = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         "div",
-        { className: "container-fluid" },
+        { className: "container-fluid time-tractcontainer" },
         _react2.default.createElement(
           _reactRouterDom.HashRouter,
           null,
@@ -32656,16 +32656,10 @@ var TimeTract = function (_Component) {
         ),
         _react2.default.createElement(
           "div",
-          { className: "containers" },
-          _react2.default.createElement("img", {
-            src: "./images/time-track/time-track1.png",
-            alt: "time-track",
-            height: "350",
-            width: "900"
-          }),
+          { className: "timetractchildcontainers" },
           _react2.default.createElement(
             "div",
-            { className: "contaniner1" },
+            { className: "contaniner1 timecontainer1" },
             _react2.default.createElement(
               "div",
               { className: "contaniner", id: "circle" },
