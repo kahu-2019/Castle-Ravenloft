@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Tile from './Tile'
 import { connect } from "react-redux";
 import allTiles from '../../public/game_assets/tiles.json'
+import { getAllMonsters } from '../actions';
 
 /*  Main board component, renders tile and square sub-components
 
@@ -19,6 +20,8 @@ class Board extends Component {
             players: this.props.characters,
 
             monsters: [],
+
+            allMonsters: this.props.allMonsters,
 
             transform: {
                 dragging: false,
@@ -76,6 +79,7 @@ class Board extends Component {
     }
 
     componentDidMount(){
+        this.props.dispatch(getAllMonsters())
         window.oncontextmenu = (e) => {
             e.preventDefault();
         }
@@ -99,6 +103,12 @@ class Board extends Component {
 
     componentWillUnmount(){
         document.removeEventListener("keydown", this.keypress, false);
+    }
+
+    componentDidUpdate(prevProps){
+        if(this.props.allMonsters !== prevProps.allMonsters){
+            this.setState({allMonsters: this.props.allMonsters})
+        }
     }
 
     mouseDown(event){
@@ -263,9 +273,29 @@ class Board extends Component {
         tile.y = position.y
         tempSet.push(tile)
 
+        let monster = {
+            playerOwner: this.state.players[0].id
+        }
+        monsterFinder:
+        for(let y in tile.grid){
+            for(let x in tile.grid){
+                if(tile.grid[y][x] === 2){
+                    monster.x = (Number(tile.x)-1)*4+Number(x)+1
+                    monster.y = (Number(tile.y)-1)*4+Number(y)+1
+                    break monsterFinder
+                } 
+            }
+        }
+        console.log(monster)
+
         this.setState({
             cleanTileSet: tempSet
         }, () => this.processCharacters())
+    }
+
+    getMonster(monster){
+        let monNum = Math.floor(Math.random()*10)+1
+
     }
 
     //  Calculates the tile and square that a character is on
@@ -379,6 +409,7 @@ class Board extends Component {
     }
     
     render() {
+        console.log(this.state)
         let rows = 0
         let cols = 0
         this.state.dataSet.map(set => {
@@ -430,7 +461,8 @@ function mapStateToProps(state){
         }
     }
     return {
-        characters: state.characterOrder
+        characters: state.characterOrder,
+        allMonsters: state.monsters
     }
 } 
 
