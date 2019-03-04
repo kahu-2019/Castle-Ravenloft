@@ -10,7 +10,7 @@ var attack = damage * monsterNum
 
 var zombAtt = {
     attack: attack,
-    adjacent: asjacent
+    adjacent: adjacent
 }
 var movement = {
     instruction: "move",
