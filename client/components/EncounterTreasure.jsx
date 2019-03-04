@@ -1,20 +1,28 @@
 import React, { Component, Fragment } from "react";
-import { getRandomEncounter } from "../actions";
+import { getRandomEncounter, getRandomTreasure } from "../actions";
 import { connect } from "react-redux";
 
 class EncounterTreasure extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      encounter: undefined
+      encounter: undefined,
+      treasure: undefined
     };
     this.getEncounter = this.getEncounter.bind(this);
+    this.getTreasure = this.getTreasure.bind(this);
   }
 
   getEncounter() {
     this.props
       .dispatch(getRandomEncounter())
       .then(randomEncounter => this.setState({ encounter: randomEncounter }));
+  }
+
+  getTreasure() {
+    this.props
+      .dispatch(getRandomTreasure())
+      .then(randomTreasure => this.setState({ treasure: randomTreasure }));
   }
 
   render() {
@@ -31,17 +39,17 @@ class EncounterTreasure extends Component {
             <div className="Treasure">
               <img
                 src="./images/card/treasure-card1.jpg"
-                onClick={this.onclick}
+                onClick={() => this.getTreasure()}
               />
             </div>
           </div>
         </div>
-        <div className="card-columns">
-          {this.state.encounter && (
-            <div className={"card " + "bg-" + this.state.encounter.name}>
-              <div className="container-fluid">
-                <div className="card-body">
-                  <div className="row">
+        <div class="row">
+          <div class="col-sm-4">
+            {this.state.encounter && (
+              <div className={"card " + "bg-" + this.state.encounter.name}>
+                <div class="card">
+                  <div className="card-body">
                     <h5 className="card-title card-text">
                       {this.state.encounter.name}
                     </h5>
@@ -54,8 +62,29 @@ class EncounterTreasure extends Component {
                   </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            {this.state.treasure && (
+              <div className={"card " + "bg-" + this.state.treasure.name}>
+                <div class="card">
+                  <div className="card-body">
+                    <h5 className="card-title card-text">
+                      {this.state.treasure.name}
+                    </h5>
+                    <h6 className="card-subtitle mb-2 text-muted card-text">
+                      {this.state.treasure.play_imm}
+                    </h6>
+                    <p className="card-text card-text">
+                      {this.state.treasure.action}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </Fragment>
     );

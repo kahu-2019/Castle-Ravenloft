@@ -2030,6 +2030,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getRandomEncounter = getRandomEncounter;
 exports.saveRandomEncounter = saveRandomEncounter;
+exports.getRandomTreasure = getRandomTreasure;
+exports.saveRandomTreasurer = saveRandomTreasurer;
 exports.getAllCharacters = getAllCharacters;
 exports.saveAllCharacters = saveAllCharacters;
 exports.addCharacterOrder = addCharacterOrder;
@@ -2039,13 +2041,13 @@ exports.addPowerCards = addPowerCards;
 
 var _ecounter = __webpack_require__(100);
 
+var _treasure = __webpack_require__(111);
+
 var _characters = __webpack_require__(106);
 
 function getRandomEncounter() {
   return function (dispatch) {
     return (0, _ecounter.randomEncounter)().then(function (randomEncounter) {
-      // dispatch(saveRandomEncounter(randomEncounter));
-      console.log("action", randomEncounter);
       return randomEncounter;
     });
   };
@@ -2054,6 +2056,20 @@ function getRandomEncounter() {
 function saveRandomEncounter(randomEncounter) {
   return function (dispatch) {
     type: "SAVE_RANDOM_ENCOUNTER", randomEncounter;
+  };
+}
+
+function getRandomTreasure() {
+  return function (dispatch) {
+    return (0, _treasure.randomTreasure)().then(function (randomTreasure) {
+      return randomTreasure;
+    });
+  };
+}
+
+function saveRandomTreasurer(randomTreasure) {
+  return function (dispatch) {
+    type: "SAVE_RANDOM_TREASURE", randomTreasure;
   };
 }
 
@@ -32795,9 +32811,11 @@ var EncounterTreasure = function (_Component) {
     var _this = _possibleConstructorReturn(this, (EncounterTreasure.__proto__ || Object.getPrototypeOf(EncounterTreasure)).call(this, props));
 
     _this.state = {
-      encounter: undefined
+      encounter: undefined,
+      treasure: undefined
     };
     _this.getEncounter = _this.getEncounter.bind(_this);
+    _this.getTreasure = _this.getTreasure.bind(_this);
     return _this;
   }
 
@@ -32811,9 +32829,18 @@ var EncounterTreasure = function (_Component) {
       });
     }
   }, {
+    key: "getTreasure",
+    value: function getTreasure() {
+      var _this3 = this;
+
+      this.props.dispatch((0, _actions.getRandomTreasure)()).then(function (randomTreasure) {
+        return _this3.setState({ treasure: randomTreasure });
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       return _react2.default.createElement(
         _react.Fragment,
@@ -32830,7 +32857,7 @@ var EncounterTreasure = function (_Component) {
               _react2.default.createElement("img", {
                 src: "./images/card/encounter-card.jpeg",
                 onClick: function onClick() {
-                  return _this3.getEncounter();
+                  return _this4.getEncounter();
                 }
               })
             ),
@@ -32839,26 +32866,28 @@ var EncounterTreasure = function (_Component) {
               { className: "Treasure" },
               _react2.default.createElement("img", {
                 src: "./images/card/treasure-card1.jpg",
-                onClick: this.onclick
+                onClick: function onClick() {
+                  return _this4.getTreasure();
+                }
               })
             )
           )
         ),
         _react2.default.createElement(
           "div",
-          { className: "card-columns" },
-          this.state.encounter && _react2.default.createElement(
+          { "class": "row" },
+          _react2.default.createElement(
             "div",
-            { className: "card " + "bg-" + this.state.encounter.name },
-            _react2.default.createElement(
+            { "class": "col-sm-4" },
+            this.state.encounter && _react2.default.createElement(
               "div",
-              { className: "container-fluid" },
+              { className: "card " + "bg-" + this.state.encounter.name },
               _react2.default.createElement(
                 "div",
-                { className: "card-body" },
+                { "class": "card" },
                 _react2.default.createElement(
                   "div",
-                  { className: "row" },
+                  { className: "card-body" },
                   _react2.default.createElement(
                     "h5",
                     { className: "card-title card-text" },
@@ -32873,6 +32902,41 @@ var EncounterTreasure = function (_Component) {
                     "p",
                     { className: "card-text card-text" },
                     this.state.encounter.description
+                  )
+                )
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { "class": "row" },
+          _react2.default.createElement(
+            "div",
+            { "class": "col-sm-4" },
+            this.state.treasure && _react2.default.createElement(
+              "div",
+              { className: "card " + "bg-" + this.state.treasure.name },
+              _react2.default.createElement(
+                "div",
+                { "class": "card" },
+                _react2.default.createElement(
+                  "div",
+                  { className: "card-body" },
+                  _react2.default.createElement(
+                    "h5",
+                    { className: "card-title card-text" },
+                    this.state.treasure.name
+                  ),
+                  _react2.default.createElement(
+                    "h6",
+                    { className: "card-subtitle mb-2 text-muted card-text" },
+                    this.state.treasure.play_imm
+                  ),
+                  _react2.default.createElement(
+                    "p",
+                    { className: "card-text card-text" },
+                    this.state.treasure.action
                   )
                 )
               )
@@ -35061,6 +35125,30 @@ function mapStateToProps(state) {
 }
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(Powers);
+
+/***/ }),
+/* 111 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.randomTreasure = randomTreasure;
+
+var _superagent = __webpack_require__(37);
+
+var _superagent2 = _interopRequireDefault(_superagent);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function randomTreasure() {
+  return _superagent2.default.get("./api/v1/randomTreasure").then(function (res) {
+    return res.body;
+  });
+}
 
 /***/ })
 /******/ ]);

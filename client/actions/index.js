@@ -1,4 +1,5 @@
 import { randomEncounter as apiGetRandomEncounter } from "../api/ecounter";
+import { randomTreasure as apiGetRandomTreasure } from "../api/treasure";
 import {
   getAllCharacters as apiGetAllCharacters,
   getCardsByCharacter as apiGetCardsByCharacter
@@ -7,8 +8,6 @@ import {
 export function getRandomEncounter() {
   return dispatch => {
     return apiGetRandomEncounter().then(randomEncounter => {
-      // dispatch(saveRandomEncounter(randomEncounter));
-      console.log("action", randomEncounter);
       return randomEncounter;
     });
   };
@@ -17,6 +16,20 @@ export function getRandomEncounter() {
 export function saveRandomEncounter(randomEncounter) {
   return dispatch => {
     type: "SAVE_RANDOM_ENCOUNTER", randomEncounter;
+  };
+}
+
+export function getRandomTreasure() {
+  return dispatch => {
+    return apiGetRandomTreasure().then(randomTreasure => {
+      return randomTreasure;
+    });
+  };
+}
+
+export function saveRandomTreasurer(randomTreasure) {
+  return dispatch => {
+    type: "SAVE_RANDOM_TREASURE", randomTreasure;
   };
 }
 
