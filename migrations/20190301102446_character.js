@@ -10,8 +10,8 @@ exports.up = function (knex, Promise) {
     t.integer('HP')
     t.integer('speed')
     t.integer('SurgeValue')
-    t.string('ability')
-    t.string('image')
+    t.string('ability', 1000)
+    t.string('image', 1000)
   })
 };
 

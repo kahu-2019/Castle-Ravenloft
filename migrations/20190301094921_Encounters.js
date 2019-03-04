@@ -9,7 +9,7 @@ exports.up = function (knex, Promise) {
     t.increments('id').primary()
     t.integer('evt_type')
     t.string('name')
-    t.string('flavour')
+    t.string('flavour', 1000)
     t.string('description', 1000)
   })
 };
