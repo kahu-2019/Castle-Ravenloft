@@ -32,7 +32,7 @@ exports.seed = function (knex, Promise) {
         {
           id: 5, name: 'Thorgrim', level: 1, subtitle: 'Dwarf Cleric',
           image: 'images/icons/Thorgrim.jpg',
-          description: 'You are a champion of the dwarven gods,m sent to eradicate the evil deep inside Castle Ravenloft',
+          description: 'You are a champion of the dwarven gods, sent to eradicate the evil deep inside Castle Ravenloft',
           AC: 17, HP: 10, speed: 5, SurgeValue: 5, ability: "AID: You know healing techniques. At tne end of your hero phase, if you did not attack, the other one hero on your tile regains 1 HP"
         }
       ]);
