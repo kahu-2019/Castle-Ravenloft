@@ -148,8 +148,6 @@ class Board extends Component {
             case "ArrowLeft":
                 this.getPositionOfCharacter(this.state.players[0], 'x', -1)
                 break
-            case "s":
-                this.nextPlayer()
         }
     }
 
@@ -385,7 +383,6 @@ class Board extends Component {
             if(set.x > cols) cols = set.x
             if(set.y > rows) rows = set.y
         })
-        console.log(this.state.completeTileSet)
         return (
         <React.Fragment>
             <div className='board-container'>
@@ -404,11 +401,11 @@ class Board extends Component {
                 </div>
             </div>
             <div style={{position:'absolute', top:'10px', left:'10px'}}>
-                {this.state.players[0].name}
-                <br />
-                {this.state.explore.left   && <button onClick={() => this.prepTileForAdding(3)}>Explore left</button>}
-                {this.state.explore.right  && <button onClick={() => this.prepTileForAdding(1)}>Explore right</button>}
-                {this.state.explore.top    && <button onClick={() => this.prepTileForAdding(0)}>Explore top</button>}
+                {this.state.players[0].name}<br />
+                <button onClick={() => this.nextPlayer()}>End turn</button><br />
+                {this.state.explore.left   && <React.Fragment><button onClick={() => this.prepTileForAdding(3)}>Explore left</button><br /></React.Fragment>}
+                {this.state.explore.right  && <React.Fragment><button onClick={() => this.prepTileForAdding(1)}>Explore right</button><br /></React.Fragment>}
+                {this.state.explore.top    && <React.Fragment><button onClick={() => this.prepTileForAdding(0)}>Explore top</button><br /></React.Fragment>}
                 {this.state.explore.bottom && <button onClick={() => this.prepTileForAdding(2)}>Explore bottom</button>}
             </div>
         </React.Fragment>
