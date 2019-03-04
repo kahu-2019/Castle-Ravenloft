@@ -16,46 +16,54 @@
   text-align: center;
 }
 
-.card{
-  -webkit-box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
-  -moz-box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
-  box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
+.card {
+  -webkit-box-shadow: inset 0px 0px 125px -11px rgba(0, 0, 0, 0.51);
+  -moz-box-shadow: inset 0px 0px 125px -11px rgba(0, 0, 0, 0.51);
+  box-shadow: inset 0px 0px 125px -11px rgba(0, 0, 0, 0.51);
 }
 
 .bg-Alisa {
-  background-color: #228B22!important;
+  background-color: #228b22 !important;
 }
 
 .bg-Arjhan {
-  background-color: 	#800000!important;
+  background-color: #800000 !important;
 }
 
 .bg-Immeril {
-  background-color: #4f3584!important;
+  background-color: #4f3584 !important;
 }
 
 .bg-Kat {
-  background-color: #013554!important;
+  background-color: #013554 !important;
 }
 
 .bg-Thorgrim {
-  background-color: #9e8f0b!important;
+  background-color: #9e8f0b !important;
 }
 
-.character-card{
-  animation:scale-out-center 0.2s cubic-bezier(.55,.085,.68,.53) both
+.character-card {
+  animation: scale-out-center 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
 }
 /* .scale-out-center{} */
 
- @keyframes scale-out-center{0%{transform:scale(1);opacity:1}100%{transform:scale(0);opacity:1}}
+@keyframes scale-out-center {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 1;
+  }
+}
 
-.char-card{
-  color:rgb(223, 219, 219);
-  
+.char-card {
+  color: rgb(223, 219, 219);
 }
 
 /* HIDE RADIO */
-[type=radio] { 
+[type="radio"] {
   position: absolute;
   opacity: 0;
   width: 0;
@@ -63,23 +71,21 @@
 }
 
 /* IMAGE STYLES */
-[type=radio] + .card {
+[type="radio"] + .card {
   cursor: pointer;
 }
 
-[type=radio]:hover + .card {
+[type="radio"]:hover + .card {
   outline: 2px solid lightblue;
-  
 }
 
 /* CHECKED STYLES */
-[type=radio]:checked + .card {
+[type="radio"]:checked + .card {
   outline: 2px solid greenyellow;
 }
-
 
 /* HIDE CHECK */
-[type=checkbox] { 
+[type="checkbox"] {
   position: absolute;
   opacity: 0;
   width: 0;
@@ -87,24 +93,22 @@
 }
 
 /* IMAGE STYLES */
-[type=checkbox] + .card {
+[type="checkbox"] + .card {
   cursor: pointer;
 }
 
-[type=checkbox]:hover + .card {
+[type="checkbox"]:hover + .card {
   outline: 2px solid lightblue;
-  
 }
 
 /* CHECKED STYLES */
-[type=checkbox]:checked + .card {
+[type="checkbox"]:checked + .card {
   outline: 2px solid greenyellow;
 }
 
-.power-titles{
+.power-titles {
   text-align: center;
 }
-
 
 .card-text {
   color: rgb(223, 219, 219);
@@ -170,51 +174,61 @@ span {
   margin-top: 30px important;
 }
 
-.home {
-  background-color: black;
-}
-.home img {
+.container-fluid {
+  background-image: url(./images/main/main-img1.png);
   background-repeat: no-repeat;
-  background-position: center;
   background-size: cover;
-  overflow: hidden;
-  padding-bottom: 100px;
+  width: 100%;
+  height: 100vh;
   position: relative;
-  z-index: 1;
-  height: auto;
-  max-width: 100%;
-  margin-left: 7%;
 }
 
 .display {
-  background-color: rgb(247, 241, 224) !important;
   color: rgb(48, 46, 46);
   display: flex !important;
   flex-wrap: wrap !important;
-  width: 80%;
   margin: 0 auto;
+  flex-direction: row;
+  padding: 15px;
+  align-items: flex-end;
 }
+/* .display1 {
+  background-color: rgba(247, 241, 224, 0.85) !important;
+  width: 45%;
+  margin-right: 10%;
+  padding: 25px;
+  border-radius: 5px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  margin-top: 25%;
+}
+.display2 {
+  background-color: rgba(247, 241, 224, 0.85) !important;
+  width: 45%;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+} */
 
 .display1 {
   position: absolute;
-  z-index: 2;
-  left: 12%;
-  top: 500px;
+  left: 8% !important;
+  top: 38%;
   width: 30%;
-  height: 650px;
+  height: 580px;
   opacity: 0.8;
+  padding: 15px;
   border-radius: 15px;
   background-color: rgb(247, 241, 224) !important;
 }
 
 .display2 {
   position: absolute;
-  z-index: 3;
-  height: 400px;
+  height: 350px;
   width: 28%;
-  right: 14%;
-  top: 500px;
+  right: 10%;
+  top: 50%;
   opacity: 0.8;
+  padding: 15px;
   border-radius: 15px;
   background-color: rgb(247, 241, 224) !important;
 }
