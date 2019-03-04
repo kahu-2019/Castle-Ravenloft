@@ -257,9 +257,89 @@ span {
   position:fixed;
   width: 100%;
   height:100%;
-  background-image: url('./images/darkcastle.jpg')
+  background-image: url('./images/darkcastle.jpg');
+
 }
 
 .cr-logo{
-  height: 200px
+  height: 250px
+}
+
+.logo-div{
+  position:fixed;
+  top: 20%;
+  left: 50%
+}
+.rain{
+  height:100vh;
+  background: url('./images/rain.png');
+  animation: rain .5s linear infinite;
+}
+
+.rain:before{
+  content:'';
+  position: absolute;
+  width: 100%;
+  height:100%;
+  background: #fff;
+  animation: lightning 1s 4s infinite alternate backwards;
+  opacity: 0;
+
+}
+
+@keyframes rain {
+  0%{
+    background-position: 0% 0%
+  }
+  100%{
+    background-position: 20% 100%
+  }
+}
+
+@keyframes lightning {
+  0%{
+    opacity: 0;
+  }
+  10%{
+    opacity: 0.2;
+  }
+  11%{
+    opacity: 0;
+  }
+
+}
+
+.dnd-logo{
+  position: absolute;
+  bottom: 5%;
+  left:43%;
+  height: 60px
+}
+
+.eda-logo{
+  position: absolute;
+  bottom: 5%;
+  left:50%;
+  height: 60px
+}
+.startbutton{
+  color: rgb(238, 232, 223);
+  font-family: 'IM Fell DW Pica', serif;
+  text-align: center;
+  font-size: 30px;
+  opacity: 1;
+  animation: start 2s linear infinite
+}
+
+@keyframes start{
+  0%{
+    opacity: 1;
+  }
+  50%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+
 }
