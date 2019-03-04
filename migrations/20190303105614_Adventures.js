@@ -1,16 +1,16 @@
 exports.up = function (knex, Promise) {
   return knex.schema.createTable('adventures', t => {
     t.increments('adv_id').primary()
-    t.text('adv_name')
-    t.text('flav_text')
-    t.text('Goal')
-    t.text('spec_components')
-    t.text('adv_setup')
-    t.text('adv_rules')
-    t.text('victory')
-    t.text('defeat')
-    t.text('start_adv')
-    t.text('adv_reveal')
+    t.varchar(1000)('adv_name')
+    t.varchar(1000)('flav_varchar(1000)')
+    t.varchar(1000)('Goal')
+    t.varchar(1000)('spec_components')
+    t.varchar(1000)('adv_setup')
+    t.varchar(1000)('adv_rules')
+    t.varchar(1000)('victory')
+    t.varchar(1000)('defeat')
+    t.varchar(1000)('start_adv')
+    t.varchar(1000)('adv_reveal')
   })
 };
 

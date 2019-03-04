@@ -5,7 +5,7 @@ exports.up = function (knex, Promise) {
     t.string('name')
     t.integer('level')
     t.string('subtitle')
-    t.text('description')
+    t.varchar(1000)('description')
     t.integer('AC')
     t.integer('HP')
     t.integer('speed')
