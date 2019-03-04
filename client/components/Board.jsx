@@ -395,6 +395,7 @@ class Board extends Component {
     }
     
     render() {
+        console.log(this.props.characters)
         let rows = 0
         let cols = 0
         this.state.sets.map(set => {
@@ -429,4 +430,10 @@ class Board extends Component {
     }
 }
 
-export default Board
+function mapStateToProps(state){
+    return {
+        characters: state.characterOrder
+    }
+} 
+
+export default connect(mapStateToProps)(Board)

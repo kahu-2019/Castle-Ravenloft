@@ -83,9 +83,6 @@ function mapStateToProps(state){
     return {
         characters: state.characters
     }
-  } 
+} 
   
-  
-
-
 export default connect(mapStateToProps)(Characters)
