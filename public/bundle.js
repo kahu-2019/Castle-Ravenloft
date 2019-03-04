@@ -552,7 +552,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Provider__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Context__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__connect_connect__ = __webpack_require__(57);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Provider", function() { return __WEBPACK_IMPORTED_MODULE_0__components_Provider__["a"]; });
@@ -1670,7 +1670,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "BrowserRouter", function() { return __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HashRouter__ = __webpack_require__(80);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "HashRouter", function() { return __WEBPACK_IMPORTED_MODULE_1__HashRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Link__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Link__ = __webpack_require__(33);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Link", function() { return __WEBPACK_IMPORTED_MODULE_2__Link__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__ = __webpack_require__(81);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "MemoryRouter", function() { return __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__["a"]; });
@@ -1680,7 +1680,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Prompt", function() { return __WEBPACK_IMPORTED_MODULE_5__Prompt__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__(87);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Redirect", function() { return __WEBPACK_IMPORTED_MODULE_6__Redirect__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__(34);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Route", function() { return __WEBPACK_IMPORTED_MODULE_7__Route__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Router__ = __webpack_require__(21);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Router", function() { return __WEBPACK_IMPORTED_MODULE_8__Router__["a"]; });
@@ -1943,7 +1943,7 @@ Router.childContextTypes = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_path_to_regexp__);
 
 
@@ -2041,9 +2041,9 @@ exports.addPowerCards = addPowerCards;
 
 var _ecounter = __webpack_require__(100);
 
-var _treasure = __webpack_require__(111);
+var _treasure = __webpack_require__(106);
 
-var _characters = __webpack_require__(106);
+var _characters = __webpack_require__(107);
 
 function getRandomEncounter() {
   return function (dispatch) {
@@ -2121,1199 +2121,6 @@ function addPowerCards(id, powerCards) {
 
 /***/ }),
 /* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(44);
-} else {
-  module.exports = __webpack_require__(45);
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ }),
-/* 26 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = _inheritsLoose;
-function _inheritsLoose(subClass, superClass) {
-  subClass.prototype = Object.create(superClass.prototype);
-  subClass.prototype.constructor = subClass;
-  subClass.__proto__ = superClass;
-}
-
-/***/ }),
-/* 27 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony export (immutable) */ __webpack_exports__["a"] = connectAdvanced;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_assertThisInitialized__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_inheritsLoose__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__babel_runtime_helpers_esm_extends__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_hoist_non_react_statics__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_hoist_non_react_statics___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_hoist_non_react_statics__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_invariant__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_invariant__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react_is__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react_is___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_react_is__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Context__ = __webpack_require__(15);
-
-
-
-
-
-
-
-
-
-
-var stringifyComponent = function stringifyComponent(Comp) {
-  try {
-    return JSON.stringify(Comp);
-  } catch (err) {
-    return String(Comp);
-  }
-};
-
-function connectAdvanced(
-/*
-  selectorFactory is a func that is responsible for returning the selector function used to
-  compute new props from state, props, and dispatch. For example:
-     export default connectAdvanced((dispatch, options) => (state, props) => ({
-      thing: state.things[props.thingId],
-      saveThing: fields => dispatch(actionCreators.saveThing(props.thingId, fields)),
-    }))(YourComponent)
-   Access to dispatch is provided to the factory so selectorFactories can bind actionCreators
-  outside of their selector as an optimization. Options passed to connectAdvanced are passed to
-  the selectorFactory, along with displayName and WrappedComponent, as the second argument.
-   Note that selectorFactory is responsible for all caching/memoization of inbound and outbound
-  props. Do not use connectAdvanced directly without memoizing results between calls to your
-  selector, otherwise the Connect component will re-render on every state or props change.
-*/
-selectorFactory, // options object:
-_ref) {
-  if (_ref === void 0) {
-    _ref = {};
-  }
-
-  var _ref2 = _ref,
-      _ref2$getDisplayName = _ref2.getDisplayName,
-      getDisplayName = _ref2$getDisplayName === void 0 ? function (name) {
-    return "ConnectAdvanced(" + name + ")";
-  } : _ref2$getDisplayName,
-      _ref2$methodName = _ref2.methodName,
-      methodName = _ref2$methodName === void 0 ? 'connectAdvanced' : _ref2$methodName,
-      _ref2$renderCountProp = _ref2.renderCountProp,
-      renderCountProp = _ref2$renderCountProp === void 0 ? undefined : _ref2$renderCountProp,
-      _ref2$shouldHandleSta = _ref2.shouldHandleStateChanges,
-      shouldHandleStateChanges = _ref2$shouldHandleSta === void 0 ? true : _ref2$shouldHandleSta,
-      _ref2$storeKey = _ref2.storeKey,
-      storeKey = _ref2$storeKey === void 0 ? 'store' : _ref2$storeKey,
-      _ref2$withRef = _ref2.withRef,
-      withRef = _ref2$withRef === void 0 ? false : _ref2$withRef,
-      _ref2$forwardRef = _ref2.forwardRef,
-      forwardRef = _ref2$forwardRef === void 0 ? false : _ref2$forwardRef,
-      _ref2$context = _ref2.context,
-      context = _ref2$context === void 0 ? __WEBPACK_IMPORTED_MODULE_8__Context__["a" /* ReactReduxContext */] : _ref2$context,
-      connectOptions = Object(__WEBPACK_IMPORTED_MODULE_3__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__["a" /* default */])(_ref2, ["getDisplayName", "methodName", "renderCountProp", "shouldHandleStateChanges", "storeKey", "withRef", "forwardRef", "context"]);
-
-  __WEBPACK_IMPORTED_MODULE_5_invariant___default()(renderCountProp === undefined, "renderCountProp is removed. render counting is built into the latest React dev tools profiling extension");
-  __WEBPACK_IMPORTED_MODULE_5_invariant___default()(!withRef, 'withRef is removed. To access the wrapped instance, use a ref on the connected component');
-  var customStoreWarningMessage = 'To use a custom Redux store for specific components,  create a custom React context with ' + "React.createContext(), and pass the context object to React Redux's Provider and specific components" + ' like:  <Provider context={MyContext}><ConnectedComponent context={MyContext} /></Provider>. ' + 'You may also pass a {context : MyContext} option to connect';
-  __WEBPACK_IMPORTED_MODULE_5_invariant___default()(storeKey === 'store', 'storeKey has been removed and does not do anything. ' + customStoreWarningMessage);
-  var Context = context;
-  return function wrapWithConnect(WrappedComponent) {
-    if (process.env.NODE_ENV !== 'production') {
-      __WEBPACK_IMPORTED_MODULE_5_invariant___default()(Object(__WEBPACK_IMPORTED_MODULE_7_react_is__["isValidElementType"])(WrappedComponent), "You must pass a component to the function returned by " + (methodName + ". Instead received " + stringifyComponent(WrappedComponent)));
-    }
-
-    var wrappedComponentName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
-    var displayName = getDisplayName(wrappedComponentName);
-
-    var selectorFactoryOptions = Object(__WEBPACK_IMPORTED_MODULE_2__babel_runtime_helpers_esm_extends__["a" /* default */])({}, connectOptions, {
-      getDisplayName: getDisplayName,
-      methodName: methodName,
-      renderCountProp: renderCountProp,
-      shouldHandleStateChanges: shouldHandleStateChanges,
-      storeKey: storeKey,
-      displayName: displayName,
-      wrappedComponentName: wrappedComponentName,
-      WrappedComponent: WrappedComponent
-    });
-
-    var pure = connectOptions.pure;
-    var OuterBaseComponent = __WEBPACK_IMPORTED_MODULE_6_react__["Component"];
-
-    if (pure) {
-      OuterBaseComponent = __WEBPACK_IMPORTED_MODULE_6_react__["PureComponent"];
-    }
-
-    function makeDerivedPropsSelector() {
-      var lastProps;
-      var lastState;
-      var lastDerivedProps;
-      var lastStore;
-      var lastSelectorFactoryOptions;
-      var sourceSelector;
-      return function selectDerivedProps(state, props, store, selectorFactoryOptions) {
-        if (pure && lastProps === props && lastState === state) {
-          return lastDerivedProps;
-        }
-
-        if (store !== lastStore || lastSelectorFactoryOptions !== selectorFactoryOptions) {
-          lastStore = store;
-          lastSelectorFactoryOptions = selectorFactoryOptions;
-          sourceSelector = selectorFactory(store.dispatch, selectorFactoryOptions);
-        }
-
-        lastProps = props;
-        lastState = state;
-        var nextProps = sourceSelector(state, props);
-        lastDerivedProps = nextProps;
-        return lastDerivedProps;
-      };
-    }
-
-    function makeChildElementSelector() {
-      var lastChildProps, lastForwardRef, lastChildElement, lastComponent;
-      return function selectChildElement(WrappedComponent, childProps, forwardRef) {
-        if (childProps !== lastChildProps || forwardRef !== lastForwardRef || lastComponent !== WrappedComponent) {
-          lastChildProps = childProps;
-          lastForwardRef = forwardRef;
-          lastComponent = WrappedComponent;
-          lastChildElement = __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(WrappedComponent, Object(__WEBPACK_IMPORTED_MODULE_2__babel_runtime_helpers_esm_extends__["a" /* default */])({}, childProps, {
-            ref: forwardRef
-          }));
-        }
-
-        return lastChildElement;
-      };
-    }
-
-    var Connect =
-    /*#__PURE__*/
-    function (_OuterBaseComponent) {
-      Object(__WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_inheritsLoose__["a" /* default */])(Connect, _OuterBaseComponent);
-
-      function Connect(props) {
-        var _this;
-
-        _this = _OuterBaseComponent.call(this, props) || this;
-        __WEBPACK_IMPORTED_MODULE_5_invariant___default()(forwardRef ? !props.wrapperProps[storeKey] : !props[storeKey], 'Passing redux store in props has been removed and does not do anything. ' + customStoreWarningMessage);
-        _this.selectDerivedProps = makeDerivedPropsSelector();
-        _this.selectChildElement = makeChildElementSelector();
-        _this.indirectRenderWrappedComponent = _this.indirectRenderWrappedComponent.bind(Object(__WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_assertThisInitialized__["a" /* default */])(_this));
-        return _this;
-      }
-
-      var _proto = Connect.prototype;
-
-      _proto.indirectRenderWrappedComponent = function indirectRenderWrappedComponent(value) {
-        // calling renderWrappedComponent on prototype from indirectRenderWrappedComponent bound to `this`
-        return this.renderWrappedComponent(value);
-      };
-
-      _proto.renderWrappedComponent = function renderWrappedComponent(value) {
-        __WEBPACK_IMPORTED_MODULE_5_invariant___default()(value, "Could not find \"store\" in the context of " + ("\"" + displayName + "\". Either wrap the root component in a <Provider>, ") + "or pass a custom React context provider to <Provider> and the corresponding " + ("React context consumer to " + displayName + " in connect options."));
-        var storeState = value.storeState,
-            store = value.store;
-        var wrapperProps = this.props;
-        var forwardedRef;
-
-        if (forwardRef) {
-          wrapperProps = this.props.wrapperProps;
-          forwardedRef = this.props.forwardedRef;
-        }
-
-        var derivedProps = this.selectDerivedProps(storeState, wrapperProps, store, selectorFactoryOptions);
-        return this.selectChildElement(WrappedComponent, derivedProps, forwardedRef);
-      };
-
-      _proto.render = function render() {
-        var ContextToUse = this.props.context && this.props.context.Consumer && Object(__WEBPACK_IMPORTED_MODULE_7_react_is__["isContextConsumer"])(__WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(this.props.context.Consumer, null)) ? this.props.context : Context;
-        return __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(ContextToUse.Consumer, null, this.indirectRenderWrappedComponent);
-      };
-
-      return Connect;
-    }(OuterBaseComponent);
-
-    Connect.WrappedComponent = WrappedComponent;
-    Connect.displayName = displayName;
-
-    if (forwardRef) {
-      var forwarded = __WEBPACK_IMPORTED_MODULE_6_react___default.a.forwardRef(function forwardConnectRef(props, ref) {
-        return __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(Connect, {
-          wrapperProps: props,
-          forwardedRef: ref
-        });
-      });
-      forwarded.displayName = displayName;
-      forwarded.WrappedComponent = WrappedComponent;
-      return __WEBPACK_IMPORTED_MODULE_4_hoist_non_react_statics___default()(forwarded, WrappedComponent);
-    }
-
-    return __WEBPACK_IMPORTED_MODULE_4_hoist_non_react_statics___default()(Connect, WrappedComponent);
-  };
-}
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
-
-/***/ }),
-/* 28 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony export (immutable) */ __webpack_exports__["a"] = wrapMapToPropsConstant;
-/* unused harmony export getDependsOnOwnProps */
-/* harmony export (immutable) */ __webpack_exports__["b"] = wrapMapToPropsFunc;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_verifyPlainObject__ = __webpack_require__(29);
-
-function wrapMapToPropsConstant(getConstant) {
-  return function initConstantSelector(dispatch, options) {
-    var constant = getConstant(dispatch, options);
-
-    function constantSelector() {
-      return constant;
-    }
-
-    constantSelector.dependsOnOwnProps = false;
-    return constantSelector;
-  };
-} // dependsOnOwnProps is used by createMapToPropsProxy to determine whether to pass props as args
-// to the mapToProps function being wrapped. It is also used by makePurePropsSelector to determine
-// whether mapToProps needs to be invoked when props have changed.
-//
-// A length of one signals that mapToProps does not depend on props from the parent component.
-// A length of zero is assumed to mean mapToProps is getting args via arguments or ...args and
-// therefore not reporting its length accurately..
-
-function getDependsOnOwnProps(mapToProps) {
-  return mapToProps.dependsOnOwnProps !== null && mapToProps.dependsOnOwnProps !== undefined ? Boolean(mapToProps.dependsOnOwnProps) : mapToProps.length !== 1;
-} // Used by whenMapStateToPropsIsFunction and whenMapDispatchToPropsIsFunction,
-// this function wraps mapToProps in a proxy function which does several things:
-//
-//  * Detects whether the mapToProps function being called depends on props, which
-//    is used by selectorFactory to decide if it should reinvoke on props changes.
-//
-//  * On first call, handles mapToProps if returns another function, and treats that
-//    new function as the true mapToProps for subsequent calls.
-//
-//  * On first call, verifies the first result is a plain object, in order to warn
-//    the developer that their mapToProps function is not returning a valid result.
-//
-
-function wrapMapToPropsFunc(mapToProps, methodName) {
-  return function initProxySelector(dispatch, _ref) {
-    var displayName = _ref.displayName;
-
-    var proxy = function mapToPropsProxy(stateOrDispatch, ownProps) {
-      return proxy.dependsOnOwnProps ? proxy.mapToProps(stateOrDispatch, ownProps) : proxy.mapToProps(stateOrDispatch);
-    }; // allow detectFactoryAndVerify to get ownProps
-
-
-    proxy.dependsOnOwnProps = true;
-
-    proxy.mapToProps = function detectFactoryAndVerify(stateOrDispatch, ownProps) {
-      proxy.mapToProps = mapToProps;
-      proxy.dependsOnOwnProps = getDependsOnOwnProps(mapToProps);
-      var props = proxy(stateOrDispatch, ownProps);
-
-      if (typeof props === 'function') {
-        proxy.mapToProps = props;
-        proxy.dependsOnOwnProps = getDependsOnOwnProps(props);
-        props = proxy(stateOrDispatch, ownProps);
-      }
-
-      if (process.env.NODE_ENV !== 'production') Object(__WEBPACK_IMPORTED_MODULE_0__utils_verifyPlainObject__["a" /* default */])(props, displayName, methodName);
-      return props;
-    };
-
-    return proxy;
-  };
-}
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
-
-/***/ }),
-/* 29 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = verifyPlainObject;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__isPlainObject__ = __webpack_require__(63);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__warning__ = __webpack_require__(30);
-
-
-function verifyPlainObject(value, displayName, methodName) {
-  if (!Object(__WEBPACK_IMPORTED_MODULE_0__isPlainObject__["a" /* default */])(value)) {
-    Object(__WEBPACK_IMPORTED_MODULE_1__warning__["a" /* default */])(methodName + "() in " + displayName + " must return a plain object. Instead received " + value + ".");
-  }
-}
-
-/***/ }),
-/* 30 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = warning;
-/**
- * Prints a warning in the console if it exists.
- *
- * @param {String} message The warning message.
- * @returns {void}
- */
-function warning(message) {
-  /* eslint-disable no-console */
-  if (typeof console !== 'undefined' && typeof console.error === 'function') {
-    console.error(message);
-  }
-  /* eslint-enable no-console */
-
-
-  try {
-    // This error was thrown as a convenience so that if you enable
-    // "break on all exceptions" in your console,
-    // it would pause the execution at this line.
-    throw new Error(message);
-    /* eslint-disable no-empty */
-  } catch (e) {}
-  /* eslint-enable no-empty */
-
-}
-
-/***/ }),
-/* 31 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return canUseDOM; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return addEventListener; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return removeEventListener; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return getConfirmation; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return supportsHistory; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return supportsPopStateOnHashChange; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return supportsGoWithoutReloadUsingHash; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return isExtraneousPopstateEvent; });
-var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
-
-var addEventListener = function addEventListener(node, event, listener) {
-  return node.addEventListener ? node.addEventListener(event, listener, false) : node.attachEvent('on' + event, listener);
-};
-
-var removeEventListener = function removeEventListener(node, event, listener) {
-  return node.removeEventListener ? node.removeEventListener(event, listener, false) : node.detachEvent('on' + event, listener);
-};
-
-var getConfirmation = function getConfirmation(message, callback) {
-  return callback(window.confirm(message));
-}; // eslint-disable-line no-alert
-
-/**
- * Returns true if the HTML5 history API is supported. Taken from Modernizr.
- *
- * https://github.com/Modernizr/Modernizr/blob/master/LICENSE
- * https://github.com/Modernizr/Modernizr/blob/master/feature-detects/history.js
- * changed to avoid false negatives for Windows Phones: https://github.com/reactjs/react-router/issues/586
- */
-var supportsHistory = function supportsHistory() {
-  var ua = window.navigator.userAgent;
-
-  if ((ua.indexOf('Android 2.') !== -1 || ua.indexOf('Android 4.0') !== -1) && ua.indexOf('Mobile Safari') !== -1 && ua.indexOf('Chrome') === -1 && ua.indexOf('Windows Phone') === -1) return false;
-
-  return window.history && 'pushState' in window.history;
-};
-
-/**
- * Returns true if browser fires popstate on hash change.
- * IE10 and IE11 do not.
- */
-var supportsPopStateOnHashChange = function supportsPopStateOnHashChange() {
-  return window.navigator.userAgent.indexOf('Trident') === -1;
-};
-
-/**
- * Returns false if using go(n) with hash history causes a full page reload.
- */
-var supportsGoWithoutReloadUsingHash = function supportsGoWithoutReloadUsingHash() {
-  return window.navigator.userAgent.indexOf('Firefox') === -1;
-};
-
-/**
- * Returns true if a given popstate event is an extraneous WebKit event.
- * Accounts for the fact that Chrome on iOS fires real popstate events
- * containing undefined state when pressing the back button.
- */
-var isExtraneousPopstateEvent = function isExtraneousPopstateEvent(event) {
-  return event.state === undefined && navigator.userAgent.indexOf('CriOS') === -1;
-};
-
-/***/ }),
-/* 32 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_invariant__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_history__ = __webpack_require__(5);
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-
-
-
-var isModifiedEvent = function isModifiedEvent(event) {
-  return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
-};
-
-/**
- * The public API for rendering a history-aware <a>.
- */
-
-var Link = function (_React$Component) {
-  _inherits(Link, _React$Component);
-
-  function Link() {
-    var _temp, _this, _ret;
-
-    _classCallCheck(this, Link);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.handleClick = function (event) {
-      if (_this.props.onClick) _this.props.onClick(event);
-
-      if (!event.defaultPrevented && // onClick prevented default
-      event.button === 0 && // ignore everything but left clicks
-      !_this.props.target && // let browser handle "target=_blank" etc.
-      !isModifiedEvent(event) // ignore clicks with modifier keys
-      ) {
-          event.preventDefault();
-
-          var history = _this.context.router.history;
-          var _this$props = _this.props,
-              replace = _this$props.replace,
-              to = _this$props.to;
-
-
-          if (replace) {
-            history.replace(to);
-          } else {
-            history.push(to);
-          }
-        }
-    }, _temp), _possibleConstructorReturn(_this, _ret);
-  }
-
-  Link.prototype.render = function render() {
-    var _props = this.props,
-        replace = _props.replace,
-        to = _props.to,
-        innerRef = _props.innerRef,
-        props = _objectWithoutProperties(_props, ["replace", "to", "innerRef"]); // eslint-disable-line no-unused-vars
-
-    __WEBPACK_IMPORTED_MODULE_2_invariant___default()(this.context.router, "You should not use <Link> outside a <Router>");
-
-    __WEBPACK_IMPORTED_MODULE_2_invariant___default()(to !== undefined, 'You must specify the "to" property');
-
-    var history = this.context.router.history;
-
-    var location = typeof to === "string" ? Object(__WEBPACK_IMPORTED_MODULE_3_history__["c" /* createLocation */])(to, null, null, history.location) : to;
-
-    var href = history.createHref(location);
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", _extends({}, props, { onClick: this.handleClick, href: href, ref: innerRef }));
-  };
-
-  return Link;
-}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
-
-Link.propTypes = {
-  onClick: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
-  target: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string,
-  replace: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  to: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string, __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.object]).isRequired,
-  innerRef: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string, __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func])
-};
-Link.defaultProps = {
-  replace: false
-};
-Link.contextTypes = {
-  router: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.shape({
-    history: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.shape({
-      push: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func.isRequired,
-      replace: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func.isRequired,
-      createHref: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func.isRequired
-    }).isRequired
-  }).isRequired
-};
-
-
-/* harmony default export */ __webpack_exports__["a"] = (Link);
-
-/***/ }),
-/* 33 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Route__ = __webpack_require__(34);
-// Written in this round about way for babel-transform-imports
-
-
-/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_Route__["a" /* default */]);
-
-/***/ }),
-/* 34 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__matchPath__ = __webpack_require__(23);
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-
-
-
-
-var isEmptyChildren = function isEmptyChildren(children) {
-  return __WEBPACK_IMPORTED_MODULE_2_react___default.a.Children.count(children) === 0;
-};
-
-/**
- * The public API for matching a single path and rendering.
- */
-
-var Route = function (_React$Component) {
-  _inherits(Route, _React$Component);
-
-  function Route() {
-    var _temp, _this, _ret;
-
-    _classCallCheck(this, Route);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.state = {
-      match: _this.computeMatch(_this.props, _this.context.router)
-    }, _temp), _possibleConstructorReturn(_this, _ret);
-  }
-
-  Route.prototype.getChildContext = function getChildContext() {
-    return {
-      router: _extends({}, this.context.router, {
-        route: {
-          location: this.props.location || this.context.router.route.location,
-          match: this.state.match
-        }
-      })
-    };
-  };
-
-  Route.prototype.computeMatch = function computeMatch(_ref, router) {
-    var computedMatch = _ref.computedMatch,
-        location = _ref.location,
-        path = _ref.path,
-        strict = _ref.strict,
-        exact = _ref.exact,
-        sensitive = _ref.sensitive;
-
-    if (computedMatch) return computedMatch; // <Switch> already computed the match for us
-
-    __WEBPACK_IMPORTED_MODULE_1_invariant___default()(router, "You should not use <Route> or withRouter() outside a <Router>");
-
-    var route = router.route;
-
-    var pathname = (location || route.location).pathname;
-
-    return Object(__WEBPACK_IMPORTED_MODULE_4__matchPath__["a" /* default */])(pathname, { path: path, strict: strict, exact: exact, sensitive: sensitive }, route.match);
-  };
-
-  Route.prototype.componentWillMount = function componentWillMount() {
-    __WEBPACK_IMPORTED_MODULE_0_warning___default()(!(this.props.component && this.props.render), "You should not use <Route component> and <Route render> in the same route; <Route render> will be ignored");
-
-    __WEBPACK_IMPORTED_MODULE_0_warning___default()(!(this.props.component && this.props.children && !isEmptyChildren(this.props.children)), "You should not use <Route component> and <Route children> in the same route; <Route children> will be ignored");
-
-    __WEBPACK_IMPORTED_MODULE_0_warning___default()(!(this.props.render && this.props.children && !isEmptyChildren(this.props.children)), "You should not use <Route render> and <Route children> in the same route; <Route children> will be ignored");
-  };
-
-  Route.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps, nextContext) {
-    __WEBPACK_IMPORTED_MODULE_0_warning___default()(!(nextProps.location && !this.props.location), '<Route> elements should not change from uncontrolled to controlled (or vice versa). You initially used no "location" prop and then provided one on a subsequent render.');
-
-    __WEBPACK_IMPORTED_MODULE_0_warning___default()(!(!nextProps.location && this.props.location), '<Route> elements should not change from controlled to uncontrolled (or vice versa). You provided a "location" prop initially but omitted it on a subsequent render.');
-
-    this.setState({
-      match: this.computeMatch(nextProps, nextContext.router)
-    });
-  };
-
-  Route.prototype.render = function render() {
-    var match = this.state.match;
-    var _props = this.props,
-        children = _props.children,
-        component = _props.component,
-        render = _props.render;
-    var _context$router = this.context.router,
-        history = _context$router.history,
-        route = _context$router.route,
-        staticContext = _context$router.staticContext;
-
-    var location = this.props.location || route.location;
-    var props = { match: match, location: location, history: history, staticContext: staticContext };
-
-    if (component) return match ? __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(component, props) : null;
-
-    if (render) return match ? render(props) : null;
-
-    if (typeof children === "function") return children(props);
-
-    if (children && !isEmptyChildren(children)) return __WEBPACK_IMPORTED_MODULE_2_react___default.a.Children.only(children);
-
-    return null;
-  };
-
-  return Route;
-}(__WEBPACK_IMPORTED_MODULE_2_react___default.a.Component);
-
-Route.propTypes = {
-  computedMatch: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.object, // private, from <Switch>
-  path: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.string,
-  exact: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.bool,
-  strict: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.bool,
-  sensitive: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.bool,
-  component: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.func,
-  render: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.func,
-  children: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.func, __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.node]),
-  location: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.object
-};
-Route.contextTypes = {
-  router: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.shape({
-    history: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.object.isRequired,
-    route: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.object.isRequired,
-    staticContext: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.object
-  })
-};
-Route.childContextTypes = {
-  router: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.object.isRequired
-};
-
-
-/* harmony default export */ __webpack_exports__["a"] = (Route);
-
-/***/ }),
-/* 35 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var isarray = __webpack_require__(84)
-
-/**
- * Expose `pathToRegexp`.
- */
-module.exports = pathToRegexp
-module.exports.parse = parse
-module.exports.compile = compile
-module.exports.tokensToFunction = tokensToFunction
-module.exports.tokensToRegExp = tokensToRegExp
-
-/**
- * The main path matching regexp utility.
- *
- * @type {RegExp}
- */
-var PATH_REGEXP = new RegExp([
-  // Match escaped characters that would otherwise appear in future matches.
-  // This allows the user to escape special characters that won't transform.
-  '(\\\\.)',
-  // Match Express-style parameters and un-named parameters with a prefix
-  // and optional suffixes. Matches appear as:
-  //
-  // "/:test(\\d+)?" => ["/", "test", "\d+", undefined, "?", undefined]
-  // "/route(\\d+)"  => [undefined, undefined, undefined, "\d+", undefined, undefined]
-  // "/*"            => ["/", undefined, undefined, undefined, undefined, "*"]
-  '([\\/.])?(?:(?:\\:(\\w+)(?:\\(((?:\\\\.|[^\\\\()])+)\\))?|\\(((?:\\\\.|[^\\\\()])+)\\))([+*?])?|(\\*))'
-].join('|'), 'g')
-
-/**
- * Parse a string for the raw tokens.
- *
- * @param  {string}  str
- * @param  {Object=} options
- * @return {!Array}
- */
-function parse (str, options) {
-  var tokens = []
-  var key = 0
-  var index = 0
-  var path = ''
-  var defaultDelimiter = options && options.delimiter || '/'
-  var res
-
-  while ((res = PATH_REGEXP.exec(str)) != null) {
-    var m = res[0]
-    var escaped = res[1]
-    var offset = res.index
-    path += str.slice(index, offset)
-    index = offset + m.length
-
-    // Ignore already escaped sequences.
-    if (escaped) {
-      path += escaped[1]
-      continue
-    }
-
-    var next = str[index]
-    var prefix = res[2]
-    var name = res[3]
-    var capture = res[4]
-    var group = res[5]
-    var modifier = res[6]
-    var asterisk = res[7]
-
-    // Push the current path onto the tokens.
-    if (path) {
-      tokens.push(path)
-      path = ''
-    }
-
-    var partial = prefix != null && next != null && next !== prefix
-    var repeat = modifier === '+' || modifier === '*'
-    var optional = modifier === '?' || modifier === '*'
-    var delimiter = res[2] || defaultDelimiter
-    var pattern = capture || group
-
-    tokens.push({
-      name: name || key++,
-      prefix: prefix || '',
-      delimiter: delimiter,
-      optional: optional,
-      repeat: repeat,
-      partial: partial,
-      asterisk: !!asterisk,
-      pattern: pattern ? escapeGroup(pattern) : (asterisk ? '.*' : '[^' + escapeString(delimiter) + ']+?')
-    })
-  }
-
-  // Match any characters still remaining.
-  if (index < str.length) {
-    path += str.substr(index)
-  }
-
-  // If the path exists, push it onto the end.
-  if (path) {
-    tokens.push(path)
-  }
-
-  return tokens
-}
-
-/**
- * Compile a string to a template function for the path.
- *
- * @param  {string}             str
- * @param  {Object=}            options
- * @return {!function(Object=, Object=)}
- */
-function compile (str, options) {
-  return tokensToFunction(parse(str, options))
-}
-
-/**
- * Prettier encoding of URI path segments.
- *
- * @param  {string}
- * @return {string}
- */
-function encodeURIComponentPretty (str) {
-  return encodeURI(str).replace(/[\/?#]/g, function (c) {
-    return '%' + c.charCodeAt(0).toString(16).toUpperCase()
-  })
-}
-
-/**
- * Encode the asterisk parameter. Similar to `pretty`, but allows slashes.
- *
- * @param  {string}
- * @return {string}
- */
-function encodeAsterisk (str) {
-  return encodeURI(str).replace(/[?#]/g, function (c) {
-    return '%' + c.charCodeAt(0).toString(16).toUpperCase()
-  })
-}
-
-/**
- * Expose a method for transforming tokens into the path function.
- */
-function tokensToFunction (tokens) {
-  // Compile all the tokens into regexps.
-  var matches = new Array(tokens.length)
-
-  // Compile all the patterns before compilation.
-  for (var i = 0; i < tokens.length; i++) {
-    if (typeof tokens[i] === 'object') {
-      matches[i] = new RegExp('^(?:' + tokens[i].pattern + ')$')
-    }
-  }
-
-  return function (obj, opts) {
-    var path = ''
-    var data = obj || {}
-    var options = opts || {}
-    var encode = options.pretty ? encodeURIComponentPretty : encodeURIComponent
-
-    for (var i = 0; i < tokens.length; i++) {
-      var token = tokens[i]
-
-      if (typeof token === 'string') {
-        path += token
-
-        continue
-      }
-
-      var value = data[token.name]
-      var segment
-
-      if (value == null) {
-        if (token.optional) {
-          // Prepend partial segment prefixes.
-          if (token.partial) {
-            path += token.prefix
-          }
-
-          continue
-        } else {
-          throw new TypeError('Expected "' + token.name + '" to be defined')
-        }
-      }
-
-      if (isarray(value)) {
-        if (!token.repeat) {
-          throw new TypeError('Expected "' + token.name + '" to not repeat, but received `' + JSON.stringify(value) + '`')
-        }
-
-        if (value.length === 0) {
-          if (token.optional) {
-            continue
-          } else {
-            throw new TypeError('Expected "' + token.name + '" to not be empty')
-          }
-        }
-
-        for (var j = 0; j < value.length; j++) {
-          segment = encode(value[j])
-
-          if (!matches[i].test(segment)) {
-            throw new TypeError('Expected all "' + token.name + '" to match "' + token.pattern + '", but received `' + JSON.stringify(segment) + '`')
-          }
-
-          path += (j === 0 ? token.prefix : token.delimiter) + segment
-        }
-
-        continue
-      }
-
-      segment = token.asterisk ? encodeAsterisk(value) : encode(value)
-
-      if (!matches[i].test(segment)) {
-        throw new TypeError('Expected "' + token.name + '" to match "' + token.pattern + '", but received "' + segment + '"')
-      }
-
-      path += token.prefix + segment
-    }
-
-    return path
-  }
-}
-
-/**
- * Escape a regular expression string.
- *
- * @param  {string} str
- * @return {string}
- */
-function escapeString (str) {
-  return str.replace(/([.+*?=^!:${}()[\]|\/\\])/g, '\\$1')
-}
-
-/**
- * Escape the capturing group by escaping special characters and meaning.
- *
- * @param  {string} group
- * @return {string}
- */
-function escapeGroup (group) {
-  return group.replace(/([=!:$\/()])/g, '\\$1')
-}
-
-/**
- * Attach the keys as a property of the regexp.
- *
- * @param  {!RegExp} re
- * @param  {Array}   keys
- * @return {!RegExp}
- */
-function attachKeys (re, keys) {
-  re.keys = keys
-  return re
-}
-
-/**
- * Get the flags for a regexp from the options.
- *
- * @param  {Object} options
- * @return {string}
- */
-function flags (options) {
-  return options.sensitive ? '' : 'i'
-}
-
-/**
- * Pull out keys from a regexp.
- *
- * @param  {!RegExp} path
- * @param  {!Array}  keys
- * @return {!RegExp}
- */
-function regexpToRegexp (path, keys) {
-  // Use a negative lookahead to match only capturing groups.
-  var groups = path.source.match(/\((?!\?)/g)
-
-  if (groups) {
-    for (var i = 0; i < groups.length; i++) {
-      keys.push({
-        name: i,
-        prefix: null,
-        delimiter: null,
-        optional: false,
-        repeat: false,
-        partial: false,
-        asterisk: false,
-        pattern: null
-      })
-    }
-  }
-
-  return attachKeys(path, keys)
-}
-
-/**
- * Transform an array into a regexp.
- *
- * @param  {!Array}  path
- * @param  {Array}   keys
- * @param  {!Object} options
- * @return {!RegExp}
- */
-function arrayToRegexp (path, keys, options) {
-  var parts = []
-
-  for (var i = 0; i < path.length; i++) {
-    parts.push(pathToRegexp(path[i], keys, options).source)
-  }
-
-  var regexp = new RegExp('(?:' + parts.join('|') + ')', flags(options))
-
-  return attachKeys(regexp, keys)
-}
-
-/**
- * Create a path regexp from string input.
- *
- * @param  {string}  path
- * @param  {!Array}  keys
- * @param  {!Object} options
- * @return {!RegExp}
- */
-function stringToRegexp (path, keys, options) {
-  return tokensToRegExp(parse(path, options), keys, options)
-}
-
-/**
- * Expose a function for taking tokens and returning a RegExp.
- *
- * @param  {!Array}          tokens
- * @param  {(Array|Object)=} keys
- * @param  {Object=}         options
- * @return {!RegExp}
- */
-function tokensToRegExp (tokens, keys, options) {
-  if (!isarray(keys)) {
-    options = /** @type {!Object} */ (keys || options)
-    keys = []
-  }
-
-  options = options || {}
-
-  var strict = options.strict
-  var end = options.end !== false
-  var route = ''
-
-  // Iterate over the tokens and create our regexp string.
-  for (var i = 0; i < tokens.length; i++) {
-    var token = tokens[i]
-
-    if (typeof token === 'string') {
-      route += escapeString(token)
-    } else {
-      var prefix = escapeString(token.prefix)
-      var capture = '(?:' + token.pattern + ')'
-
-      keys.push(token)
-
-      if (token.repeat) {
-        capture += '(?:' + prefix + capture + ')*'
-      }
-
-      if (token.optional) {
-        if (!token.partial) {
-          capture = '(?:' + prefix + '(' + capture + '))?'
-        } else {
-          capture = prefix + '(' + capture + ')?'
-        }
-      } else {
-        capture = prefix + '(' + capture + ')'
-      }
-
-      route += capture
-    }
-  }
-
-  var delimiter = escapeString(options.delimiter || '/')
-  var endsWithDelimiter = route.slice(-delimiter.length) === delimiter
-
-  // In non-strict mode we allow a slash at the end of match. If the path to
-  // match already ends with a slash, we remove it for consistency. The slash
-  // is valid at the end of a path match, not in the middle. This is important
-  // in non-ending mode, where "/test/" shouldn't match "/test//route".
-  if (!strict) {
-    route = (endsWithDelimiter ? route.slice(0, -delimiter.length) : route) + '(?:' + delimiter + '(?=$))?'
-  }
-
-  if (end) {
-    route += '$'
-  } else {
-    // In non-ending mode, we need the capturing groups to match as much as
-    // possible by using a positive lookahead to the end or next path segment.
-    route += strict && endsWithDelimiter ? '' : '(?=' + delimiter + '|$)'
-  }
-
-  return attachKeys(new RegExp('^' + route, flags(options)), keys)
-}
-
-/**
- * Normalize the given path string, returning a regular expression.
- *
- * An empty array can be passed in for the keys, which will hold the
- * placeholder key descriptions. For example, using `/user/:id`, `keys` will
- * contain `[{ name: 'id', delimiter: '/', optional: false, repeat: false }]`.
- *
- * @param  {(string|RegExp|Array)} path
- * @param  {(Array|Object)=}       keys
- * @param  {Object=}               options
- * @return {!RegExp}
- */
-function pathToRegexp (path, keys, options) {
-  if (!isarray(keys)) {
-    options = /** @type {!Object} */ (keys || options)
-    keys = []
-  }
-
-  options = options || {}
-
-  if (path instanceof RegExp) {
-    return regexpToRegexp(path, /** @type {!Array} */ (keys))
-  }
-
-  if (isarray(path)) {
-    return arrayToRegexp(/** @type {!Array} */ (path), /** @type {!Array} */ (keys), options)
-  }
-
-  return stringToRegexp(/** @type {string} */ (path), /** @type {!Array} */ (keys), options)
-}
-
-
-/***/ }),
-/* 36 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_path_to_regexp__);
-
-
-var patternCache = {};
-var cacheLimit = 10000;
-var cacheCount = 0;
-
-var compileGenerator = function compileGenerator(pattern) {
-  var cacheKey = pattern;
-  var cache = patternCache[cacheKey] || (patternCache[cacheKey] = {});
-
-  if (cache[pattern]) return cache[pattern];
-
-  var compiledGenerator = __WEBPACK_IMPORTED_MODULE_0_path_to_regexp___default.a.compile(pattern);
-
-  if (cacheCount < cacheLimit) {
-    cache[pattern] = compiledGenerator;
-    cacheCount++;
-  }
-
-  return compiledGenerator;
-};
-
-/**
- * Public API for generating a URL pathname from a pattern and parameters.
- */
-var generatePath = function generatePath() {
-  var pattern = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "/";
-  var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-  if (pattern === "/") {
-    return pattern;
-  }
-  var generator = compileGenerator(pattern);
-  return generator(params, { pretty: true });
-};
-
-/* harmony default export */ __webpack_exports__["a"] = (generatePath);
-
-/***/ }),
-/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -4236,6 +3043,1199 @@ request.put = (url, data, fn) => {
   return req;
 };
 
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports = __webpack_require__(44);
+} else {
+  module.exports = __webpack_require__(45);
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 27 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = _inheritsLoose;
+function _inheritsLoose(subClass, superClass) {
+  subClass.prototype = Object.create(superClass.prototype);
+  subClass.prototype.constructor = subClass;
+  subClass.__proto__ = superClass;
+}
+
+/***/ }),
+/* 28 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony export (immutable) */ __webpack_exports__["a"] = connectAdvanced;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_assertThisInitialized__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_inheritsLoose__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__babel_runtime_helpers_esm_extends__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_hoist_non_react_statics__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_hoist_non_react_statics___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_hoist_non_react_statics__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_invariant__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_invariant__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react_is__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react_is___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_react_is__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Context__ = __webpack_require__(15);
+
+
+
+
+
+
+
+
+
+
+var stringifyComponent = function stringifyComponent(Comp) {
+  try {
+    return JSON.stringify(Comp);
+  } catch (err) {
+    return String(Comp);
+  }
+};
+
+function connectAdvanced(
+/*
+  selectorFactory is a func that is responsible for returning the selector function used to
+  compute new props from state, props, and dispatch. For example:
+     export default connectAdvanced((dispatch, options) => (state, props) => ({
+      thing: state.things[props.thingId],
+      saveThing: fields => dispatch(actionCreators.saveThing(props.thingId, fields)),
+    }))(YourComponent)
+   Access to dispatch is provided to the factory so selectorFactories can bind actionCreators
+  outside of their selector as an optimization. Options passed to connectAdvanced are passed to
+  the selectorFactory, along with displayName and WrappedComponent, as the second argument.
+   Note that selectorFactory is responsible for all caching/memoization of inbound and outbound
+  props. Do not use connectAdvanced directly without memoizing results between calls to your
+  selector, otherwise the Connect component will re-render on every state or props change.
+*/
+selectorFactory, // options object:
+_ref) {
+  if (_ref === void 0) {
+    _ref = {};
+  }
+
+  var _ref2 = _ref,
+      _ref2$getDisplayName = _ref2.getDisplayName,
+      getDisplayName = _ref2$getDisplayName === void 0 ? function (name) {
+    return "ConnectAdvanced(" + name + ")";
+  } : _ref2$getDisplayName,
+      _ref2$methodName = _ref2.methodName,
+      methodName = _ref2$methodName === void 0 ? 'connectAdvanced' : _ref2$methodName,
+      _ref2$renderCountProp = _ref2.renderCountProp,
+      renderCountProp = _ref2$renderCountProp === void 0 ? undefined : _ref2$renderCountProp,
+      _ref2$shouldHandleSta = _ref2.shouldHandleStateChanges,
+      shouldHandleStateChanges = _ref2$shouldHandleSta === void 0 ? true : _ref2$shouldHandleSta,
+      _ref2$storeKey = _ref2.storeKey,
+      storeKey = _ref2$storeKey === void 0 ? 'store' : _ref2$storeKey,
+      _ref2$withRef = _ref2.withRef,
+      withRef = _ref2$withRef === void 0 ? false : _ref2$withRef,
+      _ref2$forwardRef = _ref2.forwardRef,
+      forwardRef = _ref2$forwardRef === void 0 ? false : _ref2$forwardRef,
+      _ref2$context = _ref2.context,
+      context = _ref2$context === void 0 ? __WEBPACK_IMPORTED_MODULE_8__Context__["a" /* ReactReduxContext */] : _ref2$context,
+      connectOptions = Object(__WEBPACK_IMPORTED_MODULE_3__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__["a" /* default */])(_ref2, ["getDisplayName", "methodName", "renderCountProp", "shouldHandleStateChanges", "storeKey", "withRef", "forwardRef", "context"]);
+
+  __WEBPACK_IMPORTED_MODULE_5_invariant___default()(renderCountProp === undefined, "renderCountProp is removed. render counting is built into the latest React dev tools profiling extension");
+  __WEBPACK_IMPORTED_MODULE_5_invariant___default()(!withRef, 'withRef is removed. To access the wrapped instance, use a ref on the connected component');
+  var customStoreWarningMessage = 'To use a custom Redux store for specific components,  create a custom React context with ' + "React.createContext(), and pass the context object to React Redux's Provider and specific components" + ' like:  <Provider context={MyContext}><ConnectedComponent context={MyContext} /></Provider>. ' + 'You may also pass a {context : MyContext} option to connect';
+  __WEBPACK_IMPORTED_MODULE_5_invariant___default()(storeKey === 'store', 'storeKey has been removed and does not do anything. ' + customStoreWarningMessage);
+  var Context = context;
+  return function wrapWithConnect(WrappedComponent) {
+    if (process.env.NODE_ENV !== 'production') {
+      __WEBPACK_IMPORTED_MODULE_5_invariant___default()(Object(__WEBPACK_IMPORTED_MODULE_7_react_is__["isValidElementType"])(WrappedComponent), "You must pass a component to the function returned by " + (methodName + ". Instead received " + stringifyComponent(WrappedComponent)));
+    }
+
+    var wrappedComponentName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
+    var displayName = getDisplayName(wrappedComponentName);
+
+    var selectorFactoryOptions = Object(__WEBPACK_IMPORTED_MODULE_2__babel_runtime_helpers_esm_extends__["a" /* default */])({}, connectOptions, {
+      getDisplayName: getDisplayName,
+      methodName: methodName,
+      renderCountProp: renderCountProp,
+      shouldHandleStateChanges: shouldHandleStateChanges,
+      storeKey: storeKey,
+      displayName: displayName,
+      wrappedComponentName: wrappedComponentName,
+      WrappedComponent: WrappedComponent
+    });
+
+    var pure = connectOptions.pure;
+    var OuterBaseComponent = __WEBPACK_IMPORTED_MODULE_6_react__["Component"];
+
+    if (pure) {
+      OuterBaseComponent = __WEBPACK_IMPORTED_MODULE_6_react__["PureComponent"];
+    }
+
+    function makeDerivedPropsSelector() {
+      var lastProps;
+      var lastState;
+      var lastDerivedProps;
+      var lastStore;
+      var lastSelectorFactoryOptions;
+      var sourceSelector;
+      return function selectDerivedProps(state, props, store, selectorFactoryOptions) {
+        if (pure && lastProps === props && lastState === state) {
+          return lastDerivedProps;
+        }
+
+        if (store !== lastStore || lastSelectorFactoryOptions !== selectorFactoryOptions) {
+          lastStore = store;
+          lastSelectorFactoryOptions = selectorFactoryOptions;
+          sourceSelector = selectorFactory(store.dispatch, selectorFactoryOptions);
+        }
+
+        lastProps = props;
+        lastState = state;
+        var nextProps = sourceSelector(state, props);
+        lastDerivedProps = nextProps;
+        return lastDerivedProps;
+      };
+    }
+
+    function makeChildElementSelector() {
+      var lastChildProps, lastForwardRef, lastChildElement, lastComponent;
+      return function selectChildElement(WrappedComponent, childProps, forwardRef) {
+        if (childProps !== lastChildProps || forwardRef !== lastForwardRef || lastComponent !== WrappedComponent) {
+          lastChildProps = childProps;
+          lastForwardRef = forwardRef;
+          lastComponent = WrappedComponent;
+          lastChildElement = __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(WrappedComponent, Object(__WEBPACK_IMPORTED_MODULE_2__babel_runtime_helpers_esm_extends__["a" /* default */])({}, childProps, {
+            ref: forwardRef
+          }));
+        }
+
+        return lastChildElement;
+      };
+    }
+
+    var Connect =
+    /*#__PURE__*/
+    function (_OuterBaseComponent) {
+      Object(__WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_inheritsLoose__["a" /* default */])(Connect, _OuterBaseComponent);
+
+      function Connect(props) {
+        var _this;
+
+        _this = _OuterBaseComponent.call(this, props) || this;
+        __WEBPACK_IMPORTED_MODULE_5_invariant___default()(forwardRef ? !props.wrapperProps[storeKey] : !props[storeKey], 'Passing redux store in props has been removed and does not do anything. ' + customStoreWarningMessage);
+        _this.selectDerivedProps = makeDerivedPropsSelector();
+        _this.selectChildElement = makeChildElementSelector();
+        _this.indirectRenderWrappedComponent = _this.indirectRenderWrappedComponent.bind(Object(__WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_assertThisInitialized__["a" /* default */])(_this));
+        return _this;
+      }
+
+      var _proto = Connect.prototype;
+
+      _proto.indirectRenderWrappedComponent = function indirectRenderWrappedComponent(value) {
+        // calling renderWrappedComponent on prototype from indirectRenderWrappedComponent bound to `this`
+        return this.renderWrappedComponent(value);
+      };
+
+      _proto.renderWrappedComponent = function renderWrappedComponent(value) {
+        __WEBPACK_IMPORTED_MODULE_5_invariant___default()(value, "Could not find \"store\" in the context of " + ("\"" + displayName + "\". Either wrap the root component in a <Provider>, ") + "or pass a custom React context provider to <Provider> and the corresponding " + ("React context consumer to " + displayName + " in connect options."));
+        var storeState = value.storeState,
+            store = value.store;
+        var wrapperProps = this.props;
+        var forwardedRef;
+
+        if (forwardRef) {
+          wrapperProps = this.props.wrapperProps;
+          forwardedRef = this.props.forwardedRef;
+        }
+
+        var derivedProps = this.selectDerivedProps(storeState, wrapperProps, store, selectorFactoryOptions);
+        return this.selectChildElement(WrappedComponent, derivedProps, forwardedRef);
+      };
+
+      _proto.render = function render() {
+        var ContextToUse = this.props.context && this.props.context.Consumer && Object(__WEBPACK_IMPORTED_MODULE_7_react_is__["isContextConsumer"])(__WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(this.props.context.Consumer, null)) ? this.props.context : Context;
+        return __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(ContextToUse.Consumer, null, this.indirectRenderWrappedComponent);
+      };
+
+      return Connect;
+    }(OuterBaseComponent);
+
+    Connect.WrappedComponent = WrappedComponent;
+    Connect.displayName = displayName;
+
+    if (forwardRef) {
+      var forwarded = __WEBPACK_IMPORTED_MODULE_6_react___default.a.forwardRef(function forwardConnectRef(props, ref) {
+        return __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(Connect, {
+          wrapperProps: props,
+          forwardedRef: ref
+        });
+      });
+      forwarded.displayName = displayName;
+      forwarded.WrappedComponent = WrappedComponent;
+      return __WEBPACK_IMPORTED_MODULE_4_hoist_non_react_statics___default()(forwarded, WrappedComponent);
+    }
+
+    return __WEBPACK_IMPORTED_MODULE_4_hoist_non_react_statics___default()(Connect, WrappedComponent);
+  };
+}
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
+
+/***/ }),
+/* 29 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony export (immutable) */ __webpack_exports__["a"] = wrapMapToPropsConstant;
+/* unused harmony export getDependsOnOwnProps */
+/* harmony export (immutable) */ __webpack_exports__["b"] = wrapMapToPropsFunc;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_verifyPlainObject__ = __webpack_require__(30);
+
+function wrapMapToPropsConstant(getConstant) {
+  return function initConstantSelector(dispatch, options) {
+    var constant = getConstant(dispatch, options);
+
+    function constantSelector() {
+      return constant;
+    }
+
+    constantSelector.dependsOnOwnProps = false;
+    return constantSelector;
+  };
+} // dependsOnOwnProps is used by createMapToPropsProxy to determine whether to pass props as args
+// to the mapToProps function being wrapped. It is also used by makePurePropsSelector to determine
+// whether mapToProps needs to be invoked when props have changed.
+//
+// A length of one signals that mapToProps does not depend on props from the parent component.
+// A length of zero is assumed to mean mapToProps is getting args via arguments or ...args and
+// therefore not reporting its length accurately..
+
+function getDependsOnOwnProps(mapToProps) {
+  return mapToProps.dependsOnOwnProps !== null && mapToProps.dependsOnOwnProps !== undefined ? Boolean(mapToProps.dependsOnOwnProps) : mapToProps.length !== 1;
+} // Used by whenMapStateToPropsIsFunction and whenMapDispatchToPropsIsFunction,
+// this function wraps mapToProps in a proxy function which does several things:
+//
+//  * Detects whether the mapToProps function being called depends on props, which
+//    is used by selectorFactory to decide if it should reinvoke on props changes.
+//
+//  * On first call, handles mapToProps if returns another function, and treats that
+//    new function as the true mapToProps for subsequent calls.
+//
+//  * On first call, verifies the first result is a plain object, in order to warn
+//    the developer that their mapToProps function is not returning a valid result.
+//
+
+function wrapMapToPropsFunc(mapToProps, methodName) {
+  return function initProxySelector(dispatch, _ref) {
+    var displayName = _ref.displayName;
+
+    var proxy = function mapToPropsProxy(stateOrDispatch, ownProps) {
+      return proxy.dependsOnOwnProps ? proxy.mapToProps(stateOrDispatch, ownProps) : proxy.mapToProps(stateOrDispatch);
+    }; // allow detectFactoryAndVerify to get ownProps
+
+
+    proxy.dependsOnOwnProps = true;
+
+    proxy.mapToProps = function detectFactoryAndVerify(stateOrDispatch, ownProps) {
+      proxy.mapToProps = mapToProps;
+      proxy.dependsOnOwnProps = getDependsOnOwnProps(mapToProps);
+      var props = proxy(stateOrDispatch, ownProps);
+
+      if (typeof props === 'function') {
+        proxy.mapToProps = props;
+        proxy.dependsOnOwnProps = getDependsOnOwnProps(props);
+        props = proxy(stateOrDispatch, ownProps);
+      }
+
+      if (process.env.NODE_ENV !== 'production') Object(__WEBPACK_IMPORTED_MODULE_0__utils_verifyPlainObject__["a" /* default */])(props, displayName, methodName);
+      return props;
+    };
+
+    return proxy;
+  };
+}
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
+
+/***/ }),
+/* 30 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = verifyPlainObject;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__isPlainObject__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__warning__ = __webpack_require__(31);
+
+
+function verifyPlainObject(value, displayName, methodName) {
+  if (!Object(__WEBPACK_IMPORTED_MODULE_0__isPlainObject__["a" /* default */])(value)) {
+    Object(__WEBPACK_IMPORTED_MODULE_1__warning__["a" /* default */])(methodName + "() in " + displayName + " must return a plain object. Instead received " + value + ".");
+  }
+}
+
+/***/ }),
+/* 31 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = warning;
+/**
+ * Prints a warning in the console if it exists.
+ *
+ * @param {String} message The warning message.
+ * @returns {void}
+ */
+function warning(message) {
+  /* eslint-disable no-console */
+  if (typeof console !== 'undefined' && typeof console.error === 'function') {
+    console.error(message);
+  }
+  /* eslint-enable no-console */
+
+
+  try {
+    // This error was thrown as a convenience so that if you enable
+    // "break on all exceptions" in your console,
+    // it would pause the execution at this line.
+    throw new Error(message);
+    /* eslint-disable no-empty */
+  } catch (e) {}
+  /* eslint-enable no-empty */
+
+}
+
+/***/ }),
+/* 32 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return canUseDOM; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return addEventListener; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return removeEventListener; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return getConfirmation; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return supportsHistory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return supportsPopStateOnHashChange; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return supportsGoWithoutReloadUsingHash; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return isExtraneousPopstateEvent; });
+var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+
+var addEventListener = function addEventListener(node, event, listener) {
+  return node.addEventListener ? node.addEventListener(event, listener, false) : node.attachEvent('on' + event, listener);
+};
+
+var removeEventListener = function removeEventListener(node, event, listener) {
+  return node.removeEventListener ? node.removeEventListener(event, listener, false) : node.detachEvent('on' + event, listener);
+};
+
+var getConfirmation = function getConfirmation(message, callback) {
+  return callback(window.confirm(message));
+}; // eslint-disable-line no-alert
+
+/**
+ * Returns true if the HTML5 history API is supported. Taken from Modernizr.
+ *
+ * https://github.com/Modernizr/Modernizr/blob/master/LICENSE
+ * https://github.com/Modernizr/Modernizr/blob/master/feature-detects/history.js
+ * changed to avoid false negatives for Windows Phones: https://github.com/reactjs/react-router/issues/586
+ */
+var supportsHistory = function supportsHistory() {
+  var ua = window.navigator.userAgent;
+
+  if ((ua.indexOf('Android 2.') !== -1 || ua.indexOf('Android 4.0') !== -1) && ua.indexOf('Mobile Safari') !== -1 && ua.indexOf('Chrome') === -1 && ua.indexOf('Windows Phone') === -1) return false;
+
+  return window.history && 'pushState' in window.history;
+};
+
+/**
+ * Returns true if browser fires popstate on hash change.
+ * IE10 and IE11 do not.
+ */
+var supportsPopStateOnHashChange = function supportsPopStateOnHashChange() {
+  return window.navigator.userAgent.indexOf('Trident') === -1;
+};
+
+/**
+ * Returns false if using go(n) with hash history causes a full page reload.
+ */
+var supportsGoWithoutReloadUsingHash = function supportsGoWithoutReloadUsingHash() {
+  return window.navigator.userAgent.indexOf('Firefox') === -1;
+};
+
+/**
+ * Returns true if a given popstate event is an extraneous WebKit event.
+ * Accounts for the fact that Chrome on iOS fires real popstate events
+ * containing undefined state when pressing the back button.
+ */
+var isExtraneousPopstateEvent = function isExtraneousPopstateEvent(event) {
+  return event.state === undefined && navigator.userAgent.indexOf('CriOS') === -1;
+};
+
+/***/ }),
+/* 33 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_invariant__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_history__ = __webpack_require__(5);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+var isModifiedEvent = function isModifiedEvent(event) {
+  return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
+};
+
+/**
+ * The public API for rendering a history-aware <a>.
+ */
+
+var Link = function (_React$Component) {
+  _inherits(Link, _React$Component);
+
+  function Link() {
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, Link);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.handleClick = function (event) {
+      if (_this.props.onClick) _this.props.onClick(event);
+
+      if (!event.defaultPrevented && // onClick prevented default
+      event.button === 0 && // ignore everything but left clicks
+      !_this.props.target && // let browser handle "target=_blank" etc.
+      !isModifiedEvent(event) // ignore clicks with modifier keys
+      ) {
+          event.preventDefault();
+
+          var history = _this.context.router.history;
+          var _this$props = _this.props,
+              replace = _this$props.replace,
+              to = _this$props.to;
+
+
+          if (replace) {
+            history.replace(to);
+          } else {
+            history.push(to);
+          }
+        }
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  Link.prototype.render = function render() {
+    var _props = this.props,
+        replace = _props.replace,
+        to = _props.to,
+        innerRef = _props.innerRef,
+        props = _objectWithoutProperties(_props, ["replace", "to", "innerRef"]); // eslint-disable-line no-unused-vars
+
+    __WEBPACK_IMPORTED_MODULE_2_invariant___default()(this.context.router, "You should not use <Link> outside a <Router>");
+
+    __WEBPACK_IMPORTED_MODULE_2_invariant___default()(to !== undefined, 'You must specify the "to" property');
+
+    var history = this.context.router.history;
+
+    var location = typeof to === "string" ? Object(__WEBPACK_IMPORTED_MODULE_3_history__["c" /* createLocation */])(to, null, null, history.location) : to;
+
+    var href = history.createHref(location);
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", _extends({}, props, { onClick: this.handleClick, href: href, ref: innerRef }));
+  };
+
+  return Link;
+}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
+
+Link.propTypes = {
+  onClick: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
+  target: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string,
+  replace: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
+  to: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string, __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.object]).isRequired,
+  innerRef: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string, __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func])
+};
+Link.defaultProps = {
+  replace: false
+};
+Link.contextTypes = {
+  router: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.shape({
+    history: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.shape({
+      push: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func.isRequired,
+      replace: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func.isRequired,
+      createHref: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func.isRequired
+    }).isRequired
+  }).isRequired
+};
+
+
+/* harmony default export */ __webpack_exports__["a"] = (Link);
+
+/***/ }),
+/* 34 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Route__ = __webpack_require__(35);
+// Written in this round about way for babel-transform-imports
+
+
+/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_Route__["a" /* default */]);
+
+/***/ }),
+/* 35 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_prop_types__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__matchPath__ = __webpack_require__(23);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+
+var isEmptyChildren = function isEmptyChildren(children) {
+  return __WEBPACK_IMPORTED_MODULE_2_react___default.a.Children.count(children) === 0;
+};
+
+/**
+ * The public API for matching a single path and rendering.
+ */
+
+var Route = function (_React$Component) {
+  _inherits(Route, _React$Component);
+
+  function Route() {
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, Route);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.state = {
+      match: _this.computeMatch(_this.props, _this.context.router)
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  Route.prototype.getChildContext = function getChildContext() {
+    return {
+      router: _extends({}, this.context.router, {
+        route: {
+          location: this.props.location || this.context.router.route.location,
+          match: this.state.match
+        }
+      })
+    };
+  };
+
+  Route.prototype.computeMatch = function computeMatch(_ref, router) {
+    var computedMatch = _ref.computedMatch,
+        location = _ref.location,
+        path = _ref.path,
+        strict = _ref.strict,
+        exact = _ref.exact,
+        sensitive = _ref.sensitive;
+
+    if (computedMatch) return computedMatch; // <Switch> already computed the match for us
+
+    __WEBPACK_IMPORTED_MODULE_1_invariant___default()(router, "You should not use <Route> or withRouter() outside a <Router>");
+
+    var route = router.route;
+
+    var pathname = (location || route.location).pathname;
+
+    return Object(__WEBPACK_IMPORTED_MODULE_4__matchPath__["a" /* default */])(pathname, { path: path, strict: strict, exact: exact, sensitive: sensitive }, route.match);
+  };
+
+  Route.prototype.componentWillMount = function componentWillMount() {
+    __WEBPACK_IMPORTED_MODULE_0_warning___default()(!(this.props.component && this.props.render), "You should not use <Route component> and <Route render> in the same route; <Route render> will be ignored");
+
+    __WEBPACK_IMPORTED_MODULE_0_warning___default()(!(this.props.component && this.props.children && !isEmptyChildren(this.props.children)), "You should not use <Route component> and <Route children> in the same route; <Route children> will be ignored");
+
+    __WEBPACK_IMPORTED_MODULE_0_warning___default()(!(this.props.render && this.props.children && !isEmptyChildren(this.props.children)), "You should not use <Route render> and <Route children> in the same route; <Route children> will be ignored");
+  };
+
+  Route.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps, nextContext) {
+    __WEBPACK_IMPORTED_MODULE_0_warning___default()(!(nextProps.location && !this.props.location), '<Route> elements should not change from uncontrolled to controlled (or vice versa). You initially used no "location" prop and then provided one on a subsequent render.');
+
+    __WEBPACK_IMPORTED_MODULE_0_warning___default()(!(!nextProps.location && this.props.location), '<Route> elements should not change from controlled to uncontrolled (or vice versa). You provided a "location" prop initially but omitted it on a subsequent render.');
+
+    this.setState({
+      match: this.computeMatch(nextProps, nextContext.router)
+    });
+  };
+
+  Route.prototype.render = function render() {
+    var match = this.state.match;
+    var _props = this.props,
+        children = _props.children,
+        component = _props.component,
+        render = _props.render;
+    var _context$router = this.context.router,
+        history = _context$router.history,
+        route = _context$router.route,
+        staticContext = _context$router.staticContext;
+
+    var location = this.props.location || route.location;
+    var props = { match: match, location: location, history: history, staticContext: staticContext };
+
+    if (component) return match ? __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(component, props) : null;
+
+    if (render) return match ? render(props) : null;
+
+    if (typeof children === "function") return children(props);
+
+    if (children && !isEmptyChildren(children)) return __WEBPACK_IMPORTED_MODULE_2_react___default.a.Children.only(children);
+
+    return null;
+  };
+
+  return Route;
+}(__WEBPACK_IMPORTED_MODULE_2_react___default.a.Component);
+
+Route.propTypes = {
+  computedMatch: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.object, // private, from <Switch>
+  path: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.string,
+  exact: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.bool,
+  strict: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.bool,
+  sensitive: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.bool,
+  component: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.func,
+  render: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.func,
+  children: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.func, __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.node]),
+  location: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.object
+};
+Route.contextTypes = {
+  router: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.shape({
+    history: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.object.isRequired,
+    route: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.object.isRequired,
+    staticContext: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.object
+  })
+};
+Route.childContextTypes = {
+  router: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.object.isRequired
+};
+
+
+/* harmony default export */ __webpack_exports__["a"] = (Route);
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isarray = __webpack_require__(84)
+
+/**
+ * Expose `pathToRegexp`.
+ */
+module.exports = pathToRegexp
+module.exports.parse = parse
+module.exports.compile = compile
+module.exports.tokensToFunction = tokensToFunction
+module.exports.tokensToRegExp = tokensToRegExp
+
+/**
+ * The main path matching regexp utility.
+ *
+ * @type {RegExp}
+ */
+var PATH_REGEXP = new RegExp([
+  // Match escaped characters that would otherwise appear in future matches.
+  // This allows the user to escape special characters that won't transform.
+  '(\\\\.)',
+  // Match Express-style parameters and un-named parameters with a prefix
+  // and optional suffixes. Matches appear as:
+  //
+  // "/:test(\\d+)?" => ["/", "test", "\d+", undefined, "?", undefined]
+  // "/route(\\d+)"  => [undefined, undefined, undefined, "\d+", undefined, undefined]
+  // "/*"            => ["/", undefined, undefined, undefined, undefined, "*"]
+  '([\\/.])?(?:(?:\\:(\\w+)(?:\\(((?:\\\\.|[^\\\\()])+)\\))?|\\(((?:\\\\.|[^\\\\()])+)\\))([+*?])?|(\\*))'
+].join('|'), 'g')
+
+/**
+ * Parse a string for the raw tokens.
+ *
+ * @param  {string}  str
+ * @param  {Object=} options
+ * @return {!Array}
+ */
+function parse (str, options) {
+  var tokens = []
+  var key = 0
+  var index = 0
+  var path = ''
+  var defaultDelimiter = options && options.delimiter || '/'
+  var res
+
+  while ((res = PATH_REGEXP.exec(str)) != null) {
+    var m = res[0]
+    var escaped = res[1]
+    var offset = res.index
+    path += str.slice(index, offset)
+    index = offset + m.length
+
+    // Ignore already escaped sequences.
+    if (escaped) {
+      path += escaped[1]
+      continue
+    }
+
+    var next = str[index]
+    var prefix = res[2]
+    var name = res[3]
+    var capture = res[4]
+    var group = res[5]
+    var modifier = res[6]
+    var asterisk = res[7]
+
+    // Push the current path onto the tokens.
+    if (path) {
+      tokens.push(path)
+      path = ''
+    }
+
+    var partial = prefix != null && next != null && next !== prefix
+    var repeat = modifier === '+' || modifier === '*'
+    var optional = modifier === '?' || modifier === '*'
+    var delimiter = res[2] || defaultDelimiter
+    var pattern = capture || group
+
+    tokens.push({
+      name: name || key++,
+      prefix: prefix || '',
+      delimiter: delimiter,
+      optional: optional,
+      repeat: repeat,
+      partial: partial,
+      asterisk: !!asterisk,
+      pattern: pattern ? escapeGroup(pattern) : (asterisk ? '.*' : '[^' + escapeString(delimiter) + ']+?')
+    })
+  }
+
+  // Match any characters still remaining.
+  if (index < str.length) {
+    path += str.substr(index)
+  }
+
+  // If the path exists, push it onto the end.
+  if (path) {
+    tokens.push(path)
+  }
+
+  return tokens
+}
+
+/**
+ * Compile a string to a template function for the path.
+ *
+ * @param  {string}             str
+ * @param  {Object=}            options
+ * @return {!function(Object=, Object=)}
+ */
+function compile (str, options) {
+  return tokensToFunction(parse(str, options))
+}
+
+/**
+ * Prettier encoding of URI path segments.
+ *
+ * @param  {string}
+ * @return {string}
+ */
+function encodeURIComponentPretty (str) {
+  return encodeURI(str).replace(/[\/?#]/g, function (c) {
+    return '%' + c.charCodeAt(0).toString(16).toUpperCase()
+  })
+}
+
+/**
+ * Encode the asterisk parameter. Similar to `pretty`, but allows slashes.
+ *
+ * @param  {string}
+ * @return {string}
+ */
+function encodeAsterisk (str) {
+  return encodeURI(str).replace(/[?#]/g, function (c) {
+    return '%' + c.charCodeAt(0).toString(16).toUpperCase()
+  })
+}
+
+/**
+ * Expose a method for transforming tokens into the path function.
+ */
+function tokensToFunction (tokens) {
+  // Compile all the tokens into regexps.
+  var matches = new Array(tokens.length)
+
+  // Compile all the patterns before compilation.
+  for (var i = 0; i < tokens.length; i++) {
+    if (typeof tokens[i] === 'object') {
+      matches[i] = new RegExp('^(?:' + tokens[i].pattern + ')$')
+    }
+  }
+
+  return function (obj, opts) {
+    var path = ''
+    var data = obj || {}
+    var options = opts || {}
+    var encode = options.pretty ? encodeURIComponentPretty : encodeURIComponent
+
+    for (var i = 0; i < tokens.length; i++) {
+      var token = tokens[i]
+
+      if (typeof token === 'string') {
+        path += token
+
+        continue
+      }
+
+      var value = data[token.name]
+      var segment
+
+      if (value == null) {
+        if (token.optional) {
+          // Prepend partial segment prefixes.
+          if (token.partial) {
+            path += token.prefix
+          }
+
+          continue
+        } else {
+          throw new TypeError('Expected "' + token.name + '" to be defined')
+        }
+      }
+
+      if (isarray(value)) {
+        if (!token.repeat) {
+          throw new TypeError('Expected "' + token.name + '" to not repeat, but received `' + JSON.stringify(value) + '`')
+        }
+
+        if (value.length === 0) {
+          if (token.optional) {
+            continue
+          } else {
+            throw new TypeError('Expected "' + token.name + '" to not be empty')
+          }
+        }
+
+        for (var j = 0; j < value.length; j++) {
+          segment = encode(value[j])
+
+          if (!matches[i].test(segment)) {
+            throw new TypeError('Expected all "' + token.name + '" to match "' + token.pattern + '", but received `' + JSON.stringify(segment) + '`')
+          }
+
+          path += (j === 0 ? token.prefix : token.delimiter) + segment
+        }
+
+        continue
+      }
+
+      segment = token.asterisk ? encodeAsterisk(value) : encode(value)
+
+      if (!matches[i].test(segment)) {
+        throw new TypeError('Expected "' + token.name + '" to match "' + token.pattern + '", but received "' + segment + '"')
+      }
+
+      path += token.prefix + segment
+    }
+
+    return path
+  }
+}
+
+/**
+ * Escape a regular expression string.
+ *
+ * @param  {string} str
+ * @return {string}
+ */
+function escapeString (str) {
+  return str.replace(/([.+*?=^!:${}()[\]|\/\\])/g, '\\$1')
+}
+
+/**
+ * Escape the capturing group by escaping special characters and meaning.
+ *
+ * @param  {string} group
+ * @return {string}
+ */
+function escapeGroup (group) {
+  return group.replace(/([=!:$\/()])/g, '\\$1')
+}
+
+/**
+ * Attach the keys as a property of the regexp.
+ *
+ * @param  {!RegExp} re
+ * @param  {Array}   keys
+ * @return {!RegExp}
+ */
+function attachKeys (re, keys) {
+  re.keys = keys
+  return re
+}
+
+/**
+ * Get the flags for a regexp from the options.
+ *
+ * @param  {Object} options
+ * @return {string}
+ */
+function flags (options) {
+  return options.sensitive ? '' : 'i'
+}
+
+/**
+ * Pull out keys from a regexp.
+ *
+ * @param  {!RegExp} path
+ * @param  {!Array}  keys
+ * @return {!RegExp}
+ */
+function regexpToRegexp (path, keys) {
+  // Use a negative lookahead to match only capturing groups.
+  var groups = path.source.match(/\((?!\?)/g)
+
+  if (groups) {
+    for (var i = 0; i < groups.length; i++) {
+      keys.push({
+        name: i,
+        prefix: null,
+        delimiter: null,
+        optional: false,
+        repeat: false,
+        partial: false,
+        asterisk: false,
+        pattern: null
+      })
+    }
+  }
+
+  return attachKeys(path, keys)
+}
+
+/**
+ * Transform an array into a regexp.
+ *
+ * @param  {!Array}  path
+ * @param  {Array}   keys
+ * @param  {!Object} options
+ * @return {!RegExp}
+ */
+function arrayToRegexp (path, keys, options) {
+  var parts = []
+
+  for (var i = 0; i < path.length; i++) {
+    parts.push(pathToRegexp(path[i], keys, options).source)
+  }
+
+  var regexp = new RegExp('(?:' + parts.join('|') + ')', flags(options))
+
+  return attachKeys(regexp, keys)
+}
+
+/**
+ * Create a path regexp from string input.
+ *
+ * @param  {string}  path
+ * @param  {!Array}  keys
+ * @param  {!Object} options
+ * @return {!RegExp}
+ */
+function stringToRegexp (path, keys, options) {
+  return tokensToRegExp(parse(path, options), keys, options)
+}
+
+/**
+ * Expose a function for taking tokens and returning a RegExp.
+ *
+ * @param  {!Array}          tokens
+ * @param  {(Array|Object)=} keys
+ * @param  {Object=}         options
+ * @return {!RegExp}
+ */
+function tokensToRegExp (tokens, keys, options) {
+  if (!isarray(keys)) {
+    options = /** @type {!Object} */ (keys || options)
+    keys = []
+  }
+
+  options = options || {}
+
+  var strict = options.strict
+  var end = options.end !== false
+  var route = ''
+
+  // Iterate over the tokens and create our regexp string.
+  for (var i = 0; i < tokens.length; i++) {
+    var token = tokens[i]
+
+    if (typeof token === 'string') {
+      route += escapeString(token)
+    } else {
+      var prefix = escapeString(token.prefix)
+      var capture = '(?:' + token.pattern + ')'
+
+      keys.push(token)
+
+      if (token.repeat) {
+        capture += '(?:' + prefix + capture + ')*'
+      }
+
+      if (token.optional) {
+        if (!token.partial) {
+          capture = '(?:' + prefix + '(' + capture + '))?'
+        } else {
+          capture = prefix + '(' + capture + ')?'
+        }
+      } else {
+        capture = prefix + '(' + capture + ')'
+      }
+
+      route += capture
+    }
+  }
+
+  var delimiter = escapeString(options.delimiter || '/')
+  var endsWithDelimiter = route.slice(-delimiter.length) === delimiter
+
+  // In non-strict mode we allow a slash at the end of match. If the path to
+  // match already ends with a slash, we remove it for consistency. The slash
+  // is valid at the end of a path match, not in the middle. This is important
+  // in non-ending mode, where "/test/" shouldn't match "/test//route".
+  if (!strict) {
+    route = (endsWithDelimiter ? route.slice(0, -delimiter.length) : route) + '(?:' + delimiter + '(?=$))?'
+  }
+
+  if (end) {
+    route += '$'
+  } else {
+    // In non-ending mode, we need the capturing groups to match as much as
+    // possible by using a positive lookahead to the end or next path segment.
+    route += strict && endsWithDelimiter ? '' : '(?=' + delimiter + '|$)'
+  }
+
+  return attachKeys(new RegExp('^' + route, flags(options)), keys)
+}
+
+/**
+ * Normalize the given path string, returning a regular expression.
+ *
+ * An empty array can be passed in for the keys, which will hold the
+ * placeholder key descriptions. For example, using `/user/:id`, `keys` will
+ * contain `[{ name: 'id', delimiter: '/', optional: false, repeat: false }]`.
+ *
+ * @param  {(string|RegExp|Array)} path
+ * @param  {(Array|Object)=}       keys
+ * @param  {Object=}               options
+ * @return {!RegExp}
+ */
+function pathToRegexp (path, keys, options) {
+  if (!isarray(keys)) {
+    options = /** @type {!Object} */ (keys || options)
+    keys = []
+  }
+
+  options = options || {}
+
+  if (path instanceof RegExp) {
+    return regexpToRegexp(path, /** @type {!Array} */ (keys))
+  }
+
+  if (isarray(path)) {
+    return arrayToRegexp(/** @type {!Array} */ (path), /** @type {!Array} */ (keys), options)
+  }
+
+  return stringToRegexp(/** @type {string} */ (path), /** @type {!Array} */ (keys), options)
+}
+
+
+/***/ }),
+/* 37 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_path_to_regexp__);
+
+
+var patternCache = {};
+var cacheLimit = 10000;
+var cacheCount = 0;
+
+var compileGenerator = function compileGenerator(pattern) {
+  var cacheKey = pattern;
+  var cache = patternCache[cacheKey] || (patternCache[cacheKey] = {});
+
+  if (cache[pattern]) return cache[pattern];
+
+  var compiledGenerator = __WEBPACK_IMPORTED_MODULE_0_path_to_regexp___default.a.compile(pattern);
+
+  if (cacheCount < cacheLimit) {
+    cache[pattern] = compiledGenerator;
+    cacheCount++;
+  }
+
+  return compiledGenerator;
+};
+
+/**
+ * Public API for generating a URL pathname from a pattern and parameters.
+ */
+var generatePath = function generatePath() {
+  var pattern = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "/";
+  var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+  if (pattern === "/") {
+    return pattern;
+  }
+  var generator = compileGenerator(pattern);
+  return generator(params, { pretty: true });
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (generatePath);
 
 /***/ }),
 /* 38 */
@@ -6305,7 +6305,7 @@ if (process.env.NODE_ENV === 'production') {
 /*
  Modernizr 3.0.0pre (Custom Build) | MIT
 */
-var aa=__webpack_require__(0),n=__webpack_require__(6),r=__webpack_require__(25);function ba(a,b,c,d,e,f,g,h){if(!a){a=void 0;if(void 0===b)a=Error("Minified exception occurred; use the non-minified dev environment for the full error message and additional helpful warnings.");else{var l=[c,d,e,f,g,h],k=0;a=Error(b.replace(/%s/g,function(){return l[k++]}));a.name="Invariant Violation"}a.framesToPop=1;throw a;}}
+var aa=__webpack_require__(0),n=__webpack_require__(6),r=__webpack_require__(26);function ba(a,b,c,d,e,f,g,h){if(!a){a=void 0;if(void 0===b)a=Error("Minified exception occurred; use the non-minified dev environment for the full error message and additional helpful warnings.");else{var l=[c,d,e,f,g,h],k=0;a=Error(b.replace(/%s/g,function(){return l[k++]}));a.name="Invariant Violation"}a.framesToPop=1;throw a;}}
 function x(a){for(var b=arguments.length-1,c="https://reactjs.org/docs/error-decoder.html?invariant="+a,d=0;d<b;d++)c+="&args[]="+encodeURIComponent(arguments[d+1]);ba(!1,"Minified React error #"+a+"; visit %s for the full message or use the non-minified dev environment for full errors and additional helpful warnings. ",c)}aa?void 0:x("227");function ca(a,b,c,d,e,f,g,h,l){var k=Array.prototype.slice.call(arguments,3);try{b.apply(c,k)}catch(m){this.onError(m)}}
 var da=!1,ea=null,fa=!1,ha=null,ia={onError:function(a){da=!0;ea=a}};function ja(a,b,c,d,e,f,g,h,l){da=!1;ea=null;ca.apply(ia,arguments)}function ka(a,b,c,d,e,f,g,h,l){ja.apply(this,arguments);if(da){if(da){var k=ea;da=!1;ea=null}else x("198"),k=void 0;fa||(fa=!0,ha=k)}}var la=null,ma={};
 function na(){if(la)for(var a in ma){var b=ma[a],c=la.indexOf(a);-1<c?void 0:x("96",a);if(!oa[c]){b.extractEvents?void 0:x("97",a);oa[c]=b;c=b.eventTypes;for(var d in c){var e=void 0;var f=c[d],g=b,h=d;pa.hasOwnProperty(h)?x("99",h):void 0;pa[h]=f;var l=f.phasedRegistrationNames;if(l){for(e in l)l.hasOwnProperty(e)&&qa(l[e],g,h);e=!0}else f.registrationName?(qa(f.registrationName,g,h),e=!0):e=!1;e?void 0:x("98",d,a)}}}}
@@ -7325,7 +7325,7 @@ if (process.env.NODE_ENV !== "production") {
 var React = __webpack_require__(0);
 var _assign = __webpack_require__(6);
 var checkPropTypes = __webpack_require__(12);
-var scheduler = __webpack_require__(25);
+var scheduler = __webpack_require__(26);
 var tracing = __webpack_require__(47);
 
 /**
@@ -28850,7 +28850,7 @@ exports.unstable_unsubscribe = unstable_unsubscribe;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_inheritsLoose__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_inheritsLoose__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(2);
@@ -30009,7 +30009,7 @@ module.exports = hoistNonReactStatics;
 /* unused harmony export createConnect */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_extends__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_connectAdvanced__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_connectAdvanced__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_shallowEqual__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mapDispatchToProps__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mapStateToProps__ = __webpack_require__(64);
@@ -30159,7 +30159,7 @@ function shallowEqual(objA, objB) {
 /* unused harmony export whenMapDispatchToPropsIsMissing */
 /* unused harmony export whenMapDispatchToPropsIsObject */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__wrapMapToProps__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__wrapMapToProps__ = __webpack_require__(29);
 
 
 function whenMapDispatchToPropsIsFunction(mapDispatchToProps) {
@@ -30292,7 +30292,7 @@ function isPlainObject(obj) {
 "use strict";
 /* unused harmony export whenMapStateToPropsIsFunction */
 /* unused harmony export whenMapStateToPropsIsMissing */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__wrapMapToProps__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__wrapMapToProps__ = __webpack_require__(29);
 
 function whenMapStateToPropsIsFunction(mapStateToProps) {
   return typeof mapStateToProps === 'function' ? Object(__WEBPACK_IMPORTED_MODULE_0__wrapMapToProps__["b" /* wrapMapToPropsFunc */])(mapStateToProps, 'mapStateToProps') : undefined;
@@ -30314,7 +30314,7 @@ function whenMapStateToPropsIsMissing(mapStateToProps) {
 /* unused harmony export whenMergePropsIsFunction */
 /* unused harmony export whenMergePropsIsOmitted */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_extends__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_verifyPlainObject__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_verifyPlainObject__ = __webpack_require__(30);
 
 
 function defaultMergeProps(stateProps, dispatchProps, ownProps) {
@@ -30458,7 +30458,7 @@ function finalPropsSelectorFactory(dispatch, _ref2) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = verifySubselectors;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_warning__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_warning__ = __webpack_require__(31);
 
 
 function verify(selector, methodName, displayName) {
@@ -30660,15 +30660,15 @@ var _EncounterTreasure = __webpack_require__(99);
 
 var _EncounterTreasure2 = _interopRequireDefault(_EncounterTreasure);
 
-var _Home = __webpack_require__(107);
+var _Home = __webpack_require__(108);
 
 var _Home2 = _interopRequireDefault(_Home);
 
-var _Characters = __webpack_require__(108);
+var _Characters = __webpack_require__(109);
 
 var _Characters2 = _interopRequireDefault(_Characters);
 
-var _Powers = __webpack_require__(110);
+var _Powers = __webpack_require__(111);
 
 var _Powers2 = _interopRequireDefault(_Powers);
 
@@ -30795,7 +30795,7 @@ BrowserRouter.propTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(32);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -31219,7 +31219,7 @@ function valueEqual(a, b) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(32);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 
@@ -31847,8 +31847,8 @@ MemoryRouter.propTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Route__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Link__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Route__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Link__ = __webpack_require__(33);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -32060,7 +32060,7 @@ Prompt.contextTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_history__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__generatePath__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__generatePath__ = __webpack_require__(37);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -32460,7 +32460,7 @@ Switch.propTypes = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_generatePath__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_generatePath__ = __webpack_require__(37);
 // Written in this round about way for babel-transform-imports
 
 
@@ -32499,7 +32499,7 @@ Switch.propTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_hoist_non_react_statics__ = __webpack_require__(97);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_hoist_non_react_statics___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_hoist_non_react_statics__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Route__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Route__ = __webpack_require__(35);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -32875,34 +32875,30 @@ var EncounterTreasure = function (_Component) {
         ),
         _react2.default.createElement(
           "div",
-          { className: "card-columns" },
+          { className: "row" },
           this.state.encounter && _react2.default.createElement(
             "div",
-            { className: "card " + "bg-" + this.state.encounter.name },
+            { className: "card1" + "bg-" + this.state.encounter.name },
             _react2.default.createElement(
               "div",
-              { className: "container-fluid" },
+              { className: "card1 w-40" },
               _react2.default.createElement(
                 "div",
-                { className: "card-body" },
+                { "class": "card-body" },
                 _react2.default.createElement(
-                  "div",
-                  { className: "row" },
-                  _react2.default.createElement(
-                    "h5",
-                    { className: "card-title card-text" },
-                    this.state.encounter.name
-                  ),
-                  _react2.default.createElement(
-                    "h6",
-                    { className: "card-subtitle mb-2 text-muted card-text" },
-                    this.state.encounter.flavour
-                  ),
-                  _react2.default.createElement(
-                    "p",
-                    { className: "card-text card-text" },
-                    this.state.encounter.description
-                  )
+                  "h5",
+                  { className: "card-title card-text" },
+                  this.state.encounter.name
+                ),
+                _react2.default.createElement(
+                  "h6",
+                  { className: "card-subtitle mb-2 text-muted card-text" },
+                  this.state.encounter.flavour
+                ),
+                _react2.default.createElement(
+                  "p",
+                  { className: "card-text card-text" },
+                  this.state.encounter.description
                 )
               )
             )
@@ -32910,34 +32906,30 @@ var EncounterTreasure = function (_Component) {
         ),
         _react2.default.createElement(
           "div",
-          { className: "card-columns" },
+          { className: "row" },
           this.state.treasure && _react2.default.createElement(
             "div",
-            { className: "card " + "bg-" + this.state.treasure.name },
+            { className: "card2 " + "bg-" + this.state.treasure.name },
             _react2.default.createElement(
               "div",
-              { className: "container-fluid" },
+              { className: "card2 w-40" },
               _react2.default.createElement(
                 "div",
                 { className: "card-body" },
                 _react2.default.createElement(
-                  "div",
-                  { className: "row" },
-                  _react2.default.createElement(
-                    "h5",
-                    { className: "card-title card-text" },
-                    this.state.treasure.name
-                  ),
-                  _react2.default.createElement(
-                    "h6",
-                    { className: "card-subtitle mb-2 text-muted card-text" },
-                    this.state.treasure.play_imm
-                  ),
-                  _react2.default.createElement(
-                    "p",
-                    { className: "card-text card-text" },
-                    this.state.treasure.action
-                  )
+                  "h5",
+                  { className: "card-title card-text" },
+                  this.state.treasure.name
+                ),
+                _react2.default.createElement(
+                  "h6",
+                  { className: "card-subtitle mb-2 text-muted card-text" },
+                  this.state.treasure.play_imm
+                ),
+                _react2.default.createElement(
+                  "p",
+                  { className: "card-text card-text" },
+                  this.state.treasure.action
                 )
               )
             )
@@ -32964,7 +32956,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.randomEncounter = randomEncounter;
 
-var _superagent = __webpack_require__(37);
+var _superagent = __webpack_require__(25);
 
 var _superagent2 = _interopRequireDefault(_superagent);
 
@@ -34104,12 +34096,36 @@ module.exports = Agent;
 
 
 Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.randomTreasure = randomTreasure;
+
+var _superagent = __webpack_require__(25);
+
+var _superagent2 = _interopRequireDefault(_superagent);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function randomTreasure() {
+  return _superagent2.default.get("./api/v1/randomTreasure").then(function (res) {
+    return res.body;
+  });
+}
+
+/***/ }),
+/* 107 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.getAllCharacters = getAllCharacters;
 exports.getCardsByCharacter = getCardsByCharacter;
 
-var _superagent = __webpack_require__(37);
+var _superagent = __webpack_require__(25);
 
 var _superagent2 = _interopRequireDefault(_superagent);
 
@@ -34128,7 +34144,7 @@ function getCardsByCharacter(id) {
 }
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34233,7 +34249,7 @@ var Home = function (_Component) {
 exports.default = Home;
 
 /***/ }),
-/* 108 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34253,7 +34269,7 @@ var _reactRedux = __webpack_require__(7);
 
 var _actions = __webpack_require__(24);
 
-var _CharacterOrder = __webpack_require__(109);
+var _CharacterOrder = __webpack_require__(110);
 
 var _CharacterOrder2 = _interopRequireDefault(_CharacterOrder);
 
@@ -34429,7 +34445,7 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(Characters);
 
 /***/ }),
-/* 109 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34536,7 +34552,7 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(CharacterOrder);
 
 /***/ }),
-/* 110 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35125,30 +35141,6 @@ function mapStateToProps(state) {
 }
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(Powers);
-
-/***/ }),
-/* 111 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.randomTreasure = randomTreasure;
-
-var _superagent = __webpack_require__(37);
-
-var _superagent2 = _interopRequireDefault(_superagent);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function randomTreasure() {
-  return _superagent2.default.get("./api/v1/randomTreasure").then(function (res) {
-    return res.body;
-  });
-}
 
 /***/ })
 /******/ ]);
