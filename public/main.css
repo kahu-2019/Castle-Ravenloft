@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background-image: url('./images/darkconcrete.jpg');
+    background-image: url('./images/brick.jpg');
     background-size: 100%;
 }
 
@@ -262,7 +262,7 @@ span {
 }
 
 .cr-logo{
-  height: 250px
+  height: 200px
 }
 
 .logo-div{
@@ -316,12 +316,6 @@ span {
   height: 60px
 }
 
-.eda-logo{
-  position: absolute;
-  bottom: 5%;
-  left:50%;
-  height: 60px
-}
 .startbutton{
   color: rgb(238, 232, 223);
   font-family: 'IM Fell DW Pica', serif;

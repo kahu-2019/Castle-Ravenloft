@@ -13,8 +13,8 @@ class Home2 extends React.Component{
                 <p className='startbutton'>START</p>
                 </div>
                 <div className='rain'>
-                <img className='dnd-logo' src='./images/dndlogo.png'/>
-                <img className='eda-logo' src='./images/edagames.png'/>
+                <img className='dnd-logo' src='./images/dndeda.png'/>
+             
                 </div>   
                 
             </div>
