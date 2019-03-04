@@ -10,7 +10,7 @@ exports.up = function (knex, Promise) {
     t.integer('evt_type')
     t.string('name')
     t.string('flavour')
-    t.string('description')
+    t.string('description', 1000)
   })
 };
 
