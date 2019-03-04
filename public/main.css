@@ -4,6 +4,8 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    background-image: url('./images/darkconcrete.jpg');
+    background-size: 100%;
 }
 
 .tile {
