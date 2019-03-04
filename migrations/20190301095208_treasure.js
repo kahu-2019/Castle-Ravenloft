@@ -5,7 +5,7 @@ exports.up = function (knex, Promise) {
     table.integer('type')
     table.string('name')
     table.boolean('play_imm')
-    table.text('action', 'longtext')
+    table.text('action', '1000')
     table.integer('discard')
     table.integer('att')
     table.integer('dmg')

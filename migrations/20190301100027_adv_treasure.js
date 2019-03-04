@@ -4,7 +4,7 @@ exports.up = function (knex, Promise) {
     table.increments('id').primary()
     table.string('name')
     table.integer('use_item')
-    table.text('desc', 'longtext')
+    table.text('desc', '1000')
     table.integer('discard')
 
   })
