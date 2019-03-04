@@ -1,0 +1,65 @@
+//Test data
+var heroAc = 15
+var diceRoll = diceRoll()
+
+function diceRoll(){
+    return Math.floor(Math.random()*20) + 1
+}
+
+var tileAdjacent = false
+var squareAdjacent = false
+
+
+// Wraith stats
+var lifeDrainingClaw = {
+    att: 6,
+    dmg: 3,
+    miss:1,
+}
+
+var movement = {
+    instruction: "move",
+    moveValue: 1
+}
+
+console.log('dice roll:',diceRoll)
+
+
+//Right next to hero, attack
+if(squareAdjacent && diceRoll + lifeDrainingClaw.att > heroAc){
+    console.log("he's right next to you! You've been hit! Receive ",lifeDrainingClaw.dmg + ' damage!')
+    return lifeDrainingClaw.dmg
+    
+} else if(squareAdjacent && diceRoll + lifeDrainingClaw.att < heroAc){
+    console.log("he's right next to you! He missed, but still hits you with ",lifeDrainingClaw.miss + ' damage!')
+    return lifeDrainingClaw.miss
+
+//Within 1 tile of hero, attack
+} else if(tileAdjacent){
+    if(diceRoll + lifeDrainingClaw.att > heroAc){
+        console.log("he ain't close, but he is now! AND hits you with ", lifeDrainingClaw.dmg + ' damage!')
+        return {
+            move:movement,
+            attack:lifeDrainingClaw.dmg
+        }
+
+    } else if(diceRoll + lifeDrainingClaw.att < heroAc){
+        console.log("he ain't close, but he is now! He missed clawing you... But still hits with a damage of ", lifeDrainingClaw.miss + '!')
+        return {
+            move:movement,
+            attack:lifeDrainingClaw.miss
+        }
+    }
+//Move if too far
+} else {
+    console.log("he be creepin' on ya")
+    return movement
+}
+
+if(monsterDead){
+    console.log('everyone hurts. Receive 1 damage')
+    return {
+        attack:1,
+        target:'all'
+    }
+}
