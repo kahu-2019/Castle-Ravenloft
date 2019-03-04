@@ -65,17 +65,3 @@ export function addPowerCards(id, powerCards) {
     powerCards
   };
 }
-
-export function increaseSunTracker(){
-  return {
-    type: 'ADD_SUNTRACKER',
-    sunTracker: 1
-  }
-}
-
-export function scrollTextViewChange(scrollTextView){
-  return {
-    type: 'SCROLL_TEXT_VIEW',
-    scrollTextView
-  }
-}

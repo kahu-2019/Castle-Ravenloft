@@ -7,7 +7,8 @@ class Square extends Component {
             type: this.props.square,
             x: this.props.x + 1,
             y: this.props.y + 1,
-
+            image: this.props.image || undefined,
+            image: 'images/icons/Alisa.jpg',
             style:{}
         }
 
@@ -15,7 +16,10 @@ class Square extends Component {
     }
 
     componentWillReceiveProps(props) {
-        this.setState({type: props.square}, () => this.updateStyle())
+        this.setState({
+            type: props.square,
+            image: props.image || undefined
+        }, () => this.updateStyle())
     }
 
     componentDidMount(){
@@ -24,11 +28,10 @@ class Square extends Component {
     
     updateStyle(){
         this.setState({style: {
-            'backgroundColor':(this.state.type === 11 ? 'green' : this.state.type === 0 ? 'grey' : this.state.type === 1 ? 'black': 'red'),
-            'gridColumnStart':this.state.y,
-            'gridColumnEnd':this.state.y+1,
-            'gridRowStart':this.state.x,
-            'gridRowEnd':this.state.x+1
+            'gridColumnStart':this.state.x,
+            'gridColumnEnd':this.state.x+1,
+            'gridRowStart':this.state.y,
+            'gridRowEnd':this.state.y+1
         }})
     }
 
@@ -36,6 +39,9 @@ class Square extends Component {
     render() {
         return (
         <div style={this.state.style}>
+        {this.state.type === 11 && <img src={this.state.image} style={{
+                    maxHeight: '50px',
+                    maxWidth: '50px'}} />}
         </div>
         )
     }
