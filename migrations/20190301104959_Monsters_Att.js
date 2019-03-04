@@ -3,11 +3,11 @@ exports.up = function (knex, Promise) {
     t.integer('id')
     t.integer('monster_id')
     t.string('tactics')
-    t.varchar(1000)('attack_name')
+    t.text('attack_name', 'longtext')
     t.integer('att')
     t.integer('dmg')
     t.integer('miss_dmg')
-    t.varchar(1000)('special')
+    t.text('special', 'longtext')
   })
 };
 
