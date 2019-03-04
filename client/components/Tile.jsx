@@ -19,7 +19,6 @@ class Tile extends Component {
     }
 
     render() {
-        console.log(this.state.rotation)
         return (
         <div>
             <div style={{position: 'absolute'}}> 

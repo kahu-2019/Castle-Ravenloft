@@ -19,6 +19,10 @@ class Board extends Component {
                 {
                     x: 2,
                     y: 4
+                },
+                {
+                    x: 3,
+                    y: 5
                 }
             ],
 
@@ -189,16 +193,16 @@ class Board extends Component {
     prepTileForAdding(side){
         // get a new tile
         let testTile = {
-            "id": 1,
-            "image":"images/tiles/39.jpg",           
+            "id": 6,
+            "image":"images/tiles/5.jpg",           
             "grid": [
-                [1,1,1,1],
+                [0,0,0,1],
+                [0,2,0,0],
                 [0,0,0,0],
-                [0,0,2,0],
-                [1,0,0,1]
+                [0,0,0,1]
             ],
             "arrow":true,
-            "skull":false,
+            "skull":true,
             "name":  null
         }
 
@@ -415,7 +419,6 @@ class Board extends Component {
                 </div>
             </div>
             <div style={{position:'absolute', top:'10px', left:'10px'}}>
-                {/* <img src='images/tiles/1.jpg' /> */}
                 {this.state.explore.left   && <button onClick={() => this.prepTileForAdding(3)}>Explore left</button>}
                 {this.state.explore.right  && <button onClick={() => this.prepTileForAdding(1)}>Explore right</button>}
                 {this.state.explore.top    && <button onClick={() => this.prepTileForAdding(0)}>Explore top</button>}
