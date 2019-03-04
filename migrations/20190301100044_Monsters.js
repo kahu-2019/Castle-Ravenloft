@@ -7,6 +7,7 @@ exports.up = function (knex, Promise) {
     t.integer('AC')
     t.integer('HP')
     t.integer('exp')
+    t.string('image')
   })
 };
 
