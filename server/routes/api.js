@@ -4,6 +4,7 @@ const encounters = require('../db/encounter')
 const character = require('../db/character')
 const randomMonster = require('../db/randomMonster')
 const monster = require('../db/monsters')
+const treasure = require('../db/treasure')
 
 const router = express.Router()
 
@@ -82,5 +83,23 @@ router.get('/getMonsterAttacks/:id', (req, res) => {
         })
 })
 
+// GET /api/v1/allTreasures returns all treasure cards
+router.get('/allTreasure', (req, res) => {
+    treasure.getAllTreasure().then(data => {
+        res.json(data)
+    })
+        .catch(err => {
+            res.json(standardError)
+        })
+})
 
+// GET /api/v1/randomTreasure returns a random treasure card
+router.get('/randomTreasure', (req, res) => {
+    treasure.getRandomTreasure().then(data => {
+        res.json(data)
+    })
+        .catch(err => {
+            res.json(standardError)
+        })
+})
 module.exports = router
