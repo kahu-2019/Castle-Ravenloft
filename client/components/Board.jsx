@@ -48,7 +48,8 @@ class Board extends Component {
                     "skull":true,
                     "name": "Strahds Crypt",
                     x: 1,
-                    y: 1
+                    y: 1,
+                    players: []
                 },
             ]
         }
@@ -274,7 +275,6 @@ class Board extends Component {
         if(char[dir]+val < 1) return
 
         char[dir] = char[dir] + val
-        let tempChar = JSON.parse(JSON.stringify(char))
 
         let position = this.getTileAndSquareForCharacter(char)
 
@@ -362,6 +362,7 @@ class Board extends Component {
             for(let item of tempSet){
                 if(position.tileX === item.x && position.tileY === item.y){
                     item.grid[position.squareY][position.squareX] = 11
+                    item.players.push({image:char.image, x:position.squareX, y:position.squareY})
                     continue outerloop
                 }
             }
@@ -376,7 +377,6 @@ class Board extends Component {
             if(set.x > cols) cols = set.x
             if(set.y > rows) rows = set.y
         })
-        console.log(this.state.players)
         return (
         <React.Fragment>
             <div className='board-container'>
