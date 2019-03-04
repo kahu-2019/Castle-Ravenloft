@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Tile from './Tile'
 import { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } from 'constants';
+import ScrollViewer from './ScrollViewer'
 
 /*  Main board component, renders tile and square sub-components
 
@@ -419,6 +420,7 @@ class Board extends Component {
                 {this.state.explore.top    && <button onClick={() => this.prepTileForAdding(0)}>Explore top</button>}
                 {this.state.explore.bottom && <button onClick={() => this.prepTileForAdding(2)}>Explore bottom</button>}
             </div>
+            <ScrollViewer/> 
         </React.Fragment>
         )
     }

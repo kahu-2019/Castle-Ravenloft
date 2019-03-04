@@ -11,7 +11,7 @@ class ScrollViewer extends React.Component {
   
   
   componentDidMount(){
-      // this.props.dispatch(scrollTextViewChange('none'))
+      this.props.dispatch(scrollTextViewChange('startScenarioOne'))
   }
     render() {
       return (
