@@ -8,7 +8,7 @@ exports.up = function (knex, Promise) {
   return knex.schema.createTable('encounters', t => {
     t.increments('id').primary()
     t.integer('evt_type')
-    t.string('name')
+    t.string('name', 1000)
     t.string('flavour', 1000)
     t.string('description', 1000)
   })
