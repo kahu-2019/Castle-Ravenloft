@@ -32875,19 +32875,19 @@ var EncounterTreasure = function (_Component) {
         ),
         _react2.default.createElement(
           "div",
-          { "class": "row" },
-          _react2.default.createElement(
+          { className: "card-columns" },
+          this.state.encounter && _react2.default.createElement(
             "div",
-            { "class": "col-sm-4" },
-            this.state.encounter && _react2.default.createElement(
+            { className: "card " + "bg-" + this.state.encounter.name },
+            _react2.default.createElement(
               "div",
-              { className: "card " + "bg-" + this.state.encounter.name },
+              { className: "container-fluid" },
               _react2.default.createElement(
                 "div",
-                { "class": "card" },
+                { className: "card-body" },
                 _react2.default.createElement(
                   "div",
-                  { className: "card-body" },
+                  { className: "row" },
                   _react2.default.createElement(
                     "h5",
                     { className: "card-title card-text" },
@@ -32910,19 +32910,19 @@ var EncounterTreasure = function (_Component) {
         ),
         _react2.default.createElement(
           "div",
-          { "class": "row" },
-          _react2.default.createElement(
+          { className: "card-columns" },
+          this.state.treasure && _react2.default.createElement(
             "div",
-            { "class": "col-sm-4" },
-            this.state.treasure && _react2.default.createElement(
+            { className: "card " + "bg-" + this.state.treasure.name },
+            _react2.default.createElement(
               "div",
-              { className: "card " + "bg-" + this.state.treasure.name },
+              { className: "container-fluid" },
               _react2.default.createElement(
                 "div",
-                { "class": "card" },
+                { className: "card-body" },
                 _react2.default.createElement(
                   "div",
-                  { className: "card-body" },
+                  { className: "row" },
                   _react2.default.createElement(
                     "h5",
                     { className: "card-title card-text" },
