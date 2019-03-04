@@ -3,19 +3,29 @@ var heroAc = 15
 var diceRoll = 10
 var monsterAttack = 1
 var damage = 1
-var movement = "move "
-var moveValue = 1 
 var monsterNum = 4
 var adjacent = "adj"
+    
+var attack = damage * monsterNum
+
+var zombAtt = {
+    attack: attack,
+    adjacent: asjacent
+}
+var movement = {
+    instruction: "move",
+    moveValue: 1
+}
+
+
 
 if(closestHero < 2  && diceRoll + monsterAttack > heroAc ) {
-    
-let attack = damage * monsterNum
+
 console.log(attack + " " + adjacent) 
- return attack + adjacent
+ return zombAtt
 } 
 
 else {
     console.log(movement + moveValue)
-  return movement + moveValue
+  return movement
 }

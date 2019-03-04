@@ -3,8 +3,13 @@ var heroAc = 25
 var diceRoll = 10
 var monsterAttack = 9
 var damage = 1
-var movement = "move"
-var moveValue = 1 
+// var movement = "move"
+// var moveValue = 1 
+
+var movement = {
+    instruction: "move",
+    moveValue: 1
+}
 
 
 if(closestHero < 2  && diceRoll + monsterAttack > heroAc ) {
@@ -12,5 +17,5 @@ if(closestHero < 2  && diceRoll + monsterAttack > heroAc ) {
  return damage
 } else {
     console.log("move")
-  return movement + moveValue
+  return movement
 }
