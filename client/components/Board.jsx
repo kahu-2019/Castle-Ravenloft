@@ -18,6 +18,8 @@ class Board extends Component {
         this.state = {
             players: this.props.characters,
 
+            monsters: [],
+
             transform: {
                 dragging: false,
                 startX: undefined,
@@ -401,7 +403,10 @@ class Board extends Component {
                 </div>
             </div>
             <div style={{position:'absolute', top:'10px', left:'10px'}}>
-                {this.state.players[0].name}<br />
+            
+                <div className="alert alert-light" style={{color:'black'}}>
+                    {this.state.players[0].name}<br />
+                </div>
                 <button onClick={() => this.nextPlayer()}>End turn</button><br />
                 {this.state.explore.left   && <React.Fragment><button onClick={() => this.prepTileForAdding(3)}>Explore left</button><br /></React.Fragment>}
                 {this.state.explore.right  && <React.Fragment><button onClick={() => this.prepTileForAdding(1)}>Explore right</button><br /></React.Fragment>}
