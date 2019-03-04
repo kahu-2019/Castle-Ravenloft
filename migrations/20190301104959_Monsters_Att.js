@@ -3,11 +3,11 @@ exports.up = function (knex, Promise) {
     t.integer("id");
     t.integer("monster_id");
     t.string("tactics");
-    t.text("attack_name", '1000');
+    t.string("attack_name", '1000');
     t.integer("att");
     t.integer("dmg");
     t.integer("miss_dmg");
-    t.text("special", '1000');
+    t.string("special", '1000');
   });
 };
 
