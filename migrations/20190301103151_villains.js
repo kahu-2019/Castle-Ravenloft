@@ -4,10 +4,8 @@ exports.up = function (knex, Promise) {
     table.increments('id')
     table.string('name', 1000)
     table.string('race', 1000)
-    table.string('description')
     table.integer('ac')
     table.integer('hp')
-    table.integer('level')
   })
 };
 
