@@ -60,10 +60,8 @@ class Powers extends Component {
             //resets form
             document.getElementById("powersForm").reset();
             
-            // scrolls to the top
-            var elmnt = document.getElementById("myDIV");
-            elmnt.scrollLeft = 0;
-            elmnt.scrollTop = 0;
+
+            window.scrollTo(0,0)
             
             var id = nextProps.match.params.id
 
@@ -153,7 +151,7 @@ class Powers extends Component {
 
   render() {
     return (
-      <div id='myDIV'>
+      <Fragment>
           <h1>{this.state.character.name}</h1>
           <h2>{this.state.character.subtitle}</h2>
         <form onSubmit={this.onSubmit} action={`/powers/${this.state.nextCharId}`} id='powersForm'>
@@ -303,7 +301,7 @@ class Powers extends Component {
                     }
             </div>
         </form>
-      </div>
+      </Fragment>
     )
   }
 }

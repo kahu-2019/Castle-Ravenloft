@@ -34765,10 +34765,7 @@ var Powers = function (_Component) {
                 //resets form
                 document.getElementById("powersForm").reset();
 
-                // scrolls to the top
-                var elmnt = document.getElementById("myDIV");
-                elmnt.scrollLeft = 0;
-                elmnt.scrollTop = 0;
+                window.scrollTo(0, 0);
 
                 var id = nextProps.match.params.id;
 
@@ -34867,8 +34864,8 @@ var Powers = function (_Component) {
             var _this4 = this;
 
             return _react2.default.createElement(
-                'div',
-                { id: 'myDIV' },
+                _react.Fragment,
+                null,
                 _react2.default.createElement(
                     'h1',
                     null,
