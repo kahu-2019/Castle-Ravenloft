@@ -1,6 +1,5 @@
 //Test data
 var heroAc = 15
-var numCharOnTile = 3
 var heroes = [{id: 1, name:'Karl', AC:20},{id: 2,name:'Sam',AC:15},{id: 3,name:'Miju',AC:10}]
 
 var tileAdjacent = true
@@ -52,6 +51,7 @@ if(tileAdjacent){
         }
     }
     console.log('character data:',characters)
+    //still need to figure out movement
     return {
         movement:{
             x:1,
