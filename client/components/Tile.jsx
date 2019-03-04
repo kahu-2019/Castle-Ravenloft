@@ -22,7 +22,6 @@ class Tile extends Component {
     }
 
     render() {
-        console.log(this.state.players)
         return (
         <div>
             <div style={{position: 'absolute'}}> 

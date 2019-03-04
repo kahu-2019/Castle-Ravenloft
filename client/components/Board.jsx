@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Tile from './Tile'
 import { connect } from "react-redux";
+import allTiles from '../../public/game_assets/tiles.json'
 
 /*  Main board component, renders tile and square sub-components
 
@@ -32,8 +33,10 @@ class Board extends Component {
                 right: false
             },
 
+            //Dataset includes every tile currently in play, with the players and monsters placed on it
             dataSet: [],
 
+            //  cleanTileSet includes every tile currently in play, the starting tile is already given
             cleanTileSet: [
                 {
                     "id": 29,
@@ -51,7 +54,9 @@ class Board extends Component {
                     y: 1,
                     players: []
                 },
-            ]
+            ],
+
+            completeTileSet: []
         }
 
         this.keypress = this.keypress.bind(this)
@@ -71,9 +76,21 @@ class Board extends Component {
     componentDidMount(){
         window.oncontextmenu = (e) => {
             e.preventDefault();
-          }
+        }
         document.addEventListener("keydown", this.keypress, false);
-        this.setState({dataSet: this.state.cleanTileSet}, () => {
+
+        let temp = allTiles
+        temp.splice(-2, 2) //   Remove start tiles from array
+
+        //  Removes strahds crypt tile for the starting piece
+        let strahdsCrypt = temp.splice(29,1)
+        strahdsCrypt[0].x = 1
+        strahdsCrypt[0].y = 1
+
+        //  Removes Secret Stairway tile for the ending piece
+        let endingPiece = temp.splice(29,1)[0]
+
+        this.setState({dataSet: strahdsCrypt, cleanTileSet: strahdsCrypt, completeTileSet: temp, endingPiece}, () => {
             this.processCharacters()
         })
     }
@@ -168,48 +185,38 @@ class Board extends Component {
     //  Preps tile for adding, checks should already be done in this.checkSidesOfPlayer(), rotating tile to correct orientation
     prepTileForAdding(side){
         // get a new tile
-        let testTile = {
-            "id": 22,
-            "image":"images/tiles/16.jpg",           
-            "grid": [
-                [1,0,0,0],
-                [0,0,2,0],
-                [0,0,0,0],
-                [1,0,0,0]
-            ],
-            "arrow":true,
-            "skull":true,
-            "name": null,
-            "players": []
-        }
+        let tileIndex = Math.floor(Math.random()*this.state.completeTileSet.length)
+        if(this.state.completeTileSet < 1) return
+        let newTile = this.state.completeTileSet.splice(tileIndex, 1)[0]
+        
 
         let tile = undefined
 
         let playerPos = this.getTileAndSquareForCharacter(this.state.players[0])
         switch(side){
             case 0:
-                tile = this.rotateTile(testTile.grid, side)
-                testTile.grid = tile
-                testTile.rotation = 0
-                this.addTile(testTile, {x: playerPos.tileX, y: playerPos.tileY-1})
+                tile = this.rotateTile(newTile.grid, side)
+                newTile.grid = tile
+                newTile.rotation = 0
+                this.addTile(newTile, {x: playerPos.tileX, y: playerPos.tileY-1})
                 break
             case 1:
-                tile = this.rotateTile(testTile.grid, side)
-                testTile.grid = tile
-                testTile.rotation = 1
-                this.addTile(testTile, {x: playerPos.tileX+1, y: playerPos.tileY})
+                tile = this.rotateTile(newTile.grid, side)
+                newTile.grid = tile
+                newTile.rotation = 1
+                this.addTile(newTile, {x: playerPos.tileX+1, y: playerPos.tileY})
                 break
             case 2:
-                tile = this.rotateTile(testTile.grid, side)
-                testTile.grid = tile
-                testTile.rotation = 2
-                this.addTile(testTile, {x: playerPos.tileX, y: playerPos.tileY+1})
+                tile = this.rotateTile(newTile.grid, side)
+                newTile.grid = tile
+                newTile.rotation = 2
+                this.addTile(newTile, {x: playerPos.tileX, y: playerPos.tileY+1})
                 break
             case 3:
-                tile = this.rotateTile(testTile.grid, side)
-                testTile.grid = tile
-                testTile.rotation = 3
-                this.addTile(testTile, {x: playerPos.tileX-1, y: playerPos.tileY})
+                tile = this.rotateTile(newTile.grid, side)
+                newTile.grid = tile
+                newTile.rotation = 3
+                this.addTile(newTile, {x: playerPos.tileX-1, y: playerPos.tileY})
                 break
         }
     }
@@ -378,6 +385,7 @@ class Board extends Component {
             if(set.x > cols) cols = set.x
             if(set.y > rows) rows = set.y
         })
+        console.log(this.state.completeTileSet)
         return (
         <React.Fragment>
             <div className='board-container'>
