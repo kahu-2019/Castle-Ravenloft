@@ -40,14 +40,14 @@ if(squareAdjacent && diceRoll + lifeDrainingClaw.att > heroAc){
         console.log("he ain't close, but he is now! AND hits you with ", lifeDrainingClaw.dmg + ' damage!')
         return {
             move:movement,
-            attack:lifeDrainingClaw.dmg
+            damage:lifeDrainingClaw.dmg
         }
 
     } else if(diceRoll + lifeDrainingClaw.att < heroAc){
         console.log("he ain't close, but he is now! He missed clawing you... But still hits with a damage of ", lifeDrainingClaw.miss + '!')
         return {
             move:movement,
-            attack:lifeDrainingClaw.miss
+            damage:lifeDrainingClaw.miss
         }
     }
 //Move if too far
