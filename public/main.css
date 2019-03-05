@@ -1,15 +1,15 @@
-.board-container{
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+.board-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
 .tile {
-    display:grid;
-    grid-template-rows: repeat(4, 50px);
-    grid-template-columns: repeat(4, 50px);
+  display: grid;
+  grid-template-rows: repeat(4, 50px);
+  grid-template-columns: repeat(4, 50px);
 }
 
 .error {
@@ -128,21 +128,38 @@
   color: rgb(223, 219, 219);
 }
 
+/*TIME-TRACT*/
+.time-containers {
+  background-image: url(./images/time-track/time-track1.png);
+  width: 650px;
+  height: 150px;
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  justify-content: flex-end;
+  display: flex;
+  margin-left: 61%;
+}
 
 .Time-tract {
-  text-align: right;
   margin-top: 10px;
-
   z-index: 0;
 }
-.Time-tract h4 {
-  margin-bottom: 20px;
-  color: rgb(51, 30, 5);
+.time-title {
+  width: 200px;
+  margin-left: 77% !important;
+  color: #702906;
+  position: absolute;
 }
 .contaniner1 {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end !important;
+}
+.timecontainer1 {
+  left: 61% !important;
+  margin-right: 0 !important;
+  margin-top: 24px !important;
 }
 .containers,
 .contaniner1 {
@@ -156,27 +173,29 @@
 }
 .contaniner1 {
   z-index: 2;
-  /* top: 120px; */
-  /* height: 5em; */
 }
 
 .time {
-  margin-top: 20px;
+  top: 120px;
   color: rgb(100, 57, 8);
+  left: 15px;
+  position: absolute;
 }
 .time1 {
-  margin-top: 70px;
+  top: 120px;
+  right: 30px;
   color: rgb(100, 57, 8);
+  position: absolute;
 }
 
 #circle {
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   color: rgb(126, 87, 41);
   background: rgb(250, 235, 217);
   border-radius: 80%;
   border-color: rgb(99, 71, 37);
-  margin-right: 50px;
+  margin-right: 12px;
   text-align: center;
   border-color: #b6926b !important;
 }
@@ -231,27 +250,6 @@ span {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
-.time-tractcontainer {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
-.timetractchildcontainers {
-  background-image: url(./images/time-track/time-track1.png);
-  width: 900px;
-  height: 350px;
-  background-position: center;
-  background-size: 100%;
-  background-repeat: no-repeat;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-}
-
-.timecontainer1 {
-  left: 23% !important;
-  margin-right: 0 !important;
-}
 .treasure {
   margin-left: 1px;
   margin: 1px !important;
