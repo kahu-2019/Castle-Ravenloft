@@ -6,9 +6,8 @@ exports.up = function (knex, Promise) {
     t.string('type', 1000)
     t.integer('AC')
     t.integer('HP')
-    t.integer('att1')
-    t.integer('att2')
     t.integer('exp')
+    t.string('image')
   })
 };
 
