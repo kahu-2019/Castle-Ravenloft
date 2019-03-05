@@ -9,7 +9,7 @@ import Powers from "./Powers";
 class App extends Component {
   render() {
     return (
-      <div className="container-fluid time-tractcontainer">
+      <div>
         <Router>
           <Fragment>
             <Route exact path="/" component={Home} />

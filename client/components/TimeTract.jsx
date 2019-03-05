@@ -13,9 +13,9 @@ class TimeTract extends Component {
     return (
       <div className="Time-tract">
         <div className="title">
-          <h2>
+          <h5>
             <strong>TIME TRACT</strong>
-          </h2>
+          </h5>
         </div>
         <div className="timetractchildcontainers">
           {/* <img
@@ -42,7 +42,7 @@ class TimeTract extends Component {
             </div>
 
             <div className="contaniner" id="circle">
-              <h3>2</h3>
+              <h4>2</h4>
               {this.state.sunTrack === 2 && (
                 <img height="40" src="/images/icons/sun.png" />
               )}

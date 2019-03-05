@@ -30694,7 +30694,7 @@ var App = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         "div",
-        { className: "container-fluid time-tractcontainer" },
+        null,
         _react2.default.createElement(
           _reactRouterDom.HashRouter,
           null,
@@ -32661,7 +32661,7 @@ var TimeTract = function (_Component) {
           "div",
           { className: "title" },
           _react2.default.createElement(
-            "h2",
+            "h5",
             null,
             _react2.default.createElement(
               "strong",
@@ -32708,7 +32708,7 @@ var TimeTract = function (_Component) {
               "div",
               { className: "contaniner", id: "circle" },
               _react2.default.createElement(
-                "h3",
+                "h4",
                 null,
                 "2"
               ),

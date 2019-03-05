@@ -114,18 +114,19 @@
   color: rgb(223, 219, 219);
 }
 .Time-tract {
-  text-align: center;
+  text-align: right;
   margin-top: 10px;
+
   z-index: 0;
 }
-.Time-tract h2 {
+.Time-tract h4 {
   margin-bottom: 20px;
   color: rgb(51, 30, 5);
 }
 .contaniner1 {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-end !important;
 }
 .containers,
 .contaniner1 {
