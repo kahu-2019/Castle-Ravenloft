@@ -74,11 +74,24 @@ class Powers extends Component {
 
     filterCards(powerCards){
         var daily = powerCards.filter(powerCard => {
-            return powerCard.type == 'Daily-Power'
+            if(powerCard.id == 47){
+                this.setState({dragonsBreath:powerCard})
+            }
+            return powerCard.type == 'Daily-Power' && powerCard.id != 47
         })
 
         var utility = powerCards.filter(powerCard => {
-            return powerCard.type == 'utility power'
+            switch(powerCard.id){
+                case 14:
+                this.setState({sneakAttack:powerCard})
+                break
+                case 1:
+                this.setState({healingWord:powerCard})
+                break
+                case 31:
+                this.setState({feySted:powerCard})
+            }
+            return powerCard.type == 'utility power' && powerCard.id != 14 && powerCard.id  !=  1 && powerCard.id != 31
         })
 
         var atWill = powerCards.filter(powerCard => {
@@ -126,6 +139,7 @@ class Powers extends Component {
             utility: this.state.utilityResult,
             atWill: this.state.atWillResults
         }
+        
 
         if(cards.atWill.length < 2){
             alert("You must pick 2 At Will powers")
@@ -154,6 +168,94 @@ class Powers extends Component {
       <Fragment>
           <h1>{this.state.character.name}</h1>
           <h2>{this.state.character.subtitle}</h2>
+          {this.state.sneakAttack ?  
+                <Fragment>
+                <h3>You get this by default</h3>
+                    <div className="card">
+                        <div className='container-fluid'>
+                            <div className="card-body">
+                            <div className='row'>
+                                <h5 className="card-title">{this.state.sneakAttack.title}</h5>
+                                <p className="card-subtitle mb-2 text-muted card-text"><b>{this.state.sneakAttack.subtitle}</b></p>
+                                <p><b>{this.state.sneakAttack.instruction_1}</b> {this.state.sneakAttack.instruction_2}</p>
+                            </div>
+                            <p><small className="text-muted">FILP THIS CARD OVER AFTER YOU USE THE POWER</small></p>
+                        </div>
+                    </div>
+                </div>
+                </Fragment>
+            : this.state.dragonsBreath ? 
+            <Fragment>
+                <h3>You get this by default</h3>
+                <div className="card">
+                    <div className='container-fluid'>
+                        <div className="card-body">
+                            <div className='row'>
+                                <h5 className="card-title">{this.state.dragonsBreath.title}</h5>
+                                <p className="card-subtitle mb-2 text-muted card-text"><b>{this.state.dragonsBreath.subtitle}</b></p>
+                                <p><b>{this.state.dragonsBreath.instruction_1}</b> {this.state.dragonsBreath.instruction_2}</p>
+                            </div>
+                            {this.state.dragonsBreath.damage && 
+                                <Fragment>
+                                <div className='row'>
+                                    <div className='col attribs-title card-text'>Attack</div>
+                                    <div className='col attribs-title card-text'>Damage</div>
+                                </div>
+                                <div className='row'>
+                                    <div className='col attribs card-text'>+ {this.state.dragonsBreath.attack}</div>
+                                    <div className='col attribs card-text'>
+                                    
+                                        {this.state.dragonsBreath.damage}
+                                        {this.state.dragonsBreath.miss && 
+                                        <Fragment>
+                                        
+                                        <p>Miss: {this.state.dragonsBreath.miss} Damage</p>
+                                        </Fragment>
+                                        }
+                                    
+                                    </div>
+                                </div>
+                                </Fragment>
+                            }
+                            <p><small className="text-muted">FILP THIS CARD AFTER USE</small></p>
+                    </div>
+
+                </div>
+            </div>
+        </Fragment>
+        : this.state.healingWord ? 
+        <Fragment>
+                <h3>You get this by default</h3>
+                    <div className="card">
+                        <div className='container-fluid'>
+                            <div className="card-body">
+                            <div className='row'>
+                                <h5 className="card-title">{this.state.healingWord.title}</h5>
+                                <p className="card-subtitle mb-2 text-muted card-text"><b>{this.state.healingWord.subtitle}</b></p>
+                                <p><b>{this.state.healingWord.instruction_1}</b> {this.state.sneakAttack.instruction_2}</p>
+                            </div>
+                            <p><small className="text-muted">FILP THIS CARD OVER AFTER YOU USE THE POWER</small></p>
+                        </div>
+                    </div>
+                </div>
+        </Fragment>
+        : this.state.feySted ? 
+        <Fragment>
+                <h3>You get this by default</h3>
+                    <div className="card">
+                        <div className='container-fluid'>
+                            <div className="card-body">
+                            <div className='row'>
+                                <h5 className="card-title">{this.state.feySted.title}</h5>
+                                <p className="card-subtitle mb-2 text-muted card-text"><b>{this.state.feySted.subtitle}</b></p>
+                                <p><b>{this.state.feySted.instruction_1}</b> {this.state.feySted.instruction_2}</p>
+                            </div>
+                            <p><small className="text-muted">FILP THIS CARD OVER AFTER YOU USE THE POWER</small></p>
+                        </div>
+                    </div>
+                </div>
+        </Fragment>
+        : ''}
         <form onSubmit={this.onSubmit} action={`/powers/${this.state.nextCharId}`} id='powersForm'>
             <div className="form-group">
                     <h2 className='power-titles'>Daily</h2>
