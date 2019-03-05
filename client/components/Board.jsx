@@ -253,8 +253,19 @@ class Board extends Component {
             }
         }
         
-        console.log('adjacent', bigArray)
-        this.checkTwoAdjacent(coords)
+        let containsPlayer = false
+        for(let row in bigArray){
+            for(let col in bigArray){
+                if(bigArray[row][col] === 11){
+                    bigArray[row][col] = 0
+                    containsPlayer = true
+                }
+                else if(bigArray[row][col] === 21 || bigArray[row][col] === 2) bigArray[row][col] = 0
+            }
+        }
+        if(!containsPlayer){
+            let path = this.checkTwoAdjacent(coords)
+        }
     }
 
 
@@ -262,18 +273,67 @@ class Board extends Component {
     checkTwoAdjacent(coords){
         //  All returned arrays are exactly 12*12 squares
 
-        let startX = coords.tileX
-        let startY = coords.startY
-
         let left = this.checkTwoAdjacentLeft(coords)
         let right = this.checkTwoAdjacentRight(coords)
         let top = this.checkTwoAdjacentTop(coords)
         let bottom = this.checkTwoAdjacentBottom(coords)
 
-        console.log('left', left)
-        console.log('right', right)
-        console.log('top', top)
-        console.log('bottom', bottom)
+        let leftContainsPlayer = false
+        for(let row in left){
+            for(let col in left){
+                if(left[row][col] === 11){
+                    left[row][col] = 0
+                    containsPlayer = true
+                }
+                else if(left[row][col] === 21 || left[row][col] === 2) left[row][col] = 0
+            }
+        }
+
+        let rightContainsPlayer = false
+        for(let row in right){
+            for(let col in right){
+                if(right[row][col] === 11){
+                    right[row][col] = 0
+                    containsPlayer = true
+                }
+                else if(right[row][col] === 21 || right[row][col] === 2) right[row][col] = 0
+            }
+        }
+
+        let topContainsPlayer = false
+        for(let row in top){
+            for(let col in top){
+                if(top[row][col] === 11){
+                    top[row][col] = 0
+                    containsPlayer = true
+                }
+                else if(top[row][col] === 21 || top[row][col] === 2) top[row][col] = 0
+            }
+        }
+
+        let bottomContainsPlayer = false
+        for(let row in bottom){
+            for(let col in bottom){
+                if(bottom[row][col] === 11){
+                    bottom[row][col] = 0
+                    containsPlayer = true
+                }
+                else if(bottom[row][col] === 21 || bottom[row][col] === 2) bottom[row][col] = 0
+            }
+        }
+
+        let leftPaths = []
+        if(leftContainsPlayer){
+            this.state.players.map(player => {
+                if(player.x > ((Number(coords.tileX)-3)*4)-1 && player.x < Number(coords.tileX)*4+1 && player.y > (Number(coords.tileY)-2)*4 && player.y < (Number(coords.tileY)*4+1)){
+                    let grid = new PF.Grid(left)
+                    let finder = new PF.AStarFinder()
+                    // TODO     Find relative coordinates between monster and player, those coords then become target for finder
+                    // let path = finder.findPath(Number(coords.tileX)-1 + 8, Number(monster.y)-1 + 4, Number(this.state.players[0].x)-1, Number(this.state.players[0].y)-1, grid)
+                    leftPaths.push(path)
+                }
+            })
+        }
     }
 
     checkTwoAdjacentLeft(coords){
@@ -544,8 +604,7 @@ class Board extends Component {
         let grid = new PF.Grid(bigArray)
         let finder = new PF.AStarFinder()
         let path = finder.findPath(Number(monster.x)-1, Number(monster.y)-1, Number(this.state.players[0].x)-1, Number(this.state.players[0].y)-1, grid)
-        console.log(path)
-
+        return path //  Return something (path for now)
     }
 
     //  Rotates 2d arrays of size n*n (equal on both sides)
