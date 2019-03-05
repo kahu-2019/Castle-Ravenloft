@@ -293,6 +293,7 @@ class Board extends Component {
             if(tile.x === coords.tileX   && tile.y === coords.tileY)    rightTile = tile
         })
 
+
         if(centerTile){
             for(let y = 0; y < centerTile.grid.length; y++){
                 for(let x = 0; x < centerTile.grid[y].length; x++){
