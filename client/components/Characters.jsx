@@ -64,7 +64,30 @@ class Characters extends Component {
                                 </div>
                             )
                         } else {
-                            return ''
+                            return (
+                                <div className={'slide-out-blurred-top card ' + 'bg-' + (character.name)} key={i} onClick={() => this.characterOrder(character)}>
+                                    <div className="container-fluid">
+                                        <div className="card-body">
+                                          
+                                                <h5 className="card-title card-text char-card namePosition">{character.name}</h5>
+                                                <h6 className="subtitlePosition">{character.subtitle}</h6>
+                                                <p className="descriptionPosition">{character.description}</p>
+                                           
+                                            <div className="row statRow">
+                                                <div className="col card-text char-card acPosition">{character.AC}</div>
+                                                <div className="col card-text char-card hpPosition">{character.HP}</div>
+                                                <div className="col card-text char-card speedPosition">{character.speed}</div>
+                                                <div className="col card-text char-card surgePosition">+{character.SurgeValue}</div>
+                                            </div>
+                                            <div className="abilityPosition">
+                                                <p >{character.ability}</p>
+                                                <h5>Power:</h5>
+                                                <p>You can choose the following Power Cards:<br/>Select one Utility Power<br/>Select two At-Will Powers<br/>Select one Daily Power</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
                         }
 
                     })}
