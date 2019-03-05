@@ -1,11 +1,7 @@
 //Test data
 var playerDetails = {
-    adjacentTile:{
-        adj:false,
-        x:0,
-        y:0
-    },
-    closestPlayer:1,
+    adjacentTile:false,
+    id:1,
     playerTile:[[1,1,1,1],
                 [0,11,0,0],
                 [11,0,0,1],
@@ -23,10 +19,10 @@ var playerPos = {
 }
 
 var monPos = {
-    tileX:2,
-    tileY:2,
+    tileX:1,
+    tileY:1,
     squareX:3,
-    squareY:3
+    squareY:4
 }
 
 console.log('first monpos', monPos)
@@ -51,15 +47,23 @@ var dataSet = [{x:1,y:1,grid:[
         ]}]
 
 
-//if not adjacent, move monX - playX, monY - playY
-//check if tiles are valid
 
 //values i need
-var closestPlayer = playerDetails.players.find(player => player.id == playerDetails.closestPlayer)
+var closestPlayer = playerDetails.players.find(player => player.id == playerDetails.id)
 var heroes = playerDetails.players
-var tileAdjacent = playerDetails.adjacentTile.adj
+var tileAdjacent = playerDetails.adjacentTile
+var squareAdjacent = false
 
-
+//Checks for square adjacent
+if(playerPos.squareX -1 == monPos.squareX && playerPos.squareY == monPos.squareY){
+    squareAdjacent = true
+} else if(playerPos.squareX +1 == monPos.squareX && playerPos.squareY == monPos.squareY){
+    squareAdjacent = true
+} else if(playerPos.squareX == monPos.squareX && playerPos.squareY -1 == monPos.squareY){
+    squareAdjacent = true
+} else if(playerPos.squareX == monPos.squareX && playerPos.squareY + 1 == monPos.squareY){
+    squareAdjacent = true
+} else {squareAdjacent = false}
 
 console.log(closestPlayer)
 console.log(tileAdjacent)
@@ -72,7 +76,7 @@ var ballOfFire = {
 
 var diceRoll = null
 
-if(tileAdjacent){
+if(tileAdjacent || squareAdjacent){
     var characters = []
     for(var i = 0; i < heroes.length; i++){
         diceRoll = diceRoll()
