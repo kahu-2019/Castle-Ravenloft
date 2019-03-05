@@ -21,23 +21,22 @@ class CharacterOrder extends Component {
     }
 
   render() {
-      
     return (
       <Fragment>
-          <div className="col">
-            <h2>Order:</h2>
+          <div className="col orderStyle">
+            <p>Order:</p>
           </div>
           <div className="col">
             <ul className="list-inline">
                 {this.props.characterOrder.map((character,i) => {
                     return(
-                        <li className="list-inline-item" key={i}>{character.name}</li>
+                        <li className="list-inline-item orderList" key={i}>{character.name}</li>
                     )
                 })}
             </ul>
           </div>
           <div className="col">
-            <Link className='btn btn-outline-secondary' to={this.choosePowersLink()}>Choose Powers</Link>
+            <Link className={this.props.characterOrder.length > 0?'choosepowersActive':'choosePowersInactive'} to={this.choosePowersLink()}>Choose Powers</Link>
           </div>
       </Fragment>
     )

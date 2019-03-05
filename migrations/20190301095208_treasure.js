@@ -3,9 +3,9 @@ exports.up = function (knex, Promise) {
   return knex.schema.createTable('treasure', (table => {
     table.increments('id').primary()
     table.integer('type')
-    table.string('name')
+    table.string('name', 1000)
     table.boolean('play_imm')
-    table.text('action', 'longtext')
+    table.text('action', 1000)
     table.integer('discard')
     table.integer('att')
     table.integer('dmg')

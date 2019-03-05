@@ -22,6 +22,7 @@ class Powers extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
         this.nextCharacter = this.nextCharacter.bind(this)
+        this.submit = this.submit.bind(this)
     }
 
     componentDidMount(){
@@ -60,10 +61,8 @@ class Powers extends Component {
             //resets form
             document.getElementById("powersForm").reset();
             
-            // scrolls to the top
-            var elmnt = document.getElementById("myDIV");
-            elmnt.scrollLeft = 0;
-            elmnt.scrollTop = 0;
+
+            window.scrollTo(0,0)
             
             var id = nextProps.match.params.id
 
@@ -76,11 +75,24 @@ class Powers extends Component {
 
     filterCards(powerCards){
         var daily = powerCards.filter(powerCard => {
-            return powerCard.type == 'Daily-Power'
+            if(powerCard.id == 47){
+                this.setState({dragonsBreath:powerCard})
+            }
+            return powerCard.type == 'Daily-Power' && powerCard.id != 47
         })
 
         var utility = powerCards.filter(powerCard => {
-            return powerCard.type == 'utility power'
+            switch(powerCard.id){
+                case 14:
+                this.setState({sneakAttack:powerCard})
+                break
+                case 1:
+                this.setState({healingWord:powerCard})
+                break
+                case 31:
+                this.setState({feySted:powerCard})
+            }
+            return powerCard.type == 'utility power' && powerCard.id != 14 && powerCard.id  !=  1 && powerCard.id != 31
         })
 
         var atWill = powerCards.filter(powerCard => {
@@ -123,19 +135,76 @@ class Powers extends Component {
     onSubmit(e){
         e.preventDefault()
         var id = this.props.match.params.id
+
+        var daily = this.state.dailyResult
+        var utility = this.state.utilityResult
+        var atWill = this.state.atWillResults
+
         var cards = {
-            daily:this.state.dailyResult,
-            utility: this.state.utilityResult,
-            atWill: this.state.atWillResults
+            daily,
+            utility,
+            atWill
         }
 
+
+        function setDefaultUtility(powerCard){
+            cards = {
+            daily,
+            utility:[utility,powerCard],
+            atWill
+        }
+        return cards            
+        }
+
+        function setDefaultDaily(powerCard){
+            cards = {
+                daily:[daily,powerCard],
+                utility,
+                atWill
+            } 
+            return cards      
+        }
+        
+        function alisaThePickyBitch(){
+            cards = {
+                daily,
+                utility,
+                atWill
+            }
+            return cards
+        }
+
+        switch(Number(id)){
+            case 4:
+            setDefaultUtility(this.state.sneakAttack)
+            break
+            case 5:
+            setDefaultUtility(this.state.healingWord)
+            break
+            case 3:
+            setDefaultUtility(this.state.feySted)
+            break
+            case 2:
+            setDefaultDaily(this.state.dragonsBreath)
+            break
+            case 1:
+            alisaThePickyBitch()
+            break
+            default:
+            return cards
+        }
+
+        this.submit(id,cards)
+
+    }
+
+    submit(id,cards){
         if(cards.atWill.length < 2){
             alert("You must pick 2 At Will powers")
         }else{
             this.props.dispatch(addPowerCards(id,cards))
             this.nextCharacter()
         }
-
     }
 
     nextCharacter(){
@@ -153,9 +222,97 @@ class Powers extends Component {
 
   render() {
     return (
-      <div id='myDIV'>
+      <Fragment>
           <h1>{this.state.character.name}</h1>
           <h2>{this.state.character.subtitle}</h2>
+          {this.state.sneakAttack ?  
+                <Fragment>
+                <h3>You get this by default</h3>
+                    <div className="card">
+                        <div className='container-fluid'>
+                            <div className="card-body">
+                            <div className='row'>
+                                <h5 className="card-title">{this.state.sneakAttack.title}</h5>
+                                <p className="card-subtitle mb-2 text-muted card-text"><b>{this.state.sneakAttack.subtitle}</b></p>
+                                <p><b>{this.state.sneakAttack.instruction_1}</b> {this.state.sneakAttack.instruction_2}</p>
+                            </div>
+                            <p><small className="text-muted">FILP THIS CARD OVER AFTER YOU USE THE POWER</small></p>
+                        </div>
+                    </div>
+                </div>
+                </Fragment>
+            : this.state.dragonsBreath ? 
+            <Fragment>
+                <h3>You get this by default</h3>
+                <div className="card">
+                    <div className='container-fluid'>
+                        <div className="card-body">
+                            <div className='row'>
+                                <h5 className="card-title">{this.state.dragonsBreath.title}</h5>
+                                <p className="card-subtitle mb-2 text-muted card-text"><b>{this.state.dragonsBreath.subtitle}</b></p>
+                                <p><b>{this.state.dragonsBreath.instruction_1}</b> {this.state.dragonsBreath.instruction_2}</p>
+                            </div>
+                            {this.state.dragonsBreath.damage && 
+                                <Fragment>
+                                <div className='row'>
+                                    <div className='col attribs-title card-text'>Attack</div>
+                                    <div className='col attribs-title card-text'>Damage</div>
+                                </div>
+                                <div className='row'>
+                                    <div className='col attribs card-text'>+ {this.state.dragonsBreath.attack}</div>
+                                    <div className='col attribs card-text'>
+                                    
+                                        {this.state.dragonsBreath.damage}
+                                        {this.state.dragonsBreath.miss && 
+                                        <Fragment>
+                                        
+                                        <p>Miss: {this.state.dragonsBreath.miss} Damage</p>
+                                        </Fragment>
+                                        }
+                                    
+                                    </div>
+                                </div>
+                                </Fragment>
+                            }
+                            <p><small className="text-muted">FILP THIS CARD AFTER USE</small></p>
+                    </div>
+
+                </div>
+            </div>
+        </Fragment>
+        : this.state.healingWord ? 
+        <Fragment>
+                <h3>You get this by default</h3>
+                    <div className="card">
+                        <div className='container-fluid'>
+                            <div className="card-body">
+                            <div className='row'>
+                                <h5 className="card-title">{this.state.healingWord.title}</h5>
+                                <p className="card-subtitle mb-2 text-muted card-text"><b>{this.state.healingWord.subtitle}</b></p>
+                                <p><b>{this.state.healingWord.instruction_1}</b> {this.state.healingWord.instruction_2}</p>
+                            </div>
+                            <p><small className="text-muted">FILP THIS CARD OVER AFTER YOU USE THE POWER</small></p>
+                        </div>
+                    </div>
+                </div>
+        </Fragment>
+        : this.state.feySted ? 
+        <Fragment>
+                <h3>You get this by default</h3>
+                    <div className="card">
+                        <div className='container-fluid'>
+                            <div className="card-body">
+                            <div className='row'>
+                                <h5 className="card-title">{this.state.feySted.title}</h5>
+                                <p className="card-subtitle mb-2 text-muted card-text"><b>{this.state.feySted.subtitle}</b></p>
+                                <p><b>{this.state.feySted.instruction_1}</b> {this.state.feySted.instruction_2}</p>
+                            </div>
+                            <p><small className="text-muted">FILP THIS CARD OVER AFTER YOU USE THE POWER</small></p>
+                        </div>
+                    </div>
+                </div>
+        </Fragment>
+        : ''}
         <form onSubmit={this.onSubmit} action={`/powers/${this.state.nextCharId}`} id='powersForm'>
             <div className="form-group">
                     <h2 className='power-titles'>Daily</h2>
@@ -303,7 +460,7 @@ class Powers extends Component {
                     }
             </div>
         </form>
-      </div>
+      </Fragment>
     )
   }
 }
