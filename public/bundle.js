@@ -2028,6 +2028,8 @@ var matchPath = function matchPath(pathname) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.getAllMonsters = getAllMonsters;
+exports.saveAllMonsters = saveAllMonsters;
 exports.getRandomEncounter = getRandomEncounter;
 exports.saveRandomEncounter = saveRandomEncounter;
 exports.getRandomTreasure = getRandomTreasure;
@@ -2039,15 +2041,28 @@ exports.getCardsByCharacter = getCardsByCharacter;
 exports.savePowerCards = savePowerCards;
 exports.addPowerCards = addPowerCards;
 
-var _ecounter = __webpack_require__(100);
-
-var _treasure = __webpack_require__(106);
+var _encounter = __webpack_require__(113);
 
 var _characters = __webpack_require__(107);
 
+function getAllMonsters() {
+  return function (dispatch) {
+    return (0, _encounter.getAllMonsters)().then(function (monsters) {
+      dispatch(saveAllMonsters(monsters));
+    });
+  };
+}
+
+function saveAllMonsters(monsters) {
+  return {
+    type: "SAVE_ALL_MONSTERS",
+    monsters: monsters
+  };
+}
+
 function getRandomEncounter() {
   return function (dispatch) {
-    return (0, _ecounter.randomEncounter)().then(function (randomEncounter) {
+    return (0, _encounter.randomEncounter)().then(function (randomEncounter) {
       return randomEncounter;
     });
   };
@@ -2061,7 +2076,7 @@ function saveRandomEncounter(randomEncounter) {
 
 function getRandomTreasure() {
   return function (dispatch) {
-    return (0, _treasure.randomTreasure)().then(function (randomTreasure) {
+    return apiGetRandomTreasure().then(function (randomTreasure) {
       return randomTreasure;
     });
   };
@@ -30529,12 +30544,17 @@ var _powerCards = __webpack_require__(72);
 
 var _powerCards2 = _interopRequireDefault(_powerCards);
 
+var _monsters = __webpack_require__(112);
+
+var _monsters2 = _interopRequireDefault(_monsters);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _redux.combineReducers)({
   characters: _characters2.default,
   characterOrder: _characterOrder2.default,
-  powerCards: _powerCards2.default
+  powerCards: _powerCards2.default,
+  monsters: _monsters2.default
 });
 
 /***/ }),
@@ -30556,27 +30576,12 @@ var reducer = function reducer() {
     switch (action.type) {
         case 'SAVE_ALL_CHARACTERS':
             return action.allCharacters;
-        case 'ADD_POWER_CARDS':
-            return updateCharacter(action.id, action.powerCards, state);
         default:
             return state;
     }
 };
 
 exports.default = reducer;
-
-
-function updateCharacter(id, cards, characters) {
-    var updatedCharacters = characters.map(function (character) {
-        if (character.id == id) {
-            character.cards = cards;
-            return character;
-        } else {
-            return character;
-        }
-    });
-    return updatedCharacters;
-}
 
 /***/ }),
 /* 71 */
@@ -30600,12 +30605,27 @@ var reducer = function reducer() {
     switch (action.type) {
         case 'ADD_CHARACTER_ORDER':
             return [].concat(_toConsumableArray(state), [action.character]);
+        case 'ADD_POWER_CARDS':
+            return updateCharacter(action.id, action.powerCards, state);
         default:
             return state;
     }
 };
 
 exports.default = reducer;
+
+
+function updateCharacter(id, cards, characters) {
+    var updatedCharacters = characters.map(function (character) {
+        if (character.id == id) {
+            character.cards = cards;
+            return character;
+        } else {
+            return character;
+        }
+    });
+    return updatedCharacters;
+}
 
 /***/ }),
 /* 72 */
@@ -30645,6 +30665,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _Board = __webpack_require__(114);
+
+var _Board2 = _interopRequireDefault(_Board);
 
 var _react = __webpack_require__(0);
 
@@ -32945,30 +32969,7 @@ var EncounterTreasure = function (_Component) {
 exports.default = (0, _reactRedux.connect)()(EncounterTreasure);
 
 /***/ }),
-/* 100 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.randomEncounter = randomEncounter;
-
-var _superagent = __webpack_require__(25);
-
-var _superagent2 = _interopRequireDefault(_superagent);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function randomEncounter() {
-  return _superagent2.default.get("./api/v1/randomEncounter").then(function (res) {
-    return res.body;
-  });
-}
-
-/***/ }),
+/* 100 */,
 /* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34089,30 +34090,7 @@ module.exports = Agent;
 
 
 /***/ }),
-/* 106 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.randomTreasure = randomTreasure;
-
-var _superagent = __webpack_require__(25);
-
-var _superagent2 = _interopRequireDefault(_superagent);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function randomTreasure() {
-  return _superagent2.default.get("./api/v1/randomTreasure").then(function (res) {
-    return res.body;
-  });
-}
-
-/***/ }),
+/* 106 */,
 /* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34657,8 +34635,16 @@ var Powers = function (_Component) {
                     if (document.getElementById('inlineRadio1' + i) !== null) document.getElementById('inlineRadio1' + i).checked = 'checked';
                     if (document.getElementById('inlineRadio2' + i) !== null) document.getElementById('inlineRadio2' + i).checked = 'checked';
                 }
+                //resets form
                 document.getElementById("powersForm").reset();
+
+                // scrolls to the top
+                var elmnt = document.getElementById("myDIV");
+                elmnt.scrollLeft = 0;
+                elmnt.scrollTop = 0;
+
                 var id = nextProps.match.params.id;
+
                 var character = this.props.characters.find(function (character) {
                     return character.id == id;
                 });
@@ -34731,9 +34717,8 @@ var Powers = function (_Component) {
                 alert("You must pick 2 At Will powers");
             } else {
                 this.props.dispatch((0, _actions.addPowerCards)(id, cards));
+                this.nextCharacter();
             }
-
-            this.nextCharacter();
         }
     }, {
         key: 'nextCharacter',
@@ -34755,8 +34740,8 @@ var Powers = function (_Component) {
             var _this4 = this;
 
             return _react2.default.createElement(
-                _react.Fragment,
-                null,
+                'div',
+                { id: 'myDIV' },
                 _react2.default.createElement(
                     'h1',
                     null,
@@ -35141,6 +35126,1145 @@ function mapStateToProps(state) {
 }
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(Powers);
+
+/***/ }),
+/* 112 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var initialState = [];
+
+var reducer = function reducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+    var action = arguments[1];
+
+    switch (action.type) {
+        case 'SAVE_ALL_MONSTERS':
+            return action.monsters;
+        default:
+            return state;
+    }
+};
+
+exports.default = reducer;
+
+/***/ }),
+/* 113 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.randomEncounter = randomEncounter;
+exports.getAllMonsters = getAllMonsters;
+
+var _superagent = __webpack_require__(25);
+
+var _superagent2 = _interopRequireDefault(_superagent);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function randomEncounter() {
+  return _superagent2.default.get("./api/v1/randomEncounter").then(function (res) {
+    return res.body;
+  });
+}
+
+function getAllMonsters() {
+  return _superagent2.default.get('./api/v1/getAllMonsters').then(function (res) {
+    return res.body;
+  });
+}
+
+/***/ }),
+/* 114 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Tile = __webpack_require__(115);
+
+var _Tile2 = _interopRequireDefault(_Tile);
+
+var _reactRedux = __webpack_require__(7);
+
+var _tiles = __webpack_require__(117);
+
+var _tiles2 = _interopRequireDefault(_tiles);
+
+var _actions = __webpack_require__(24);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/*  Main board component, renders tile and square sub-components
+
+    In state:
+        cleanTileSet should be replaced with the actual datasets used during play
+        dataSet is a temp set that should contain the player and monster positions
+        Player represents a single player
+*/
+
+var Board = function (_Component) {
+    _inherits(Board, _Component);
+
+    function Board(props) {
+        _classCallCheck(this, Board);
+
+        var _this = _possibleConstructorReturn(this, (Board.__proto__ || Object.getPrototypeOf(Board)).call(this, props));
+
+        _this.state = {
+            players: _this.props.characters,
+
+            monsters: [],
+
+            allMonsters: _this.props.allMonsters,
+
+            transform: {
+                dragging: false,
+                startX: undefined,
+                endX: undefined,
+                x: 0,
+                y: 0
+            },
+
+            explore: {
+                top: false,
+                bottom: false,
+                left: false,
+                right: false
+            },
+
+            //Dataset includes every tile currently in play, with the players and monsters placed on it
+            dataSet: [],
+
+            //  cleanTileSet includes every tile currently in play, the starting tile is already given
+            cleanTileSet: [{
+                "id": 29,
+                "image": "images/tiles/20.jpg",
+                "grid": [[1, 1, 1, 1], [0, 0, 0, 0], [0, 2, 0, 0], [0, 0, 0, 0]],
+                "arrow": false,
+                "skull": true,
+                "name": "Strahds Crypt",
+                x: 1,
+                y: 1,
+                players: []
+            }],
+
+            completeTileSet: []
+        };
+
+        _this.keypress = _this.keypress.bind(_this);
+        _this.getPositionOfCharacter = _this.getPositionOfCharacter.bind(_this);
+        _this.addTile = _this.addTile.bind(_this);
+        _this.nextPlayer = _this.nextPlayer.bind(_this);
+        _this.processCharacters = _this.processCharacters.bind(_this);
+        _this.mouseDown = _this.mouseDown.bind(_this);
+        _this.mouseUp = _this.mouseUp.bind(_this);
+        _this.mouseMove = _this.mouseMove.bind(_this);
+        _this.getTileAndSquareForCharacter = _this.getTileAndSquareForCharacter.bind(_this);
+        _this.rotateTile = _this.rotateTile.bind(_this);
+        _this.checkSidesOfCharacter = _this.checkSidesOfCharacter.bind(_this);
+        _this.diceRoll = _this.diceRoll.bind(_this);
+        _this.getMonster = _this.getMonster.bind(_this);
+        return _this;
+    }
+
+    _createClass(Board, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
+
+            this.props.dispatch((0, _actions.getAllMonsters)());
+            window.oncontextmenu = function (e) {
+                e.preventDefault();
+            };
+            document.addEventListener("keydown", this.keypress, false);
+
+            var temp = _tiles2.default;
+            temp.splice(-2, 2); //   Remove start tiles from array
+
+            //  Removes strahds crypt tile for the starting piece
+            var strahdsCrypt = temp.splice(29, 1);
+            strahdsCrypt[0].x = 1;
+            strahdsCrypt[0].y = 1;
+
+            //  Removes Secret Stairway tile for the ending piece
+            var endingPiece = temp.splice(29, 1)[0];
+
+            this.setState({ dataSet: strahdsCrypt, cleanTileSet: strahdsCrypt, completeTileSet: temp, endingPiece: endingPiece }, function () {
+                _this2.processCharacters();
+            });
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            document.removeEventListener("keydown", this.keypress, false);
+        }
+    }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(prevProps) {
+            if (this.props.allMonsters !== prevProps.allMonsters) {
+                this.setState({ allMonsters: this.props.allMonsters });
+            }
+        }
+    }, {
+        key: 'mouseDown',
+        value: function mouseDown(event) {
+            if (event.button === 2) {
+                event.stopPropagation();
+                event.preventDefault();
+                var temp = this.state.transform;
+                temp.dragging = true;
+                temp.startX = event.screenX - this.state.transform.x;
+                temp.startY = event.screenY - this.state.transform.y;
+                this.setState({ transform: temp });
+            }
+        }
+    }, {
+        key: 'mouseUp',
+        value: function mouseUp(event) {
+            if (event.button === 2) {
+                event.stopPropagation();
+                event.preventDefault();
+                var temp = this.state.transform;
+                temp.dragging = false;
+                this.setState({ transform: temp });
+            }
+        }
+    }, {
+        key: 'mouseMove',
+        value: function mouseMove(event) {
+            if (this.state.transform.dragging) {
+                var temp = this.state.transform;
+                temp.x = event.screenX - this.state.transform.startX;
+                temp.y = event.screenY - this.state.transform.startY;
+                this.setState({ transform: temp });
+            }
+        }
+
+        //  Processes keypress events
+
+    }, {
+        key: 'keypress',
+        value: function keypress(event) {
+            event.preventDefault();
+            var key = event.key;
+
+            switch (key) {
+                case "ArrowDown":
+                    this.getPositionOfCharacter(this.state.players[0], 'y', 1);
+                    break;
+                case "ArrowUp":
+                    this.getPositionOfCharacter(this.state.players[0], 'y', -1);
+                    break;
+                case "ArrowRight":
+                    this.getPositionOfCharacter(this.state.players[0], 'x', 1);
+                    break;
+                case "ArrowLeft":
+                    this.getPositionOfCharacter(this.state.players[0], 'x', -1);
+                    break;
+            }
+        }
+
+        //  Generates a random number between 1 and 20 inclusive
+
+    }, {
+        key: 'diceRoll',
+        value: function diceRoll() {
+            return Math.floor(Math.random() * 20) + 1;
+        }
+
+        //  Changes the positions of players in the 'players' array stored in state
+        //  The player in first position gets placed last, i.e: [1,2,3,4] -> [2,3,4,]
+
+    }, {
+        key: 'nextPlayer',
+        value: function nextPlayer() {
+            var _this3 = this;
+
+            var temp = this.state.players;
+            temp.push(temp.shift());
+            this.setState({ players: temp }, function () {
+                return _this3.checkSidesOfCharacter();
+            });
+        }
+
+        //  Rotates 2d arrays of size n*n (equal on both sides)
+
+    }, {
+        key: 'rotateTile',
+        value: function rotateTile(inputArray, num) {
+            if (num === 0) return inputArray;
+
+            inputArray.reverse();
+            for (var n = 0; n < inputArray.length; n++) {
+                for (var i = 0; i < n; i++) {
+                    var temp = inputArray[n][i];
+                    inputArray[n][i] = inputArray[i][n];
+                    inputArray[i][n] = temp;
+                }
+            }
+
+            return this.rotateTile(inputArray, num - 1);
+        }
+
+        //  Preps tile for adding, checks should already be done in this.checkSidesOfPlayer(), rotating tile to correct orientation
+
+    }, {
+        key: 'prepTileForAdding',
+        value: function prepTileForAdding(side) {
+            // get a new tile
+            var tileIndex = Math.floor(Math.random() * this.state.completeTileSet.length);
+            if (this.state.completeTileSet < 1) return;
+            var newTile = this.state.completeTileSet.splice(tileIndex, 1)[0];
+
+            var tile = undefined;
+
+            var playerPos = this.getTileAndSquareForCharacter(this.state.players[0]);
+            switch (side) {
+                case 0:
+                    tile = this.rotateTile(newTile.grid, side);
+                    newTile.grid = tile;
+                    newTile.rotation = 0;
+                    this.addTile(newTile, { x: playerPos.tileX, y: playerPos.tileY - 1 });
+                    break;
+                case 1:
+                    tile = this.rotateTile(newTile.grid, side);
+                    newTile.grid = tile;
+                    newTile.rotation = 1;
+                    this.addTile(newTile, { x: playerPos.tileX + 1, y: playerPos.tileY });
+                    break;
+                case 2:
+                    tile = this.rotateTile(newTile.grid, side);
+                    newTile.grid = tile;
+                    newTile.rotation = 2;
+                    this.addTile(newTile, { x: playerPos.tileX, y: playerPos.tileY + 1 });
+                    break;
+                case 3:
+                    tile = this.rotateTile(newTile.grid, side);
+                    newTile.grid = tile;
+                    newTile.rotation = 3;
+                    this.addTile(newTile, { x: playerPos.tileX - 1, y: playerPos.tileY });
+                    break;
+            }
+        }
+
+        //  Adds a tile to a given position, tile should be a 2d array, position should be an object with x and y keys
+
+    }, {
+        key: 'addTile',
+        value: function addTile(tile, position) {
+            var _this4 = this;
+
+            var tempSet = JSON.parse(JSON.stringify(this.state.cleanTileSet)); // Creates a deep copy of the array
+            var tempPlayers = this.state.players;
+
+            if (position.x === 0) {
+                for (var item in tempSet) {
+                    tempSet[item].x = tempSet[item].x + 1;
+                }
+                tempPlayers.map(function (player) {
+                    return player.x = player.x + 4;
+                });
+                this.state.monsters.map(function (monster) {
+                    return monster.x = monster.x + 4;
+                });
+                tile.x = position.x + 1;
+                tile.y = position.y;
+                tempSet.push(tile);
+
+                var _monster = {};
+                monsterFinder: for (var y in tile.grid) {
+                    for (var x in tile.grid) {
+                        if (tile.grid[y][x] === 2) {
+                            _monster.x = (Number(tile.x) - 1) * 4 + Number(x) + 1;
+                            _monster.y = (Number(tile.y) - 1) * 4 + Number(y) + 1;
+                            break monsterFinder;
+                        }
+                    }
+                }
+                this.state.monsters.push(this.getMonster(_monster.x, _monster.y, this.state.players[0].id));
+
+                this.setState({
+                    players: tempPlayers,
+                    cleanTileSet: tempSet
+                }, function () {
+                    return _this4.processCharacters();
+                });
+                return;
+            } else if (position.y === 0) {
+                for (var _item in tempSet) {
+                    tempSet[_item].y = tempSet[_item].y + 1;
+                }
+                tempPlayers.map(function (player) {
+                    return player.y = player.y + 4;
+                });
+                this.state.monsters.map(function (monster) {
+                    return monster.y = monster.y + 4;
+                });
+                tile.x = position.x;
+                tile.y = position.y + 1;
+                tempSet.push(tile);
+
+                var _monster2 = {};
+                monsterFinder: for (var _y in tile.grid) {
+                    for (var _x in tile.grid) {
+                        if (tile.grid[_y][_x] === 2) {
+                            _monster2.x = (Number(tile.x) - 1) * 4 + Number(_x) + 1;
+                            _monster2.y = (Number(tile.y) - 1) * 4 + Number(_y) + 1;
+                            break monsterFinder;
+                        }
+                    }
+                }
+                this.state.monsters.push(this.getMonster(_monster2.x, _monster2.y, this.state.players[0].id));
+
+                this.setState({
+                    players: tempPlayers,
+                    cleanTileSet: tempSet
+                }, function () {
+                    return _this4.processCharacters();
+                });
+                return;
+            }
+
+            tile.x = position.x;
+            tile.y = position.y;
+            tempSet.push(tile);
+
+            var monster = {};
+            monsterFinder: for (var _y2 in tile.grid) {
+                for (var _x2 in tile.grid) {
+                    if (tile.grid[_y2][_x2] === 2) {
+                        monster.x = (Number(tile.x) - 1) * 4 + Number(_x2) + 1;
+                        monster.y = (Number(tile.y) - 1) * 4 + Number(_y2) + 1;
+                        break monsterFinder;
+                    }
+                }
+            }
+            this.state.monsters.push(this.getMonster(monster.x, monster.y, this.state.players[0].id));
+
+            this.setState({
+                cleanTileSet: tempSet
+            }, function () {
+                return _this4.processCharacters();
+            });
+        }
+    }, {
+        key: 'getMonster',
+        value: function getMonster(x, y, charId) {
+            var monNum = Math.floor(Math.random() * 10);
+            var newMonster = JSON.parse(JSON.stringify(this.state.allMonsters[monNum]));
+            newMonster.x = x;
+            newMonster.y = y;
+            newMonster.owner = charId;
+            return newMonster;
+        }
+
+        //  Calculates the tile and square that a character is on
+
+    }, {
+        key: 'getTileAndSquareForCharacter',
+        value: function getTileAndSquareForCharacter(char) {
+            return {
+                tileX: Math.floor(char.x / 4) + (char.x % 4 === 0 ? 0 : 1),
+                squareX: (char.x - 1) % 4,
+                tileY: Math.floor(char.y / 4) + (char.y % 4 === 0 ? 0 : 1),
+                squareY: (char.y - 1) % 4
+            };
+        }
+
+        //  Updates position of character, includes wall and edge detection
+
+    }, {
+        key: 'getPositionOfCharacter',
+        value: function getPositionOfCharacter(char, dir, val) {
+            var _this5 = this;
+
+            if (char[dir] + val < 1) return;
+
+            char[dir] = char[dir] + val;
+
+            var position = this.getTileAndSquareForCharacter(char);
+
+            var tileExists = false;
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = this.state.cleanTileSet[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var item = _step.value;
+
+                    if (position.tileX === item.x && position.tileY === item.y) {
+                        tileExists = true;
+                        if (item.grid[position.squareY][position.squareX] === 1) {
+                            char[dir] = char[dir] - val;
+                            break;
+                        }
+                    }
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            if (!tileExists) char[dir] = char[dir] - val;
+
+            var tempPlayers = this.state.players;
+            tempPlayers[0] = char;
+            this.setState({ players: tempPlayers }, function () {
+                return _this5.processCharacters();
+            });
+        }
+
+        //  Checks each side of the current character, returns an object with values showing if they are on an unexplored edge
+
+    }, {
+        key: 'checkSidesOfCharacter',
+        value: function checkSidesOfCharacter() {
+            var sides = { top: false, right: false, bottom: false, left: false };
+            var playerPos = this.getTileAndSquareForCharacter(this.state.players[0]);
+            for (var side = 0; side < 4; side++) {
+                switch (side) {
+                    case 0:
+                        if (playerPos.squareY === 0) {
+                            var tileAlreadyExists = false;
+                            var _iteratorNormalCompletion2 = true;
+                            var _didIteratorError2 = false;
+                            var _iteratorError2 = undefined;
+
+                            try {
+                                for (var _iterator2 = this.state.cleanTileSet[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                                    var item = _step2.value;
+
+                                    if (item.y === playerPos.tileY - 1 && item.x === playerPos.tileX) {
+                                        tileAlreadyExists = true;
+                                        break;
+                                    }
+                                }
+                            } catch (err) {
+                                _didIteratorError2 = true;
+                                _iteratorError2 = err;
+                            } finally {
+                                try {
+                                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                                        _iterator2.return();
+                                    }
+                                } finally {
+                                    if (_didIteratorError2) {
+                                        throw _iteratorError2;
+                                    }
+                                }
+                            }
+
+                            if (!tileAlreadyExists) sides.top = true;
+                        }
+                    case 1:
+                        if (playerPos.squareX === 3) {
+                            var _tileAlreadyExists = false;
+                            var _iteratorNormalCompletion3 = true;
+                            var _didIteratorError3 = false;
+                            var _iteratorError3 = undefined;
+
+                            try {
+                                for (var _iterator3 = this.state.cleanTileSet[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                                    var _item2 = _step3.value;
+
+                                    if (_item2.y === playerPos.tileY && _item2.x === playerPos.tileX + 1) {
+                                        _tileAlreadyExists = true;
+                                        break;
+                                    }
+                                }
+                            } catch (err) {
+                                _didIteratorError3 = true;
+                                _iteratorError3 = err;
+                            } finally {
+                                try {
+                                    if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                                        _iterator3.return();
+                                    }
+                                } finally {
+                                    if (_didIteratorError3) {
+                                        throw _iteratorError3;
+                                    }
+                                }
+                            }
+
+                            if (!_tileAlreadyExists) sides.right = true;
+                        }
+                    case 2:
+                        if (playerPos.squareY === 3) {
+                            var _tileAlreadyExists2 = false;
+                            var _iteratorNormalCompletion4 = true;
+                            var _didIteratorError4 = false;
+                            var _iteratorError4 = undefined;
+
+                            try {
+                                for (var _iterator4 = this.state.cleanTileSet[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+                                    var _item3 = _step4.value;
+
+                                    if (_item3.y === playerPos.tileY + 1 && _item3.x === playerPos.tileX) {
+                                        _tileAlreadyExists2 = true;
+                                        break;
+                                    }
+                                }
+                            } catch (err) {
+                                _didIteratorError4 = true;
+                                _iteratorError4 = err;
+                            } finally {
+                                try {
+                                    if (!_iteratorNormalCompletion4 && _iterator4.return) {
+                                        _iterator4.return();
+                                    }
+                                } finally {
+                                    if (_didIteratorError4) {
+                                        throw _iteratorError4;
+                                    }
+                                }
+                            }
+
+                            if (!_tileAlreadyExists2) sides.bottom = true;
+                        }
+                    case 3:
+                        if (playerPos.squareX === 0) {
+                            var _tileAlreadyExists3 = false;
+                            var _iteratorNormalCompletion5 = true;
+                            var _didIteratorError5 = false;
+                            var _iteratorError5 = undefined;
+
+                            try {
+                                for (var _iterator5 = this.state.cleanTileSet[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+                                    var _item4 = _step5.value;
+
+                                    if (_item4.y === playerPos.tileY && _item4.x === playerPos.tileX - 1) {
+                                        _tileAlreadyExists3 = true;
+                                        break;
+                                    }
+                                }
+                            } catch (err) {
+                                _didIteratorError5 = true;
+                                _iteratorError5 = err;
+                            } finally {
+                                try {
+                                    if (!_iteratorNormalCompletion5 && _iterator5.return) {
+                                        _iterator5.return();
+                                    }
+                                } finally {
+                                    if (_didIteratorError5) {
+                                        throw _iteratorError5;
+                                    }
+                                }
+                            }
+
+                            if (!_tileAlreadyExists3) sides.left = true;
+                        }
+                }
+            }
+            this.setState({ explore: sides });
+        }
+
+        //  Gets the position of every character and monster, and puts them on the 'dataSet' stored in state
+
+    }, {
+        key: 'processCharacters',
+        value: function processCharacters() {
+            var tempSet = JSON.parse(JSON.stringify(this.state.cleanTileSet)); // Creates a deep copy of the array
+
+            var _iteratorNormalCompletion6 = true;
+            var _didIteratorError6 = false;
+            var _iteratorError6 = undefined;
+
+            try {
+                outerloop: for (var _iterator6 = this.state.players[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+                    var char = _step6.value;
+
+
+                    var position = this.getTileAndSquareForCharacter(char);
+
+                    var _iteratorNormalCompletion8 = true;
+                    var _didIteratorError8 = false;
+                    var _iteratorError8 = undefined;
+
+                    try {
+                        for (var _iterator8 = tempSet[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
+                            var item = _step8.value;
+
+                            if (position.tileX === item.x && position.tileY === item.y) {
+                                item.grid[position.squareY][position.squareX] = 11;
+                                item.players.push({ image: char.image, x: position.squareX, y: position.squareY });
+                                continue outerloop;
+                            }
+                        }
+                    } catch (err) {
+                        _didIteratorError8 = true;
+                        _iteratorError8 = err;
+                    } finally {
+                        try {
+                            if (!_iteratorNormalCompletion8 && _iterator8.return) {
+                                _iterator8.return();
+                            }
+                        } finally {
+                            if (_didIteratorError8) {
+                                throw _iteratorError8;
+                            }
+                        }
+                    }
+                }
+            } catch (err) {
+                _didIteratorError6 = true;
+                _iteratorError6 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion6 && _iterator6.return) {
+                        _iterator6.return();
+                    }
+                } finally {
+                    if (_didIteratorError6) {
+                        throw _iteratorError6;
+                    }
+                }
+            }
+
+            var _iteratorNormalCompletion7 = true;
+            var _didIteratorError7 = false;
+            var _iteratorError7 = undefined;
+
+            try {
+                outerloop: for (var _iterator7 = this.state.monsters[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+                    var monster = _step7.value;
+
+
+                    var position = this.getTileAndSquareForCharacter(monster);
+
+                    var _iteratorNormalCompletion9 = true;
+                    var _didIteratorError9 = false;
+                    var _iteratorError9 = undefined;
+
+                    try {
+                        for (var _iterator9 = tempSet[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
+                            var _item5 = _step9.value;
+
+                            if (position.tileX === _item5.x && position.tileY === _item5.y) {
+                                _item5.grid[position.squareY][position.squareX] = 21;
+                                _item5.players.push({ image: monster.image, x: position.squareX, y: position.squareY });
+                                continue outerloop;
+                            }
+                        }
+                    } catch (err) {
+                        _didIteratorError9 = true;
+                        _iteratorError9 = err;
+                    } finally {
+                        try {
+                            if (!_iteratorNormalCompletion9 && _iterator9.return) {
+                                _iterator9.return();
+                            }
+                        } finally {
+                            if (_didIteratorError9) {
+                                throw _iteratorError9;
+                            }
+                        }
+                    }
+                }
+            } catch (err) {
+                _didIteratorError7 = true;
+                _iteratorError7 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion7 && _iterator7.return) {
+                        _iterator7.return();
+                    }
+                } finally {
+                    if (_didIteratorError7) {
+                        throw _iteratorError7;
+                    }
+                }
+            }
+
+            this.setState({ dataSet: tempSet }, this.checkSidesOfCharacter());
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this6 = this;
+
+            var rows = 0;
+            var cols = 0;
+            this.state.dataSet.map(function (set) {
+                if (set.x > cols) cols = set.x;
+                if (set.y > rows) rows = set.y;
+            });
+            return _react2.default.createElement(
+                _react2.default.Fragment,
+                null,
+                _react2.default.createElement(
+                    'div',
+                    { className: 'board-container' },
+                    _react2.default.createElement(
+                        'div',
+                        { style: { display: 'grid',
+                                width: 200 * cols + 'px',
+                                height: 200 * rows + 'px',
+                                gridTemplateRows: 'repeat(' + rows + ', 200px)',
+                                gridTemplateColumns: 'repeat(' + cols + ', 200px)',
+                                transform: 'translate(' + this.state.transform.x + 'px, ' + this.state.transform.y + 'px)' },
+                            onMouseDown: this.mouseDown, onMouseUp: this.mouseUp, onMouseMove: this.mouseMove },
+                        this.state.dataSet && this.state.dataSet.map(function (tile, key) {
+                            return _react2.default.createElement(
+                                'div',
+                                { key: key, style: { 'gridColumnStart': tile.x, 'gridColumnEnd': tile.x + 1, 'gridRowStart': tile.y, 'gridRowEnd': tile.y + 1 } },
+                                _react2.default.createElement(_Tile2.default, { tile: tile })
+                            );
+                        })
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { style: { position: 'absolute', top: '10px', left: '10px' } },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'alert alert-light', style: { color: 'black' } },
+                        this.state.players[0].name,
+                        _react2.default.createElement('br', null)
+                    ),
+                    _react2.default.createElement(
+                        'button',
+                        { onClick: function onClick() {
+                                return _this6.nextPlayer();
+                            } },
+                        'End turn'
+                    ),
+                    _react2.default.createElement('br', null),
+                    this.state.explore.left && _react2.default.createElement(
+                        _react2.default.Fragment,
+                        null,
+                        _react2.default.createElement(
+                            'button',
+                            { onClick: function onClick() {
+                                    return _this6.prepTileForAdding(3);
+                                } },
+                            'Explore left'
+                        ),
+                        _react2.default.createElement('br', null)
+                    ),
+                    this.state.explore.right && _react2.default.createElement(
+                        _react2.default.Fragment,
+                        null,
+                        _react2.default.createElement(
+                            'button',
+                            { onClick: function onClick() {
+                                    return _this6.prepTileForAdding(1);
+                                } },
+                            'Explore right'
+                        ),
+                        _react2.default.createElement('br', null)
+                    ),
+                    this.state.explore.top && _react2.default.createElement(
+                        _react2.default.Fragment,
+                        null,
+                        _react2.default.createElement(
+                            'button',
+                            { onClick: function onClick() {
+                                    return _this6.prepTileForAdding(0);
+                                } },
+                            'Explore top'
+                        ),
+                        _react2.default.createElement('br', null)
+                    ),
+                    this.state.explore.bottom && _react2.default.createElement(
+                        'button',
+                        { onClick: function onClick() {
+                                return _this6.prepTileForAdding(2);
+                            } },
+                        'Explore bottom'
+                    )
+                )
+            );
+        }
+    }]);
+
+    return Board;
+}(_react.Component);
+
+function mapStateToProps(state) {
+    for (var index in state.characterOrder) {
+        if (index > 3) {
+            state.characterOrder[index].x = 1;
+            state.characterOrder[index].y = 3;
+        } else {
+            state.characterOrder[index].x = Number(index) + 1;
+            state.characterOrder[index].y = 4;
+        }
+    }
+    return {
+        characters: state.characterOrder,
+        allMonsters: state.monsters
+    };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(Board);
+
+/***/ }),
+/* 115 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Square = __webpack_require__(116);
+
+var _Square2 = _interopRequireDefault(_Square);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Tile = function (_Component) {
+    _inherits(Tile, _Component);
+
+    function Tile(props) {
+        _classCallCheck(this, Tile);
+
+        var _this = _possibleConstructorReturn(this, (Tile.__proto__ || Object.getPrototypeOf(Tile)).call(this, props));
+
+        _this.state = {
+            grid: _this.props.tile.grid,
+            image: _this.props.tile.image,
+            rotation: _this.props.tile.rotation || 0,
+            players: _this.props.tile.players
+        };
+        return _this;
+    }
+
+    _createClass(Tile, [{
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(prevProps) {
+            if (prevProps !== this.props) {
+                this.setState({ grid: this.props.tile.grid,
+                    image: this.props.tile.image,
+                    rotation: this.props.tile.rotation || 0,
+                    players: this.props.tile.players
+                });
+            }
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    'div',
+                    { style: { position: 'absolute' } },
+                    _react2.default.createElement('img', { src: this.state.image, style: {
+                            maxHeight: '200px',
+                            maxWidth: '200px',
+                            WebkitTransform: 'rotate(' + 90 * this.state.rotation + 'deg)',
+                            MozTransform: 'rotate(' + 90 * this.state.rotation + 'deg)',
+                            OTransform: 'rotate(' + 90 * this.state.rotation + 'deg)',
+                            MsTransform: 'rotate(' + 90 * this.state.rotation + 'deg)',
+                            transform: 'rotate(' + 90 * this.state.rotation + 'deg)' } })
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'tile', style: { position: 'absolute' } },
+                    this.state.grid.map(function (row, y) {
+                        return row.map(function (square, x) {
+                            var tempPlayer = undefined;
+
+                            if (_this2.state.players) {
+                                var _iteratorNormalCompletion = true;
+                                var _didIteratorError = false;
+                                var _iteratorError = undefined;
+
+                                try {
+                                    for (var _iterator = _this2.state.players[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                                        var player = _step.value;
+
+                                        if (player.x === x && player.y === y) {
+                                            tempPlayer = player;
+                                            break;
+                                        }
+                                    }
+                                } catch (err) {
+                                    _didIteratorError = true;
+                                    _iteratorError = err;
+                                } finally {
+                                    try {
+                                        if (!_iteratorNormalCompletion && _iterator.return) {
+                                            _iterator.return();
+                                        }
+                                    } finally {
+                                        if (_didIteratorError) {
+                                            throw _iteratorError;
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (tempPlayer) {
+                                return _react2.default.createElement(_Square2.default, { key: x + ',' + y, square: square, x: x, y: y, image: tempPlayer.image });
+                            }
+                            return _react2.default.createElement(_Square2.default, { key: x + ',' + y, square: square, x: x, y: y, image: null });
+                        });
+                    })
+                )
+            );
+        }
+    }]);
+
+    return Tile;
+}(_react.Component);
+
+exports.default = Tile;
+
+/***/ }),
+/* 116 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Square = function (_Component) {
+    _inherits(Square, _Component);
+
+    function Square(props) {
+        _classCallCheck(this, Square);
+
+        var _this = _possibleConstructorReturn(this, (Square.__proto__ || Object.getPrototypeOf(Square)).call(this, props));
+
+        _this.state = {
+            type: _this.props.square,
+            x: _this.props.x + 1,
+            y: _this.props.y + 1,
+            image: _this.props.image || undefined,
+            style: {}
+        };
+
+        _this.updateStyle = _this.updateStyle.bind(_this);
+        return _this;
+    }
+
+    _createClass(Square, [{
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(prevProps) {
+            var _this2 = this;
+
+            if (prevProps !== this.props) {
+                this.setState({
+                    type: this.props.square,
+                    image: this.props.image || undefined
+                }, function () {
+                    return _this2.updateStyle();
+                });
+            }
+        }
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.updateStyle();
+        }
+    }, {
+        key: 'updateStyle',
+        value: function updateStyle() {
+            this.setState({ style: {
+                    'gridColumnStart': this.state.x,
+                    'gridColumnEnd': this.state.x + 1,
+                    'gridRowStart': this.state.y,
+                    'gridRowEnd': this.state.y + 1
+                } });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                { style: this.state.style },
+                (this.state.type === 11 || this.state.type === 21) && _react2.default.createElement('img', { src: this.state.image, style: {
+                        maxHeight: '50px',
+                        maxWidth: '50px' } })
+            );
+        }
+    }]);
+
+    return Square;
+}(_react.Component);
+
+exports.default = Square;
+
+/***/ }),
+/* 117 */
+/***/ (function(module, exports) {
+
+module.exports = [{"id":0,"image":"images/tiles/38.jpg","grid":[[0,0,0,0],[0,0,0,0],[0,2,0,0],[0,0,0,0]],"arrow":true,"skull":true,"name":null,"players":[]},{"id":1,"image":"images/tiles/39.jpg","grid":[[1,1,1,1],[0,0,0,0],[0,0,2,0],[1,0,0,1]],"arrow":true,"skull":false,"name":null,"players":[]},{"id":2,"image":"images/tiles/11.jpg","grid":[[1,1,1,1],[0,0,2,1],[0,0,0,1],[0,0,0,1]],"arrow":false,"skull":true,"name":"Crypt Corner 6-10","players":[]},{"id":3,"image":"images/tiles/37.jpg","grid":[[1,0,2,0],[1,0,0,0],[1,0,0,0],[1,0,0,0]],"arrow":false,"skull":false,"name":"Workshop","players":[]},{"id":4,"image":"images/tiles/42.jpg","grid":[[0,0,0,1],[0,2,0,1],[0,0,0,1],[0,0,0,1]],"arrow":true,"skull":true,"name":"Arcrane Circle","players":[]},{"id":5,"image":"images/tiles/40.jpg","grid":[[1,0,0,1],[1,2,0,0],[1,0,0,0],[1,0,0,1]],"arrow":false,"skull":true,"name":null,"players":[]},{"id":6,"image":"images/tiles/5.jpg","grid":[[0,0,0,1],[0,2,0,0],[0,0,0,0],[0,0,0,1]],"arrow":true,"skull":true,"name":null,"players":[]},{"id":7,"image":"images/tiles/3.jpg","grid":[[1,1,1,1],[0,0,0,0],[0,2,0,0],[0,0,0,0]],"arrow":true,"skull":true,"name":"Crypt of Sergei Von Zarovich","players":[]},{"id":8,"image":"images/tiles/28.jpg","grid":[[1,1,1,1],[0,0,0,1],[0,2,0,1],[0,0,0,1]],"arrow":true,"skull":false,"name":"Crypt of Artimus","players":[]},{"id":9,"image":"images/tiles/6.jpg","grid":[[0,0,0,0],[0,2,0,0],[0,0,0,0],[0,0,0,0]],"arrow":true,"skull":true,"name":null,"players":[]},{"id":10,"image":"images/tiles/21.jpg","grid":[[1,0,0,1],[0,0,2,1],[0,0,0,1],[1,0,0,1]],"arrow":false,"skull":true,"name":null,"players":[]},{"id":11,"image":"images/tiles/2.jpg","grid":[[1,1,1,1],[1,0,0,0],[1,0,2,0],[1,0,0,0]],"arrow":true,"skull":false,"name":"Prince Auriels Crypt","players":[]},{"id":12,"image":"images/tiles/41.jpg","grid":[[1,1,1,1],[1,0,0,0],[1,2,0,0],[1,0,0,0]],"arrow":true,"skull":true,"name":"Crypt Corner 11-15","players":[]},{"id":13,"image":"images/tiles/9.jpg","grid":[[0,2,0,1],[0,0,0,1],[0,0,0,1],[0,0,0,1]],"arrow":false,"skull":false,"name":"Dark Fountain","players":[]},{"id":14,"image":"images/tiles/36.jpg","grid":[[1,0,0,1],[0,2,0,1],[0,0,0,1],[1,0,0,1]],"arrow":false,"skull":true,"name":null,"players":[]},{"id":15,"image":"images/tiles/12.jpg","grid":[[1,0,0,1],[0,0,0,0],[0,2,0,0],[1,0,0,1]],"arrow":true,"skull":true,"name":null,"players":[]},{"id":16,"image":"images/tiles/1.jpg","grid":[[1,1,1,1],[0,0,0,1],[0,0,2,1],[1,0,0,1]],"arrow":true,"skull":true,"name":"Crypt Corner 16-20","players":[]},{"id":17,"image":"images/tiles/8.jpg","grid":[[1,0,0,1],[0,0,2,0],[0,0,0,0],[0,0,0,0]],"arrow":true,"skull":true,"name":"Kings Crypt","players":[]},{"id":18,"image":"images/tiles/17.jpg","grid":[[1,1,1,1],[0,0,0,0],[0,0,2,0],[0,0,0,0]],"arrow":true,"skull":true,"name":"Crypt of Barov and Ravenovia","players":[]},{"id":19,"image":"images/tiles/15.jpg","grid":[[1,1,1,1],[1,0,0,0],[1,0,0,2],[1,0,0,0]],"arrow":false,"skull":false,"name":"Rotting Nook","players":[]},{"id":20,"image":"images/tiles/7.jpg","grid":[[1,0,0,1],[0,0,0,1],[0,2,0,1],[0,0,0,1]],"arrow":true,"skull":true,"name":null,"players":[]},{"id":21,"image":"images/tiles/18.jpg","grid":[[1,0,0,1],[1,0,0,0],[1,0,0,2],[1,0,0,0]],"arrow":true,"skull":true,"name":"Ireena Kolyana's Crypt","players":[]},{"id":22,"image":"images/tiles/16.jpg","grid":[[1,0,0,0],[0,0,2,0],[0,0,0,0],[1,0,0,0]],"arrow":true,"skull":true,"name":null,"players":[]},{"id":23,"image":"images/tiles/14.jpg","grid":[[0,0,0,1],[0,0,0,1],[2,0,0,1],[0,0,0,1]],"arrow":true,"skull":true,"name":"Lonely Crypt ","players":[]},{"id":24,"image":"images/tiles/23.jpg","grid":[[1,0,0,0],[1,0,0,0],[1,2,0,0],[1,0,0,0]],"arrow":false,"skull":true,"name":"Chapel","players":[]},{"id":25,"image":"images/tiles/4.jpg","grid":[[1,0,0,1],[1,0,2,0],[1,0,0,0],[1,0,0,1]],"arrow":false,"skull":true,"name":null,"players":[]},{"id":26,"image":"images/tiles/13.jpg","grid":[[1,0,0,1],[1,0,0,1],[1,0,2,1],[1,0,0,1]],"arrow":false,"skull":false,"name":null,"players":[]},{"id":27,"image":"images/tiles/24.jpg","grid":[[1,0,0,1],[1,0,2,1],[1,0,0,1],[1,0,0,1]],"arrow":false,"skull":false,"name":null,"players":[]},{"id":28,"image":"images/tiles/22.jpg","grid":[[1,0,0,1],[1,0,2,1],[1,0,0,1],[1,0,0,1]],"arrow":true,"skull":false,"name":null,"players":[]},{"id":29,"image":"images/tiles/20.jpg","grid":[[1,1,1,1],[0,0,0,0],[0,2,0,0],[0,0,0,0]],"arrow":false,"skull":true,"name":"Strahds Crypt","players":[]},{"id":30,"image":"images/tiles/29.jpg","grid":[[1,1,1,1],[0,0,0,1],[2,0,0,1],[0,0,0,1]],"arrow":false,"skull":false,"name":"Secret Stairway","players":[]},{"id":31,"image":"images/tiles/27.jpg","grid":[[1,1,1,1],[1,2,0,0],[1,0,0,0],[1,0,0,0]],"arrow":false,"skull":true,"name":"Crypt Corner 1-5 ","players":[]},{"id":32,"image":"images/tiles/19.jpg","grid":[[1,0,0,1],[1,0,0,1],[1,0,2,1],[1,0,0,1]],"arrow":true,"skull":false,"name":null,"players":[]},{"id":33,"image":"images/tiles/10.jpg","grid":[[1,0,0,1],[1,0,2,1],[1,0,0,1],[1,0,0,1]],"arrow":false,"skull":true,"name":null,"players":[]},{"id":34,"image":"images/tiles/30.jpg","grid":[[1,0,0,1],[1,0,0,1],[1,2,0,1],[1,0,0,1]],"arrow":true,"skull":false,"name":null,"players":[]},{"id":35,"image":"images/tiles/26.jpg","grid":[[1,1,1,1],[0,0,0,2],[0,0,0,0],[0,0,0,0]],"arrow":false,"skull":true,"name":"Laboratory","players":[]},{"id":36,"image":"images/tiles/25.jpg","grid":[[1,0,0,1],[1,2,0,1],[1,0,0,1],[1,0,0,1]],"arrow":true,"skull":false,"name":null,"players":[]},{"id":37,"image":"images/tiles/33.jpg","grid":[[0,0,0,0],[0,0,2,0],[0,0,0,0],[0,0,0,0]],"arrow":true,"skull":true,"name":null,"players":[]},{"id":38,"image":"images/tiles/31.jpg","grid":[[1,1,1,1],[0,2,0,0],[0,0,0,0],[0,0,0,0]],"arrow":false,"skull":true,"name":"Fetid Den","players":[]},{"id":39,"image":"images/tiles/32.jpg","grid":[[1,0,0,0],[1,0,0,0],[1,0,2,0],[1,0,0,0]],"arrow":false,"skull":true,"name":null,"players":[]},{"id":40,"image":"images/tiles/35start.jpg","grid":[[0,0,0,0],[2,0,0,0],[0,0,0,0],[0,0,0,0]],"arrow":false,"skull":false,"name":"Start 2","players":[]},{"id":41,"image":"images/tiles/34start.jpg","grid":[[0,0,0,0],[0,0,0,2],[0,0,0,0],[1,1,1,1]],"arrow":false,"skull":false,"name":"Start","players":[]}]
 
 /***/ })
 /******/ ]);

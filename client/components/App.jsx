@@ -1,3 +1,4 @@
+import Board from "./Board";
 import React, { Component, Fragment } from "react";
 import { HashRouter as Router, Route } from "react-router-dom";
 import TimeTract from "./TimeTract";
