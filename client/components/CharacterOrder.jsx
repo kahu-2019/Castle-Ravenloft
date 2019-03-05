@@ -21,7 +21,6 @@ class CharacterOrder extends Component {
     }
 
   render() {
-      console.log(this.props.characterOrder.length)
     return (
       <Fragment>
           <div className="col orderStyle">
