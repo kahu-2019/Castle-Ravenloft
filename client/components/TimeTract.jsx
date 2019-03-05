@@ -35,7 +35,7 @@ class TimeTract extends Component {
                 adventure
               </span>
               <div className="time">
-                <h6>
+                <h6 className="morning">
                   <strong>MORNING</strong>
                 </h6>
               </div>

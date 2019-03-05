@@ -32695,7 +32695,7 @@ var TimeTract = function (_Component) {
                 { className: "time" },
                 _react2.default.createElement(
                   "h6",
-                  null,
+                  { className: "morning" },
                   _react2.default.createElement(
                     "strong",
                     null,
@@ -32853,7 +32853,7 @@ var EncounterTreasure = function (_Component) {
             { className: "row" },
             _react2.default.createElement(
               "div",
-              { className: "Encounter" },
+              { className: "encounter" },
               _react2.default.createElement("img", {
                 src: "./images/card/encounter-card.jpeg",
                 onClick: function onClick() {
@@ -32863,7 +32863,7 @@ var EncounterTreasure = function (_Component) {
             ),
             _react2.default.createElement(
               "div",
-              { className: "Treasure" },
+              { className: "treasure" },
               _react2.default.createElement("img", {
                 src: "./images/card/treasure-card1.jpg",
                 onClick: function onClick() {
@@ -34188,7 +34188,7 @@ var Home = function (_Component) {
           { className: "display" },
           _react2.default.createElement(
             "div",
-            { className: "display1", id: "square" },
+            { className: "display1", id: "square1" },
             _react2.default.createElement(
               "h4",
               null,

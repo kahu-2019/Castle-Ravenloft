@@ -30,13 +30,13 @@ class EncounterTreasure extends Component {
       <Fragment>
         <div className="container-fluid">
           <div className="row">
-            <div className="Encounter">
+            <div className="encounter">
               <img
                 src="./images/card/encounter-card.jpeg"
                 onClick={() => this.getEncounter()}
               />
             </div>
-            <div className="Treasure">
+            <div className="treasure">
               <img
                 src="./images/card/treasure-card1.jpg"
                 onClick={() => this.getTreasure()}

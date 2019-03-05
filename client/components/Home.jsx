@@ -5,7 +5,7 @@ class Home extends Component {
     return (
       <div className="home">
         <div className="display">
-          <div className="display1" id="square">
+          <div className="display1" id="square1">
             <h4>INTRODUCTION</h4>
             <p className="ptext">
               <i>
