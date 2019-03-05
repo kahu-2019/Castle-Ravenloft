@@ -222,7 +222,7 @@ class Powers extends Component {
 
     render() {
         return (
-            <Fragment>
+            <div className="charSelectBg">
                 <h1>{this.state.character.name}</h1>
                 <h2>{this.state.character.subtitle}</h2>
                 {this.state.sneakAttack ?
@@ -315,7 +315,7 @@ class Powers extends Component {
                                 : ''}
                 <form onSubmit={this.onSubmit} action={`/powers/${this.state.nextCharId}`} id='powersForm'>
                     <div className="form-group">
-                        <h2 className='power-titles'>Daily</h2>
+                        <h2 className='power-titles orderList'>Daily Powers:</h2>
                         <div className="row">
                             {this.state.daily.map((daily, i) => {
                                 return (
@@ -369,7 +369,7 @@ class Powers extends Component {
                         </div>
                     </div>
                     <div className="form-group">
-                        <h2 className='power-titles'>Utility</h2>
+                        <h2 className='power-titles orderList'>Utility Powers:</h2>
                         <div className="row">
                             {this.state.utility.map((utility, i) => {
                                 return (
@@ -380,17 +380,20 @@ class Powers extends Component {
                                                     <input className="form-check-input" type="radio" id={`inlineRadio2${i}`} value={JSON.stringify(utility)} name='utilityResult' onChange={this.handleChange} />
 
                                                     <div className="card">
-                                                        <div className='container-fluid'>
-                                                            <div className="card-body">
+                                                        
+                                                            <div className="utilityCard">
                                                                 <div className='row'>
-                                                                    <h5 className="card-title">{utility.title}</h5>
-                                                                    <p className="card-subtitle mb-2 text-muted card-text"><b>{utility.subtitle}</b></p>
-                                                                    <p><b>{utility.instruction_1}</b> {utility.instruction_2}</p>
+                                                                    <h5 className="card-title powerCardTitle">{utility.title}</h5>
+                                                                    <p className="powerCardSubtitle"><b>{utility.subtitle}</b></p>
+                                                                    <div className="PowerCardInst">
+                                                                    <p>{utility.instruction_1}</p>
+                                                                    <p>{utility.instruction_2}</p>
+                                                                    </div>
                                                                 </div>
-                                                                <p><small className="text-muted">FILP THIS CARD OVER AFTER YOU USE THE POWER</small></p>
+                                                                <p><small className="powerCardUse">YOU MAY ONLY USE THIS POWER ONCE</small></p>
                                                             </div>
 
-                                                        </div>
+                                                        
                                                     </div>
                                                 </label>
                                             </div>
@@ -401,45 +404,48 @@ class Powers extends Component {
                         </div>
                     </div>
                     <div className="form-group">
-                        <h2 className='power-titles'>At Will</h2>
+                        <h2 className='power-titles orderList'>At Will Powers:</h2>
                         <div className="row">
                             {this.state.atWill.map((atWill, i) => {
                                 return (
                                     <Fragment key={i}>
-                                        <div className="col">
-                                            <div className="form-check form-check-inline">
-                                                <label className="form-check-label">
-                                                    <input className="form-check-input" type="checkbox" id={`inlineCheckbox3${i}`} value={JSON.stringify({ atWill })} name='atWillResults' onChange={this.handleChange} />
+                                    <div className="col">
+                                        <div className="form-check form-check-inline">
+                                            <label className="form-check-label">
+                                                <input className="form-check-input" type="checkbox" id={`inlineCheckbox3${i}`} value={JSON.stringify({ atWill })} name='atWillResults' onChange={this.handleChange} />
 
-                                                    <div className="card">
-                                                        <div className='container-fluid'>
-                                                            <div className="card-body">
-                                                                <div className='row'>
-                                                                    <h5 className="card-title">{atWill.title}</h5>
-                                                                    <p className="card-subtitle mb-2 text-muted card-text"><b>{atWill.subtitle}</b></p>
-                                                                    <p><b>{atWill.instruction_1}</b> {atWill.instruction_2}</p>
+                                                <div className="card">
+                                                    
+                                                        <div className="atWillCard">
+                                                            <div className='row'>
+                                                                <h5 className="card-title powerCardTitle">{atWill.title}</h5>
+                                                                <p className="powerCardSubtitle">{atWill.subtitle}</p>
+                                                                <div className="PowerCardInst">
+                                                                    <p>{atWill.instruction_1}</p>
+                                                                    <p>{atWill.instruction_2}</p>
                                                                 </div>
-                                                                {atWill.damage &&
-                                                                    <Fragment>
-                                                                        <div className='row'>
-                                                                            <div className='col attribs-title card-text'>Attack</div>
-                                                                            <div className='col attribs-title card-text'>Damage</div>
-                                                                        </div>
-                                                                        <div className='row'>
-                                                                            <div className='col attribs card-text'>+ {atWill.attack}</div>
-                                                                            <div className='col attribs card-text'>{atWill.damage}</div>
-                                                                        </div>
-                                                                    </Fragment>
-                                                                }
-                                                                <p><small className="text-muted">FILP THIS CARD AFTER USE</small></p>
                                                             </div>
-
+                                                            {atWill.damage &&
+                                                                <div className="powerCardNumberBox">
+                                                                    <div className='row'>
+                                                                        <div className='col attribs-title card-text pcb'>Attack</div>
+                                                                        <div className='col attribs-title card-textpcb'>Damage</div>
+                                                                    </div>
+                                                                    <div className='row'>
+                                                                        <div className='col attribs card-text pcb'>+ {atWill.attack}</div>
+                                                                        <div className='col attribs card-text pcb'>{atWill.damage}</div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                            <p><small className="powerCardUse"></small></p>
                                                         </div>
-                                                    </div>
-                                                </label>
-                                            </div>
+
+                                                   
+                                                </div>
+                                            </label>
                                         </div>
-                                    </Fragment>
+                                    </div>
+                                </Fragment>
                                 )
                             })}
                         </div>
@@ -460,7 +466,7 @@ class Powers extends Component {
                         }
                     </div>
                 </form>
-            </Fragment>
+            </div>
         )
     }
 }
