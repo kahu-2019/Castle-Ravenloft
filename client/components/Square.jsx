@@ -8,18 +8,19 @@ class Square extends Component {
             x: this.props.x + 1,
             y: this.props.y + 1,
             image: this.props.image || undefined,
-            image: 'images/icons/Alisa.jpg',
             style:{}
         }
 
         this.updateStyle = this.updateStyle.bind(this)
     }
 
-    componentWillReceiveProps(props) {
-        this.setState({
-            type: props.square,
-            image: props.image || undefined
-        }, () => this.updateStyle())
+    componentDidUpdate(prevProps) {
+        if(prevProps !== this.props){
+            this.setState({
+                type: this.props.square,
+                image: this.props.image || undefined
+            }, () => this.updateStyle())
+        }
     }
 
     componentDidMount(){
@@ -39,7 +40,7 @@ class Square extends Component {
     render() {
         return (
         <div style={this.state.style}>
-        {this.state.type === 11 && <img src={this.state.image} style={{
+        {(this.state.type === 11 || this.state.type === 21) && <img src={this.state.image} style={{
                     maxHeight: '50px',
                     maxWidth: '50px'}} />}
         </div>
