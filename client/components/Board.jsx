@@ -171,7 +171,7 @@ class Board extends Component {
                 this.getPositionOfCharacter(this.state.players[0], 'x', -1)
                 break
             case "t":
-                this.checkAdjacentSquares()
+                this.checkAdjacentSquares(this.state.monsters[0])
                 break
         }
     }
@@ -189,19 +189,16 @@ class Board extends Component {
         this.setState({players:temp}, () => this.checkSidesOfCharacter())
     }
 
-    //  Checks adjacent squares of a given tile
-    checkAdjacentSquares(){
+    //  Checks adjacent squares of a given tile, for monster movement/atacks
+    checkAdjacentSquares(monster){
         let cols = 12 //    3 tiles -> 12 Squares
         let rows = 12 //    3 tiles -> 12 Squares
 
         let bigArray = JSON.parse(JSON.stringify(new Array(rows).fill(new Array(cols).fill(1))))
+        
+        let coords = this.getTileAndSquareForCharacter(monster)
 
-        let tempMonster = {
-            x: 2,
-            y: 2
-        }
-
-        let coords = this.getTileAndSquareForCharacter(tempMonster)
+        this.checkTwoAdjacent(coords)
 
         let centerTile = null
         let leftTile = null
@@ -209,7 +206,8 @@ class Board extends Component {
         let topTile = null
         let bottomTile = null
 
-        this.state.dataSet.map(tile => {
+        let dataSetCopy = JSON.parse(JSON.stringify(this.state.dataSet))
+        dataSetCopy.map(tile => {
             if(tile.x === coords.tileX-1 && tile.y === coords.tileY) leftTile   = tile
             if(tile.x === coords.tileX+1 && tile.y === coords.tileY) rightTile  = tile
             if(tile.x === coords.tileX && tile.y === coords.tileY-1) topTile    = tile
@@ -263,9 +261,9 @@ class Board extends Component {
                 else if(bigArray[row][col] === 21 || bigArray[row][col] === 2) bigArray[row][col] = 0
             }
         }
-        if(!containsPlayer){
-            let path = this.checkTwoAdjacent(coords)
-        }
+        // if(!containsPlayer){
+        //     let path = this.checkTwoAdjacent(coords)
+        // }
     }
 
 
@@ -277,63 +275,166 @@ class Board extends Component {
         let right = this.checkTwoAdjacentRight(coords)
         let top = this.checkTwoAdjacentTop(coords)
         let bottom = this.checkTwoAdjacentBottom(coords)
+        
 
-        let leftContainsPlayer = false
+        let leftPlayers = []
         for(let row in left){
-            for(let col in left){
+            for(let col in left[row]){
                 if(left[row][col] === 11){
                     left[row][col] = 0
-                    containsPlayer = true
+                    let player = {
+                        x: col,
+                        y: row
+                    }
+                    let relativeX = 8+Number(coords.squareX) - player.x  
+                    let relativeY = 4+Number(coords.squareY) - player.y
+                    this.state.players.map(tempPlayer => {
+                        if(tempPlayer.x === (coords.tileX-1)*4+coords.squareX+1-relativeX && tempPlayer.y === (coords.tileY-1)*4+coords.squareY+1-relativeY){
+                            player.id = tempPlayer.id
+                            leftPlayers.push(player)
+                        }
+                    })
                 }
                 else if(left[row][col] === 21 || left[row][col] === 2) left[row][col] = 0
             }
         }
 
-        let rightContainsPlayer = false
+        let rightPlayers = []
         for(let row in right){
-            for(let col in right){
+            for(let col in right[row]){
                 if(right[row][col] === 11){
                     right[row][col] = 0
-                    containsPlayer = true
+                    let player = {
+                        x: col,
+                        y: row
+                    }
+                    let relativeX = Number(coords.squareX) - player.x
+                    let relativeY = 4+Number(coords.squareY) - player.y
+                    this.state.players.map(tempPlayer => {
+                        if(tempPlayer.x === (coords.tileX-1)*4+coords.squareX+1-relativeX && tempPlayer.y === (coords.tileY-1)*4+coords.squareY+1-relativeY){
+                            player.id = tempPlayer.id
+                            rightPlayers.push(player)
+                        }
+                    })
                 }
                 else if(right[row][col] === 21 || right[row][col] === 2) right[row][col] = 0
             }
         }
 
-        let topContainsPlayer = false
+        let topPlayers = []
         for(let row in top){
-            for(let col in top){
+            for(let col in top[row]){
                 if(top[row][col] === 11){
                     top[row][col] = 0
-                    containsPlayer = true
+                    let player = {
+                        x: col,
+                        y: row
+                    }
+                    let relativeX = 4+Number(coords.squareX) - player.x
+                    let relativeY = 8+Number(coords.squareY) - player.y
+                    this.state.players.map(tempPlayer => {
+                        if(tempPlayer.x === (coords.tileX-1)*4+coords.squareX+1-relativeX && tempPlayer.y === (coords.tileY-1)*4+coords.squareY+1-relativeY){
+                            player.id = tempPlayer.id
+                            topPlayers.push(player)
+                        }
+                    })
                 }
                 else if(top[row][col] === 21 || top[row][col] === 2) top[row][col] = 0
             }
         }
 
-        let bottomContainsPlayer = false
+        let bottomPlayers = []
         for(let row in bottom){
-            for(let col in bottom){
+            for(let col in bottom[row]){
                 if(bottom[row][col] === 11){
                     bottom[row][col] = 0
-                    containsPlayer = true
+                    let player = {
+                        x: col,
+                        y: row
+                    }
+                    let relativeX = 4+Number(coords.squareX) - player.x
+                    let relativeY = Number(coords.squareY) - player.y
+                    this.state.players.map(tempPlayer => {
+                        if(tempPlayer.x === (coords.tileX-1)*4+coords.squareX+1-relativeX && tempPlayer.y === (coords.tileY-1)*4+coords.squareY+1-relativeY){
+                            player.id = tempPlayer.id
+                            bottomPlayers.push(player)
+                        }
+                    })
                 }
                 else if(bottom[row][col] === 21 || bottom[row][col] === 2) bottom[row][col] = 0
             }
         }
 
-        let leftPaths = []
-        if(leftContainsPlayer){
-            this.state.players.map(player => {
-                if(player.x > ((Number(coords.tileX)-3)*4)-1 && player.x < Number(coords.tileX)*4+1 && player.y > (Number(coords.tileY)-2)*4 && player.y < (Number(coords.tileY)*4+1)){
-                    let grid = new PF.Grid(left)
-                    let finder = new PF.AStarFinder()
-                    // TODO     Find relative coordinates between monster and player, those coords then become target for finder
-                    // let path = finder.findPath(Number(coords.tileX)-1 + 8, Number(monster.y)-1 + 4, Number(this.state.players[0].x)-1, Number(this.state.players[0].y)-1, grid)
-                    leftPaths.push(path)
+        let paths = []
+
+        leftPlayers.map(player => {
+            let grid = new PF.Grid(left)
+            let finder = new PF.AStarFinder()
+            let path = finder.findPath(coords.squareX + 8, coords.squareY + 4, player.x, player.y, grid)
+            if(path.length > 0) paths.push({id:player.id, path:path, length: path.length-2})
+        })
+        
+        rightPlayers.map(player => {
+            let grid = new PF.Grid(right)
+            let finder = new PF.AStarFinder()
+            let path = finder.findPath(coords.squareX, coords.squareY + 4, player.x, player.y, grid)
+            if(path.length > 0) paths.push({id:player.id, path:path, length: path.length-2})
+        })
+
+        topPlayers.map(player => {
+            let grid = new PF.Grid(top)
+            let finder = new PF.AStarFinder()
+            let path = finder.findPath(coords.squareX + 4, coords.squareY + 8, player.x, player.y, grid)
+            if(path.length > 0) paths.push({id:player.id, path:path, length: path.length-2})
+        })
+
+        bottomPlayers.map(player => {
+            let grid = new PF.Grid(bottom)
+            let finder = new PF.AStarFinder()
+            let path = finder.findPath(coords.squareX + 4, coords.squareY, player.x, player.y, grid)
+            if(path.length > 0) paths.push({id:player.id, path:path, length: path.length-2})
+        })
+
+        let closestPlayer = paths.sort((a, b) => {
+            return a.length - b.length
+        })[0]
+
+        // console.log(closestPlayer)
+
+        let playerTile = undefined
+        let playersOnTile = []
+
+        outerloop:
+        for(let player of this.state.players){
+            if(player.id === closestPlayer.id){
+                let playerCoords = this.getTileAndSquareForCharacter(player)
+                for(let tile of this.state.dataSet){
+                    if(tile.x === playerCoords.tileX && tile.y === playerCoords.tileY){
+                        playerTile =  JSON.parse(JSON.stringify(tile.grid))
+                        for(let player2 of this.state.players){
+                            let player2Coords = this.getTileAndSquareForCharacter(player2)
+                            if(player2Coords.tileX === playerCoords.tileX && player2Coords.tileY === playerCoords.tileY){
+                                playersOnTile.push(JSON.parse(JSON.stringify(player2)))
+                            }
+                        }
+
+                        break outerloop
+                    }
                 }
-            })
+            }
         }
+
+        let squares = closestPlayer.length
+
+        closestPlayer.adjacent = false
+        closestPlayer.distance = {
+            tiles: 2,
+            squares
+        }
+        closestPlayer.playerTile = playerTile
+        closestPlayer.players = playersOnTile
+
+        console.log(closestPlayer)
     }
 
     checkTwoAdjacentLeft(coords){
@@ -348,7 +449,8 @@ class Board extends Component {
         let topTile = null
         let bottomTile = null
 
-        this.state.dataSet.map(tile => {
+        let dataSetCopy = JSON.parse(JSON.stringify(this.state.dataSet))
+        dataSetCopy.map(tile => {
             if(tile.x === coords.tileX-1 && tile.y === coords.tileY)   centerTile = tile
             if(tile.x === coords.tileX-2 && tile.y === coords.tileY)     leftTile = tile
             if(tile.x === coords.tileX-1 && tile.y === coords.tileY-1)    topTile = tile
@@ -409,7 +511,8 @@ class Board extends Component {
         let topTile = null
         let bottomTile = null
 
-        this.state.dataSet.map(tile => {
+        let dataSetCopy = JSON.parse(JSON.stringify(this.state.dataSet))
+        dataSetCopy.map(tile => {
             if(tile.x === coords.tileX+1 && tile.y === coords.tileY)   centerTile = tile
             if(tile.x === coords.tileX+2 && tile.y === coords.tileY)    rightTile = tile
             if(tile.x === coords.tileX+1 && tile.y === coords.tileY-1)    topTile = tile
@@ -469,7 +572,8 @@ class Board extends Component {
         let topTile = null
         let bottomTile = null // Checks top, so start bottom
 
-        this.state.dataSet.map(tile => {
+        let dataSetCopy = JSON.parse(JSON.stringify(this.state.dataSet))
+        dataSetCopy.map(tile => {
             if(tile.x === coords.tileX-1 && tile.y === coords.tileY-1)   leftTile = tile
             if(tile.x === coords.tileX+1 && tile.y === coords.tileY-1)  rightTile = tile
             if(tile.x === coords.tileX && tile.y === coords.tileY-2)      topTile = tile
@@ -529,7 +633,8 @@ class Board extends Component {
         let topTile = null  //  Checks bottom, so start top
         let bottomTile = null 
 
-        this.state.dataSet.map(tile => {
+        let dataSetCopy = JSON.parse(JSON.stringify(this.state.dataSet))
+        dataSetCopy.map(tile => {
             if(tile.x === coords.tileX-1 && tile.y === coords.tileY+1)   leftTile = tile
             if(tile.x === coords.tileX+1 && tile.y === coords.tileY+1)  rightTile = tile
             if(tile.x === coords.tileX && tile.y === coords.tileY+2)      bottomTile = tile
@@ -583,7 +688,8 @@ class Board extends Component {
         let cols = 0
         let rows = 0
 
-        this.state.dataSet.map(set => {
+        let dataSetCopy = JSON.parse(JSON.stringify(this.state.dataSet))
+        dataSetCopy.map(tile => {
             if(set.x > cols) cols = set.x
             if(set.y > rows) rows = set.y
         })
