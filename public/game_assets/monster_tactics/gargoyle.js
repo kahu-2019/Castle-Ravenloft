@@ -49,8 +49,8 @@ if(tileAdjacent){
     //still need to figure out movement
     return {
         movement:{
-            x:1,
-            y:2
+            x:0,
+            y:0
         },
         characters
     }
