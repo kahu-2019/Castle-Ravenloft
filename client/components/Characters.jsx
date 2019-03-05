@@ -31,7 +31,7 @@ class Characters extends Component {
 
         return (
             <Fragment>
-                <div className="card-columns">
+                <div className="card-columns imFont">
                     {this.props.characters.map((character, i) => {
                         var id = character.id
                         if (!this.state[`characterChosen${id}`]) {
@@ -39,27 +39,21 @@ class Characters extends Component {
                                 <div className={'card ' + 'bg-' + (character.name)} key={i} onClick={() => this.characterOrder(character)}>
                                     <div className="container-fluid">
                                         <div className="card-body">
-                                            <div className="row">
-                                                <h5 className="card-title card-text char-card">{character.name}</h5>
-                                                <h6 className="card-subtitle mb-2 text-muted card-text char-card">{character.subtitle}</h6>
-                                                <p className="card-text char-card">{character.description}</p>
+                                          
+                                                <h5 className="card-title card-text char-card namePosition">{character.name}</h5>
+                                                <h6 className="subtitlePosition">{character.subtitle}</h6>
+                                                <p className="descriptionPosition">{character.description}</p>
+                                           
+                                            <div className="row statRow">
+                                                <div className="col card-text char-card acPosition">{character.AC}</div>
+                                                <div className="col card-text char-card hpPosition">{character.HP}</div>
+                                                <div className="col card-text char-card speedPosition">{character.speed}</div>
+                                                <div className="col card-text char-card surgePosition">+{character.SurgeValue}</div>
                                             </div>
-                                            <div className="row">
-                                                <div className="col attribs-title card-text char-card">AC</div>
-                                                <div className="col attribs-title card-text char-card">HP</div>
-                                                <div className="col attribs-title card-text char-card">Speed</div>
-                                                <div className="col attribs-title card-text char-card">SurgeValue</div>
-                                            </div>
-                                            <div className="row">
-                                                <div className="col attribs card-text char-card">{character.AC}</div>
-                                                <div className="col attribs card-text char-card">{character.HP}</div>
-                                                <div className="col attribs card-text char-card">{character.speed}</div>
-                                                <div className="col attribs card-text char-card">+ {character.SurgeValue}</div>
-                                            </div>
-
-
-                                            <div className="row">
-                                                <p className="card-text char-card">{character.description}</p>
+                                            <div className="abilityPosition">
+                                                <p >{character.ability}</p>
+                                                <h5>Power:</h5>
+                                                <p>You can choose the following Power Cards:<br/>Select one Utility Power<br/>Select two At-Will Powers<br/>Select one Daily Power</p>
                                             </div>
                                         </div>
                                     </div>

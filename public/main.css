@@ -38,25 +38,7 @@
   box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
 }
 
-.bg-Alisa {
-  background-color: #228B22!important;
-}
 
-.bg-Arjhan {
-  background-color: 	#800000!important;
-}
-
-.bg-Immeril {
-  background-color: #4f3584!important;
-}
-
-.bg-Kat {
-  background-color: #013554!important;
-}
-
-.bg-Thorgrim {
-  background-color: #9e8f0b!important;
-}
 
 .character-card{
   animation:scale-out-center 0.2s cubic-bezier(.55,.085,.68,.53) both
@@ -500,3 +482,134 @@ span {
   border-radius: 15px;
   background-color: rgb(247, 241, 224) !important;
 }
+/* The Following is for Character selection cards */
+.imFont{
+  font-family: 'IM Fell DW Pica', serif;
+  
+}
+.acPosition{
+position: absolute;
+left: 15px;
+color:black;
+font-size: 20px
+}
+
+.statRow{
+position: absolute;
+top: 190px;
+}
+.hpPosition{
+position: absolute;
+left: 20px;
+color:black;
+font-size: 20px
+}
+.speedPosition{
+position: absolute;
+left: 32px;
+color:black;
+font-size: 20px
+}
+
+.surgePosition{
+position: absolute;
+left: 50px;
+color:black;
+font-size: 20px
+}
+
+.namePosition{
+position: absolute;
+left: 30px;
+top: 25px;
+color:White;
+font-size: 30px
+}
+
+.subtitlePosition{
+position: absolute;
+left: 30px;
+top: 60px;
+color:rgb(184, 184, 184);
+font-size: 20px
+}
+
+.descriptionPosition{
+position: absolute;
+left: 30px;
+top: 80px;
+color:white;
+font-size: 15px;
+width: 250px;
+line-height: 15pt;
+}
+
+.abilityPosition{
+position: absolute;
+left: 30px;
+top: 230px;
+color:black;
+font-size: 15px;
+width: 250px;
+line-height: 15pt;
+}
+.powerPosition{
+  position: absolute;
+  left: 30px;
+  top: 250px;
+  color:black;
+  font-size: 15px;
+  width: 250px;
+  line-height: 15pt;
+  }
+
+  .bg-Alisa {
+    background-color: #228B22!important;
+    height:500px;
+    width:500px;
+    background-image: url(./images/characterTemplates/allisa.jpg);
+    background-size: cover;
+    max-width: 500px;
+    min-width: 500px;
+  }
+  
+  .bg-Arjhan {
+    background-color: 	#800000!important;
+    height:500px;
+    width:500px;
+    background-image: url(./images/characterTemplates/arjhan.jpg);
+    background-size: cover;
+    max-width: 500px;
+    min-width: 500px;
+  }
+  
+  .bg-Immeril {
+    background-color: #4f3584!important;
+    height:500px;
+    width:500px;
+    background-image: url(./images/characterTemplates/immeril.jpg);
+    background-size: cover;
+    max-width: 500px;
+    min-width: 500px;
+  }
+  
+  .bg-Kat {
+    background-color: #013554!important;
+    height:500px;
+    width:500px;
+    background-image: url(./images/characterTemplates/kat.jpg);
+    background-size: cover;
+    max-width: 500px;
+    min-width: 500px;
+  }
+  
+  .bg-Thorgrim {
+    background-color: #9e8f0b!important;
+    background-image: url(./images/characterTemplates/thorgrim.jpg);
+    background-size: cover;
+    height:500px;
+    width:500px;
+    max-width: 500px;
+    min-width: 500px;
+  
+  }
