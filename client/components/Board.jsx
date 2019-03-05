@@ -79,7 +79,7 @@ class Board extends Component {
         this.checkSidesOfCharacter = this.checkSidesOfCharacter.bind(this)
         this.diceRoll = this.diceRoll.bind(this)
         this.getMonster = this.getMonster.bind(this)
-        this.pathFindingArrayConstructor = this.pathFindingArrayConstructor.bind(this)
+        this.monsterPathfinder = this.monsterPathfinder.bind(this)
     }
 
     componentDidMount(){
@@ -165,7 +165,7 @@ class Board extends Component {
                 this.getPositionOfCharacter(this.state.players[0], 'x', -1)
                 break
             case "t":
-                this.pathFindingArrayConstructor()
+                this.monsterPathfinder(this.state.monsters[0])
                 break
         }
     }
@@ -186,7 +186,7 @@ class Board extends Component {
     findClosestTileWithPLayer
 
     //  Constructs one large array from every square on every tile, necessary for pathfinding library
-    pathFindingArrayConstructor(){
+    monsterPathfinder(monster){
         let cols = 0
         let rows = 0
 
@@ -194,11 +194,6 @@ class Board extends Component {
             if(set.x > cols) cols = set.x
             if(set.y > rows) rows = set.y
         })
-
-        let tempMonster = {
-            x: 2,
-            y: 2
-        }
 
         rows*=4
         cols*=4
@@ -215,7 +210,7 @@ class Board extends Component {
 
         let grid = new PF.Grid(bigArray)
         let finder = new PF.AStarFinder()
-        let path = finder.findPath(Number(tempMonster.x)-1, Number(tempMonster.y)-1, Number(this.state.players[0].x)-1, Number(this.state.players[0].y)-1, grid)
+        let path = finder.findPath(Number(monster.x)-1, Number(monster.y)-1, Number(this.state.players[0].x)-1, Number(this.state.players[0].y)-1, grid)
         console.log(path)
 
     }
