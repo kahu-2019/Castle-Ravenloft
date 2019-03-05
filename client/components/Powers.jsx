@@ -208,7 +208,6 @@ class Powers extends Component {
     }
 
     nextCharacter(){
-        console.log('hit')
         var id = this.props.match.params.id
         var pos = this.props.characterOrder.findIndex(character => character.id == id)
         if(pos + 1 < this.props.characterOrder.length){
@@ -290,7 +289,7 @@ class Powers extends Component {
                             <div className='row'>
                                 <h5 className="card-title">{this.state.healingWord.title}</h5>
                                 <p className="card-subtitle mb-2 text-muted card-text"><b>{this.state.healingWord.subtitle}</b></p>
-                                <p><b>{this.state.healingWord.instruction_1}</b> {this.state.sneakAttack.instruction_2}</p>
+                                <p><b>{this.state.healingWord.instruction_1}</b> {this.state.healingWord.instruction_2}</p>
                             </div>
                             <p><small className="text-muted">FILP THIS CARD OVER AFTER YOU USE THE POWER</small></p>
                         </div>
