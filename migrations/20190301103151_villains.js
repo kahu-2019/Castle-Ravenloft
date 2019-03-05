@@ -2,12 +2,10 @@
 exports.up = function (knex, Promise) {
   return knex.schema.createTable('villains', table => {
     table.increments('id')
-    table.string('name')
-    table.string('race')
-    table.string('description')
+    table.string('name', 1000)
+    table.string('race', 1000)
     table.integer('ac')
     table.integer('hp')
-    table.integer('level')
   })
 };
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Tile from './Tile'
 import { connect } from "react-redux";
 import allTiles from '../../public/game_assets/tiles.json'
+import { getAllMonsters } from '../actions';
 
 /*  Main board component, renders tile and square sub-components
 
@@ -17,6 +18,10 @@ class Board extends Component {
 
         this.state = {
             players: this.props.characters,
+
+            monsters: [],
+
+            allMonsters: this.props.allMonsters,
 
             transform: {
                 dragging: false,
@@ -71,9 +76,11 @@ class Board extends Component {
         this.rotateTile = this.rotateTile.bind(this)
         this.checkSidesOfCharacter = this.checkSidesOfCharacter.bind(this)
         this.diceRoll = this.diceRoll.bind(this)
+        this.getMonster = this.getMonster.bind(this)
     }
 
     componentDidMount(){
+        this.props.dispatch(getAllMonsters())
         window.oncontextmenu = (e) => {
             e.preventDefault();
         }
@@ -97,6 +104,12 @@ class Board extends Component {
 
     componentWillUnmount(){
         document.removeEventListener("keydown", this.keypress, false);
+    }
+
+    componentDidUpdate(prevProps){
+        if(this.props.allMonsters !== prevProps.allMonsters){
+            this.setState({allMonsters: this.props.allMonsters})
+        }
     }
 
     mouseDown(event){
@@ -231,9 +244,26 @@ class Board extends Component {
             tempPlayers.map(player => {
                 return player.x = player.x + 4
             })
+            this.state.monsters.map(monster => {
+                return monster.x = monster.x + 4
+            })
             tile.x = position.x+1
             tile.y = position.y
             tempSet.push(tile)
+
+            let monster = {}
+            monsterFinder:
+            for(let y in tile.grid){
+                for(let x in tile.grid){
+                    if(tile.grid[y][x] === 2){
+                        monster.x = (Number(tile.x)-1)*4+Number(x)+1
+                        monster.y = (Number(tile.y)-1)*4+Number(y)+1
+                        break monsterFinder
+                    } 
+                }
+            }
+            this.state.monsters.push(this.getMonster(monster.x, monster.y, this.state.players[0].id))
+
             this.setState({
                 players: tempPlayers,
                 cleanTileSet: tempSet,
@@ -247,9 +277,26 @@ class Board extends Component {
             tempPlayers.map(player => {
                 return player.y = player.y + 4
             })
+            this.state.monsters.map(monster => {
+                return monster.y = monster.y + 4
+            })
             tile.x = position.x
             tile.y = position.y+1
             tempSet.push(tile)
+
+            let monster = {}
+            monsterFinder:
+            for(let y in tile.grid){
+                for(let x in tile.grid){
+                    if(tile.grid[y][x] === 2){
+                        monster.x = (Number(tile.x)-1)*4+Number(x)+1
+                        monster.y = (Number(tile.y)-1)*4+Number(y)+1
+                        break monsterFinder
+                    } 
+                }
+            }
+            this.state.monsters.push(this.getMonster(monster.x, monster.y, this.state.players[0].id))
+
             this.setState({
                 players: tempPlayers,
                 cleanTileSet: tempSet
@@ -261,9 +308,31 @@ class Board extends Component {
         tile.y = position.y
         tempSet.push(tile)
 
+        let monster = {}
+        monsterFinder:
+        for(let y in tile.grid){
+            for(let x in tile.grid){
+                if(tile.grid[y][x] === 2){
+                    monster.x = (Number(tile.x)-1)*4+Number(x)+1
+                    monster.y = (Number(tile.y)-1)*4+Number(y)+1
+                    break monsterFinder
+                } 
+            }
+        }
+        this.state.monsters.push(this.getMonster(monster.x, monster.y, this.state.players[0].id))
+
         this.setState({
             cleanTileSet: tempSet
         }, () => this.processCharacters())
+    }
+
+    getMonster(x, y, charId){
+        let monNum = Math.floor(Math.random()*10)
+        let newMonster = JSON.parse(JSON.stringify(this.state.allMonsters[monNum]))
+        newMonster.x = x
+        newMonster.y = y
+        newMonster.owner = charId
+        return newMonster
     }
 
     //  Calculates the tile and square that a character is on
@@ -356,7 +425,7 @@ class Board extends Component {
         this.setState({explore: sides})
     }
     
-    //  Gets the position of every character, and puts them on the 'dataSet' stored in state
+    //  Gets the position of every character and monster, and puts them on the 'dataSet' stored in state
     processCharacters(){
         let tempSet = JSON.parse(JSON.stringify(this.state.cleanTileSet)) // Creates a deep copy of the array
 
@@ -373,6 +442,21 @@ class Board extends Component {
                 }
             }
         }
+        
+        outerloop:
+        for(let monster of this.state.monsters){
+
+            let position = this.getTileAndSquareForCharacter(monster)
+
+            for(let item of tempSet){
+                if(position.tileX === item.x && position.tileY === item.y){
+                    item.grid[position.squareY][position.squareX] = 21
+                    item.players.push({image:monster.image, x:position.squareX, y:position.squareY})
+                    continue outerloop
+                }
+            }
+        }
+
         this.setState({dataSet: tempSet}, this.checkSidesOfCharacter())
     }
     
@@ -401,7 +485,10 @@ class Board extends Component {
                 </div>
             </div>
             <div style={{position:'absolute', top:'10px', left:'10px'}}>
-                {this.state.players[0].name}<br />
+            
+                <div className="alert alert-light" style={{color:'black'}}>
+                    {this.state.players[0].name}<br />
+                </div>
                 <button onClick={() => this.nextPlayer()}>End turn</button><br />
                 {this.state.explore.left   && <React.Fragment><button onClick={() => this.prepTileForAdding(3)}>Explore left</button><br /></React.Fragment>}
                 {this.state.explore.right  && <React.Fragment><button onClick={() => this.prepTileForAdding(1)}>Explore right</button><br /></React.Fragment>}
@@ -425,7 +512,8 @@ function mapStateToProps(state){
         }
     }
     return {
-        characters: state.characterOrder
+        characters: state.characterOrder,
+        allMonsters: state.monsters
     }
 } 
 

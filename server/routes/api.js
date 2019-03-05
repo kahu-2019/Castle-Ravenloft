@@ -68,6 +68,7 @@ router.get('/getAllMonsters', (req, res) => {
         res.json(data)
     })
         .catch(err => {
+            console.log(err)
             res.json(standardError)
         })
 })
