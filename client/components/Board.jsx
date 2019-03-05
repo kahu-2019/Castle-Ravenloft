@@ -220,28 +220,28 @@ class Board extends Component {
         //  Center tile
         for(let y = 0; y < centerTile.grid.length; y++){
             for(let x = 0; x < centerTile.grid[y].length; x++){
-                bigArray[4 + Number(y)][4 + Number(x)] = (centerTile.grid[y][x] === 2 || centerTile.grid[y][x] === 11 || centerTile.grid[y][x] === 21) ? 0 : centerTile.grid[y][x]
+                bigArray[4 + Number(y)][4 + Number(x)] = centerTile.grid[y][x]
             }
         }
 
         if(leftTile){
             for(let y = 0; y < leftTile.grid.length; y++){
                 for(let x = 0; x < leftTile.grid[y].length; x++){
-                    bigArray[4 + Number(y)][x] = (leftTile.grid[y][x] === 2 || leftTile.grid[y][x] === 11 || leftTile.grid[y][x] === 21) ? 0 : leftTile.grid[y][x]
+                    bigArray[4 + Number(y)][x] = leftTile.grid[y][x]
                 }
             }
         }
         if(rightTile){
             for(let y = 0; y < rightTile.grid.length; y++){
                 for(let x = 0; x < rightTile.grid[y].length; x++){
-                    bigArray[4 + Number(y)][8 + Number(x)] = (rightTile.grid[y][x] === 2 || rightTile.grid[y][x] === 11 || rightTile.grid[y][x] === 21) ? 0 : rightTile.grid[y][x]
+                    bigArray[4 + Number(y)][8 + Number(x)] = rightTile.grid[y][x]
                 }
             }
         }
         if(topTile){
             for(let y = 0; y < topTile.grid.length; y++){
                 for(let x = 0; x < topTile.grid[y].length; x++){
-                    bigArray[y][4 + Number(x)] = (topTile.grid[y][x] === 2 || topTile.grid[y][x] === 11 || topTile.grid[y][x] === 21) ? 0 : topTile.grid[y][x]
+                    bigArray[y][4 + Number(x)] = topTile.grid[y][x]
                 }
             }
         }
@@ -261,6 +261,9 @@ class Board extends Component {
     //  Checks the adjacent two squares of a given tile
     checkTwoAdjacent(coords){
         //  All returned arrays are exactly 12*12 squares
+
+        let startX = coords.tileX
+        let startY = coords.startY
 
         let left = this.checkTwoAdjacentLeft(coords)
         let right = this.checkTwoAdjacentRight(coords)
@@ -297,7 +300,7 @@ class Board extends Component {
         if(centerTile){
             for(let y = 0; y < centerTile.grid.length; y++){
                 for(let x = 0; x < centerTile.grid[y].length; x++){
-                    bigArray[4 + Number(y)][4 + Number(x)] = (centerTile.grid[y][x] === 2 || centerTile.grid[y][x] === 11 || centerTile.grid[y][x] === 21) ? 0 : centerTile.grid[y][x]
+                    bigArray[4 + Number(y)][4 + Number(x)] = centerTile.grid[y][x]
                 }
             }
         }
@@ -306,28 +309,28 @@ class Board extends Component {
         if(leftTile){
             for(let y = 0; y < leftTile.grid.length; y++){
                 for(let x = 0; x < leftTile.grid[y].length; x++){
-                    bigArray[4 + Number(y)][x] = (leftTile.grid[y][x] === 2 || leftTile.grid[y][x] === 11 || leftTile.grid[y][x] === 21) ? 0 : leftTile.grid[y][x]
+                    bigArray[4 + Number(y)][x] = leftTile.grid[y][x]
                 }
             }
         }
         if(rightTile){
             for(let y = 0; y < rightTile.grid.length; y++){
                 for(let x = 0; x < rightTile.grid[y].length; x++){
-                    bigArray[4 + Number(y)][8 + Number(x)] = (rightTile.grid[y][x] === 2 || rightTile.grid[y][x] === 11 || rightTile.grid[y][x] === 21) ? 0 : rightTile.grid[y][x]
+                    bigArray[4 + Number(y)][8 + Number(x)] = rightTile.grid[y][x]
                 }
             }
         }
         if(topTile){
             for(let y = 0; y < topTile.grid.length; y++){
                 for(let x = 0; x < topTile.grid[y].length; x++){
-                    bigArray[y][4 + Number(x)] = (topTile.grid[y][x] === 2 || topTile.grid[y][x] === 11 || topTile.grid[y][x] === 21) ? 0 : topTile.grid[y][x]
+                    bigArray[y][4 + Number(x)] = topTile.grid[y][x]
                 }
             }
         }
         if(bottomTile){
             for(let y = 0; y < bottomTile.grid.length; y++){
                 for(let x = 0; x < bottomTile.grid[y].length; x++){
-                    bigArray[8 + Number(y)][4 + Number(x)] = (bottomTile.grid[y][x] === 2 || bottomTile.grid[y][x] === 11 || bottomTile.grid[y][x] === 21) ? 0 : bottomTile.grid[y][x]
+                    bigArray[8 + Number(y)][4 + Number(x)] = bottomTile.grid[y][x]
                 }
             }
         }
@@ -357,7 +360,7 @@ class Board extends Component {
         if(centerTile){
             for(let y = 0; y < centerTile.grid.length; y++){
                 for(let x = 0; x < centerTile.grid[y].length; x++){
-                    bigArray[4 + Number(y)][4 + Number(x)] = (centerTile.grid[y][x] === 2 || centerTile.grid[y][x] === 11 || centerTile.grid[y][x] === 21) ? 0 : centerTile.grid[y][x]
+                    bigArray[4 + Number(y)][4 + Number(x)] = centerTile.grid[y][x]
                 }
             }
         }
@@ -366,28 +369,28 @@ class Board extends Component {
         if(leftTile){
             for(let y = 0; y < leftTile.grid.length; y++){
                 for(let x = 0; x < leftTile.grid[y].length; x++){
-                    bigArray[4 + Number(y)][x] = (leftTile.grid[y][x] === 2 || leftTile.grid[y][x] === 11 || leftTile.grid[y][x] === 21) ? 0 : leftTile.grid[y][x]
+                    bigArray[4 + Number(y)][x] = leftTile.grid[y][x]
                 }
             }
         }
         if(rightTile){
             for(let y = 0; y < rightTile.grid.length; y++){
                 for(let x = 0; x < rightTile.grid[y].length; x++){
-                    bigArray[4 + Number(y)][8 + Number(x)] = (rightTile.grid[y][x] === 2 || rightTile.grid[y][x] === 11 || rightTile.grid[y][x] === 21) ? 0 : rightTile.grid[y][x]
+                    bigArray[4 + Number(y)][8 + Number(x)] = rightTile.grid[y][x]
                 }
             }
         }
         if(topTile){
             for(let y = 0; y < topTile.grid.length; y++){
                 for(let x = 0; x < topTile.grid[y].length; x++){
-                    bigArray[y][4 + Number(x)] = (topTile.grid[y][x] === 2 || topTile.grid[y][x] === 11 || topTile.grid[y][x] === 21) ? 0 : topTile.grid[y][x]
+                    bigArray[y][4 + Number(x)] = topTile.grid[y][x]
                 }
             }
         }
         if(bottomTile){
             for(let y = 0; y < bottomTile.grid.length; y++){
                 for(let x = 0; x < bottomTile.grid[y].length; x++){
-                    bigArray[8 + Number(y)][4 + Number(x)] = (bottomTile.grid[y][x] === 2 || bottomTile.grid[y][x] === 11 || bottomTile.grid[y][x] === 21) ? 0 : bottomTile.grid[y][x]
+                    bigArray[8 + Number(y)][4 + Number(x)] = bottomTile.grid[y][x]
                 }
             }
         }
@@ -417,7 +420,7 @@ class Board extends Component {
         if(centerTile){
             for(let y = 0; y < centerTile.grid.length; y++){
                 for(let x = 0; x < centerTile.grid[y].length; x++){
-                    bigArray[4 + Number(y)][4 + Number(x)] = (centerTile.grid[y][x] === 2 || centerTile.grid[y][x] === 11 || centerTile.grid[y][x] === 21) ? 0 : centerTile.grid[y][x]
+                    bigArray[4 + Number(y)][4 + Number(x)] = centerTile.grid[y][x]
                 }
             }
         }
@@ -426,28 +429,28 @@ class Board extends Component {
         if(leftTile){
             for(let y = 0; y < leftTile.grid.length; y++){
                 for(let x = 0; x < leftTile.grid[y].length; x++){
-                    bigArray[4 + Number(y)][x] = (leftTile.grid[y][x] === 2 || leftTile.grid[y][x] === 11 || leftTile.grid[y][x] === 21) ? 0 : leftTile.grid[y][x]
+                    bigArray[4 + Number(y)][x] = leftTile.grid[y][x]
                 }
             }
         }
         if(rightTile){
             for(let y = 0; y < rightTile.grid.length; y++){
                 for(let x = 0; x < rightTile.grid[y].length; x++){
-                    bigArray[4 + Number(y)][8 + Number(x)] = (rightTile.grid[y][x] === 2 || rightTile.grid[y][x] === 11 || rightTile.grid[y][x] === 21) ? 0 : rightTile.grid[y][x]
+                    bigArray[4 + Number(y)][8 + Number(x)] = rightTile.grid[y][x]
                 }
             }
         }
         if(topTile){
             for(let y = 0; y < topTile.grid.length; y++){
                 for(let x = 0; x < topTile.grid[y].length; x++){
-                    bigArray[y][4 + Number(x)] = (topTile.grid[y][x] === 2 || topTile.grid[y][x] === 11 || topTile.grid[y][x] === 21) ? 0 : topTile.grid[y][x]
+                    bigArray[y][4 + Number(x)] = topTile.grid[y][x]
                 }
             }
         }
         if(bottomTile){
             for(let y = 0; y < bottomTile.grid.length; y++){
                 for(let x = 0; x < bottomTile.grid[y].length; x++){
-                    bigArray[8 + Number(y)][4 + Number(x)] = (bottomTile.grid[y][x] === 2 || bottomTile.grid[y][x] === 11 || bottomTile.grid[y][x] === 21) ? 0 : bottomTile.grid[y][x]
+                    bigArray[8 + Number(y)][4 + Number(x)] = bottomTile.grid[y][x]
                 }
             }
         }
@@ -477,7 +480,7 @@ class Board extends Component {
         if(centerTile){
             for(let y = 0; y < centerTile.grid.length; y++){
                 for(let x = 0; x < centerTile.grid[y].length; x++){
-                    bigArray[4 + Number(y)][4 + Number(x)] = (centerTile.grid[y][x] === 2 || centerTile.grid[y][x] === 11 || centerTile.grid[y][x] === 21) ? 0 : centerTile.grid[y][x]
+                    bigArray[4 + Number(y)][4 + Number(x)] = centerTile.grid[y][x]
                 }
             }
         }
@@ -486,28 +489,28 @@ class Board extends Component {
         if(leftTile){
             for(let y = 0; y < leftTile.grid.length; y++){
                 for(let x = 0; x < leftTile.grid[y].length; x++){
-                    bigArray[4 + Number(y)][x] = (leftTile.grid[y][x] === 2 || leftTile.grid[y][x] === 11 || leftTile.grid[y][x] === 21) ? 0 : leftTile.grid[y][x]
+                    bigArray[4 + Number(y)][x] = leftTile.grid[y][x]
                 }
             }
         }
         if(rightTile){
             for(let y = 0; y < rightTile.grid.length; y++){
                 for(let x = 0; x < rightTile.grid[y].length; x++){
-                    bigArray[4 + Number(y)][8 + Number(x)] = (rightTile.grid[y][x] === 2 || rightTile.grid[y][x] === 11 || rightTile.grid[y][x] === 21) ? 0 : rightTile.grid[y][x]
+                    bigArray[4 + Number(y)][8 + Number(x)] = rightTile.grid[y][x]
                 }
             }
         }
         if(topTile){
             for(let y = 0; y < topTile.grid.length; y++){
                 for(let x = 0; x < topTile.grid[y].length; x++){
-                    bigArray[y][4 + Number(x)] = (topTile.grid[y][x] === 2 || topTile.grid[y][x] === 11 || topTile.grid[y][x] === 21) ? 0 : topTile.grid[y][x]
+                    bigArray[y][4 + Number(x)] = topTile.grid[y][x]
                 }
             }
         }
         if(bottomTile){
             for(let y = 0; y < bottomTile.grid.length; y++){
                 for(let x = 0; x < bottomTile.grid[y].length; x++){
-                    bigArray[8 + Number(y)][4 + Number(x)] = (bottomTile.grid[y][x] === 2 || bottomTile.grid[y][x] === 11 || bottomTile.grid[y][x] === 21) ? 0 : bottomTile.grid[y][x]
+                    bigArray[8 + Number(y)][4 + Number(x)] = bottomTile.grid[y][x]
                 }
             }
         }
@@ -533,7 +536,7 @@ class Board extends Component {
         this.state.dataSet.map(tile => {
             for(let y = 0; y < tile.grid.length; y++){
                 for(let x = 0; x < tile.grid[y].length; x++){
-                    bigArray[(Number(tile.y)-1)*4 + Number(y)][(Number(tile.x)-1)*4 + Number(x)] = (tile.grid[y][x] === 2 || tile.grid[y][x] === 11 || tile.grid[y][x] === 21) ? 0 : tile.grid[y][x]
+                    bigArray[(Number(tile.y)-1)*4 + Number(y)][(Number(tile.x)-1)*4 + Number(x)] = tile.grid[y][x]
                 }
             }
         })
