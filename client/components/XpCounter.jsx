@@ -7,7 +7,7 @@ export class XpCounter extends Component {
         this.state={
             monsterXP:7,
             pooledXP:0,
-            hello:6
+            hello:9
             
         }
     }

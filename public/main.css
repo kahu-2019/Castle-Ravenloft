@@ -5,6 +5,10 @@
     justify-content: center;
     overflow: hidden;
 }
+.surgeToken{
+  border-radius: 50%;
+  float: right;
+}
 
 .tile {
     display:grid;

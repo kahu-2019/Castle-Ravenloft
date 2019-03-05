@@ -6,7 +6,7 @@ var heroCoords = d
 var monstCoords = d
 var tileAdjacent = true
 var tileWithin = true
-var heroesArr = [{name:"karl the wizard", AC:15},{name:"sam the gimp", AC:16 }]
+var heroesArr = [{name:"karl the wizard", AC:15, id:1},{name:"sam the gimp", AC:16, id: 3}]
 
 var damage = {
     damage:1,
