@@ -13,12 +13,14 @@ class Tile extends Component {
         }
     }
 
-    componentWillReceiveProps(props) {
-        this.setState({grid: props.tile.grid,
-            image: props.tile.image,
-            rotation: props.tile.rotation || 0,
-            players: props.tile.players
-        })
+    componentDidUpdate(prevProps) {
+        if(prevProps !== this.props){
+            this.setState({grid: this.props.tile.grid,
+                image: this.props.tile.image,
+                rotation: this.props.tile.rotation || 0,
+                players: this.props.tile.players
+            })
+        }
     }
 
     render() {
