@@ -4,6 +4,7 @@ import { HashRouter as Router, Route } from "react-router-dom";
 import TimeTract from "./TimeTract";
 import EncounterTreasure from "./EncounterTreasure";
 import Home2 from "./Home2";
+import Home from "./Home";
 import Characters from "./Characters";
 import Powers from "./Powers";
 // import Home from "./Home";
@@ -22,6 +23,7 @@ class App extends Component {
               <Route path="/timetract" component={TimeTract} />
               <Route path="/encounter-treasure" component={EncounterTreasure} />
               <Route path="/board" component={Board} />
+              <Route path="/home" component={Home} />
             </Fragment>
           </Router>
         </div>

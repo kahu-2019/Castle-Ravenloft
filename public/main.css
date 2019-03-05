@@ -1,3 +1,6 @@
+*{
+  text-decoration: none !important
+}
 .board-container{
     height: 100vh;
     display: flex;
@@ -240,6 +243,7 @@ span {
   width: 100%;
   height:100%;
   background-image: url('./images/darkcastle.jpg');
+  
 
 }
 
@@ -250,12 +254,14 @@ span {
 .logo-div{
   position:fixed;
   top: 20%;
-  left: 50%
+  left: 50%;
+  
 }
 .rain{
   height:100vh;
   background: url('./images/rain.png');
   animation: rain .5s linear infinite;
+  
 }
 
 .rain:before{
@@ -299,12 +305,13 @@ span {
 }
 
 .startbutton{
-  color: rgb(238, 232, 223);
+  color: rgb(238, 232, 223)!important;
   font-family: 'IM Fell DW Pica', serif;
   text-align: center;
   font-size: 30px;
   opacity: 1;
-  animation: start 2s linear infinite
+  animation: start 2s linear infinite;
+  text-decoration: none!important
 }
 
 @keyframes start{
@@ -571,6 +578,9 @@ line-height: 15pt;
     background-size: cover;
     max-width: 500px;
     min-width: 500px;
+    
+    
+    
   }
   
   .bg-Arjhan {
@@ -694,17 +704,77 @@ line-height: 15pt;
 }
 
 .choosePowersInactive{
-  color: rgb(105, 105, 105) !important;
+  color: rgb(105, 105, 105)!important;
   font-family: 'IM Fell DW Pica', serif;
   font-size: 30px;
-  text-decoration:none !important;
+  text-decoration:none!important;
 }
 
 .choosepowersActive{
-  color: white !important;
+  color: white!important;
   font-family: 'IM Fell DW Pica', serif;
   font-size: 30px;
   opacity: 1;
   animation: start 2s linear infinite;
-  text-decoration:none !important;
+  text-decoration:none!important;
+}
+
+/* Player card styling */
+.utilityCard{
+  background-color: grey
+}
+
+.atWillCard{
+  background-color: green;
+  height:450px;
+  width:320px;
+  background-image: url(./images/powerCards/atWill.jpg);
+  background-size: 100%;
+  /* max-width: 430px;
+  min-width: 320px; */
+  border-radius: 7px;
+  font-family: 'IM Fell DW Pica', serif;
+}
+
+.powerCardTitle{
+  position: absolute;
+  left:30px;
+  top:30px;
+  color:white;
+  font-size: 35px;
+}
+.powerCardSubtitle{
+  position: absolute;
+  left:30px;
+  top:100px;
+  color:white !important;
+  font-size: 16px;
+  width:270px;
+  line-height: 16px
+
+}
+.PowerCardInst{
+color:black;
+position: absolute;
+font-size: 15px;
+left:40px;
+top:170px;
+width: 230px
+}
+
+.powerCardNumberBox{
+  color:black;
+  position: absolute;
+  top:330px;
+  left: 90px
+}
+.pcb{
+  color:black!important
+}
+
+.powerCardUse{
+position:absolute;
+left:40px;
+top:390px;
+color:black
 }
