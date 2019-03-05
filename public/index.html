@@ -8,10 +8,20 @@
   <title>Castle Ravenloft</title>
 </head>
 
-<body>
+<!-- prevents any refresh or leave page event -->
+
+<body onbeforeunload='return dontPressThatButton()'>
+
+  <!-- onbeforeunload should display the text below but sometimes doesn't depending on browser.... -->
+  <script>
+    function dontPressThatButton() {
+      return "There be dragons out there, are you sure you want to refresh...?"
+    }
+  </script>
   <div id="app"></div>
 
   <div class="hidden">
+    <!-- this massive chunk of script  is to preload all tiles and player icons for better game performance -->
     <script type="text/javascript">
       var images = new Array()
       function preload() {
