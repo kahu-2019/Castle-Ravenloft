@@ -4,8 +4,8 @@ var diceRoll = 10
 var biteAttack = 7
 var heroCoords = d
 var monstCoords = d
-var tileAdjacent = true
-var tileWithin = true
+var isAdjacent = true
+var isWithin = true
 var heroesArr = [{name:"karl the wizard", AC:15, id:1},{name:"sam the gimp", AC:16, id: 3}]
 
 var damage = {
@@ -20,7 +20,58 @@ var movement = {
     y:0
 }
 
-if(tileAdjacent === true ){
+var heroInfo = {
+    adjacentTile = {
+
+    },
+    closestPlayer: 5,
+    playerTile : [[1,1,1,1,
+                    0,11,0,0,
+                    11,0,0,0,
+                    0,0,0,1]]
+}   
+
+if(playerTile[y-1][x] === 0  || 2){
+    console.log("1")
+    movement.push({
+        x:x,
+        y:y-1
+    })
+        
+        return movement
+    }
+    else if(playerTile[y+1][x] === 0 || 2){
+        console.log("2")
+        movement.push({
+        x:x,
+        y:y+1   
+        })
+
+        return movement 
+    }
+
+else if(playerTile[y][x-1] === 0 || 2){
+    console.log("3")
+    movement.push({
+        x:x-1,
+        y:y  
+        })
+
+        return movement 
+}
+else if(playerTile[y][x+1] === 0 || 2){
+    console.log("4")
+    movement.push({
+        x:x+1,
+        y:y  
+        })
+        c
+        return movement 
+}
+
+
+
+if(isAdjacent === true ){
     var characters =[]
     for(i=0; i < heroesArr.length; i++){
         diceRoll = diceRoll()

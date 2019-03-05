@@ -1,4 +1,4 @@
-var closestHero = 1
+var isWithin1 = true
 var heroAc = 15
 var diceRoll = 10
 var monsterAttack = 1
@@ -18,13 +18,15 @@ var movement = {
 }
 
 
-
-if(closestHero < 2  && diceRoll + monsterAttack > heroAc ) {
+// Within one tile of hero, attacks rotting fist
+if(isWIthin ===true  && diceRoll + monsterAttack > heroAc ) {
 
 console.log(attack + " " + adjacent) 
  return zombAtt
 } 
 
+
+// Not within one tile, moves 1 tile to closest hero
 else {
     console.log(movement + moveValue)
   return movement
