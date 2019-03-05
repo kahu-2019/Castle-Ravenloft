@@ -22,6 +22,7 @@ class Powers extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
         this.nextCharacter = this.nextCharacter.bind(this)
+        this.submit = this.submit.bind(this)
     }
 
     componentDidMount(){
@@ -134,23 +135,80 @@ class Powers extends Component {
     onSubmit(e){
         e.preventDefault()
         var id = this.props.match.params.id
+
+        var daily = this.state.dailyResult
+        var utility = this.state.utilityResult
+        var atWill = this.state.atWillResults
+
         var cards = {
-            daily:this.state.dailyResult,
-            utility: this.state.utilityResult,
-            atWill: this.state.atWillResults
+            daily,
+            utility,
+            atWill
+        }
+
+
+        function setDefaultUtility(powerCard){
+            cards = {
+            daily,
+            utility:[utility,powerCard],
+            atWill
+        }
+        return cards            
+        }
+
+        function setDefaultDaily(powerCard){
+            cards = {
+                daily:[daily,powerCard],
+                utility,
+                atWill
+            } 
+            return cards      
         }
         
+        function alisaThePickyBitch(){
+            cards = {
+                daily,
+                utility,
+                atWill
+            }
+            return cards
+        }
 
+        switch(Number(id)){
+            case 4:
+            setDefaultUtility(this.state.sneakAttack)
+            break
+            case 5:
+            setDefaultUtility(this.state.healingWord)
+            break
+            case 3:
+            setDefaultUtility(this.state.feySted)
+            break
+            case 2:
+            setDefaultDaily(this.state.dragonsBreath)
+            break
+            case 1:
+            alisaThePickyBitch()
+            break
+            default:
+            return cards
+        }
+
+        this.submit(id,cards)
+
+    }
+
+    submit(id,cards){
         if(cards.atWill.length < 2){
             alert("You must pick 2 At Will powers")
         }else{
             this.props.dispatch(addPowerCards(id,cards))
             this.nextCharacter()
         }
-
     }
 
     nextCharacter(){
+        console.log('hit')
         var id = this.props.match.params.id
         var pos = this.props.characterOrder.findIndex(character => character.id == id)
         if(pos + 1 < this.props.characterOrder.length){
