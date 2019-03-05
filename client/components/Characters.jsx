@@ -30,7 +30,11 @@ class Characters extends Component {
     render() {
 
         return (
-            <Fragment>
+            <div className = "charSelectBg">
+                <div className="selectWarriors "><h1>Select Your Warriors:</h1></div>
+                <div className="row">
+                    <CharacterOrder />
+                </div>
                 <div className="card-columns imFont">
                     {this.props.characters.map((character, i) => {
                         var id = character.id
@@ -66,10 +70,8 @@ class Characters extends Component {
                     })}
                     <p></p>
                 </div>
-                <div className="row">
-                    <CharacterOrder />
-                </div>
-            </Fragment>
+
+            </div>
         )
     }
 }
