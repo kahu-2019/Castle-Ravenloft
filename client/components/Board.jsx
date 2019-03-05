@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Tile from './Tile'
 import { connect } from "react-redux";
+import PF from 'pathfinding'
+
 import allTiles from '../../public/game_assets/tiles.json'
 import { getAllMonsters } from '../actions';
 
@@ -77,6 +79,7 @@ class Board extends Component {
         this.checkSidesOfCharacter = this.checkSidesOfCharacter.bind(this)
         this.diceRoll = this.diceRoll.bind(this)
         this.getMonster = this.getMonster.bind(this)
+        this.pathFindingArrayConstructor = this.pathFindingArrayConstructor.bind(this)
     }
 
     componentDidMount(){
@@ -161,6 +164,9 @@ class Board extends Component {
             case "ArrowLeft":
                 this.getPositionOfCharacter(this.state.players[0], 'x', -1)
                 break
+            case "t":
+                this.pathFindingArrayConstructor()
+                break
         }
     }
 
@@ -175,6 +181,43 @@ class Board extends Component {
         let temp = this.state.players
         temp.push(temp.shift())
         this.setState({players:temp}, () => this.checkSidesOfCharacter())
+    }
+
+    findClosestTileWithPLayer
+
+    //  Constructs one large array from every square on every tile, necessary for pathfinding library
+    pathFindingArrayConstructor(){
+        let cols = 0
+        let rows = 0
+
+        this.state.dataSet.map(set => {
+            if(set.x > cols) cols = set.x
+            if(set.y > rows) rows = set.y
+        })
+
+        let tempMonster = {
+            x: 2,
+            y: 2
+        }
+
+        rows*=4
+        cols*=4
+
+        let bigArray = JSON.parse(JSON.stringify(new Array(rows).fill(new Array(cols).fill(1))))
+
+        this.state.dataSet.map(tile => {
+            for(let y = 0; y < tile.grid.length; y++){
+                for(let x = 0; x < tile.grid[y].length; x++){
+                    bigArray[(Number(tile.y)-1)*4 + Number(y)][(Number(tile.x)-1)*4 + Number(x)] = (tile.grid[y][x] === 2 || tile.grid[y][x] === 11 || tile.grid[y][x] === 21) ? 0 : tile.grid[y][x]
+                }
+            }
+        })
+
+        let grid = new PF.Grid(bigArray)
+        let finder = new PF.AStarFinder()
+        let path = finder.findPath(Number(tempMonster.x)-1, Number(tempMonster.y)-1, Number(this.state.players[0].x)-1, Number(this.state.players[0].y)-1, grid)
+        console.log(path)
+
     }
 
     //  Rotates 2d arrays of size n*n (equal on both sides)
