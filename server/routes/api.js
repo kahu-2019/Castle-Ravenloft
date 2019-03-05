@@ -80,9 +80,10 @@ router.get("/getAllMonsters", (req, res) => {
       res.json(data);
     })
     .catch(err => {
-      res.json(standardError);
-    });
-});
+      console.log(err)
+      res.json(standardError)
+    })
+})
 
 // GET /api/v1/getMonsterAttacks/:id returns all attacks for that monster
 router.get("/getMonsterAttacks/:id", (req, res) => {
