@@ -191,79 +191,94 @@ class Board extends Component {
 
     //  Checks adjacent squares of a given tile, for monster movement/atacks
     checkAdjacentSquares(monster){
-        let cols = 12 //    3 tiles -> 12 Squares
-        let rows = 12 //    3 tiles -> 12 Squares
+        // let cols = 12 //    3 tiles -> 12 Squares
+        // let rows = 12 //    3 tiles -> 12 Squares
 
-        let bigArray = JSON.parse(JSON.stringify(new Array(rows).fill(new Array(cols).fill(1))))
+        // let bigArray = JSON.parse(JSON.stringify(new Array(rows).fill(new Array(cols).fill(1))))
         
         let coords = this.getTileAndSquareForCharacter(monster)
-
         this.checkTwoAdjacent(coords)
 
-        let centerTile = null
-        let leftTile = null
-        let rightTile = null
-        let topTile = null
-        let bottomTile = null
+        // let centerTile = null
+        // let leftTile = null
+        // let rightTile = null
+        // let topTile = null
+        // let bottomTile = null
 
-        let dataSetCopy = JSON.parse(JSON.stringify(this.state.dataSet))
-        dataSetCopy.map(tile => {
-            if(tile.x === coords.tileX-1 && tile.y === coords.tileY) leftTile   = tile
-            if(tile.x === coords.tileX+1 && tile.y === coords.tileY) rightTile  = tile
-            if(tile.x === coords.tileX && tile.y === coords.tileY-1) topTile    = tile
-            if(tile.x === coords.tileX && tile.y === coords.tileY+1) bottomTile = tile
-            if(tile.x === coords.tileX && tile.y === coords.tileY)   centerTile = tile
-        })
+        // let dataSetCopy = JSON.parse(JSON.stringify(this.state.dataSet))
+        // dataSetCopy.map(tile => {
+        //     if(tile.x === coords.tileX-1 && tile.y === coords.tileY) leftTile   = tile
+        //     if(tile.x === coords.tileX+1 && tile.y === coords.tileY) rightTile  = tile
+        //     if(tile.x === coords.tileX && tile.y === coords.tileY-1) topTile    = tile
+        //     if(tile.x === coords.tileX && tile.y === coords.tileY+1) bottomTile = tile
+        //     if(tile.x === coords.tileX && tile.y === coords.tileY)   centerTile = tile
+        // })
 
-        //  Center tile
-        for(let y = 0; y < centerTile.grid.length; y++){
-            for(let x = 0; x < centerTile.grid[y].length; x++){
-                bigArray[4 + Number(y)][4 + Number(x)] = centerTile.grid[y][x]
-            }
-        }
-
-        if(leftTile){
-            for(let y = 0; y < leftTile.grid.length; y++){
-                for(let x = 0; x < leftTile.grid[y].length; x++){
-                    bigArray[4 + Number(y)][x] = leftTile.grid[y][x]
-                }
-            }
-        }
-        if(rightTile){
-            for(let y = 0; y < rightTile.grid.length; y++){
-                for(let x = 0; x < rightTile.grid[y].length; x++){
-                    bigArray[4 + Number(y)][8 + Number(x)] = rightTile.grid[y][x]
-                }
-            }
-        }
-        if(topTile){
-            for(let y = 0; y < topTile.grid.length; y++){
-                for(let x = 0; x < topTile.grid[y].length; x++){
-                    bigArray[y][4 + Number(x)] = topTile.grid[y][x]
-                }
-            }
-        }
-        if(bottomTile){
-            for(let y = 0; y < bottomTile.grid.length; y++){
-                for(let x = 0; x < bottomTile.grid[y].length; x++){
-                    bigArray[8 + Number(y)][4 + Number(x)] = bottomTile.grid[y][x]
-                }
-            }
-        }
-        
-        let containsPlayer = false
-        for(let row in bigArray){
-            for(let col in bigArray){
-                if(bigArray[row][col] === 11){
-                    bigArray[row][col] = 0
-                    containsPlayer = true
-                }
-                else if(bigArray[row][col] === 21 || bigArray[row][col] === 2) bigArray[row][col] = 0
-            }
-        }
-        // if(!containsPlayer){
-        //     let path = this.checkTwoAdjacent(coords)
+        // //  Center tile
+        // for(let y = 0; y < centerTile.grid.length; y++){
+        //     for(let x = 0; x < centerTile.grid[y].length; x++){
+        //         bigArray[4 + Number(y)][4 + Number(x)] = centerTile.grid[y][x]
+        //     }
         // }
+
+        // if(leftTile){
+        //     for(let y = 0; y < leftTile.grid.length; y++){
+        //         for(let x = 0; x < leftTile.grid[y].length; x++){
+        //             bigArray[4 + Number(y)][x] = leftTile.grid[y][x]
+        //         }
+        //     }
+        // }
+        // if(rightTile){
+        //     for(let y = 0; y < rightTile.grid.length; y++){
+        //         for(let x = 0; x < rightTile.grid[y].length; x++){
+        //             bigArray[4 + Number(y)][8 + Number(x)] = rightTile.grid[y][x]
+        //         }
+        //     }
+        // }
+        // if(topTile){
+        //     for(let y = 0; y < topTile.grid.length; y++){
+        //         for(let x = 0; x < topTile.grid[y].length; x++){
+        //             bigArray[y][4 + Number(x)] = topTile.grid[y][x]
+        //         }
+        //     }
+        // }
+        // if(bottomTile){
+        //     for(let y = 0; y < bottomTile.grid.length; y++){
+        //         for(let x = 0; x < bottomTile.grid[y].length; x++){
+        //             bigArray[8 + Number(y)][4 + Number(x)] = bottomTile.grid[y][x]
+        //         }
+        //     }
+        // }
+        
+        // let containsPlayer = false
+        // for(let row in bigArray){
+        //     for(let col in bigArray){
+        //         if(bigArray[row][col] === 11){
+        //             bigArray[row][col] = 0
+        //             containsPlayer = true
+        //         }
+        //         else if(bigArray[row][col] === 21 || bigArray[row][col] === 2) bigArray[row][col] = 0
+        //     }
+        // }
+
+        // let closestPlayer = undefined
+        // if(!containsPlayer){
+        //     closestPlayer = this.checkTwoAdjacent(coords)
+        // }
+
+        // let monsterCoordsX = coords.x + 4
+        // let monsterCoordsY = coords.y + 4
+
+        // let heros = []
+        // for(let player of this.state.players){
+        //     let playerCoords = this.getTileAndSquareForCharacter(player)
+        //     if(playerCoords.tileX >= coords.tileX-1 && playerCoords.tileX <= playerCoords.tileX+1 && playerCoords.tileY >= coords.tileY - 1 && playerCoords.tileY <= coords.tileX + 1){
+        //         relativeX = coords.
+        //     }
+        // }
+
+
+        // return closestPlayer
     }
 
 
@@ -395,11 +410,41 @@ class Board extends Component {
             if(path.length > 0) paths.push({id:player.id, path:path, length: path.length-2})
         })
 
-        let closestPlayer = paths.sort((a, b) => {
-            return a.length - b.length
-        })[0]
+        let oneTilePlayers = []
 
-        // console.log(closestPlayer)
+        for(let player of paths){
+            for(let char of this.state.players){
+                if(char.id === player.id){
+                    let charPosition = this.getTileAndSquareForCharacter(char)
+                    let relativeTile = Math.abs(coords.tileX - charPosition.tileX) + Math.abs(coords.tileY - charPosition.tileY)
+                    if(relativeTile === 0 || relativeTile === 1){
+                        player.distance = {
+                            tiles: relativeTile
+                        }
+                        player.adjacent = true
+                        oneTilePlayers.push(player)
+                    }
+                }
+            }
+        }
+
+        let closestPlayer = undefined
+
+        if(oneTilePlayers.length > 0){
+            closestPlayer = oneTilePlayers.sort((a, b) => {
+                return a.length - b.length
+            })[0]
+        }
+        else{
+            closestPlayer = paths.sort((a, b) => {
+                return a.length - b.length
+            })[0]
+            closestPlayer.distance = {
+                distance: 2
+            }
+            closestPlayer.adjacent = false
+        }
+
 
         let playerTile = undefined
         let playersOnTile = []
@@ -426,11 +471,7 @@ class Board extends Component {
 
         let squares = closestPlayer.length
 
-        closestPlayer.adjacent = false
-        closestPlayer.distance = {
-            tiles: 2,
-            squares
-        }
+        closestPlayer.distance.squares = squares
         closestPlayer.playerTile = playerTile
         closestPlayer.players = playersOnTile
 
