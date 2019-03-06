@@ -42,7 +42,7 @@ class Home extends Component {
           <div className="display2" id="square">
             <h4>GAME OVERVIEW</h4>
             <p className="ptext">
-              The <i>Dengeons & Dragons:Castle Ravenloft Board Game</i> is a
+              The <i>Dungeons & Dragons:Castle Ravenloft Board Game</i> is a
               cooperative adventure game. You and your fellow Heroes must work
               as a team to succeed in the adventures that unfold within the
               castle. You either win together or lose togather Each player

@@ -809,3 +809,9 @@ margin: 0 auto;
   text-align: center;
   border-radius:50%
 }
+.submitPower{
+  border:none;
+  background:transparent !important;
+  background-image: url('./images/buttonclear.png');
+  text-align: center;
+}

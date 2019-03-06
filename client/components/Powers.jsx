@@ -304,7 +304,7 @@ class Powers extends Component {
                             </Fragment>
                             : this.state.feySted ?
                                 <Fragment>
-                                    <h3 className="orderList">You get this by default:</h3>
+                                    <h3 className="orderList">You get this Power by default:</h3>
                                     <div className="row justify-content-center">
                                     <div className="card">
                                         <div className="utilityCard">
@@ -458,16 +458,16 @@ class Powers extends Component {
                     </div>
                     <div className='row'>
                         <div className='col'>
-                            <button type="submit" className="btn btn-primary">Submit</button>
+                            <p><button type="submit" className="submitPower orderList choosepowersActive">Submit</button></p>
                         </div>
                         {this.state.nextCharacter &&
                             <div className='col'>
-                                <Link to={`/powers/${this.state.nextCharId}`} className="btn btn-secondary">Next character</Link>
+                                <Link to={`/powers/${this.state.nextCharId}`} className="submitPower choosepowersActive">Next character</Link>
                             </div>
                         }
                         {this.state.playGame &&
                             <div className='col'>
-                                <Link to='/board' className="btn btn-secondary">Play Game!</Link>
+                                <Link to='/board' className="submitPower choosepowersActive">Enter Castle Ravenloft</Link>
                             </div>
                         }
                     </div>
