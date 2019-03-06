@@ -5,70 +5,63 @@ class TimeTract extends Component {
     super(props);
 
     this.state = {
-      sunTrack: 3
+      sunTrack: 1
     };
   }
 
   render() {
     return (
       <div className="Time-tract">
-        <div className="title">
-          <h2>
-            <strong>TIME TRACT</strong>
-          </h2>
-        </div>
-        <div className="containers">
-          <img
-            src="./images/time-track/time-track1.png"
-            alt="time-track"
-            height="350"
-            width="900"
-          />
-          <div className="contaniner1">
-            <div className="contaniner" id="circle">
-              <h3>1</h3>
-              {this.state.sunTrack === 1 && (
-                <img height="40" src="/images/icons/sun.png" />
-              )}
-              <span>
-                Place the Sun totken on this circle at the start of the
-                adventure
-              </span>
-              <div className="time">
-                <h6>
-                  <strong>MORNING</strong>
-                </h6>
-              </div>
-            </div>
+        <div>
+          <div className="time-title text-center">
+            <h5>
+              <strong>TIME TRACT</strong>
+            </h5>
+          </div>
+          <div className="time-containers">
+            <div className="contaniner1 timecontainer1">
+              <div className="contaniner" id="circle">
+                <h5>1</h5>
+                {this.state.sunTrack === 1 && (
+                  <img height="45" src="/images/icons/sun2.png" />
+                )}
 
-            <div className="contaniner" id="circle">
-              <h3>2</h3>
-              {this.state.sunTrack === 2 && (
-                <img height="40" src="/images/icons/sun.png" />
-              )}
-            </div>
-            <div className="contaniner" id="circle">
-              <h3>3</h3>
-              {this.state.sunTrack === 3 && (
-                <img height="40" src="/images/icons/sun.png" />
-              )}
-            </div>
-            <div className="contaniner" id="circle">
-              <h3>4</h3>
-              {this.state.sunTrack === 4 && (
-                <img height="40" src="/images/icons/sun.png" />
-              )}
-            </div>
-            <div className="contaniner" id="circle">
-              <h3>5</h3>
-              {this.state.sunTrack === 5 && (
-                <img height="40" src="/images/icons/sun.png" />
-              )}
-              <span>Strahd wakes up!</span>
-              <div className="time1">
-                <h6>
-                  <strong>SUNSET</strong>
-                </h6>
+                <div className="time">
+                  <h6 className="morning">
+                    <strong>MORNING</strong>
+                  </h6>
+                </div>
+              </div>
+
+              <div className="contaniner" id="circle">
+                <h5>2</h5>
+                {this.state.sunTrack === 2 && (
+                  <img height="45" src="/images/icons/sun2.png" />
+                )}
+              </div>
+              <div className="contaniner" id="circle">
+                <h5>3</h5>
+                {this.state.sunTrack === 3 && (
+                  <img height="45" src="/images/icons/sun2.png" />
+                )}
+              </div>
+              <div className="contaniner" id="circle">
+                <h5>4</h5>
+                {this.state.sunTrack === 4 && (
+                  <img height="45" src="/images/icons/sun2.png" />
+                )}
+              </div>
+              <div className="contaniner" id="circle">
+                <h5>5</h5>
+                {this.state.sunTrack === 5 && (
+                  <img height="45" src="/images/icons/sun2.png" />
+                )}
+                <span>Strahd wakes up!</span>
+                <div className="time1">
+                  <h6>
+                    <strong>SUNSET</strong>
+                  </h6>
+                </div>
               </div>
             </div>
           </div>
