@@ -177,9 +177,9 @@
   width: 84px;
   height: 84px;
   color: rgb(126, 87, 41);
-  background: rgb(167, 153, 137);
+  background: rgb(218, 197, 175);
   border-radius: 80%;
-  border-color: rgb(99, 71, 37);
+  border-color: rgb(216, 191, 160);
   margin-right: 15px;
   text-align: center;
   border-color: #b6926b !important;
@@ -632,5 +632,9 @@ span {
   font-size: 30px;
   opacity: 1;
   animation: start 2s linear infinite;
+  text-decoration: none !important;
+}
+.charSelectLink {
+  color: black !important;
   text-decoration: none !important;
 }
