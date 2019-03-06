@@ -73,7 +73,7 @@ var slice = {
 }
 
 
-
+var diceRoll = roll()
 //Right next to, scimitar att
 if(squareAdjacent && diceRoll + scimitar.att > closestPlayer.AC){
     console.log('he boutta scimitar you cause you too close. BAM! ', scimitar.dmg + ' damage!')
@@ -84,12 +84,7 @@ if(squareAdjacent && diceRoll + scimitar.att > closestPlayer.AC){
 //Right next to and miss, don't move
 } else if(squareAdjacent && diceRoll + scimitar.att <= closestPlayer.AC){
     console.log('luckily he missed the scimi hit')
-    return {
-        movement:{
-            x:0,
-            y:0
-        }
-    }
+    return undefined
 //Close to, slice att AND move
 }else if(tileAdjacent && diceRoll + slice.att > closestPlayer.AC){
     console.log('he just charged... Bam! Charge sliced yo ass for ', slice.dmg + ' damage!')

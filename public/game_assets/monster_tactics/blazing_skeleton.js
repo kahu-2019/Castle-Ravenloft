@@ -99,7 +99,7 @@ export default function blazingSkeleton(playerDetails){
         }
     //move closer
     }
-    else {
+    else{
         //convert to detailedPosition
         var monX = monPos.tileX
         var monY = monPos.tileY
@@ -108,25 +108,27 @@ export default function blazingSkeleton(playerDetails){
 
         var destination = {x:monX - playX,y:monY - playY}
 
+        let grid = null
+
         var tileExists = playerDetails.dataSet.find(tile => {
             tile.x == destination.x && tile.y == destination.y
+            grid = tileExists.grid
+            tileExists = detailedPosition(tileExists)
             return true
         })
         
         console.log('tile Exists:',tileExists)
 
-        if (tileExists != null || tileExists != undefined){
-            if (tileExists.grid[monPos.squareY][monPos.squareX] == 0 || tileExists.grid[monPos.squareY][monPos.squareX] == 2){
+        if(tileExists != null || tileExists != undefined){
+            if(tileExists.grid[monPos.squareY][monPos.squareX] == 0 || tileExists.grid[monPos.squareY][monPos.squareX] == 2){
                 monPos.tileX = tileExists.x
                 monPos.tileY = tileExists.y
-            }
-            else {
+            }else{
                 //look for first free space and set monPos to the square as well as the tile
                 let square = {}
 
                 
-                outerLoop:
-                for(let row in tileExists.grid){
+                outerLoop: for(let row in tileExists.grid){
                     for(let col in tileExists.grid[row]){
                         if(tileExists.grid[row][col] == 0 || tileExists.grid[row][col] == 2){
                             square.x = Number(col)
@@ -134,17 +136,17 @@ export default function blazingSkeleton(playerDetails){
                             break outerLoop
                         }
                     }
+        //convert to total position
+                    var movement = totalPosition(tileExists.x,tileExists.y,square.x,square.y)
                 }
-    //convert to total position
-                var movement = totalPosition(tileExists.x,tileExists.y,square.x,square.y)
+
             }
 
+
+            
+            console.log('coming closer', movement)
+
+            return movement
         }
-
-
-        
-        console.log('coming closer', movement)
-
-        return movement
     }
 }
