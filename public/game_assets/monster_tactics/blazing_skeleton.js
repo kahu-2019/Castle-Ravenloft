@@ -34,7 +34,7 @@ var playerDetails = {
     ]}]
 }
 
-export function blazingSkeleton(playerDetails){
+export default function blazingSkeleton(playerDetails){
 //values i need
 var closestPlayer = playerDetails.players.find(player => player.id == playerDetails.id)
 var heroes = playerDetails.players
