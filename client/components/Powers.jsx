@@ -223,8 +223,11 @@ class Powers extends Component {
     render() {
         return (
             <div className="charSelectBg">
-                <h1>{this.state.character.name}</h1>
-                <h2>{this.state.character.subtitle}</h2>
+            <div className="justify-content-center">
+                <h1 className="nameTitle">{this.state.character.name}</h1>
+                <h2 className="orderList">{this.state.character.subtitle}</h2>
+                <p className="nameTitle"><img className="displayFace" src={`./images/icons/${this.state.character.name}.jpg`}/></p>
+            </div>
                 {this.state.sneakAttack ?
                     <Fragment>
                         <h3 className="orderList">You get this by default:</h3>
@@ -246,79 +249,83 @@ class Powers extends Component {
                     </Fragment>
                     : this.state.dragonsBreath ?
                         <Fragment>
-                            <h3>You get this by default</h3>
-                            <div className="card">
-                                <div className='container-fluid'>
-                                    <div className="card-body">
-                                        <div className='row'>
-                                            <h5 className="card-title">{this.state.dragonsBreath.title}</h5>
-                                            <p className="card-subtitle mb-2 text-muted card-text"><b>{this.state.dragonsBreath.subtitle}</b></p>
-                                            <p><b>{this.state.dragonsBreath.instruction_1}</b> {this.state.dragonsBreath.instruction_2}</p>
+                            <h3 className="orderList">You get this by default:</h3>
+                            <div className="row justify-content-center">
+                            <div className="card">               
+                                <div className="dailyCard">
+                                    <div className='row'>
+                                        <h5 className="card-title powerCardTitle">{this.state.dragonsBreath.title}</h5>
+                                        <p className="powerCardSubtitle">{this.state.dragonsBreath.subtitle}</p>
+                                        <div className="PowerCardInst">
+                                        <p>{this.state.dragonsBreath.instruction_1}</p>
+                                        <p>{this.state.dragonsBreath.instruction_2}</p>
                                         </div>
-                                        {this.state.dragonsBreath.damage &&
-                                            <Fragment>
-                                                <div className='row'>
-                                                    <div className='col attribs-title card-text'>Attack</div>
-                                                    <div className='col attribs-title card-text'>Damage</div>
-                                                </div>
-                                                <div className='row'>
-                                                    <div className='col attribs card-text'>+ {this.state.dragonsBreath.attack}</div>
-                                                    <div className='col attribs card-text'>
-
-                                                        {this.state.dragonsBreath.damage}
-                                                        {this.state.dragonsBreath.miss &&
-                                                            <Fragment>
-
-                                                                <p>Miss: {this.state.dragonsBreath.miss} Damage</p>
-                                                            </Fragment>
-                                                        }
-
-                                                    </div>
-                                                </div>
-                                            </Fragment>
-                                        }
-                                        <p><small className="text-muted">FILP THIS CARD AFTER USE</small></p>
                                     </div>
-
-                                </div>
+                                    {this.state.dragonsBreath.damage &&
+                                        <div className="powerCardNumberBox2">
+                                            <div className='row'>
+                                                <div className='col attribs-title card-text pcb'>Attack</div>
+                                                <div className='col attribs-title card-text pcb'>Damage</div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className='col attribs card-text pcb'>+ {this.state.dragonsBreath.attack}</div>
+                                                <div className='col attribs card-text pcb'>{this.state.dragonsBreath.damage}</div>
+                                            </div>
+                                            {this.state.dragonsBreath.miss &&
+                                                        <Fragment>
+                                                            <div className="">Miss: {this.state.dragonsBreath.miss} Damage</div>
+                                                        </Fragment>
+                                                    }
+                                        </div>
+                                    }
+                                    <p><small className="powerCardUse2">CAN ONLY USE ONCE</small></p>
+                                </div>                
+                            </div>
                             </div>
                         </Fragment>
                         : this.state.healingWord ?
                             <Fragment>
-                                <h3>You get this by default</h3>
+                                <h3 className="orderList">You get this by default:</h3>
+                                <div className="row justify-content-center">
                                 <div className="card">
-                                    <div className='container-fluid'>
-                                        <div className="card-body">
-                                            <div className='row'>
-                                                <h5 className="card-title">{this.state.healingWord.title}</h5>
-                                                <p className="card-subtitle mb-2 text-muted card-text"><b>{this.state.healingWord.subtitle}</b></p>
-                                                <p><b>{this.state.healingWord.instruction_1}</b> {this.state.healingWord.instruction_2}</p>
+                                    <div className="utilityCard">
+                                        <div className='row'>
+                                            <h5 className="card-title powerCardTitle">{this.state.healingWord.title}</h5>
+                                            <p className="powerCardSubtitle"><b>{this.state.healingWord.subtitle}</b></p>
+                                            <div className="PowerCardInst">
+                                            <p>{this.state.healingWord.instruction_1}</p>
+                                            <p>{this.state.healingWord.instruction_2}</p>
                                             </div>
-                                            <p><small className="text-muted">FILP THIS CARD OVER AFTER YOU USE THE POWER</small></p>
                                         </div>
+                                        <p><small className="powerCardUse">YOU MAY ONLY USE THIS POWER ONCE</small></p>
                                     </div>
+                                </div>
                                 </div>
                             </Fragment>
                             : this.state.feySted ?
                                 <Fragment>
-                                    <h3>You get this by default</h3>
+                                    <h3 className="orderList">You get this by default:</h3>
+                                    <div className="row justify-content-center">
                                     <div className="card">
-                                        <div className='container-fluid'>
-                                            <div className="card-body">
-                                                <div className='row'>
-                                                    <h5 className="card-title">{this.state.feySted.title}</h5>
-                                                    <p className="card-subtitle mb-2 text-muted card-text"><b>{this.state.feySted.subtitle}</b></p>
-                                                    <p><b>{this.state.feySted.instruction_1}</b> {this.state.feySted.instruction_2}</p>
+                                        <div className="utilityCard">
+                                            <div className='row'>
+                                                <h5 className="card-title powerCardTitle">{this.state.feySted.title}</h5>
+                                                <p className="powerCardSubtitle"><b>{this.state.feySted.subtitle}</b></p>
+                                                <div className="PowerCardInst">
+                                                <p>{this.state.feySted.instruction_1}</p>
+                                                <p>{this.state.feySted.instruction_2}</p>
                                                 </div>
-                                                <p><small className="text-muted">FILP THIS CARD OVER AFTER YOU USE THE POWER</small></p>
                                             </div>
+                                            <p><small className="powerCardUse">YOU MAY ONLY USE THIS POWER ONCE</small></p>
                                         </div>
+                                    </div>
                                     </div>
                                 </Fragment>
                                 : ''}
                 <form onSubmit={this.onSubmit} action={`/powers/${this.state.nextCharId}`} id='powersForm'>
                     <div className="form-group">
-                        <h2 className='power-titles orderList'>Daily Powers:</h2>
+                    <br/><br/>
+                        <h2 className='power-titles orderList'>Select One Daily Power:</h2>
                         <div className="row">
                             {this.state.daily.map((daily, i) => {
                                 return (
@@ -370,7 +377,8 @@ class Powers extends Component {
                         </div>
                     </div>
                     <div className="form-group">
-                        <h2 className='power-titles orderList'>Utility Powers:</h2>
+                    <br/><br/>
+                        <h2 className='power-titles orderList'>Select One Utility Power:</h2>
                         <div className="row">
                             {this.state.utility.map((utility, i) => {
                                 return (
@@ -379,9 +387,7 @@ class Powers extends Component {
                                             <div className="form-check form-check-inline">
                                                 <label className="form-check-label">
                                                     <input className="form-check-input" type="radio" id={`inlineRadio2${i}`} value={JSON.stringify(utility)} name='utilityResult' onChange={this.handleChange} />
-
                                                     <div className="card">
-                                                        
                                                             <div className="utilityCard">
                                                                 <div className='row'>
                                                                     <h5 className="card-title powerCardTitle">{utility.title}</h5>
@@ -393,8 +399,6 @@ class Powers extends Component {
                                                                 </div>
                                                                 <p><small className="powerCardUse">YOU MAY ONLY USE THIS POWER ONCE</small></p>
                                                             </div>
-
-                                                        
                                                     </div>
                                                 </label>
                                             </div>
@@ -405,7 +409,8 @@ class Powers extends Component {
                         </div>
                     </div>
                     <div className="form-group">
-                        <h2 className='power-titles orderList'>At Will Powers:</h2>
+                    <br/><br/>
+                        <h2 className='power-titles orderList'>Select Two At Will Powers:</h2>
                         <div className="row">
                             {this.state.atWill.map((atWill, i) => {
                                 return (

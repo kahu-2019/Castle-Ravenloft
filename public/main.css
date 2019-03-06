@@ -814,3 +814,15 @@ color:black
 .powerCardDefault{
 margin: 0 auto; 
 }
+
+.nameTitle{
+  color: white;
+  font-family: 'IM Fell DW Pica', serif;
+  text-align: center;
+  font-size: 60px;
+}
+.displayFace{
+  height: 200px;
+  text-align: center;
+  border-radius:50%
+}
