@@ -23,8 +23,6 @@ class Board extends Component {
         this.state = {
             players: this.props.characters,
 
-            monsters: [],
-
             allMonsters: this.props.allMonsters,
 
             transform: {
@@ -199,13 +197,18 @@ class Board extends Component {
 
     adjacentTester(){
 
-        let monsterId = this.state.players[0].monsters[0]
-        let monster = this.state.monsters.find(monster => monster.id === monsterId)
+        for(let monster of this.state.players[0].monsters){
+            console.log(monster)
+        }
+
+        let monsterId = this.state.players[0].monsters[0].id
+        let monster = this.state.players[0].monsters.find(monster => monster.id === monsterId)
+        console.log(monster)
         let closestPlayer = this.checkAdjacentSquares(monster)
         let result = blazingSkeleton(closestPlayer)
 
         if(result.position){
-            let tempMonsters = this.state.monsters
+            let tempMonsters = this.state.players[0].monsters
             for(let monmon of tempMonsters){
                 if(monmon == monster){
                     monmon.x = result.position.x
@@ -213,7 +216,9 @@ class Board extends Component {
                     break
                 }
             }
-            this.setState({monsters: tempMonsters}, () => this.processCharacters())
+            let tempPlayers = this.state.players
+            tempPlayers[0].monsters = tempMonsters
+            this.setState({players: tempPlayers}, () => this.processCharacters())
         }
         // console.log(result)
     }
@@ -780,8 +785,10 @@ class Board extends Component {
             tempPlayers.map(player => {
                 return player.x = player.x + 4
             })
-            this.state.monsters.map(monster => {
-                return monster.x = monster.x + 4
+            tempPlayers.map(player => {
+                player.monsters.map(monster => {
+                    return monster.x = monster.x + 4
+                })
             })
             tile.x = position.x + 1
             tile.y = position.y
@@ -798,7 +805,10 @@ class Board extends Component {
                     }
                 }
             }
-            this.state.monsters.push(this.getMonster(monster.x, monster.y, this.state.players[0].id))
+            let newMonster = this.getMonster(monster.x, monster.y)
+            if(newMonster){
+                this.state.players[0].monsters.push(this.getMonster(monster.x, monster.y))
+            }
 
             this.setState({
                 players: tempPlayers,
@@ -813,8 +823,10 @@ class Board extends Component {
             tempPlayers.map(player => {
                 return player.y = player.y + 4
             })
-            this.state.monsters.map(monster => {
-                return monster.y = monster.y + 4
+            tempPlayers.map(player => {
+                player.monsters.map(monster => {
+                    return monster.y = monster.y + 4
+                })
             })
             tile.x = position.x
             tile.y = position.y + 1
@@ -831,7 +843,10 @@ class Board extends Component {
                     }
                 }
             }
-            this.state.monsters.push(this.getMonster(monster.x, monster.y, this.state.players[0].id))
+            let newMonster = this.getMonster(monster.x, monster.y)
+            if(newMonster){
+                this.state.players[0].monsters.push(this.getMonster(monster.x, monster.y))
+            }
 
             this.setState({
                 players: tempPlayers,
@@ -855,24 +870,32 @@ class Board extends Component {
                 }
             }
         }
-        this.state.monsters.push(this.getMonster(monster.x, monster.y, this.state.players[0].id))
+        let newMonster = this.getMonster(monster.x, monster.y)
+        if(newMonster){
+            this.state.players[0].monsters.push(this.getMonster(monster.x, monster.y))
+        }
 
         this.setState({
             cleanTileSet: tempSet
         }, () => this.processCharacters())
     }
 
-    getMonster(x, y, charId) {
-        let monNum = Math.floor(Math.random() * 10)
-        let newMonster = JSON.parse(JSON.stringify(this.state.allMonsters[monNum]))
+    getMonster(x, y) {
+        if(this.state.players[0].monsters.length === 10) return null
+        let monsters = JSON.parse(JSON.stringify(this.state.allMonsters))
+        outerloop:
+        for(let mon of this.state.players[0].monsters){
+            for(let i = 0; i < monsters.length; i++){
+                if(mon.id === monsters[i].id){
+                    monsters.splice(i, 1)
+                    continue outerloop
+                }
+            }
+        }
+        let monNum = Math.floor(Math.random() * monsters.length)
+        let newMonster = monsters[monNum]
         newMonster.x = x
         newMonster.y = y
-        newMonster.owner = charId
-        this.state.players.map(player => {
-            if(player.id === charId){
-                player.monsters.push(newMonster.id)
-            }
-        })
         return newMonster
     }
 
@@ -984,16 +1007,18 @@ class Board extends Component {
             }
         }
 
-        outerloop:
-        for (let monster of this.state.monsters) {
+        for (let char of this.state.players){
+            outerloop:
+            for (let monster of char.monsters) {
 
-            let position = this.getTileAndSquareForCharacter(monster)
+                let position = this.getTileAndSquareForCharacter(monster)
 
-            for (let item of tempSet) {
-                if (position.tileX === item.x && position.tileY === item.y) {
-                    item.grid[position.squareY][position.squareX] = 21
-                    item.players.push({ image: monster.image, x: position.squareX, y: position.squareY })
-                    continue outerloop
+                for (let item of tempSet) {
+                    if (position.tileX === item.x && position.tileY === item.y) {
+                        item.grid[position.squareY][position.squareX] = 21
+                        item.players.push({ image: monster.image, x: position.squareX, y: position.squareY })
+                        continue outerloop
+                    }
                 }
             }
         }
