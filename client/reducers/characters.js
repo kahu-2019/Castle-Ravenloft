@@ -7,9 +7,9 @@ const reducer = (state = initialState, action) => {
 
         case 'UPDATE_ONE_CHARACTER':
             return state.map(c => {
-                if(c.id === action.character_id)  c.AC = c.AC + 1
+                if(c.id === action.character_id)  c.AC = c.AC + 1 ,c.HP = c.HP + 2 , c.SurgeValue = c.SurgeValue + 1
                  return c
-            })
+            }) 
 
         default:
             return state
