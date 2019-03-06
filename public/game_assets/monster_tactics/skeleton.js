@@ -9,40 +9,73 @@ var playerDetails = {
     adjacentTile:false,
     id:1,
     playerTile:[[1,1,1,1],
-                [0,11,0,0],
-                [11,0,0,1],
-                [0,0,0,1]],
+    [0,11,0,0],
+    [11,0,0,1],
+    [0,0,0,1]],
     players:[{id: 1, name:'Karl', AC:20,x:2,y:2},{id: 2,name:'Sam the Gimp',AC:16,x:1,y:3}],
-    monster:{id:1,name:'blazing skeleton',x:1,y:1}
+    monster:{id:1,name:'blazing skeleton',x:1,y:1},
+    dataSet:[{x:1,y:1,grid:[
+        [1,1,1,1],
+        [0,0,0,0],
+        [0,2,1,1],
+        [0,0,0,0]
+    ]},
+    {x:1,y:2,grid:[
+        [0,0,0,0],
+        [0,0,0,0],
+        [0,2,0,0],
+        [0,0,0,0]
+    ]},
+    {x:2,y:2,grid:[
+        [0,0,0,0],
+        [0,0,0,0],
+        [0,2,0,0],
+        [0,0,0,0]
+    ]}]
+}
+
+export default function skeleton(playerDetails){
+//values i need
+var closestPlayer = playerDetails.id
+var heroes = playerDetails.players
+var tileAdjacent = playerDetails.adjacent
+var squareAdjacent = false
+var path = playerDetails.path
+var monster = playerDetails.monster
+var dataSet = playerDetails.dataSet
+var monsterTile = undefined
+
+if(playerDetails.players){
+    closestPlayer = playerDetails.players.find(player => player.id == playerDetails.id)
 }
 
 
-var dataSet = [{x:1,y:1,grid:[
-    [1,1,1,1],
-    [0,0,0,0],
-    [0,2,1,1],
-    [0,0,0,0]
-]},
-{x:1,y:2,grid:[
-    [0,0,0,0],
-    [0,0,0,0],
-    [0,2,0,0],
-    [0,0,0,0]
-]},
-{x:2,y:2,grid:[
-    [0,0,0,0],
-    [0,0,0,0],
-    [0,2,0,0],
-    [0,0,0,0]
-]}]
+let monsterTileCoords = detailedPosition(monster)
 
+for(let tile of dataSet){
+    if(tile.x === monsterTileCoords.tileX && tile.y === monsterTileCoords.tileY){ monsterTile = tile; break}
+}
 
+let offsetX = path[0][0]
+let offsetY = path[0][1]
 
-//values i need
-var closestPlayer = playerDetails.players.find(player => player.id == playerDetails.id)
-var heroes = playerDetails.players
-var tileAdjacent = playerDetails.adjacentTile
-var squareAdjacent = false
+let nextTile = undefined
+
+outerloop:
+for(let i in path){
+    let squareX = monster.x - offsetX + path[i][0]
+    let squareY = monster.y - offsetY + path[i][1]
+    for(let tile of dataSet){
+        if(squareX > (tile.x-1)*4 && squareX <= (tile.x-1)*4+4 && squareY > (tile.y-1)*4 && squareY <= (tile.y-1)*4+4){
+            if(tile != monsterTile){
+                nextTile = tile
+                break outerloop
+            }
+        }
+    }
+}
+
+console.log('nextTIle', nextTile)
 
 console.log(closestPlayer)
 
@@ -77,7 +110,7 @@ var slice = {
 }
 
 
-
+var diceRoll = roll()
 //Right next to, scimitar att
 if(squareAdjacent && diceRoll + scimitar.att > closestPlayer.AC){
     console.log('he boutta scimitar you cause you too close. BAM! ', scimitar.dmg + ' damage!')
@@ -88,12 +121,7 @@ if(squareAdjacent && diceRoll + scimitar.att > closestPlayer.AC){
 //Right next to and miss, don't move
 } else if(squareAdjacent && diceRoll + scimitar.att <= closestPlayer.AC){
     console.log('luckily he missed the scimi hit')
-    return {
-        movement:{
-            x:0,
-            y:0
-        }
-    }
+    return undefined
 //Close to, slice att AND move
 }else if(tileAdjacent && diceRoll + slice.att > closestPlayer.AC){
     console.log('he just charged... Bam! Charge sliced yo ass for ', slice.dmg + ' damage!')
@@ -124,3 +152,6 @@ if(squareAdjacent && diceRoll + scimitar.att > closestPlayer.AC){
         }
     }
 }
+}
+
+skeleton(playerDetails)

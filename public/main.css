@@ -129,12 +129,11 @@
 }
 
 .Time-tract {
-  margin-top: 10px;
   z-index: 0;
 }
 .time-title {
   width: 200px;
-  right: 12% !important;
+  right: 15% !important;
   color: #702906;
   position: absolute;
 }

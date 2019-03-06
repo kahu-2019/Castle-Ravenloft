@@ -12,18 +12,18 @@ class App extends Component {
   render() {
     return (
       <div style={{ overflow: "hidden" }}>
-          <Router>
-            <Fragment>
-              <Route exact path="/" component={Home2} />
-              <Route exact path="/home" component={Home} />
-              <Route path="/char-select" component={Characters} />
-              <Route path="/powers/:id" component={Powers} />
-              <Route path="/timetract" component={TimeTract} />
-              <Route path="/encounter-treasure" component={EncounterTreasure} />
-              <Route path="/board" component={Board} />
-            </Fragment>
-          </Router>
-        </div>
+        <Router>
+          <Fragment>
+            <Route exact path="/" component={Home2} />
+            <Route exact path="/home" component={Home} />
+            <Route path="/char-select" component={Characters} />
+            <Route path="/powers/:id" component={Powers} />
+            <Route path="/timetract" component={TimeTract} />
+            <Route path="/encounter-treasure" component={EncounterTreasure} />
+            <Route path="/board" component={Board} />
+          </Fragment>
+        </Router>
+      </div>
     );
   }
 }

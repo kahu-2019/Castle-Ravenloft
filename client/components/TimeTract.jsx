@@ -12,7 +12,7 @@ class TimeTract extends Component {
   render() {
     return (
       <div className="Time-tract">
-        <div className="">
+        <div>
           <div className="time-title text-center">
             <h5>
               <strong>TIME TRACT</strong>
