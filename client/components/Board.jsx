@@ -105,10 +105,16 @@ class Board extends Component {
         strahdsCrypt[0].x = 1
         strahdsCrypt[0].y = 1
 
+        let tempPlayers = this.state.players
+        tempPlayers.map(player => {
+            player.monsters = []
+            return player
+        })
+
         //  Removes Secret Stairway tile for the ending piece
         let endingPiece = temp.splice(29, 1)[0]
 
-        this.setState({ dataSet: strahdsCrypt, cleanTileSet: strahdsCrypt, completeTileSet: temp, endingPiece }, () => {
+        this.setState({ players: tempPlayers, dataSet: strahdsCrypt, cleanTileSet: strahdsCrypt, completeTileSet: temp, endingPiece }, () => {
             this.processCharacters()
         })
     }
@@ -192,10 +198,25 @@ class Board extends Component {
     }
 
     adjacentTester(){
-        let closestPlayer = this.checkAdjacentSquares(this.state.monsters[0])
-        console.log(closestPlayer)
+
+        let monsterId = this.state.players[0].monsters[0]
+        let monster = this.state.monsters.find(monster => monster.id === monsterId)
+        let closestPlayer = this.checkAdjacentSquares(monster)
         let result = blazingSkeleton(closestPlayer)
-        console.log(result)
+
+        if(result.position){
+            let tempMonsters = this.state.monsters
+            for(let monmon of tempMonsters){
+                if(monmon == monster){
+                    monmon.x = result.position.x
+                    monmon.y = result.position.y
+                    break
+                }
+            }
+            console.log(tempMonsters)
+            this.setState({monsters: tempMonsters}, () => this.processCharacters())
+        }
+        // console.log(result)
     }
 
     //  Checks the adjacent two squares of a given tile
@@ -682,7 +703,8 @@ class Board extends Component {
                     player: JSON.parse(JSON.stringify(player)),
                     monster: JSON.parse(JSON.stringify(monster)),
                     distance: path.length - 2,
-                    dataSet: this.state.dataSet
+                    dataSet: this.state.dataSet,
+                    path
                 })
             }
         }
@@ -847,6 +869,11 @@ class Board extends Component {
         newMonster.x = x
         newMonster.y = y
         newMonster.owner = charId
+        this.state.players.map(player => {
+            if(player.id === charId){
+                player.monsters.push(newMonster.id)
+            }
+        })
         return newMonster
     }
 
