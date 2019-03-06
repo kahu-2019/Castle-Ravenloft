@@ -33,6 +33,8 @@ class Board extends Component {
                 y: 0
             },
 
+            speed: 0,
+
             explore: {
                 top: false,
                 bottom: false,
@@ -112,7 +114,7 @@ class Board extends Component {
         //  Removes Secret Stairway tile for the ending piece
         let endingPiece = temp.splice(29, 1)[0]
 
-        this.setState({ players: tempPlayers, dataSet: strahdsCrypt, cleanTileSet: strahdsCrypt, completeTileSet: temp, endingPiece }, () => {
+        this.setState({ players: tempPlayers, dataSet: strahdsCrypt, cleanTileSet: strahdsCrypt, completeTileSet: temp, endingPiece, speed: tempPlayers[0].speed }, () => {
             this.processCharacters()
         })
     }
@@ -192,7 +194,7 @@ class Board extends Component {
     nextPlayer() {
         let temp = this.state.players
         temp.push(temp.shift())
-        this.setState({ players: temp }, () => this.checkSidesOfCharacter())
+        this.setState({ players: temp, speed: temp[0].speed }, () => this.checkSidesOfCharacter())
     }
 
     adjacentTester(){
@@ -265,9 +267,6 @@ class Board extends Component {
             }
         }
 
-        console.log(tempPlayers)
-
-        
         this.setState({players: tempPlayers}, () => this.processCharacters())
         // console.log(result)
     }
@@ -960,7 +959,7 @@ class Board extends Component {
 
     //  Updates position of character, includes wall and edge detection
     getPositionOfCharacter(char, dir, val) {
-        if (char[dir] + val < 1) return
+        if (char[dir] + val < 1 || this.state.speed === 0) return
 
         char[dir] = char[dir] + val
 
@@ -980,7 +979,7 @@ class Board extends Component {
 
         let tempPlayers = this.state.players
         tempPlayers[0] = char
-        this.setState({ players: tempPlayers }, () => this.processCharacters())
+        this.setState({ players: tempPlayers, speed: this.state.speed-1 }, () => this.processCharacters())
     }
 
     //  Checks each side of the current character, returns an object with values showing if they are on an unexplored edge
@@ -1076,6 +1075,7 @@ class Board extends Component {
     }
 
     render() {
+        console.log(this.state.speed)
         let rows = 0
         let cols = 0
         this.state.dataSet.map(set => {
