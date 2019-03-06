@@ -106,19 +106,19 @@ if(tileAdjacent || squareAdjacent){
 
     var destination = {x:monX - playX,y:monY - playY}
 
-    let grid = null
-
+    
     var tileExists = playerDetails.dataSet.find(tile => {
         tile.x == destination.x && tile.y == destination.y
-        grid = tileExists.grid
-        tileExists = detailedPosition(tileExists)
         return true
     })
     
+
+    let grid = tileExists.grid
+    tileExists = detailedPosition(tileExists)
     console.log('tile Exists:',tileExists)
 
     if(tileExists != null || tileExists != undefined){
-        if(tileExists.grid[monPos.squareY][monPos.squareX] == 0 || tileExists.grid[monPos.squareY][monPos.squareX] == 2){
+        if(grid[monPos.squareY][monPos.squareX] == 0 || grid[monPos.squareY][monPos.squareX] == 2){
             monPos.tileX = tileExists.x
             monPos.tileY = tileExists.y
         }else{
