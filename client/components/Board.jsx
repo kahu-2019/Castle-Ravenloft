@@ -7,6 +7,7 @@ import allTiles from '../../public/game_assets/tiles.json'
 import { getAllMonsters } from '../actions';
 
 import blazingSkeleton from '../../public/game_assets/monster_tactics/blazing_skeleton.js'
+import skeleton from '../../public/game_assets/monster_tactics/skeleton.js'
 
 /*  Main board component, renders tile and square sub-components
 
@@ -202,7 +203,7 @@ class Board extends Component {
         let monsterId = this.state.players[0].monsters[0]
         let monster = this.state.monsters.find(monster => monster.id === monsterId)
         let closestPlayer = this.checkAdjacentSquares(monster)
-        let result = blazingSkeleton(closestPlayer)
+        let result = skeleton(closestPlayer)
 
         if(result.position){
             let tempMonsters = this.state.monsters
