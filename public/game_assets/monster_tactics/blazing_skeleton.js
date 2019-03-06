@@ -9,9 +9,9 @@ var playerDetails = {
     adjacentTile:false,
     id:1,
     playerTile:[[1,1,1,1],
-                [0,11,0,0],
-                [11,0,0,1],
-                [0,0,0,1]],
+    [0,11,0,0],
+    [11,0,0,1],
+    [0,0,0,1]],
     players:[{id: 1, name:'Karl', AC:20,x:2,y:2},{id: 2,name:'Sam the Gimp',AC:16,x:1,y:3}],
     monster:{id:1,name:'blazing skeleton',x:1,y:1},
     dataSet:[{x:1,y:1,grid:[
@@ -34,6 +34,7 @@ var playerDetails = {
     ]}]
 }
 
+export function blazingSkeleton(playerDetails){
 //values i need
 var closestPlayer = playerDetails.players.find(player => player.id == playerDetails.id)
 var heroes = playerDetails.players
@@ -141,4 +142,5 @@ if(tileAdjacent || squareAdjacent){
     console.log('coming closer', movement)
 
     return movement
+}
 }
