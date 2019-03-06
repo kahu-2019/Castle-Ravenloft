@@ -6,14 +6,14 @@ const {detailedPosition} = require('./functions')
 
 //Test data
 var playerDetails = {
-    adjacentTile:false,
+    adjacent:true,
     id:1,
     playerTile:[[1,1,1,1],
                 [0,11,0,0],
                 [11,0,0,1],
                 [0,0,0,1]],
-    players:[{id: 1, name:'Karl', AC:20,x:2,y:2},{id: 2,name:'Sam the Gimp',AC:16,x:1,y:3}],
-    monster:{id:1,name:'blazing skeleton',x:1,y:1},
+    players:[{id: 1, name:'Karl', AC:20,x:1,y:2},{id: 2,name:'Sam the Gimp',AC:16,x:1,y:3}],
+    monster:{id:1,name:'skeleton',x:1,y:4},
     dataSet:[{x:1,y:1,grid:[
         [1,1,1,1],
         [0,0,0,0],
@@ -54,6 +54,7 @@ console.log('monPos',monPos)
 //Checks for square adjacent
 
 if(tileAdjacent){
+    console.log('hit')
     var squareAdjacent = isSquareAdjacent(playerPos.squareX,playerPos.squareY,monPos.squareX,monPos.squareY)
 }
 
