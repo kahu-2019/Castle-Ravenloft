@@ -5,7 +5,7 @@ class TimeTract extends Component {
     super(props);
 
     this.state = {
-      arrow: false
+      sunTrack: 1
     };
   }
 
@@ -22,7 +22,7 @@ class TimeTract extends Component {
             <div className="contaniner1 timecontainer1">
               <div className="contaniner" id="circle">
                 <h5>1</h5>
-                {this.state.arrow === flase && (
+                {this.state.sunTrack === 1 && (
                   <img height="40" src="/images/icons/sun.png" />
                 )}
 

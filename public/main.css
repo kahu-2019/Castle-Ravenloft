@@ -4,6 +4,8 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  background-image: url("./images/brick.jpg");
+  background-size: 100%;
 }
 
 .tile {
@@ -34,26 +36,6 @@
   -webkit-box-shadow: inset 0px 0px 125px -11px rgba(0, 0, 0, 0.51);
   -moz-box-shadow: inset 0px 0px 125px -11px rgba(0, 0, 0, 0.51);
   box-shadow: inset 0px 0px 125px -11px rgba(0, 0, 0, 0.51);
-}
-
-.bg-Alisa {
-  background-color: #228b22 !important;
-}
-
-.bg-Arjhan {
-  background-color: #800000 !important;
-}
-
-.bg-Immeril {
-  background-color: #4f3584 !important;
-}
-
-.bg-Kat {
-  background-color: #013554 !important;
-}
-
-.bg-Thorgrim {
-  background-color: #9e8f0b !important;
 }
 
 .character-card {
@@ -131,7 +113,7 @@
 /*TIME-TRACT*/
 .time-containers {
   background-image: url(./images/time-track/time-track1.png);
-  width: 650px;
+  width: 620px;
   height: 200px;
   background-position: center;
   background-size: 100%;
@@ -192,13 +174,13 @@
 }
 
 #circle {
-  width: 85px;
-  height: 85px;
+  width: 84px;
+  height: 84px;
   color: rgb(126, 87, 41);
-  background: rgb(250, 235, 217);
+  background: rgb(167, 153, 137);
   border-radius: 80%;
   border-color: rgb(99, 71, 37);
-  margin-right: 20px;
+  margin-right: 15px;
   text-align: center;
   border-color: #b6926b !important;
 }
@@ -273,9 +255,382 @@ span {
 }
 .card2 {
   margin: 1px !important;
+
   color: rgba(17, 6, 1, 0.959) !important;
   background-color: rgba(211, 190, 150, 0.85);
   -webkit-box-shadow: inset 0px 0px 125px -11px rgba(202, 195, 188, 0.51) !important;
   -moz-box-shadow: inset 0px 0px 125px -11px rgba(129, 104, 81, 0.51) !important;
   box-shadow: inset 0px 0px 125px -11px rgba(129, 104, 81, 0.51) !important;
+}
+.textBox {
+  background-image: url("./images/scroll.png");
+  background-size: 100% 100%;
+  height: 500px;
+  width: 500px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-family: "IM Fell DW Pica", serif;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.sealButton {
+  height: 100px;
+}
+
+.home-main {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-image: url("./images/darkcastle.jpg");
+}
+
+.cr-logo {
+  height: 200px;
+}
+
+.logo-div {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+}
+.rain {
+  height: 100vh;
+  background: url("./images/rain.png");
+  animation: rain 0.5s linear infinite;
+}
+
+.rain:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  animation: lightning 1s 4s infinite alternate backwards;
+  opacity: 0;
+}
+
+@keyframes rain {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 20% 100%;
+  }
+}
+
+@keyframes lightning {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.2;
+  }
+  11% {
+    opacity: 0;
+  }
+}
+
+.dnd-logo {
+  position: absolute;
+  bottom: 5%;
+  left: 43%;
+  height: 60px;
+}
+
+.startbutton {
+  color: rgb(238, 232, 223);
+  font-family: "IM Fell DW Pica", serif;
+  text-align: center;
+  font-size: 30px;
+  opacity: 1;
+  animation: start 2s linear infinite;
+}
+
+@keyframes start {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* HIDE RADIO */
+[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* IMAGE STYLES */
+[type="radio"] + .card {
+  cursor: pointer;
+}
+
+[type="radio"]:hover + .card {
+  outline: 2px solid lightblue;
+}
+
+/* CHECKED STYLES */
+[type="radio"]:checked + .card {
+  outline: 2px solid greenyellow;
+}
+
+/* HIDE CHECK */
+[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* IMAGE STYLES */
+[type="checkbox"] + .card {
+  cursor: pointer;
+}
+
+[type="checkbox"]:hover + .card {
+  outline: 2px solid lightblue;
+}
+
+/* CHECKED STYLES */
+[type="checkbox"]:checked + .card {
+  outline: 2px solid greenyellow;
+}
+
+.power-titles {
+  text-align: center;
+}
+
+/* The Following is for Character selection cards */
+.imFont {
+  font-family: "IM Fell DW Pica", serif;
+}
+.acPosition {
+  position: absolute;
+  left: 15px;
+  color: black;
+  font-size: 20px;
+}
+
+.statRow {
+  position: absolute;
+  top: 190px;
+}
+.hpPosition {
+  position: absolute;
+  left: 20px;
+  color: black;
+  font-size: 20px;
+}
+.speedPosition {
+  position: absolute;
+  left: 32px;
+  color: black;
+  font-size: 20px;
+}
+
+.surgePosition {
+  position: absolute;
+  left: 50px;
+  color: black;
+  font-size: 20px;
+}
+
+.namePosition {
+  position: absolute;
+  left: 30px;
+  top: 25px;
+  color: White;
+  font-size: 30px;
+}
+
+.subtitlePosition {
+  position: absolute;
+  left: 30px;
+  top: 60px;
+  color: rgb(184, 184, 184);
+  font-size: 20px;
+}
+
+.descriptionPosition {
+  position: absolute;
+  left: 30px;
+  top: 80px;
+  color: white;
+  font-size: 15px;
+  width: 230px;
+  line-height: 15pt;
+}
+
+.abilityPosition {
+  position: absolute;
+  left: 30px;
+  top: 230px;
+  color: black;
+  font-size: 15px;
+  width: 250px;
+  line-height: 15pt;
+}
+.powerPosition {
+  position: absolute;
+  left: 30px;
+  top: 250px;
+  color: black;
+  font-size: 15px;
+  width: 250px;
+  line-height: 15pt;
+}
+
+.bg-Alisa {
+  background-color: #228b22 !important;
+  height: 500px;
+  width: 500px;
+  background-image: url(./images/characterTemplates/allisa.jpg);
+  background-size: cover;
+  max-width: 500px;
+  min-width: 500px;
+}
+
+.bg-Arjhan {
+  background-color: #800000 !important;
+  height: 500px;
+  width: 500px;
+  background-image: url(./images/characterTemplates/arjhan.jpg);
+  background-size: cover;
+  max-width: 500px;
+  min-width: 500px;
+}
+
+.bg-Immeril {
+  background-color: #4f3584 !important;
+  height: 500px;
+  width: 500px;
+  background-image: url(./images/characterTemplates/immeril.jpg);
+  background-size: cover;
+  max-width: 500px;
+  min-width: 500px;
+}
+
+.bg-Kat {
+  background-color: #013554 !important;
+  height: 500px;
+  width: 500px;
+  background-image: url(./images/characterTemplates/kat.jpg);
+  background-size: cover;
+  max-width: 500px;
+  min-width: 500px;
+}
+
+.bg-Thorgrim {
+  background-color: #9e8f0b !important;
+  background-image: url(./images/characterTemplates/thorgrim.jpg);
+  background-size: cover;
+  height: 500px;
+  width: 500px;
+  max-width: 500px;
+  min-width: 500px;
+}
+.selectWarriors {
+  width: 100%;
+  font-family: "IM Fell DW Pica", serif;
+  color: white;
+  text-align: center;
+}
+
+.charSelectBg {
+  background-image: url("./images/brick.jpg");
+  background-size: 100%;
+  height: 100%;
+  width: 100%;
+  min-height: 1000px;
+  /* position:fixed */
+}
+.slide-out-blurred-top {
+  -webkit-animation: slide-out-blurred-top 0.45s
+    cubic-bezier(0.755, 0.05, 0.855, 0.06) both;
+  animation: slide-out-blurred-top 0.45s cubic-bezier(0.755, 0.05, 0.855, 0.06)
+    both;
+}
+@-webkit-keyframes slide-out-blurred-top {
+  0% {
+    -webkit-transform: translateY(0) scaleY(1) scaleX(1);
+    transform: translateY(0) scaleY(1) scaleX(1);
+    -webkit-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+    -webkit-filter: blur(0);
+    filter: blur(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateY(-1000px) scaleY(2) scaleX(0.2);
+    transform: translateY(-1000px) scaleY(2) scaleX(0.2);
+    -webkit-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+    -webkit-filter: blur(40px);
+    filter: blur(40px);
+    opacity: 0;
+  }
+}
+@keyframes slide-out-blurred-top {
+  0% {
+    -webkit-transform: translateY(0) scaleY(1) scaleX(1);
+    transform: translateY(0) scaleY(1) scaleX(1);
+    -webkit-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+    -webkit-filter: blur(0);
+    filter: blur(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateY(-1000px) scaleY(2) scaleX(0.2);
+    transform: translateY(-1000px) scaleY(2) scaleX(0.2);
+    -webkit-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+    -webkit-filter: blur(40px);
+    filter: blur(40px);
+    opacity: 0;
+  }
+}
+
+/* End of character selection styling */
+
+.orderStyle {
+  color: white;
+  font-family: "IM Fell DW Pica", serif;
+  text-align: center;
+  position: absolute;
+  font-size: 30px;
+  left: 280px;
+}
+
+.orderList {
+  color: white;
+  font-family: "IM Fell DW Pica", serif;
+  text-align: center;
+  font-size: 30px;
+}
+
+.choosePowersInactive {
+  color: rgb(105, 105, 105) !important;
+  font-family: "IM Fell DW Pica", serif;
+  font-size: 30px;
+  text-decoration: none !important;
+}
+
+.choosepowersActive {
+  color: white !important;
+  font-family: "IM Fell DW Pica", serif;
+  font-size: 30px;
+  opacity: 1;
+  animation: start 2s linear infinite;
+  text-decoration: none !important;
 }
