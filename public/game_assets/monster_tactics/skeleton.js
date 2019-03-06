@@ -1,7 +1,6 @@
 // import {diceRoll} from './functions'
 const {roll} = require('./functions')
 const {isSquareAdjacent} = require('./functions')
-const {totalPosition} = require('./functions')
 const {detailedPosition} = require('./functions')
 
 //Test data
@@ -49,17 +48,12 @@ if(playerDetails.players){
 }
 
 
-
-    // console.log(closestPlayer)
-
     //from pos finder function with player.x and player.y, monster.x and monster.y
     //DETAILED POSITION
     var playerPos = detailedPosition(closestPlayer)
 
     var monPos = detailedPosition(playerDetails.monster)
 
-    // console.log('playerPos',playerPos)
-    // console.log('monPos',monPos)
 
     //same tile
     // if(playerPos.tileX === monPos.tileX && playerPos.tileY === monPos.tileY){}
@@ -69,8 +63,6 @@ if(playerDetails.players){
             var squareAdjacent = isSquareAdjacent(path)
         }
     
-    // console.log(closestPlayer)
-    // console.log(tileAdjacent)
 
 
 // Skeleton attack stats
@@ -152,7 +144,6 @@ if(squareAdjacent && diceRoll + scimitar.att > closestPlayer.AC){
             for(let tile of dataSet){
                 if(squareX > (tile.x-1)*4 && squareX <= (tile.x-1)*4+4 && squareY > (tile.y-1)*4 && squareY <= (tile.y-1)*4+4){
                     if(tile != monsterTile){
-                        // nextTile = tile
                         nextSquare = {
                             x: squareX,
                             y: squareY
