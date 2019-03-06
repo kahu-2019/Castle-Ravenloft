@@ -326,39 +326,37 @@ class Powers extends Component {
                                                     <input className="form-check-input" type="radio" id={`inlineRadio1${i}`} value={JSON.stringify(daily)} name='dailyResult' onChange={this.handleChange} />
 
                                                     <div className="card">
-                                                        <div className='container-fluid'>
-                                                            <div className="card-body">
+                                                        
+                                                            <div className="dailyCard">
                                                                 <div className='row'>
-                                                                    <h5 className="card-title">{daily.title}</h5>
-                                                                    <p className="card-subtitle mb-2 text-muted card-text"><b>{daily.subtitle}</b></p>
-                                                                    <p><b>{daily.instruction_1}</b> {daily.instruction_2}</p>
+                                                                    <h5 className="card-title powerCardTitle">{daily.title}</h5>
+                                                                    <p className="powerCardSubtitle">{daily.subtitle}</p>
+                                                                    <div className="PowerCardInst">
+                                                                    <p>{daily.instruction_1}</p>
+                                                                    <p>{daily.instruction_2}</p>
+                                                                    </div>
                                                                 </div>
                                                                 {daily.damage &&
-                                                                    <Fragment>
+                                                                    <div className="powerCardNumberBox2">
                                                                         <div className='row'>
-                                                                            <div className='col attribs-title card-text'>Attack</div>
-                                                                            <div className='col attribs-title card-text'>Damage</div>
+                                                                            <div className='col attribs-title card-text pcb'>Attack</div>
+                                                                            <div className='col attribs-title card-text pcb'>Damage</div>
                                                                         </div>
                                                                         <div className='row'>
-                                                                            <div className='col attribs card-text'>+ {daily.attack}</div>
-                                                                            <div className='col attribs card-text'>
-
-                                                                                {daily.damage}
-                                                                                {daily.miss &&
+                                                                            <div className='col attribs card-text pcb'>+ {daily.attack}</div>
+                                                                            <div className='col attribs card-text pcb'>{daily.damage}</div>
+                                                                        </div>
+                                                                        {daily.miss &&
                                                                                     <Fragment>
-
-                                                                                        <p>Miss: {daily.miss} Damage</p>
+                                                                                        <div className="">Miss: {daily.miss} Damage</div>
                                                                                     </Fragment>
                                                                                 }
-
-                                                                            </div>
-                                                                        </div>
-                                                                    </Fragment>
+                                                                    </div>
                                                                 }
-                                                                <p><small className="text-muted">FILP THIS CARD AFTER USE</small></p>
+                                                                <p><small className="powerCardUse2">CAN ONLY USE ONCE</small></p>
                                                             </div>
 
-                                                        </div>
+                                                        
                                                     </div>
                                                 </label>
                                             </div>

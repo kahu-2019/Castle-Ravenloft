@@ -636,7 +636,6 @@ line-height: 15pt;
   height:100%;
   width:100%;
   min-height:1000px
-  /* position:fixed */
 
 }
 .slide-out-blurred-top {
@@ -726,8 +725,6 @@ line-height: 15pt;
   width:320px;
   background-image: url(./images/powerCards/utility.jpg);
   background-size: 100%;
-  /* max-width: 430px;
-  min-width: 320px; */
   border-radius: 7px;
   font-family: 'IM Fell DW Pica', serif;
 }
@@ -738,8 +735,15 @@ line-height: 15pt;
   width:320px;
   background-image: url(./images/powerCards/atWill.jpg);
   background-size: 100%;
-  /* max-width: 430px;
-  min-width: 320px; */
+  border-radius: 7px;
+  font-family: 'IM Fell DW Pica', serif;
+}
+.dailyCard{
+  background-color: rgb(78, 78, 128);
+  height:450px;
+  width:320px;
+  background-image: url(./images/powerCards/daily.jpg);
+  background-size: 100%;
   border-radius: 7px;
   font-family: 'IM Fell DW Pica', serif;
 }
@@ -777,12 +781,31 @@ width: 230px
   top:330px;
   left: 90px
 }
+.powerCardNumberBox2{
+  color:black;
+  position: absolute;
+  top:300px;
+  left: 90px
+}
 .pcb{
   color:black!important
 }
 
 .powerCardUse{
 position:absolute;
+left:40px;
+top:360px;
+color:black
+}
+.powerCardUse2{
+  position:absolute;
+  left:40px;
+  top:380px;
+  color:black
+  }
+
+.powerCardMiss{
+  position:absolute;
 left:40px;
 top:360px;
 color:black
