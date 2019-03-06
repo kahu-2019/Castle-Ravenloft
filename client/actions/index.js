@@ -97,3 +97,9 @@ export function addPowerCards(id, powerCards) {
     powerCards
   };
 }
+export function scrollTextViewChange(scrollTextView){
+  return {
+    type: 'SCROLL_TEXT_VIEW',
+    scrollTextView
+  }
+}

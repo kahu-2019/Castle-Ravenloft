@@ -6,6 +6,7 @@ import PF from 'pathfinding'
 import allTiles from '../../public/game_assets/tiles.json'
 import { getAllMonsters } from '../actions';
 import TimeTract from './TimeTract'
+import ScrollViewer from './ScrollViewer'
 
 /*  Main board component, renders tile and square sub-components
 
@@ -989,7 +990,7 @@ class Board extends Component {
                         gridTemplateColumns: `repeat(${cols}, 200px)`,
                         transform: `translate(${this.state.transform.x}px, ${this.state.transform.y}px)`
                     }}
-                        onMouseDown={this.mouseDown} onMouseUp={this.mouseUp} onMouseMove={this.mouseMove}>
+                    onMouseDown={this.mouseDown} onMouseUp={this.mouseUp} onMouseMove={this.mouseMove}>
                         {this.state.dataSet && this.state.dataSet.map((tile, key) => {
                             return (<div key={key} style={{ 'gridColumnStart': tile.x, 'gridColumnEnd': tile.x + 1, 'gridRowStart': tile.y, 'gridRowEnd': tile.y + 1 }}>
                                 <Tile tile={tile} />
@@ -1007,6 +1008,7 @@ class Board extends Component {
                     {this.state.explore.right && <React.Fragment><button onClick={() => this.prepTileForAdding(1)}>Explore right</button><br /></React.Fragment>}
                     {this.state.explore.top && <React.Fragment><button onClick={() => this.prepTileForAdding(0)}>Explore top</button><br /></React.Fragment>}
                     {this.state.explore.bottom && <button onClick={() => this.prepTileForAdding(2)}>Explore bottom</button>}
+                <ScrollViewer/>
                 </div>
             </React.Fragment>
         )
