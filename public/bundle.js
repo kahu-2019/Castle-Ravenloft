@@ -39374,7 +39374,7 @@ var Characters = function (_Component) {
                 ),
                 _react2.default.createElement(
                     'div',
-                    { className: 'card-columns imFont' },
+                    { className: 'row justify-content-center imFont' },
                     this.props.characters.map(function (character, i) {
                         var id = character.id;
                         return _react2.default.createElement(
