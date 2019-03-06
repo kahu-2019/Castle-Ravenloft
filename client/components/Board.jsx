@@ -5,8 +5,14 @@ import PF from 'pathfinding'
 
 import allTiles from '../../public/game_assets/tiles.json'
 import { getAllMonsters } from '../actions';
+import DisplayCharactersBoard from './DisplayCharactersBoard'
+import SurgeTokens from './SurgeTokens'
 
 import blazingSkeleton from '../../public/game_assets/monster_tactics/blazing_skeleton.js'
+import skeleton from '../../public/game_assets/monster_tactics/skeleton.js'
+import spider from '../../public/game_assets/monster_tactics/spider.js'
+import wraith from '../../public/game_assets/monster_tactics/wraith.js'
+import gargoyle from '../../public/game_assets/monster_tactics/gargoyle.js'
 
 /*  Main board component, renders tile and square sub-components
 
@@ -23,8 +29,6 @@ class Board extends Component {
         this.state = {
             players: this.props.characters,
 
-            monsters: [],
-
             allMonsters: this.props.allMonsters,
 
             transform: {
@@ -34,6 +38,8 @@ class Board extends Component {
                 x: 0,
                 y: 0
             },
+
+            speed: 0,
 
             explore: {
                 top: false,
@@ -105,10 +111,16 @@ class Board extends Component {
         strahdsCrypt[0].x = 1
         strahdsCrypt[0].y = 1
 
+        let tempPlayers = this.state.players
+        tempPlayers.map(player => {
+            player.monsters = []
+            return player
+        })
+
         //  Removes Secret Stairway tile for the ending piece
         let endingPiece = temp.splice(29, 1)[0]
 
-        this.setState({ dataSet: strahdsCrypt, cleanTileSet: strahdsCrypt, completeTileSet: temp, endingPiece }, () => {
+        this.setState({ players: tempPlayers, dataSet: strahdsCrypt, cleanTileSet: strahdsCrypt, completeTileSet: temp, endingPiece, speed: tempPlayers[0].speed }, () => {
             this.processCharacters()
         })
     }
@@ -188,14 +200,81 @@ class Board extends Component {
     nextPlayer() {
         let temp = this.state.players
         temp.push(temp.shift())
-        this.setState({ players: temp }, () => this.checkSidesOfCharacter())
+        this.setState({ players: temp, speed: temp[0].speed }, () => this.checkSidesOfCharacter())
     }
 
     adjacentTester(){
-        let closestPlayer = this.checkAdjacentSquares(this.state.monsters[0])
-        console.log(closestPlayer)
+
+        for(let monster of this.state.players[0].monsters){
+            // console.log(monster)
+        }
+
+        let monsterId = this.state.players[0].monsters[0].id
+        let monster = this.state.players[0].monsters.find(monster => monster.id === monsterId)
+        // console.log(monster)
+        let closestPlayer = this.checkAdjacentSquares(monster)
+        
         let result = blazingSkeleton(closestPlayer)
-        console.log(result)
+        // let result = undefined
+        // switch (monsterId){
+        //     case 1:
+        //         result = zombie(closestPlayer)
+        //         break
+        //     case 2:
+        //         result = ghoul(closestPlayer)
+        //         break
+        //     case 3:
+        //         result = wolf(closestPlayer)
+        //         break
+        //     case 4:
+        //         result = ratSwarm(closestPlayer)
+        //         break
+        //     case 5:
+        //         result = gargoyle(closestPlayer)
+        //         break
+        //     case 6:
+        //         result = spider(closestPlayer)
+        //         break
+        //     case 7:
+        //         result = skeleton(closestPlayer)
+        //         break
+        //     case 8:
+        //         result = koboldSkirmisher(closestPlayer)
+        //         break
+        //     case 9:
+        //         result = blazingSkeleton(closestPlayer)
+        //         break
+        //     case 10:
+        //         result = wraith(closestPlayer)
+        // }
+
+        
+        let tempPlayers = this.state.players
+        if(result.position){
+            let tempMonsters = this.state.players[0].monsters
+            for(let monmon of tempMonsters){
+                if(monmon == monster){
+                    monmon.x = result.position.x
+                    monmon.y = result.position.y
+                    break
+                }
+            }
+            let tempPlayers = this.state.players
+            tempPlayers[0].monsters = tempMonsters
+        }
+
+        if(result.characters){
+            for(let character of result.characters){
+                for(let player of tempPlayers){
+                    if(character.id == player.id){
+                        player.HP = player.HP - character.damage
+                    }
+                }
+            }
+        }
+
+        this.setState({players: tempPlayers}, () => this.processCharacters())
+        // console.log(result)
     }
 
     //  Checks the adjacent two squares of a given tile
@@ -760,8 +839,10 @@ class Board extends Component {
             tempPlayers.map(player => {
                 return player.x = player.x + 4
             })
-            this.state.monsters.map(monster => {
-                return monster.x = monster.x + 4
+            tempPlayers.map(player => {
+                player.monsters.map(monster => {
+                    return monster.x = monster.x + 4
+                })
             })
             tile.x = position.x + 1
             tile.y = position.y
@@ -778,7 +859,10 @@ class Board extends Component {
                     }
                 }
             }
-            this.state.monsters.push(this.getMonster(monster.x, monster.y, this.state.players[0].id))
+            let newMonster = this.getMonster(monster.x, monster.y)
+            if(newMonster){
+                this.state.players[0].monsters.push(this.getMonster(monster.x, monster.y))
+            }
 
             this.setState({
                 players: tempPlayers,
@@ -793,8 +877,10 @@ class Board extends Component {
             tempPlayers.map(player => {
                 return player.y = player.y + 4
             })
-            this.state.monsters.map(monster => {
-                return monster.y = monster.y + 4
+            tempPlayers.map(player => {
+                player.monsters.map(monster => {
+                    return monster.y = monster.y + 4
+                })
             })
             tile.x = position.x
             tile.y = position.y + 1
@@ -811,7 +897,10 @@ class Board extends Component {
                     }
                 }
             }
-            this.state.monsters.push(this.getMonster(monster.x, monster.y, this.state.players[0].id))
+            let newMonster = this.getMonster(monster.x, monster.y)
+            if(newMonster){
+                this.state.players[0].monsters.push(this.getMonster(monster.x, monster.y))
+            }
 
             this.setState({
                 players: tempPlayers,
@@ -835,19 +924,32 @@ class Board extends Component {
                 }
             }
         }
-        this.state.monsters.push(this.getMonster(monster.x, monster.y, this.state.players[0].id))
+        let newMonster = this.getMonster(monster.x, monster.y)
+        if(newMonster){
+            this.state.players[0].monsters.push(this.getMonster(monster.x, monster.y))
+        }
 
         this.setState({
             cleanTileSet: tempSet
         }, () => this.processCharacters())
     }
 
-    getMonster(x, y, charId) {
-        let monNum = Math.floor(Math.random() * 10)
-        let newMonster = JSON.parse(JSON.stringify(this.state.allMonsters[monNum]))
+    getMonster(x, y) {
+        if(this.state.players[0].monsters.length === 10) return null
+        let monsters = JSON.parse(JSON.stringify(this.state.allMonsters))
+        outerloop:
+        for(let mon of this.state.players[0].monsters){
+            for(let i = 0; i < monsters.length; i++){
+                if(mon.id === monsters[i].id){
+                    monsters.splice(i, 1)
+                    continue outerloop
+                }
+            }
+        }
+        let monNum = Math.floor(Math.random() * monsters.length)
+        let newMonster = monsters[monNum]
         newMonster.x = x
         newMonster.y = y
-        newMonster.owner = charId
         return newMonster
     }
 
@@ -863,7 +965,7 @@ class Board extends Component {
 
     //  Updates position of character, includes wall and edge detection
     getPositionOfCharacter(char, dir, val) {
-        if (char[dir] + val < 1) return
+        if (char[dir] + val < 1 || this.state.speed === 0) return
 
         char[dir] = char[dir] + val
 
@@ -883,7 +985,7 @@ class Board extends Component {
 
         let tempPlayers = this.state.players
         tempPlayers[0] = char
-        this.setState({ players: tempPlayers }, () => this.processCharacters())
+        this.setState({ players: tempPlayers, speed: this.state.speed-1 }, () => this.processCharacters())
     }
 
     //  Checks each side of the current character, returns an object with values showing if they are on an unexplored edge
@@ -959,16 +1061,18 @@ class Board extends Component {
             }
         }
 
-        outerloop:
-        for (let monster of this.state.monsters) {
+        for (let char of this.state.players){
+            outerloop:
+            for (let monster of char.monsters) {
 
-            let position = this.getTileAndSquareForCharacter(monster)
+                let position = this.getTileAndSquareForCharacter(monster)
 
-            for (let item of tempSet) {
-                if (position.tileX === item.x && position.tileY === item.y) {
-                    item.grid[position.squareY][position.squareX] = 21
-                    item.players.push({ image: monster.image, x: position.squareX, y: position.squareY })
-                    continue outerloop
+                for (let item of tempSet) {
+                    if (position.tileX === item.x && position.tileY === item.y) {
+                        item.grid[position.squareY][position.squareX] = 21
+                        item.players.push({ image: monster.image, x: position.squareX, y: position.squareY })
+                        continue outerloop
+                    }
                 }
             }
         }
@@ -977,6 +1081,7 @@ class Board extends Component {
     }
 
     render() {
+        console.log(this.state.speed)
         let rows = 0
         let cols = 0
         this.state.dataSet.map(set => {
@@ -1013,6 +1118,8 @@ class Board extends Component {
                     {this.state.explore.top && <React.Fragment><button onClick={() => this.prepTileForAdding(0)}>Explore top</button><br /></React.Fragment>}
                     {this.state.explore.bottom && <button onClick={() => this.prepTileForAdding(2)}>Explore bottom</button>}
                 </div>
+                <DisplayCharactersBoard/>
+                <SurgeTokens />
             </React.Fragment>
         )
     }
