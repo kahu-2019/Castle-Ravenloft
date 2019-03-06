@@ -7,6 +7,8 @@ import allTiles from '../../public/game_assets/tiles.json'
 import { getAllMonsters } from '../actions';
 import TimeTract from './TimeTract'
 import ScrollViewer from './ScrollViewer'
+import DisplayCharactersBoard from './DisplayCharactersBoard'
+import PowerCardsBoardView from './PowerCardsBoardView'
 
 import blazingSkeleton from '../../public/game_assets/monster_tactics/blazing_skeleton.js'
 
@@ -1116,6 +1118,8 @@ class Board extends Component {
                     {this.state.explore.top && <React.Fragment><button onClick={() => this.prepTileForAdding(0)}>Explore top</button><br /></React.Fragment>}
                     {this.state.explore.bottom && <button onClick={() => this.prepTileForAdding(2)}>Explore bottom</button>}
                 <ScrollViewer/>
+                <DisplayCharactersBoard player={this.state.players}/>
+                <div className="pcbv row"><PowerCardsBoardView player={this.state.players}/></div>
                 </div>
             </div>
         )
