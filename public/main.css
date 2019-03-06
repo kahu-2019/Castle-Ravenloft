@@ -262,8 +262,9 @@ span {
 }
 
 .card1 {
+  max-width: 40%;
   margin: 1px !important;
-  margin-right: 5px !important;
+
   color: rgba(17, 6, 1, 0.959) !important;
   background-color: rgba(75, 64, 49, 0.85);
   -webkit-box-shadow: inset 0px 0px 125px -11px rgba(202, 195, 188, 0.51) !important;
@@ -272,18 +273,10 @@ span {
 }
 .card2 {
   margin: 1px !important;
+
   color: rgba(17, 6, 1, 0.959) !important;
   background-color: rgba(211, 190, 150, 0.85);
   -webkit-box-shadow: inset 0px 0px 125px -11px rgba(202, 195, 188, 0.51) !important;
   -moz-box-shadow: inset 0px 0px 125px -11px rgba(129, 104, 81, 0.51) !important;
   box-shadow: inset 0px 0px 125px -11px rgba(129, 104, 81, 0.51) !important;
 }
-
-/* @media all and (min-width: 650px) {
-  .time-containers {
-    width: 40%;
-  }
-  .contaniner1 timecontainer1 {
-    width: 40%;
-  }
-} */
