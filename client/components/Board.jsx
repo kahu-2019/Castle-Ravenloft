@@ -184,7 +184,7 @@ class Board extends Component {
                 this.getPositionOfCharacter(this.state.players[0], 'x', -1)
                 break
             case "t":
-                this.checkTileForMonsters(this.state.players[0])
+                this.adjacentTester()
                 break
         }
     }
@@ -204,14 +204,15 @@ class Board extends Component {
 
     adjacentTester(){
 
+        let tempPlayers = this.state.players
         for(let monster of this.state.players[0].monsters){
             // console.log(monster)
-        }
 
-        let monsterId = this.state.players[0].monsters[0].id
-        let monster = this.state.players[0].monsters.find(monster => monster.id === monsterId)
-        // console.log(monster)
+        let monsterId = monster.id
         let closestPlayer = this.checkAdjacentSquares(monster)
+        console.log('monster', monster)
+        console.log('id', monsterId)
+        console.log('closestPlayer', closestPlayer)
         
         let result = blazingSkeleton(closestPlayer)
         // let result = undefined
@@ -248,7 +249,6 @@ class Board extends Component {
         // }
 
         
-        let tempPlayers = this.state.players
         if(result.position){
             let tempMonsters = this.state.players[0].monsters
             for(let monmon of tempMonsters){
@@ -258,7 +258,6 @@ class Board extends Component {
                     break
                 }
             }
-            let tempPlayers = this.state.players
             tempPlayers[0].monsters = tempMonsters
         }
 
@@ -271,9 +270,10 @@ class Board extends Component {
                 }
             }
         }
+    }
 
         this.setState({players: tempPlayers}, () => this.processCharacters())
-        // console.log(result)
+        // console.log(tempPlayers)
     }
 
     checkTileForMonsters(character){
@@ -323,9 +323,9 @@ class Board extends Component {
             })
         }
         
-        console.log( paths.sort((a, b) => {
+        return paths.sort((a, b) => {
             return a.path.length - b.path.length
-        })[0])
+        })[0]
     }
 
     //  Checks the adjacent two squares of a given tile
