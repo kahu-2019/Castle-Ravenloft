@@ -91,6 +91,7 @@ class Board extends Component {
         this.checkTwoAdjacentRight = this.checkTwoAdjacentRight.bind(this)
         this.checkTwoAdjacentTop = this.checkTwoAdjacentTop.bind(this)
         this.checkTwoAdjacentBottom = this.checkTwoAdjacentBottom.bind(this)
+        this.checkTileForMonsters = this.checkTileForMonsters.bind(this)
         this.adjacentTester = this.adjacentTester.bind(this)
     }
 
@@ -183,7 +184,7 @@ class Board extends Component {
                 this.getPositionOfCharacter(this.state.players[0], 'x', -1)
                 break
             case "t":
-                this.adjacentTester()
+                this.checkTileForMonsters(this.state.players[0])
                 break
         }
     }
@@ -273,6 +274,58 @@ class Board extends Component {
 
         this.setState({players: tempPlayers}, () => this.processCharacters())
         // console.log(result)
+    }
+
+    checkTileForMonsters(character){
+        let characterCoords = this.getTileAndSquareForCharacter(character)
+        let allCharacters = JSON.parse(JSON.stringify(this.state.players))
+        let monsterArray = []
+        for(let char of allCharacters){
+            char.monsters.map(monster => {
+                let monsterCoords = this.getTileAndSquareForCharacter(monster)
+                if(monsterCoords.tileX === characterCoords.tileX && monsterCoords.tileY === characterCoords.tileY){
+                    let tempMon = {
+                        monsterId: monster.id,
+                        owner: char,
+                        player: character
+                    }
+                    monsterArray.push(tempMon)
+                }
+            })
+        }
+
+        let grid = []
+        for(let item of this.state.cleanTileSet){
+            if(item.x === characterCoords.tileX && item.y === characterCoords.tileY){
+                grid = JSON.parse(JSON.stringify(item.grid))
+            }
+        }
+
+        for(let row in grid){
+            for(let col in grid[row]){
+                if(grid[row][col] == 2) grid[row][col] = 0
+            }
+        }
+
+        let paths = []
+
+        for(let item of monsterArray){
+            let monster = item.owner.monsters.find(mon => mon.id === item.monsterId)
+            let monsterCoords = this.getTileAndSquareForCharacter(monster)
+            let gridFind = new PF.Grid(grid)
+            let finder = new PF.AStarFinder()
+            let path = finder.findPath(Number(characterCoords.squareX), Number(characterCoords.squareY), Number(monsterCoords.squareX), Number(monsterCoords.squareY), gridFind)
+            paths.push({
+                path,
+                player: item.player,
+                owner: item.owner,
+                monsterId: item.monsterId
+            })
+        }
+        
+        console.log( paths.sort((a, b) => {
+            return a.path.length - b.path.length
+        })[0])
     }
 
     //  Checks the adjacent two squares of a given tile
@@ -1089,7 +1142,6 @@ class Board extends Component {
     }
 
     render() {
-        console.log(this.state.speed)
         let rows = 0
         let cols = 0
         this.state.dataSet.map(set => {
