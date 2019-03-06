@@ -38,7 +38,7 @@ export function blazingSkeleton(playerDetails){
 //values i need
 var closestPlayer = playerDetails.players.find(player => player.id == playerDetails.id)
 var heroes = playerDetails.players
-var tileAdjacent = playerDetails.adjacentTile
+var tileAdjacent = playerDetails.adjacent
 var squareAdjacent = false
 
 console.log(closestPlayer)
