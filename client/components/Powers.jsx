@@ -227,19 +227,22 @@ class Powers extends Component {
                 <h2>{this.state.character.subtitle}</h2>
                 {this.state.sneakAttack ?
                     <Fragment>
-                        <h3>You get this by default</h3>
+                        <h3 className="orderList">You get this by default:</h3>
+                        <div className="row justify-content-center">
                         <div className="card">
-                            <div className='container-fluid'>
-                                <div className="card-body">
-                                    <div className='row'>
-                                        <h5 className="card-title">{this.state.sneakAttack.title}</h5>
-                                        <p className="card-subtitle mb-2 text-muted card-text"><b>{this.state.sneakAttack.subtitle}</b></p>
-                                        <p><b>{this.state.sneakAttack.instruction_1}</b> {this.state.sneakAttack.instruction_2}</p>
+                            <div className="utilityCard powerCardDefault">
+                                <div className='row'>
+                                    <h5 className="card-title powerCardTitle">{this.state.sneakAttack.title}</h5>
+                                    <p className="powerCardSubtitle"><b>{this.state.sneakAttack.subtitle}</b></p>
+                                    <div className="PowerCardInst">
+                                    <p>{this.state.sneakAttack.instruction_1}</p>
+                                    <p>{this.state.sneakAttack.instruction_2}</p>
                                     </div>
-                                    <p><small className="text-muted">FILP THIS CARD OVER AFTER YOU USE THE POWER</small></p>
                                 </div>
+                                <p><small className="powerCardUse">YOU MAY ONLY USE THIS POWER ONCE</small></p>
                             </div>
-                        </div>
+                            </div>
+                            </div>
                     </Fragment>
                     : this.state.dragonsBreath ?
                         <Fragment>
