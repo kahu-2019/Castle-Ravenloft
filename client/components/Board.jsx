@@ -967,21 +967,24 @@ class Board extends Component {
 
         let position = this.getTileAndSquareForCharacter(char)
 
+        let speed = this.state.speed-1
+
         let tileExists = false
         for (let item of this.state.cleanTileSet) {
             if (position.tileX === item.x && position.tileY === item.y) {
                 tileExists = true
                 if (item.grid[position.squareY][position.squareX] === 1) {
                     char[dir] = char[dir] - val
+                    speed++
                     break
                 }
             }
         }
-        if (!tileExists) char[dir] = char[dir] - val
+        if (!tileExists){ char[dir] = char[dir] - val; speed++}
 
         let tempPlayers = this.state.players
         tempPlayers[0] = char
-        this.setState({ players: tempPlayers, speed: this.state.speed-1 }, () => this.processCharacters())
+        this.setState({ players: tempPlayers, speed }, () => this.processCharacters())
     }
 
     //  Checks each side of the current character, returns an object with values showing if they are on an unexplored edge
