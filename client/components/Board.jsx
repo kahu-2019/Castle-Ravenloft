@@ -7,6 +7,7 @@ import allTiles from '../../public/game_assets/tiles.json'
 import { getAllMonsters } from '../actions';
 import TimeTract from './TimeTract'
 import ScrollViewer from './ScrollViewer'
+import DisplayCharactersBoard from './DisplayCharactersBoard'
 
 /*  Main board component, renders tile and square sub-components
 
@@ -1009,6 +1010,7 @@ class Board extends Component {
                     {this.state.explore.top && <React.Fragment><button onClick={() => this.prepTileForAdding(0)}>Explore top</button><br /></React.Fragment>}
                     {this.state.explore.bottom && <button onClick={() => this.prepTileForAdding(2)}>Explore bottom</button>}
                 <ScrollViewer/>
+                <DisplayCharactersBoard/>
                 </div>
             </React.Fragment>
         )

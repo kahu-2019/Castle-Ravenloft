@@ -31985,6 +31985,10 @@ var _ScrollViewer = __webpack_require__(114);
 
 var _ScrollViewer2 = _interopRequireDefault(_ScrollViewer);
 
+var _DisplayCharactersBoard = __webpack_require__(147);
+
+var _DisplayCharactersBoard2 = _interopRequireDefault(_DisplayCharactersBoard);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33433,7 +33437,8 @@ var Board = function (_Component) {
                             } },
                         'Explore bottom'
                     ),
-                    _react2.default.createElement(_ScrollViewer2.default, null)
+                    _react2.default.createElement(_ScrollViewer2.default, null),
+                    _react2.default.createElement(_DisplayCharactersBoard2.default, null)
                 )
             );
         }
@@ -40503,6 +40508,102 @@ function mapStateToProps(state) {
 }
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(Powers);
+
+/***/ }),
+/* 147 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+// import character from ""
+var DisplayCharactersBoard = function (_Component) {
+  _inherits(DisplayCharactersBoard, _Component);
+
+  function DisplayCharactersBoard(props) {
+    _classCallCheck(this, DisplayCharactersBoard);
+
+    var _this = _possibleConstructorReturn(this, (DisplayCharactersBoard.__proto__ || Object.getPrototypeOf(DisplayCharactersBoard)).call(this, props));
+
+    _this.state = {
+      character: {
+        AC: 14,
+        HP: 6,
+        speed: 6,
+        SurgeValue: 3,
+        name: 'Immeril'
+
+      }
+    };
+    return _this;
+  }
+
+  _createClass(DisplayCharactersBoard, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'characterBoardDiv' },
+        _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement('img', { className: 'characterBoardView', src: "./images/icons/" + this.state.character.name + ".jpg" })
+        ),
+        _react2.default.createElement(
+          'div',
+          null,
+          this.state.character.name
+        ),
+        _react2.default.createElement(
+          'div',
+          null,
+          ' HP: ',
+          this.state.character.HP
+        ),
+        _react2.default.createElement(
+          'div',
+          null,
+          ' AC: ',
+          this.state.character.AC
+        ),
+        _react2.default.createElement(
+          'div',
+          null,
+          ' Speed: ',
+          this.state.character.speed
+        ),
+        _react2.default.createElement(
+          'div',
+          null,
+          ' Surge: ',
+          this.state.character.SurgeValue
+        )
+      );
+    }
+  }]);
+
+  return DisplayCharactersBoard;
+}(_react.Component);
+
+exports.default = DisplayCharactersBoard;
 
 /***/ })
 /******/ ]);
