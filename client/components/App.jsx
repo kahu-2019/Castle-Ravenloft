@@ -6,7 +6,10 @@ import EncounterTreasure from "./EncounterTreasure";
 import Home2 from "./Home2";
 import Characters from "./Characters";
 import Powers from "./Powers";
-// import Home from "./Home";
+import SurgeTokens from './SurgeTokens';
+import XpCounter from './XpCounter';
+import LevelUp from './LevelUp';
+import DisplayCharactersBoard from './DisplayCharactersBoard';
 
 class App extends Component {
 

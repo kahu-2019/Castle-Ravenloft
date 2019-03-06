@@ -80,3 +80,11 @@ export function addPowerCards(id, powerCards) {
     powerCards
   };
 }
+
+export function updateLevel(character_id) {
+  return {
+    type: "UPDATE_ONE_CHARACTER",
+    character_id,
+
+  };
+}

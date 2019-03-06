@@ -5,6 +5,8 @@ import PF from 'pathfinding'
 
 import allTiles from '../../public/game_assets/tiles.json'
 import { getAllMonsters } from '../actions';
+import DisplayCharactersBoard from './DisplayCharactersBoard'
+import SurgeTokens from './SurgeTokens'
 
 import blazingSkeleton from '../../public/game_assets/monster_tactics/blazing_skeleton.js'
 import skeleton from '../../public/game_assets/monster_tactics/skeleton.js'
@@ -1100,6 +1102,8 @@ class Board extends Component {
                     {this.state.explore.top && <React.Fragment><button onClick={() => this.prepTileForAdding(0)}>Explore top</button><br /></React.Fragment>}
                     {this.state.explore.bottom && <button onClick={() => this.prepTileForAdding(2)}>Explore bottom</button>}
                 </div>
+                <DisplayCharactersBoard/>
+                <SurgeTokens />
             </React.Fragment>
         )
     }

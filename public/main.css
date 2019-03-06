@@ -7,6 +7,10 @@
     background-image: url('./images/brick.jpg');
     background-size: 100%;
 }
+.surgeToken{
+  border-radius: 50%;
+ 
+}
 
 .tile {
     display:grid;
@@ -707,4 +711,26 @@ line-height: 15pt;
   opacity: 1;
   animation: start 2s linear infinite;
   text-decoration:none !important;
+}
+.characterBoardView{
+  height:90px
+}
+.characterBoardDiv{
+position: fixed;
+left: 30px;
+bottom: 5px;
+ border-style: solid;
+ border-color: white;
+ border-width: 1px;
+ border-radius:3px;
+ width:92px;
+ background-color: rgba(39, 39, 39, 0.342);
+ color:white
+}
+.surgePosition{
+  position:fixed;
+  left:900px;
+  top:0px;
+  width:300px;
+  background-color: transparent
 }
