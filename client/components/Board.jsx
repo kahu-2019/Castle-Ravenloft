@@ -682,7 +682,8 @@ class Board extends Component {
                     player: JSON.parse(JSON.stringify(player)),
                     monster: JSON.parse(JSON.stringify(monster)),
                     distance: path.length - 2,
-                    dataSet: this.state.dataSet
+                    dataSet: this.state.dataSet,
+                    path
                 })
             }
         }

@@ -36,7 +36,7 @@ var playerDetails = {
 
 export default function blazingSkeleton(playerDetails){
 //values i need
-var closestPlayer = playerDetails.players.find(player => player.id == playerDetails.id) || undefined
+var closestPlayer = playerDetails.id
 var heroes = playerDetails.players
 var tileAdjacent = playerDetails.adjacent
 var squareAdjacent = false
@@ -44,6 +44,11 @@ var path = playerDetails.path
 var monster = playerDetails.monster
 var dataSet = playerDetails.dataSet
 var monsterTile = undefined
+
+if(playerDetails.players){
+    closestPlayer = playerDetails.players.find(player => player.id == playerDetails.id)
+}
+
 
 let monsterTileCoords = detailedPosition(monster)
 
@@ -128,54 +133,7 @@ if(tileAdjacent || squareAdjacent){
         characters
     }
 //move closer
-}else{
-    //convert to detailedPosition
-    var monX = monPos.tileX
-    var monY = monPos.tileY
-    var playX = playerPos.tileX
-    var playY = playerPos.tileY
-
-    var difference = {x:monX - playX,y:monY - playY}
-
-    
-    
-    var tileExists = playerDetails.dataSet.find(tile => {
-        tile.x == destination.x && tile.y == destination.y
-        return true
-    })
-    
-
-    let grid = tileExists.grid
-    tileExists = detailedPosition(tileExists)
-    console.log('tile Exists:',tileExists)
-
-    if(tileExists != null || tileExists != undefined){
-        console.log('free space')
-        if(grid[monPos.squareY][monPos.squareX] == 0 || grid[monPos.squareY][monPos.squareX] == 2){
-            monPos.tileX = tileExists.x
-            monPos.tileY = tileExists.y
-        }else{
-            //look for first free space and set monPos to the square as well as the tile
-            let square = {}
-
-            
-            outerLoop: for(let row in tileExists.grid){
-                for(let col in tileExists.grid[row]){
-                    if(tileExists.grid[row][col] == 0 || tileExists.grid[row][col] == 2){
-                        square.x = Number(col)
-                        square.y = Number(row)
-                        break outerLoop
-                    }
-                }
-            }
-//convert to total position
-            var movement = totalPosition(tileExists.x,tileExists.y,square.x,square.y)
-        }
-
-    }
-
-
-    
+}else{    
     console.log('coming closer', movement)
 
     return {
