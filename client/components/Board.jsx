@@ -6,6 +6,8 @@ import PF from 'pathfinding'
 import allTiles from '../../public/game_assets/tiles.json'
 import { getAllMonsters } from '../actions';
 
+import blazingSkeleton from '../../public/game_assets/monster_tactics/blazing_skeleton.js'
+
 /*  Main board component, renders tile and square sub-components
 
     In state:
@@ -192,6 +194,8 @@ class Board extends Component {
     adjacentTester(){
         let closestPlayer = this.checkAdjacentSquares(this.state.monsters[0])
         console.log(closestPlayer)
+        let result = blazingSkeleton(closestPlayer)
+        console.log(result)
     }
 
     //  Checks the adjacent two squares of a given tile
@@ -392,6 +396,7 @@ class Board extends Component {
         closestPlayer.playerTile = playerTile
         closestPlayer.players = playersOnTile
         closestPlayer.monster = JSON.parse(JSON.stringify(monster))
+        closestPlayer.dataSet = this.state.dataSet
 
         return closestPlayer
     }
@@ -676,7 +681,8 @@ class Board extends Component {
                     id: player.id,
                     player: JSON.parse(JSON.stringify(player)),
                     monster: JSON.parse(JSON.stringify(monster)),
-                    distance: path.length - 2
+                    distance: path.length - 2,
+                    dataSet: this.state.dataSet
                 })
             }
         }
