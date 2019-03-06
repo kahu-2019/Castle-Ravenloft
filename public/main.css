@@ -634,3 +634,6 @@ span {
   animation: start 2s linear infinite;
   text-decoration: none !important;
 }
+.charSelectLink{
+  color: black !important
+}

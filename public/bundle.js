@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 40);
+/******/ 	return __webpack_require__(__webpack_require__.s = 48);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -71,9 +71,9 @@
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(41);
+  module.exports = __webpack_require__(49);
 } else {
-  module.exports = __webpack_require__(42);
+  module.exports = __webpack_require__(50);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
@@ -280,22 +280,35 @@ process.umask = function() { return 0; };
  */
 
 if (process.env.NODE_ENV !== 'production') {
-  var ReactIs = __webpack_require__(9);
+  var ReactIs = __webpack_require__(12);
 
   // By explicitly using `prop-types` you are opting into new development behavior.
   // http://fb.me/prop-types-in-prod
   var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(54)(ReactIs.isElement, throwOnDirectAccess);
+  module.exports = __webpack_require__(62)(ReactIs.isElement, throwOnDirectAccess);
 } else {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(55)();
+  module.exports = __webpack_require__(63)();
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports) {
+
+var DiagonalMovement = {
+    Always: 1,
+    Never: 2,
+    IfAtMostOneObstacle: 3,
+    OnlyWhenNoObstacles: 4
+};
+
+module.exports = DiagonalMovement;
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -352,7 +365,7 @@ module.exports = invariant;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -422,15 +435,267 @@ module.exports = warning;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 5 */
+/* 6 */
+/***/ (function(module, exports) {
+
+/**
+ * Backtrace according to the parent records and return the path.
+ * (including both start and end nodes)
+ * @param {Node} node End node
+ * @return {Array<Array<number>>} the path
+ */
+function backtrace(node) {
+    var path = [[node.x, node.y]];
+    while (node.parent) {
+        node = node.parent;
+        path.push([node.x, node.y]);
+    }
+    return path.reverse();
+}
+exports.backtrace = backtrace;
+
+/**
+ * Backtrace from start and end node, and return the path.
+ * (including both start and end nodes)
+ * @param {Node}
+ * @param {Node}
+ */
+function biBacktrace(nodeA, nodeB) {
+    var pathA = backtrace(nodeA),
+        pathB = backtrace(nodeB);
+    return pathA.concat(pathB.reverse());
+}
+exports.biBacktrace = biBacktrace;
+
+/**
+ * Compute the length of the path.
+ * @param {Array<Array<number>>} path The path
+ * @return {number} The length of the path
+ */
+function pathLength(path) {
+    var i, sum = 0, a, b, dx, dy;
+    for (i = 1; i < path.length; ++i) {
+        a = path[i - 1];
+        b = path[i];
+        dx = a[0] - b[0];
+        dy = a[1] - b[1];
+        sum += Math.sqrt(dx * dx + dy * dy);
+    }
+    return sum;
+}
+exports.pathLength = pathLength;
+
+
+/**
+ * Given the start and end coordinates, return all the coordinates lying
+ * on the line formed by these coordinates, based on Bresenham's algorithm.
+ * http://en.wikipedia.org/wiki/Bresenham's_line_algorithm#Simplification
+ * @param {number} x0 Start x coordinate
+ * @param {number} y0 Start y coordinate
+ * @param {number} x1 End x coordinate
+ * @param {number} y1 End y coordinate
+ * @return {Array<Array<number>>} The coordinates on the line
+ */
+function interpolate(x0, y0, x1, y1) {
+    var abs = Math.abs,
+        line = [],
+        sx, sy, dx, dy, err, e2;
+
+    dx = abs(x1 - x0);
+    dy = abs(y1 - y0);
+
+    sx = (x0 < x1) ? 1 : -1;
+    sy = (y0 < y1) ? 1 : -1;
+
+    err = dx - dy;
+
+    while (true) {
+        line.push([x0, y0]);
+
+        if (x0 === x1 && y0 === y1) {
+            break;
+        }
+        
+        e2 = 2 * err;
+        if (e2 > -dy) {
+            err = err - dy;
+            x0 = x0 + sx;
+        }
+        if (e2 < dx) {
+            err = err + dx;
+            y0 = y0 + sy;
+        }
+    }
+
+    return line;
+}
+exports.interpolate = interpolate;
+
+
+/**
+ * Given a compressed path, return a new path that has all the segments
+ * in it interpolated.
+ * @param {Array<Array<number>>} path The path
+ * @return {Array<Array<number>>} expanded path
+ */
+function expandPath(path) {
+    var expanded = [],
+        len = path.length,
+        coord0, coord1,
+        interpolated,
+        interpolatedLen,
+        i, j;
+
+    if (len < 2) {
+        return expanded;
+    }
+
+    for (i = 0; i < len - 1; ++i) {
+        coord0 = path[i];
+        coord1 = path[i + 1];
+
+        interpolated = interpolate(coord0[0], coord0[1], coord1[0], coord1[1]);
+        interpolatedLen = interpolated.length;
+        for (j = 0; j < interpolatedLen - 1; ++j) {
+            expanded.push(interpolated[j]);
+        }
+    }
+    expanded.push(path[len - 1]);
+
+    return expanded;
+}
+exports.expandPath = expandPath;
+
+
+/**
+ * Smoothen the give path.
+ * The original path will not be modified; a new path will be returned.
+ * @param {PF.Grid} grid
+ * @param {Array<Array<number>>} path The path
+ */
+function smoothenPath(grid, path) {
+    var len = path.length,
+        x0 = path[0][0],        // path start x
+        y0 = path[0][1],        // path start y
+        x1 = path[len - 1][0],  // path end x
+        y1 = path[len - 1][1],  // path end y
+        sx, sy,                 // current start coordinate
+        ex, ey,                 // current end coordinate
+        newPath,
+        i, j, coord, line, testCoord, blocked;
+
+    sx = x0;
+    sy = y0;
+    newPath = [[sx, sy]];
+
+    for (i = 2; i < len; ++i) {
+        coord = path[i];
+        ex = coord[0];
+        ey = coord[1];
+        line = interpolate(sx, sy, ex, ey);
+
+        blocked = false;
+        for (j = 1; j < line.length; ++j) {
+            testCoord = line[j];
+
+            if (!grid.isWalkableAt(testCoord[0], testCoord[1])) {
+                blocked = true;
+                break;
+            }
+        }
+        if (blocked) {
+            lastValidCoord = path[i - 1];
+            newPath.push(lastValidCoord);
+            sx = lastValidCoord[0];
+            sy = lastValidCoord[1];
+        }
+    }
+    newPath.push([x1, y1]);
+
+    return newPath;
+}
+exports.smoothenPath = smoothenPath;
+
+
+/**
+ * Compress a path, remove redundant nodes without altering the shape
+ * The original path is not modified
+ * @param {Array<Array<number>>} path The path
+ * @return {Array<Array<number>>} The compressed path
+ */
+function compressPath(path) {
+
+    // nothing to compress
+    if(path.length < 3) {
+        return path;
+    }
+
+    var compressed = [],
+        sx = path[0][0], // start x
+        sy = path[0][1], // start y
+        px = path[1][0], // second point x
+        py = path[1][1], // second point y
+        dx = px - sx, // direction between the two points
+        dy = py - sy, // direction between the two points
+        lx, ly,
+        ldx, ldy,
+        sq, i;
+
+    // normalize the direction
+    sq = Math.sqrt(dx*dx + dy*dy);
+    dx /= sq;
+    dy /= sq;
+
+    // start the new path
+    compressed.push([sx,sy]);
+
+    for(i = 2; i < path.length; i++) {
+
+        // store the last point
+        lx = px;
+        ly = py;
+
+        // store the last direction
+        ldx = dx;
+        ldy = dy;
+
+        // next point
+        px = path[i][0];
+        py = path[i][1];
+
+        // next direction
+        dx = px - lx;
+        dy = py - ly;
+
+        // normalize
+        sq = Math.sqrt(dx*dx + dy*dy);
+        dx /= sq;
+        dy /= sq;
+
+        // if the direction has changed, store the point
+        if ( dx !== ldx || dy !== ldy ) {
+            compressed.push([lx,ly]);
+        }
+    }
+
+    // store the last point
+    compressed.push([px,py]);
+
+    return compressed;
+}
+exports.compressPath = compressPath;
+
+
+/***/ }),
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Provider__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Context__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__connect_connect__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Provider__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Context__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__connect_connect__ = __webpack_require__(66);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Provider", function() { return __WEBPACK_IMPORTED_MODULE_0__components_Provider__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "connectAdvanced", function() { return __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "ReactReduxContext", function() { return __WEBPACK_IMPORTED_MODULE_2__components_Context__["a"]; });
@@ -442,20 +707,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /***/ }),
-/* 6 */
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createBrowserHistory__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createBrowserHistory__ = __webpack_require__(114);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__createBrowserHistory__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__createHashHistory__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__createHashHistory__ = __webpack_require__(117);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__createHashHistory__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__createMemoryHistory__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__createMemoryHistory__ = __webpack_require__(118);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_2__createMemoryHistory__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__LocationUtils__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__LocationUtils__ = __webpack_require__(17);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_3__LocationUtils__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_3__LocationUtils__["b"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__PathUtils__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__PathUtils__ = __webpack_require__(11);
 /* unused harmony reexport parsePath */
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_4__PathUtils__["b"]; });
 
@@ -469,7 +734,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /***/ }),
-/* 7 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -566,7 +831,61 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 8 */
+/* 10 */
+/***/ (function(module, exports) {
+
+/**
+ * @namespace PF.Heuristic
+ * @description A collection of heuristic functions.
+ */
+module.exports = {
+
+  /**
+   * Manhattan distance.
+   * @param {number} dx - Difference in x.
+   * @param {number} dy - Difference in y.
+   * @return {number} dx + dy
+   */
+  manhattan: function(dx, dy) {
+      return dx + dy;
+  },
+
+  /**
+   * Euclidean distance.
+   * @param {number} dx - Difference in x.
+   * @param {number} dy - Difference in y.
+   * @return {number} sqrt(dx * dx + dy * dy)
+   */
+  euclidean: function(dx, dy) {
+      return Math.sqrt(dx * dx + dy * dy);
+  },
+
+  /**
+   * Octile distance.
+   * @param {number} dx - Difference in x.
+   * @param {number} dy - Difference in y.
+   * @return {number} sqrt(dx * dx + dy * dy) for grids
+   */
+  octile: function(dx, dy) {
+      var F = Math.SQRT2 - 1;
+      return (dx < dy) ? F * dx + dy : F * dy + dx;
+  },
+
+  /**
+   * Chebyshev distance.
+   * @param {number} dx - Difference in x.
+   * @param {number} dy - Difference in y.
+   * @return {number} max(dx, dy)
+   */
+  chebyshev: function(dx, dy) {
+      return Math.max(dx, dy);
+  }
+
+};
+
+
+/***/ }),
+/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -637,22 +956,149 @@ var createPath = function createPath(location) {
 };
 
 /***/ }),
-/* 9 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(52);
+  module.exports = __webpack_require__(60);
 } else {
-  module.exports = __webpack_require__(53);
+  module.exports = __webpack_require__(61);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 10 */
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(89);
+
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author imor / https://github.com/imor
+ */
+var Heap       = __webpack_require__(13);
+var Util       = __webpack_require__(6);
+var Heuristic  = __webpack_require__(10);
+var DiagonalMovement = __webpack_require__(3);
+
+/**
+ * Base class for the Jump Point Search algorithm
+ * @param {object} opt
+ * @param {function} opt.heuristic Heuristic function to estimate the distance
+ *     (defaults to manhattan).
+ */
+function JumpPointFinderBase(opt) {
+    opt = opt || {};
+    this.heuristic = opt.heuristic || Heuristic.manhattan;
+    this.trackJumpRecursion = opt.trackJumpRecursion || false;
+}
+
+/**
+ * Find and return the path.
+ * @return {Array<Array<number>>} The path, including both start and
+ *     end positions.
+ */
+JumpPointFinderBase.prototype.findPath = function(startX, startY, endX, endY, grid) {
+    var openList = this.openList = new Heap(function(nodeA, nodeB) {
+            return nodeA.f - nodeB.f;
+        }),
+        startNode = this.startNode = grid.getNodeAt(startX, startY),
+        endNode = this.endNode = grid.getNodeAt(endX, endY), node;
+
+    this.grid = grid;
+
+
+    // set the `g` and `f` value of the start node to be 0
+    startNode.g = 0;
+    startNode.f = 0;
+
+    // push the start node into the open list
+    openList.push(startNode);
+    startNode.opened = true;
+
+    // while the open list is not empty
+    while (!openList.empty()) {
+        // pop the position of node which has the minimum `f` value.
+        node = openList.pop();
+        node.closed = true;
+
+        if (node === endNode) {
+            return Util.expandPath(Util.backtrace(endNode));
+        }
+
+        this._identifySuccessors(node);
+    }
+
+    // fail to find the path
+    return [];
+};
+
+/**
+ * Identify successors for the given node. Runs a jump point search in the
+ * direction of each available neighbor, adding any points found to the open
+ * list.
+ * @protected
+ */
+JumpPointFinderBase.prototype._identifySuccessors = function(node) {
+    var grid = this.grid,
+        heuristic = this.heuristic,
+        openList = this.openList,
+        endX = this.endNode.x,
+        endY = this.endNode.y,
+        neighbors, neighbor,
+        jumpPoint, i, l,
+        x = node.x, y = node.y,
+        jx, jy, dx, dy, d, ng, jumpNode,
+        abs = Math.abs, max = Math.max;
+
+    neighbors = this._findNeighbors(node);
+    for(i = 0, l = neighbors.length; i < l; ++i) {
+        neighbor = neighbors[i];
+        jumpPoint = this._jump(neighbor[0], neighbor[1], x, y);
+        if (jumpPoint) {
+
+            jx = jumpPoint[0];
+            jy = jumpPoint[1];
+            jumpNode = grid.getNodeAt(jx, jy);
+
+            if (jumpNode.closed) {
+                continue;
+            }
+
+            // include distance, as parent may not be immediately adjacent:
+            d = Heuristic.octile(abs(jx - x), abs(jy - y));
+            ng = node.g + d; // next `g` value
+
+            if (!jumpNode.opened || ng < jumpNode.g) {
+                jumpNode.g = ng;
+                jumpNode.h = jumpNode.h || heuristic(abs(jx - endX), abs(jy - endY));
+                jumpNode.f = jumpNode.g + jumpNode.h;
+                jumpNode.parent = node;
+
+                if (!jumpNode.opened) {
+                    openList.push(jumpNode);
+                    jumpNode.opened = true;
+                } else {
+                    openList.updateItem(jumpNode);
+                }
+            }
+        }
+    }
+};
+
+module.exports = JumpPointFinderBase;
+
+
+/***/ }),
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -674,11 +1120,11 @@ exports.getCardsByCharacter = getCardsByCharacter;
 exports.savePowerCards = savePowerCards;
 exports.addPowerCards = addPowerCards;
 
-var _encounter = __webpack_require__(80);
+var _encounter = __webpack_require__(105);
 
-var _characters = __webpack_require__(86);
+var _characters = __webpack_require__(111);
 
-var _treasure = __webpack_require__(87);
+var _treasure = __webpack_require__(112);
 
 function getAllMonsters() {
   return function (dispatch) {
@@ -770,7 +1216,7 @@ function addPowerCards(id, powerCards) {
 }
 
 /***/ }),
-/* 11 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -838,15 +1284,15 @@ module.exports = warning;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 12 */
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return createLocation; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return locationsAreEqual; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_resolve_pathname__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_value_equal__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PathUtils__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_resolve_pathname__ = __webpack_require__(115);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_value_equal__ = __webpack_require__(116);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PathUtils__ = __webpack_require__(11);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 
@@ -914,7 +1360,7 @@ var locationsAreEqual = function locationsAreEqual(a, b) {
 };
 
 /***/ }),
-/* 13 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -930,7 +1376,7 @@ var locationsAreEqual = function locationsAreEqual(a, b) {
 var printWarning = function() {};
 
 if (process.env.NODE_ENV !== 'production') {
-  var ReactPropTypesSecret = __webpack_require__(14);
+  var ReactPropTypesSecret = __webpack_require__(19);
   var loggedTypeFailures = {};
   var has = Function.call.bind(Object.prototype.hasOwnProperty);
 
@@ -1024,7 +1470,7 @@ module.exports = checkPropTypes;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 14 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1043,7 +1489,7 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
-/* 15 */
+/* 20 */
 /***/ (function(module, exports) {
 
 var g;
@@ -1070,7 +1516,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 16 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1082,7 +1528,7 @@ var ReactReduxContext = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createCont
 /* unused harmony default export */ var _unused_webpack_default_export = (ReactReduxContext);
 
 /***/ }),
-/* 17 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1106,7 +1552,7 @@ function _extends() {
 }
 
 /***/ }),
-/* 18 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1127,7 +1573,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 }
 
 /***/ }),
-/* 19 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1138,7 +1584,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "applyMiddleware", function() { return applyMiddleware; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "compose", function() { return compose; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__DO_NOT_USE__ActionTypes", function() { return ActionTypes; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_symbol_observable__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_symbol_observable__ = __webpack_require__(69);
 
 
 /**
@@ -1779,7 +2225,360 @@ if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' 
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 20 */
+/* 25 */
+/***/ (function(module, exports) {
+
+/**
+ * A node in grid. 
+ * This class holds some basic information about a node and custom 
+ * attributes may be added, depending on the algorithms' needs.
+ * @constructor
+ * @param {number} x - The x coordinate of the node on the grid.
+ * @param {number} y - The y coordinate of the node on the grid.
+ * @param {boolean} [walkable] - Whether this node is walkable.
+ */
+function Node(x, y, walkable) {
+    /**
+     * The x coordinate of the node on the grid.
+     * @type number
+     */
+    this.x = x;
+    /**
+     * The y coordinate of the node on the grid.
+     * @type number
+     */
+    this.y = y;
+    /**
+     * Whether this node can be walked through.
+     * @type boolean
+     */
+    this.walkable = (walkable === undefined ? true : walkable);
+}
+
+module.exports = Node;
+
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Heap       = __webpack_require__(13);
+var Util       = __webpack_require__(6);
+var Heuristic  = __webpack_require__(10);
+var DiagonalMovement = __webpack_require__(3);
+
+/**
+ * A* path-finder. Based upon https://github.com/bgrins/javascript-astar
+ * @constructor
+ * @param {Object} opt
+ * @param {boolean} opt.allowDiagonal Whether diagonal movement is allowed.
+ *     Deprecated, use diagonalMovement instead.
+ * @param {boolean} opt.dontCrossCorners Disallow diagonal movement touching 
+ *     block corners. Deprecated, use diagonalMovement instead.
+ * @param {DiagonalMovement} opt.diagonalMovement Allowed diagonal movement.
+ * @param {function} opt.heuristic Heuristic function to estimate the distance
+ *     (defaults to manhattan).
+ * @param {number} opt.weight Weight to apply to the heuristic to allow for
+ *     suboptimal paths, in order to speed up the search.
+ */
+function AStarFinder(opt) {
+    opt = opt || {};
+    this.allowDiagonal = opt.allowDiagonal;
+    this.dontCrossCorners = opt.dontCrossCorners;
+    this.heuristic = opt.heuristic || Heuristic.manhattan;
+    this.weight = opt.weight || 1;
+    this.diagonalMovement = opt.diagonalMovement;
+
+    if (!this.diagonalMovement) {
+        if (!this.allowDiagonal) {
+            this.diagonalMovement = DiagonalMovement.Never;
+        } else {
+            if (this.dontCrossCorners) {
+                this.diagonalMovement = DiagonalMovement.OnlyWhenNoObstacles;
+            } else {
+                this.diagonalMovement = DiagonalMovement.IfAtMostOneObstacle;
+            }
+        }
+    }
+
+    // When diagonal movement is allowed the manhattan heuristic is not
+    //admissible. It should be octile instead
+    if (this.diagonalMovement === DiagonalMovement.Never) {
+        this.heuristic = opt.heuristic || Heuristic.manhattan;
+    } else {
+        this.heuristic = opt.heuristic || Heuristic.octile;
+    }
+}
+
+/**
+ * Find and return the the path.
+ * @return {Array<Array<number>>} The path, including both start and
+ *     end positions.
+ */
+AStarFinder.prototype.findPath = function(startX, startY, endX, endY, grid) {
+    var openList = new Heap(function(nodeA, nodeB) {
+            return nodeA.f - nodeB.f;
+        }),
+        startNode = grid.getNodeAt(startX, startY),
+        endNode = grid.getNodeAt(endX, endY),
+        heuristic = this.heuristic,
+        diagonalMovement = this.diagonalMovement,
+        weight = this.weight,
+        abs = Math.abs, SQRT2 = Math.SQRT2,
+        node, neighbors, neighbor, i, l, x, y, ng;
+
+    // set the `g` and `f` value of the start node to be 0
+    startNode.g = 0;
+    startNode.f = 0;
+
+    // push the start node into the open list
+    openList.push(startNode);
+    startNode.opened = true;
+
+    // while the open list is not empty
+    while (!openList.empty()) {
+        // pop the position of node which has the minimum `f` value.
+        node = openList.pop();
+        node.closed = true;
+
+        // if reached the end position, construct the path and return it
+        if (node === endNode) {
+            return Util.backtrace(endNode);
+        }
+
+        // get neigbours of the current node
+        neighbors = grid.getNeighbors(node, diagonalMovement);
+        for (i = 0, l = neighbors.length; i < l; ++i) {
+            neighbor = neighbors[i];
+
+            if (neighbor.closed) {
+                continue;
+            }
+
+            x = neighbor.x;
+            y = neighbor.y;
+
+            // get the distance between current node and the neighbor
+            // and calculate the next g score
+            ng = node.g + ((x - node.x === 0 || y - node.y === 0) ? 1 : SQRT2);
+
+            // check if the neighbor has not been inspected yet, or
+            // can be reached with smaller cost from the current node
+            if (!neighbor.opened || ng < neighbor.g) {
+                neighbor.g = ng;
+                neighbor.h = neighbor.h || weight * heuristic(abs(x - endX), abs(y - endY));
+                neighbor.f = neighbor.g + neighbor.h;
+                neighbor.parent = node;
+
+                if (!neighbor.opened) {
+                    openList.push(neighbor);
+                    neighbor.opened = true;
+                } else {
+                    // the neighbor can be reached with smaller cost.
+                    // Since its f value has been updated, we have to
+                    // update its position in the open list
+                    openList.updateItem(neighbor);
+                }
+            }
+        } // end for each neighbor
+    } // end while not open list empty
+
+    // fail to find the path
+    return [];
+};
+
+module.exports = AStarFinder;
+
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Heap       = __webpack_require__(13);
+var Util       = __webpack_require__(6);
+var Heuristic  = __webpack_require__(10);
+var DiagonalMovement = __webpack_require__(3);
+
+/**
+ * A* path-finder.
+ * based upon https://github.com/bgrins/javascript-astar
+ * @constructor
+ * @param {Object} opt
+ * @param {boolean} opt.allowDiagonal Whether diagonal movement is allowed.
+ *     Deprecated, use diagonalMovement instead.
+ * @param {boolean} opt.dontCrossCorners Disallow diagonal movement touching
+ *     block corners. Deprecated, use diagonalMovement instead.
+ * @param {DiagonalMovement} opt.diagonalMovement Allowed diagonal movement.
+ * @param {function} opt.heuristic Heuristic function to estimate the distance
+ *     (defaults to manhattan).
+ * @param {number} opt.weight Weight to apply to the heuristic to allow for
+ *     suboptimal paths, in order to speed up the search.
+ */
+function BiAStarFinder(opt) {
+    opt = opt || {};
+    this.allowDiagonal = opt.allowDiagonal;
+    this.dontCrossCorners = opt.dontCrossCorners;
+    this.diagonalMovement = opt.diagonalMovement;
+    this.heuristic = opt.heuristic || Heuristic.manhattan;
+    this.weight = opt.weight || 1;
+
+    if (!this.diagonalMovement) {
+        if (!this.allowDiagonal) {
+            this.diagonalMovement = DiagonalMovement.Never;
+        } else {
+            if (this.dontCrossCorners) {
+                this.diagonalMovement = DiagonalMovement.OnlyWhenNoObstacles;
+            } else {
+                this.diagonalMovement = DiagonalMovement.IfAtMostOneObstacle;
+            }
+        }
+    }
+
+    //When diagonal movement is allowed the manhattan heuristic is not admissible
+    //It should be octile instead
+    if (this.diagonalMovement === DiagonalMovement.Never) {
+        this.heuristic = opt.heuristic || Heuristic.manhattan;
+    } else {
+        this.heuristic = opt.heuristic || Heuristic.octile;
+    }
+}
+
+/**
+ * Find and return the the path.
+ * @return {Array<Array<number>>} The path, including both start and
+ *     end positions.
+ */
+BiAStarFinder.prototype.findPath = function(startX, startY, endX, endY, grid) {
+    var cmp = function(nodeA, nodeB) {
+            return nodeA.f - nodeB.f;
+        },
+        startOpenList = new Heap(cmp),
+        endOpenList = new Heap(cmp),
+        startNode = grid.getNodeAt(startX, startY),
+        endNode = grid.getNodeAt(endX, endY),
+        heuristic = this.heuristic,
+        diagonalMovement = this.diagonalMovement,
+        weight = this.weight,
+        abs = Math.abs, SQRT2 = Math.SQRT2,
+        node, neighbors, neighbor, i, l, x, y, ng,
+        BY_START = 1, BY_END = 2;
+
+    // set the `g` and `f` value of the start node to be 0
+    // and push it into the start open list
+    startNode.g = 0;
+    startNode.f = 0;
+    startOpenList.push(startNode);
+    startNode.opened = BY_START;
+
+    // set the `g` and `f` value of the end node to be 0
+    // and push it into the open open list
+    endNode.g = 0;
+    endNode.f = 0;
+    endOpenList.push(endNode);
+    endNode.opened = BY_END;
+
+    // while both the open lists are not empty
+    while (!startOpenList.empty() && !endOpenList.empty()) {
+
+        // pop the position of start node which has the minimum `f` value.
+        node = startOpenList.pop();
+        node.closed = true;
+
+        // get neigbours of the current node
+        neighbors = grid.getNeighbors(node, diagonalMovement);
+        for (i = 0, l = neighbors.length; i < l; ++i) {
+            neighbor = neighbors[i];
+
+            if (neighbor.closed) {
+                continue;
+            }
+            if (neighbor.opened === BY_END) {
+                return Util.biBacktrace(node, neighbor);
+            }
+
+            x = neighbor.x;
+            y = neighbor.y;
+
+            // get the distance between current node and the neighbor
+            // and calculate the next g score
+            ng = node.g + ((x - node.x === 0 || y - node.y === 0) ? 1 : SQRT2);
+
+            // check if the neighbor has not been inspected yet, or
+            // can be reached with smaller cost from the current node
+            if (!neighbor.opened || ng < neighbor.g) {
+                neighbor.g = ng;
+                neighbor.h = neighbor.h ||
+                    weight * heuristic(abs(x - endX), abs(y - endY));
+                neighbor.f = neighbor.g + neighbor.h;
+                neighbor.parent = node;
+
+                if (!neighbor.opened) {
+                    startOpenList.push(neighbor);
+                    neighbor.opened = BY_START;
+                } else {
+                    // the neighbor can be reached with smaller cost.
+                    // Since its f value has been updated, we have to
+                    // update its position in the open list
+                    startOpenList.updateItem(neighbor);
+                }
+            }
+        } // end for each neighbor
+
+
+        // pop the position of end node which has the minimum `f` value.
+        node = endOpenList.pop();
+        node.closed = true;
+
+        // get neigbours of the current node
+        neighbors = grid.getNeighbors(node, diagonalMovement);
+        for (i = 0, l = neighbors.length; i < l; ++i) {
+            neighbor = neighbors[i];
+
+            if (neighbor.closed) {
+                continue;
+            }
+            if (neighbor.opened === BY_START) {
+                return Util.biBacktrace(neighbor, node);
+            }
+
+            x = neighbor.x;
+            y = neighbor.y;
+
+            // get the distance between current node and the neighbor
+            // and calculate the next g score
+            ng = node.g + ((x - node.x === 0 || y - node.y === 0) ? 1 : SQRT2);
+
+            // check if the neighbor has not been inspected yet, or
+            // can be reached with smaller cost from the current node
+            if (!neighbor.opened || ng < neighbor.g) {
+                neighbor.g = ng;
+                neighbor.h = neighbor.h ||
+                    weight * heuristic(abs(x - startX), abs(y - startY));
+                neighbor.f = neighbor.g + neighbor.h;
+                neighbor.parent = node;
+
+                if (!neighbor.opened) {
+                    endOpenList.push(neighbor);
+                    neighbor.opened = BY_END;
+                } else {
+                    // the neighbor can be reached with smaller cost.
+                    // Since its f value has been updated, we have to
+                    // update its position in the open list
+                    endOpenList.updateItem(neighbor);
+                }
+            }
+        } // end for each neighbor
+    } // end while not open list empty
+
+    // fail to find the path
+    return [];
+};
+
+module.exports = BiAStarFinder;
+
+
+/***/ }),
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -1796,11 +2595,11 @@ if (typeof window !== 'undefined') { // Browser window
   root = this;
 }
 
-const Emitter = __webpack_require__(81);
-const RequestBase = __webpack_require__(82);
-const isObject = __webpack_require__(32);
-const ResponseBase = __webpack_require__(83);
-const Agent = __webpack_require__(85);
+const Emitter = __webpack_require__(106);
+const RequestBase = __webpack_require__(107);
+const isObject = __webpack_require__(40);
+const ResponseBase = __webpack_require__(108);
+const Agent = __webpack_require__(110);
 
 /**
  * Noop.
@@ -2704,38 +3503,38 @@ request.put = (url, data, fn) => {
 
 
 /***/ }),
-/* 21 */
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__ = __webpack_require__(113);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "BrowserRouter", function() { return __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HashRouter__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HashRouter__ = __webpack_require__(119);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "HashRouter", function() { return __WEBPACK_IMPORTED_MODULE_1__HashRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Link__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Link__ = __webpack_require__(43);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Link", function() { return __WEBPACK_IMPORTED_MODULE_2__Link__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__ = __webpack_require__(120);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "MemoryRouter", function() { return __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__NavLink__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__NavLink__ = __webpack_require__(122);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "NavLink", function() { return __WEBPACK_IMPORTED_MODULE_4__NavLink__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Prompt__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Prompt__ = __webpack_require__(124);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Prompt", function() { return __WEBPACK_IMPORTED_MODULE_5__Prompt__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__(126);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Redirect", function() { return __WEBPACK_IMPORTED_MODULE_6__Redirect__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__(44);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Route", function() { return __WEBPACK_IMPORTED_MODULE_7__Route__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Router__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Router__ = __webpack_require__(31);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Router", function() { return __WEBPACK_IMPORTED_MODULE_8__Router__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__StaticRouter__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__StaticRouter__ = __webpack_require__(128);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "StaticRouter", function() { return __WEBPACK_IMPORTED_MODULE_9__StaticRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Switch__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Switch__ = __webpack_require__(130);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Switch", function() { return __WEBPACK_IMPORTED_MODULE_10__Switch__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__generatePath__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__generatePath__ = __webpack_require__(132);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "generatePath", function() { return __WEBPACK_IMPORTED_MODULE_11__generatePath__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__matchPath__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__matchPath__ = __webpack_require__(133);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "matchPath", function() { return __WEBPACK_IMPORTED_MODULE_12__matchPath__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__withRouter__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__withRouter__ = __webpack_require__(134);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "withRouter", function() { return __WEBPACK_IMPORTED_MODULE_13__withRouter__["a"]; });
 
 
@@ -2767,11 +3566,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /***/ }),
-/* 22 */
+/* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
 
 
@@ -2852,24 +3651,24 @@ var createTransitionManager = function createTransitionManager() {
 /* harmony default export */ __webpack_exports__["a"] = (createTransitionManager);
 
 /***/ }),
-/* 23 */
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Router__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Router__ = __webpack_require__(32);
 // Written in this round about way for babel-transform-imports
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_Router__["a" /* default */]);
 
 /***/ }),
-/* 24 */
+/* 32 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
@@ -2982,11 +3781,11 @@ Router.childContextTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (Router);
 
 /***/ }),
-/* 25 */
+/* 33 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_path_to_regexp__);
 
 
@@ -3062,22 +3861,22 @@ var matchPath = function matchPath(pathname) {
 /* harmony default export */ __webpack_exports__["a"] = (matchPath);
 
 /***/ }),
-/* 26 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(45);
+  module.exports = __webpack_require__(53);
 } else {
-  module.exports = __webpack_require__(46);
+  module.exports = __webpack_require__(54);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 27 */
+/* 35 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3089,24 +3888,24 @@ function _inheritsLoose(subClass, superClass) {
 }
 
 /***/ }),
-/* 28 */
+/* 36 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/* harmony export (immutable) */ __webpack_exports__["a"] = connectAdvanced;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_assertThisInitialized__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_inheritsLoose__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__babel_runtime_helpers_esm_extends__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_hoist_non_react_statics__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_assertThisInitialized__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_inheritsLoose__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__babel_runtime_helpers_esm_extends__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_hoist_non_react_statics__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_hoist_non_react_statics___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_hoist_non_react_statics__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_invariant__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_invariant__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react_is__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react_is__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react_is___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_react_is__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Context__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Context__ = __webpack_require__(21);
 
 
 
@@ -3308,14 +4107,14 @@ _ref) {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 29 */
+/* 37 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/* harmony export (immutable) */ __webpack_exports__["a"] = wrapMapToPropsConstant;
 /* unused harmony export getDependsOnOwnProps */
 /* harmony export (immutable) */ __webpack_exports__["b"] = wrapMapToPropsFunc;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_verifyPlainObject__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_verifyPlainObject__ = __webpack_require__(38);
 
 function wrapMapToPropsConstant(getConstant) {
   return function initConstantSelector(dispatch, options) {
@@ -3383,13 +4182,13 @@ function wrapMapToPropsFunc(mapToProps, methodName) {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 30 */
+/* 38 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = verifyPlainObject;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__isPlainObject__ = __webpack_require__(64);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__warning__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__isPlainObject__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__warning__ = __webpack_require__(39);
 
 
 function verifyPlainObject(value, displayName, methodName) {
@@ -3399,7 +4198,7 @@ function verifyPlainObject(value, displayName, methodName) {
 }
 
 /***/ }),
-/* 31 */
+/* 39 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3430,7 +4229,7 @@ function warning(message) {
 }
 
 /***/ }),
-/* 32 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3452,7 +4251,7 @@ module.exports = isObject;
 
 
 /***/ }),
-/* 33 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3612,7 +4411,7 @@ var TimeTract = function (_Component) {
 exports.default = TimeTract;
 
 /***/ }),
-/* 34 */
+/* 42 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3678,7 +4477,7 @@ var isExtraneousPopstateEvent = function isExtraneousPopstateEvent(event) {
 };
 
 /***/ }),
-/* 35 */
+/* 43 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3686,9 +4485,9 @@ var isExtraneousPopstateEvent = function isExtraneousPopstateEvent(event) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_invariant__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_history__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_history__ = __webpack_require__(8);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -3795,30 +4594,30 @@ Link.contextTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (Link);
 
 /***/ }),
-/* 36 */
+/* 44 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Route__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Route__ = __webpack_require__(45);
 // Written in this round about way for babel-transform-imports
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_Route__["a" /* default */]);
 
 /***/ }),
-/* 37 */
+/* 45 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__matchPath__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__matchPath__ = __webpack_require__(33);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3960,10 +4759,10 @@ Route.childContextTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (Route);
 
 /***/ }),
-/* 38 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isarray = __webpack_require__(98)
+var isarray = __webpack_require__(123)
 
 /**
  * Expose `pathToRegexp`.
@@ -4392,11 +5191,11 @@ function pathToRegexp (path, keys, options) {
 
 
 /***/ }),
-/* 39 */
+/* 47 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_path_to_regexp__);
 
 
@@ -4437,7 +5236,7 @@ var generatePath = function generatePath() {
 /* harmony default export */ __webpack_exports__["a"] = (generatePath);
 
 /***/ }),
-/* 40 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4447,21 +5246,21 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(43);
+var _reactDom = __webpack_require__(51);
 
-var _reactRedux = __webpack_require__(5);
+var _reactRedux = __webpack_require__(7);
 
-var _redux = __webpack_require__(19);
+var _redux = __webpack_require__(24);
 
-var _reduxThunk = __webpack_require__(69);
+var _reduxThunk = __webpack_require__(77);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _reducers = __webpack_require__(70);
+var _reducers = __webpack_require__(78);
 
 var _reducers2 = _interopRequireDefault(_reducers);
 
-var _App = __webpack_require__(75);
+var _App = __webpack_require__(83);
 
 var _App2 = _interopRequireDefault(_App);
 
@@ -4479,7 +5278,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 /***/ }),
-/* 41 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4492,7 +5291,7 @@ document.addEventListener('DOMContentLoaded', function () {
  * LICENSE file in the root directory of this source tree.
  */
 
-var k=__webpack_require__(7),n="function"===typeof Symbol&&Symbol.for,p=n?Symbol.for("react.element"):60103,q=n?Symbol.for("react.portal"):60106,r=n?Symbol.for("react.fragment"):60107,t=n?Symbol.for("react.strict_mode"):60108,u=n?Symbol.for("react.profiler"):60114,v=n?Symbol.for("react.provider"):60109,w=n?Symbol.for("react.context"):60110,x=n?Symbol.for("react.concurrent_mode"):60111,y=n?Symbol.for("react.forward_ref"):60112,z=n?Symbol.for("react.suspense"):60113,aa=n?Symbol.for("react.memo"):
+var k=__webpack_require__(9),n="function"===typeof Symbol&&Symbol.for,p=n?Symbol.for("react.element"):60103,q=n?Symbol.for("react.portal"):60106,r=n?Symbol.for("react.fragment"):60107,t=n?Symbol.for("react.strict_mode"):60108,u=n?Symbol.for("react.profiler"):60114,v=n?Symbol.for("react.provider"):60109,w=n?Symbol.for("react.context"):60110,x=n?Symbol.for("react.concurrent_mode"):60111,y=n?Symbol.for("react.forward_ref"):60112,z=n?Symbol.for("react.suspense"):60113,aa=n?Symbol.for("react.memo"):
 60115,ba=n?Symbol.for("react.lazy"):60116,A="function"===typeof Symbol&&Symbol.iterator;function ca(a,b,d,c,e,g,h,f){if(!a){a=void 0;if(void 0===b)a=Error("Minified exception occurred; use the non-minified dev environment for the full error message and additional helpful warnings.");else{var l=[d,c,e,g,h,f],m=0;a=Error(b.replace(/%s/g,function(){return l[m++]}));a.name="Invariant Violation"}a.framesToPop=1;throw a;}}
 function B(a){for(var b=arguments.length-1,d="https://reactjs.org/docs/error-decoder.html?invariant="+a,c=0;c<b;c++)d+="&args[]="+encodeURIComponent(arguments[c+1]);ca(!1,"Minified React error #"+a+"; visit %s for the full message or use the non-minified dev environment for full errors and additional helpful warnings. ",d)}var C={isMounted:function(){return!1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}},D={};
 function E(a,b,d){this.props=a;this.context=b;this.refs=D;this.updater=d||C}E.prototype.isReactComponent={};E.prototype.setState=function(a,b){"object"!==typeof a&&"function"!==typeof a&&null!=a?B("85"):void 0;this.updater.enqueueSetState(this,a,b,"setState")};E.prototype.forceUpdate=function(a){this.updater.enqueueForceUpdate(this,a,"forceUpdate")};function F(){}F.prototype=E.prototype;function G(a,b,d){this.props=a;this.context=b;this.refs=D;this.updater=d||C}var H=G.prototype=new F;
@@ -4511,7 +5310,7 @@ unstable_ConcurrentMode:x,unstable_Profiler:u,__SECRET_INTERNALS_DO_NOT_USE_OR_Y
 
 
 /***/ }),
-/* 42 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4532,8 +5331,8 @@ if (process.env.NODE_ENV !== "production") {
   (function() {
 'use strict';
 
-var _assign = __webpack_require__(7);
-var checkPropTypes = __webpack_require__(13);
+var _assign = __webpack_require__(9);
+var checkPropTypes = __webpack_require__(18);
 
 // TODO: this is special because it gets imported during build.
 
@@ -6420,7 +7219,7 @@ module.exports = react;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 43 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6458,19 +7257,19 @@ if (process.env.NODE_ENV === 'production') {
   // DCE check should happen before ReactDOM bundle executes so that
   // DevTools can report bad minification during injection.
   checkDCE();
-  module.exports = __webpack_require__(44);
+  module.exports = __webpack_require__(52);
 } else {
-  module.exports = __webpack_require__(47);
+  module.exports = __webpack_require__(55);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 44 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/** @license React v16.8.3
+/** @license React v16.8.4
  * react-dom.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -6482,7 +7281,7 @@ if (process.env.NODE_ENV === 'production') {
 /*
  Modernizr 3.0.0pre (Custom Build) | MIT
 */
-var aa=__webpack_require__(0),n=__webpack_require__(7),r=__webpack_require__(26);function ba(a,b,c,d,e,f,g,h){if(!a){a=void 0;if(void 0===b)a=Error("Minified exception occurred; use the non-minified dev environment for the full error message and additional helpful warnings.");else{var l=[c,d,e,f,g,h],k=0;a=Error(b.replace(/%s/g,function(){return l[k++]}));a.name="Invariant Violation"}a.framesToPop=1;throw a;}}
+var aa=__webpack_require__(0),n=__webpack_require__(9),r=__webpack_require__(34);function ba(a,b,c,d,e,f,g,h){if(!a){a=void 0;if(void 0===b)a=Error("Minified exception occurred; use the non-minified dev environment for the full error message and additional helpful warnings.");else{var l=[c,d,e,f,g,h],k=0;a=Error(b.replace(/%s/g,function(){return l[k++]}));a.name="Invariant Violation"}a.framesToPop=1;throw a;}}
 function x(a){for(var b=arguments.length-1,c="https://reactjs.org/docs/error-decoder.html?invariant="+a,d=0;d<b;d++)c+="&args[]="+encodeURIComponent(arguments[d+1]);ba(!1,"Minified React error #"+a+"; visit %s for the full message or use the non-minified dev environment for full errors and additional helpful warnings. ",c)}aa?void 0:x("227");function ca(a,b,c,d,e,f,g,h,l){var k=Array.prototype.slice.call(arguments,3);try{b.apply(c,k)}catch(m){this.onError(m)}}
 var da=!1,ea=null,fa=!1,ha=null,ia={onError:function(a){da=!0;ea=a}};function ja(a,b,c,d,e,f,g,h,l){da=!1;ea=null;ca.apply(ia,arguments)}function ka(a,b,c,d,e,f,g,h,l){ja.apply(this,arguments);if(da){if(da){var k=ea;da=!1;ea=null}else x("198"),k=void 0;fa||(fa=!0,ha=k)}}var la=null,ma={};
 function na(){if(la)for(var a in ma){var b=ma[a],c=la.indexOf(a);-1<c?void 0:x("96",a);if(!oa[c]){b.extractEvents?void 0:x("97",a);oa[c]=b;c=b.eventTypes;for(var d in c){var e=void 0;var f=c[d],g=b,h=d;pa.hasOwnProperty(h)?x("99",h):void 0;pa[h]=f;var l=f.phasedRegistrationNames;if(l){for(e in l)l.hasOwnProperty(e)&&qa(l[e],g,h);e=!0}else f.registrationName?(qa(f.registrationName,g,h),e=!0):e=!1;e?void 0:x("98",d,a)}}}}
@@ -6738,15 +7537,15 @@ function Ti(a,b){var c=2<arguments.length&&void 0!==arguments[2]?arguments[2]:nu
 var Vi={createPortal:Ti,findDOMNode:function(a){if(null==a)return null;if(1===a.nodeType)return a;var b=a._reactInternalFiber;void 0===b&&("function"===typeof a.render?x("188"):x("268",Object.keys(a)));a=hd(b);a=null===a?null:a.stateNode;return a},hydrate:function(a,b,c){Qi(b)?void 0:x("200");return Si(null,a,b,!0,c)},render:function(a,b,c){Qi(b)?void 0:x("200");return Si(null,a,b,!1,c)},unstable_renderSubtreeIntoContainer:function(a,b,c,d){Qi(c)?void 0:x("200");null==a||void 0===a._reactInternalFiber?
 x("38"):void 0;return Si(a,b,c,!1,d)},unmountComponentAtNode:function(a){Qi(a)?void 0:x("40");return a._reactRootContainer?(Hi(function(){Si(null,null,a,!1,function(){a._reactRootContainer=null})}),!0):!1},unstable_createPortal:function(){return Ti.apply(void 0,arguments)},unstable_batchedUpdates:Gi,unstable_interactiveUpdates:Ii,flushSync:function(a,b){W?x("187"):void 0;var c=X;X=!0;try{return ki(a,b)}finally{X=c,Yh(1073741823,!1)}},unstable_createRoot:Ui,unstable_flushControlled:function(a){var b=
 X;X=!0;try{ki(a)}finally{(X=b)||W||Yh(1073741823,!1)}},__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:{Events:[Ia,Ja,Ka,Ba.injectEventPluginsByName,pa,Qa,function(a){ya(a,Pa)},Eb,Fb,Dd,Da]}};function Ui(a,b){Qi(a)?void 0:x("299","unstable_createRoot");return new Pi(a,!0,null!=b&&!0===b.hydrate)}
-(function(a){var b=a.findFiberByHostInstance;return Te(n({},a,{overrideProps:null,currentDispatcherRef:Tb.ReactCurrentDispatcher,findHostInstanceByFiber:function(a){a=hd(a);return null===a?null:a.stateNode},findFiberByHostInstance:function(a){return b?b(a):null}}))})({findFiberByHostInstance:Ha,bundleType:0,version:"16.8.3",rendererPackageName:"react-dom"});var Wi={default:Vi},Xi=Wi&&Vi||Wi;module.exports=Xi.default||Xi;
+(function(a){var b=a.findFiberByHostInstance;return Te(n({},a,{overrideProps:null,currentDispatcherRef:Tb.ReactCurrentDispatcher,findHostInstanceByFiber:function(a){a=hd(a);return null===a?null:a.stateNode},findFiberByHostInstance:function(a){return b?b(a):null}}))})({findFiberByHostInstance:Ha,bundleType:0,version:"16.8.4",rendererPackageName:"react-dom"});var Wi={default:Vi},Xi=Wi&&Vi||Wi;module.exports=Xi.default||Xi;
 
 
 /***/ }),
-/* 45 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global) {/** @license React v0.13.3
+/* WEBPACK VAR INJECTION */(function(global) {/** @license React v0.13.4
  * scheduler.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -6768,14 +7567,14 @@ exports.unstable_scheduleCallback=function(a,b){var c=-1!==k?k:exports.unstable_
 b=c.previous;b.next=c.previous=a;a.next=c;a.previous=b}return a};exports.unstable_cancelCallback=function(a){var b=a.next;if(null!==b){if(b===a)d=null;else{a===d&&(d=b);var c=a.previous;c.next=b;b.previous=c}a.next=a.previous=null}};exports.unstable_wrapCallback=function(a){var b=g;return function(){var c=g,f=k;g=b;k=exports.unstable_now();try{return a.apply(this,arguments)}finally{g=c,k=f,v()}}};exports.unstable_getCurrentPriorityLevel=function(){return g};
 exports.unstable_shouldYield=function(){return!e&&(null!==d&&d.expirationTime<l||w())};exports.unstable_continueExecution=function(){null!==d&&p()};exports.unstable_pauseExecution=function(){};exports.unstable_getFirstCallbackNode=function(){return d};
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(20)))
 
 /***/ }),
-/* 46 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process, global) {/** @license React v0.13.3
+/* WEBPACK VAR INJECTION */(function(process, global) {/** @license React v0.13.4
  * scheduler.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -7475,14 +8274,14 @@ exports.unstable_getFirstCallbackNode = unstable_getFirstCallbackNode;
   })();
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(15)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(20)))
 
 /***/ }),
-/* 47 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/** @license React v16.8.3
+/* WEBPACK VAR INJECTION */(function(process) {/** @license React v16.8.4
  * react-dom.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -7500,10 +8299,10 @@ if (process.env.NODE_ENV !== "production") {
 'use strict';
 
 var React = __webpack_require__(0);
-var _assign = __webpack_require__(7);
-var checkPropTypes = __webpack_require__(13);
-var scheduler = __webpack_require__(26);
-var tracing = __webpack_require__(48);
+var _assign = __webpack_require__(9);
+var checkPropTypes = __webpack_require__(18);
+var scheduler = __webpack_require__(34);
+var tracing = __webpack_require__(56);
 
 /**
  * Use invariant() to assert state which your program assumes to be true.
@@ -17485,6 +18284,7 @@ function FiberNode(tag, pendingProps, key, mode) {
     this._debugSource = null;
     this._debugOwner = null;
     this._debugIsCurrentlyTiming = false;
+    this._debugHookTypes = null;
     if (!hasBadMapPolyfill && typeof Object.preventExtensions === 'function') {
       Object.preventExtensions(this);
     }
@@ -17552,6 +18352,7 @@ function createWorkInProgress(current, pendingProps, expirationTime) {
       workInProgress._debugID = current._debugID;
       workInProgress._debugSource = current._debugSource;
       workInProgress._debugOwner = current._debugOwner;
+      workInProgress._debugHookTypes = current._debugHookTypes;
     }
 
     workInProgress.alternate = current;
@@ -17819,6 +18620,7 @@ function assignFiberPropertiesInDEV(target, source) {
   target._debugSource = source._debugSource;
   target._debugOwner = source._debugOwner;
   target._debugIsCurrentlyTiming = source._debugIsCurrentlyTiming;
+  target._debugHookTypes = source._debugHookTypes;
   return target;
 }
 
@@ -20204,7 +21006,6 @@ var currentlyRenderingFiber$1 = null;
 // current hook list is the list that belongs to the current fiber. The
 // work-in-progress hook list is a new list that will be added to the
 // work-in-progress fiber.
-var firstCurrentHook = null;
 var currentHook = null;
 var nextCurrentHook = null;
 var firstWorkInProgressHook = null;
@@ -20234,39 +21035,67 @@ var RE_RENDER_LIMIT = 25;
 // In DEV, this is the name of the currently executing primitive hook
 var currentHookNameInDev = null;
 
-function warnOnHookMismatchInDev() {
+// In DEV, this list ensures that hooks are called in the same order between renders.
+// The list stores the order of hooks used during the initial render (mount).
+// Subsequent renders (updates) reference this list.
+var hookTypesDev = null;
+var hookTypesUpdateIndexDev = -1;
+
+function mountHookTypesDev() {
+  {
+    var hookName = currentHookNameInDev;
+
+    if (hookTypesDev === null) {
+      hookTypesDev = [hookName];
+    } else {
+      hookTypesDev.push(hookName);
+    }
+  }
+}
+
+function updateHookTypesDev() {
+  {
+    var hookName = currentHookNameInDev;
+
+    if (hookTypesDev !== null) {
+      hookTypesUpdateIndexDev++;
+      if (hookTypesDev[hookTypesUpdateIndexDev] !== hookName) {
+        warnOnHookMismatchInDev(hookName);
+      }
+    }
+  }
+}
+
+function warnOnHookMismatchInDev(currentHookName) {
   {
     var componentName = getComponentName(currentlyRenderingFiber$1.type);
     if (!didWarnAboutMismatchedHooksForComponent.has(componentName)) {
       didWarnAboutMismatchedHooksForComponent.add(componentName);
 
-      var secondColumnStart = 22;
+      if (hookTypesDev !== null) {
+        var table = '';
 
-      var table = '';
-      var prevHook = firstCurrentHook;
-      var nextHook = firstWorkInProgressHook;
-      var n = 1;
-      while (prevHook !== null && nextHook !== null) {
-        var oldHookName = prevHook._debugType;
-        var newHookName = nextHook._debugType;
+        var secondColumnStart = 30;
 
-        var row = n + '. ' + oldHookName;
+        for (var i = 0; i <= hookTypesUpdateIndexDev; i++) {
+          var oldHookName = hookTypesDev[i];
+          var newHookName = i === hookTypesUpdateIndexDev ? currentHookName : oldHookName;
 
-        // Extra space so second column lines up
-        // lol @ IE not supporting String#repeat
-        while (row.length < secondColumnStart) {
-          row += ' ';
+          var row = i + 1 + '. ' + oldHookName;
+
+          // Extra space so second column lines up
+          // lol @ IE not supporting String#repeat
+          while (row.length < secondColumnStart) {
+            row += ' ';
+          }
+
+          row += newHookName + '\n';
+
+          table += row;
         }
 
-        row += newHookName + '\n';
-
-        table += row;
-        prevHook = prevHook.next;
-        nextHook = nextHook.next;
-        n++;
+        warning$1(false, 'React has detected a change in the order of Hooks called by %s. ' + 'This will lead to bugs and errors if not fixed. ' + 'For more information, read the Rules of Hooks: https://fb.me/rules-of-hooks\n\n' + '   Previous render            Next render\n' + '   ------------------------------------------------------\n' + '%s' + '   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', componentName, table);
       }
-
-      warning$1(false, 'React has detected a change in the order of Hooks called by %s. ' + 'This will lead to bugs and errors if not fixed. ' + 'For more information, read the Rules of Hooks: https://fb.me/rules-of-hooks\n\n' + '   Previous render    Next render\n' + '   -------------------------------\n' + '%s' + '   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', componentName, table);
     }
   }
 }
@@ -20302,7 +21131,12 @@ function areHookInputsEqual(nextDeps, prevDeps) {
 function renderWithHooks(current, workInProgress, Component, props, refOrContext, nextRenderExpirationTime) {
   renderExpirationTime = nextRenderExpirationTime;
   currentlyRenderingFiber$1 = workInProgress;
-  firstCurrentHook = nextCurrentHook = current !== null ? current.memoizedState : null;
+  nextCurrentHook = current !== null ? current.memoizedState : null;
+
+  {
+    hookTypesDev = current !== null ? current._debugHookTypes : null;
+    hookTypesUpdateIndexDev = -1;
+  }
 
   // The following should have already been reset
   // currentHook = null;
@@ -20316,8 +21150,26 @@ function renderWithHooks(current, workInProgress, Component, props, refOrContext
   // numberOfReRenders = 0;
   // sideEffectTag = 0;
 
+  // TODO Warn if no hooks are used at all during mount, then some are used during update.
+  // Currently we will identify the update render as a mount because nextCurrentHook === null.
+  // This is tricky because it's valid for certain types of components (e.g. React.lazy)
+
+  // Using nextCurrentHook to differentiate between mount/update only works if at least one stateful hook is used.
+  // Non-stateful hooks (e.g. context) don't get added to memoizedState,
+  // so nextCurrentHook would be null during updates and mounts.
   {
-    ReactCurrentDispatcher$1.current = nextCurrentHook === null ? HooksDispatcherOnMountInDEV : HooksDispatcherOnUpdateInDEV;
+    if (nextCurrentHook !== null) {
+      ReactCurrentDispatcher$1.current = HooksDispatcherOnUpdateInDEV;
+    } else if (hookTypesDev !== null) {
+      // This dispatcher handles an edge case where a component is updating,
+      // but no stateful hooks have been used.
+      // We want to match the production code behavior (which will use HooksDispatcherOnMount),
+      // but with the extra DEV validation to ensure hooks ordering hasn't changed.
+      // This dispatcher does that.
+      ReactCurrentDispatcher$1.current = HooksDispatcherOnMountWithHookTypesInDEV;
+    } else {
+      ReactCurrentDispatcher$1.current = HooksDispatcherOnMountInDEV;
+    }
   }
 
   var children = Component(props, refOrContext);
@@ -20328,12 +21180,17 @@ function renderWithHooks(current, workInProgress, Component, props, refOrContext
       numberOfReRenders += 1;
 
       // Start over from the beginning of the list
-      firstCurrentHook = nextCurrentHook = current !== null ? current.memoizedState : null;
+      nextCurrentHook = current !== null ? current.memoizedState : null;
       nextWorkInProgressHook = firstWorkInProgressHook;
 
       currentHook = null;
       workInProgressHook = null;
       componentUpdateQueue = null;
+
+      {
+        // Also validate hook order for cascading updates.
+        hookTypesUpdateIndexDev = -1;
+      }
 
       ReactCurrentDispatcher$1.current = HooksDispatcherOnUpdateInDEV;
 
@@ -20342,10 +21199,6 @@ function renderWithHooks(current, workInProgress, Component, props, refOrContext
 
     renderPhaseUpdates = null;
     numberOfReRenders = 0;
-  }
-
-  {
-    currentHookNameInDev = null;
   }
 
   // We can assume the previous dispatcher is always this one, since we set it
@@ -20359,17 +21212,28 @@ function renderWithHooks(current, workInProgress, Component, props, refOrContext
   renderedWork.updateQueue = componentUpdateQueue;
   renderedWork.effectTag |= sideEffectTag;
 
+  {
+    renderedWork._debugHookTypes = hookTypesDev;
+  }
+
+  // This check uses currentHook so that it works the same in DEV and prod bundles.
+  // hookTypesDev could catch more cases (e.g. context) but only in DEV bundles.
   var didRenderTooFewHooks = currentHook !== null && currentHook.next !== null;
 
   renderExpirationTime = NoWork;
   currentlyRenderingFiber$1 = null;
 
-  firstCurrentHook = null;
   currentHook = null;
   nextCurrentHook = null;
   firstWorkInProgressHook = null;
   workInProgressHook = null;
   nextWorkInProgressHook = null;
+
+  {
+    currentHookNameInDev = null;
+    hookTypesDev = null;
+    hookTypesUpdateIndexDev = -1;
+  }
 
   remainingExpirationTime = NoWork;
   componentUpdateQueue = null;
@@ -20404,20 +21268,22 @@ function resetHooks() {
   renderExpirationTime = NoWork;
   currentlyRenderingFiber$1 = null;
 
-  firstCurrentHook = null;
   currentHook = null;
   nextCurrentHook = null;
   firstWorkInProgressHook = null;
   workInProgressHook = null;
   nextWorkInProgressHook = null;
 
+  {
+    hookTypesDev = null;
+    hookTypesUpdateIndexDev = -1;
+
+    currentHookNameInDev = null;
+  }
+
   remainingExpirationTime = NoWork;
   componentUpdateQueue = null;
   sideEffectTag = 0;
-
-  {
-    currentHookNameInDev = null;
-  }
 
   didScheduleRenderPhaseUpdate = false;
   renderPhaseUpdates = null;
@@ -20435,9 +21301,6 @@ function mountWorkInProgressHook() {
     next: null
   };
 
-  {
-    hook._debugType = currentHookNameInDev;
-  }
   if (workInProgressHook === null) {
     // This is the first hook in the list
     firstWorkInProgressHook = workInProgressHook = hook;
@@ -20484,13 +21347,6 @@ function updateWorkInProgressHook() {
       workInProgressHook = workInProgressHook.next = newHook;
     }
     nextCurrentHook = currentHook.next;
-
-    {
-      newHook._debugType = currentHookNameInDev;
-      if (currentHookNameInDev !== currentHook._debugType) {
-        warnOnHookMismatchInDev();
-      }
-    }
   }
   return workInProgressHook;
 }
@@ -20503,20 +21359,6 @@ function createFunctionComponentUpdateQueue() {
 
 function basicStateReducer(state, action) {
   return typeof action === 'function' ? action(state) : action;
-}
-
-function mountContext(context, observedBits) {
-  {
-    mountWorkInProgressHook();
-  }
-  return readContext(context, observedBits);
-}
-
-function updateContext(context, observedBits) {
-  {
-    updateWorkInProgressHook();
-  }
-  return readContext(context, observedBits);
 }
 
 function mountReducer(reducer, initialArg, init) {
@@ -21011,6 +21853,7 @@ var ContextOnlyDispatcher = {
 };
 
 var HooksDispatcherOnMountInDEV = null;
+var HooksDispatcherOnMountWithHookTypesInDEV = null;
 var HooksDispatcherOnUpdateInDEV = null;
 var InvalidNestedHooksDispatcherOnMountInDEV = null;
 var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
@@ -21030,26 +21873,32 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     },
     useCallback: function (callback, deps) {
       currentHookNameInDev = 'useCallback';
+      mountHookTypesDev();
       return mountCallback(callback, deps);
     },
     useContext: function (context, observedBits) {
       currentHookNameInDev = 'useContext';
-      return mountContext(context, observedBits);
+      mountHookTypesDev();
+      return readContext(context, observedBits);
     },
     useEffect: function (create, deps) {
       currentHookNameInDev = 'useEffect';
+      mountHookTypesDev();
       return mountEffect(create, deps);
     },
     useImperativeHandle: function (ref, create, deps) {
       currentHookNameInDev = 'useImperativeHandle';
+      mountHookTypesDev();
       return mountImperativeHandle(ref, create, deps);
     },
     useLayoutEffect: function (create, deps) {
       currentHookNameInDev = 'useLayoutEffect';
+      mountHookTypesDev();
       return mountLayoutEffect(create, deps);
     },
     useMemo: function (create, deps) {
       currentHookNameInDev = 'useMemo';
+      mountHookTypesDev();
       var prevDispatcher = ReactCurrentDispatcher$1.current;
       ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
       try {
@@ -21060,6 +21909,7 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     },
     useReducer: function (reducer, initialArg, init) {
       currentHookNameInDev = 'useReducer';
+      mountHookTypesDev();
       var prevDispatcher = ReactCurrentDispatcher$1.current;
       ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
       try {
@@ -21070,10 +21920,12 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     },
     useRef: function (initialValue) {
       currentHookNameInDev = 'useRef';
+      mountHookTypesDev();
       return mountRef(initialValue);
     },
     useState: function (initialState) {
       currentHookNameInDev = 'useState';
+      mountHookTypesDev();
       var prevDispatcher = ReactCurrentDispatcher$1.current;
       ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
       try {
@@ -21084,6 +21936,81 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     },
     useDebugValue: function (value, formatterFn) {
       currentHookNameInDev = 'useDebugValue';
+      mountHookTypesDev();
+      return mountDebugValue(value, formatterFn);
+    }
+  };
+
+  HooksDispatcherOnMountWithHookTypesInDEV = {
+    readContext: function (context, observedBits) {
+      return readContext(context, observedBits);
+    },
+    useCallback: function (callback, deps) {
+      currentHookNameInDev = 'useCallback';
+      updateHookTypesDev();
+      return mountCallback(callback, deps);
+    },
+    useContext: function (context, observedBits) {
+      currentHookNameInDev = 'useContext';
+      updateHookTypesDev();
+      return readContext(context, observedBits);
+    },
+    useEffect: function (create, deps) {
+      currentHookNameInDev = 'useEffect';
+      updateHookTypesDev();
+      return mountEffect(create, deps);
+    },
+    useImperativeHandle: function (ref, create, deps) {
+      currentHookNameInDev = 'useImperativeHandle';
+      updateHookTypesDev();
+      return mountImperativeHandle(ref, create, deps);
+    },
+    useLayoutEffect: function (create, deps) {
+      currentHookNameInDev = 'useLayoutEffect';
+      updateHookTypesDev();
+      return mountLayoutEffect(create, deps);
+    },
+    useMemo: function (create, deps) {
+      currentHookNameInDev = 'useMemo';
+      updateHookTypesDev();
+      var prevDispatcher = ReactCurrentDispatcher$1.current;
+      ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
+      try {
+        return mountMemo(create, deps);
+      } finally {
+        ReactCurrentDispatcher$1.current = prevDispatcher;
+      }
+    },
+    useReducer: function (reducer, initialArg, init) {
+      currentHookNameInDev = 'useReducer';
+      updateHookTypesDev();
+      var prevDispatcher = ReactCurrentDispatcher$1.current;
+      ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
+      try {
+        return mountReducer(reducer, initialArg, init);
+      } finally {
+        ReactCurrentDispatcher$1.current = prevDispatcher;
+      }
+    },
+    useRef: function (initialValue) {
+      currentHookNameInDev = 'useRef';
+      updateHookTypesDev();
+      return mountRef(initialValue);
+    },
+    useState: function (initialState) {
+      currentHookNameInDev = 'useState';
+      updateHookTypesDev();
+      var prevDispatcher = ReactCurrentDispatcher$1.current;
+      ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
+      try {
+        return mountState(initialState);
+      } finally {
+        ReactCurrentDispatcher$1.current = prevDispatcher;
+      }
+    },
+    useDebugValue: function (value, formatterFn) {
+      currentHookNameInDev = 'useDebugValue';
+      updateHookTypesDev();
       return mountDebugValue(value, formatterFn);
     }
   };
@@ -21094,26 +22021,32 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     },
     useCallback: function (callback, deps) {
       currentHookNameInDev = 'useCallback';
+      updateHookTypesDev();
       return updateCallback(callback, deps);
     },
     useContext: function (context, observedBits) {
       currentHookNameInDev = 'useContext';
-      return updateContext(context, observedBits);
+      updateHookTypesDev();
+      return readContext(context, observedBits);
     },
     useEffect: function (create, deps) {
       currentHookNameInDev = 'useEffect';
+      updateHookTypesDev();
       return updateEffect(create, deps);
     },
     useImperativeHandle: function (ref, create, deps) {
       currentHookNameInDev = 'useImperativeHandle';
+      updateHookTypesDev();
       return updateImperativeHandle(ref, create, deps);
     },
     useLayoutEffect: function (create, deps) {
       currentHookNameInDev = 'useLayoutEffect';
+      updateHookTypesDev();
       return updateLayoutEffect(create, deps);
     },
     useMemo: function (create, deps) {
       currentHookNameInDev = 'useMemo';
+      updateHookTypesDev();
       var prevDispatcher = ReactCurrentDispatcher$1.current;
       ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
       try {
@@ -21124,6 +22057,7 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     },
     useReducer: function (reducer, initialArg, init) {
       currentHookNameInDev = 'useReducer';
+      updateHookTypesDev();
       var prevDispatcher = ReactCurrentDispatcher$1.current;
       ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
       try {
@@ -21134,10 +22068,12 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     },
     useRef: function (initialValue) {
       currentHookNameInDev = 'useRef';
+      updateHookTypesDev();
       return updateRef(initialValue);
     },
     useState: function (initialState) {
       currentHookNameInDev = 'useState';
+      updateHookTypesDev();
       var prevDispatcher = ReactCurrentDispatcher$1.current;
       ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
       try {
@@ -21148,6 +22084,7 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     },
     useDebugValue: function (value, formatterFn) {
       currentHookNameInDev = 'useDebugValue';
+      updateHookTypesDev();
       return updateDebugValue(value, formatterFn);
     }
   };
@@ -21160,31 +22097,37 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     useCallback: function (callback, deps) {
       currentHookNameInDev = 'useCallback';
       warnInvalidHookAccess();
+      mountHookTypesDev();
       return mountCallback(callback, deps);
     },
     useContext: function (context, observedBits) {
       currentHookNameInDev = 'useContext';
       warnInvalidHookAccess();
-      return mountContext(context, observedBits);
+      mountHookTypesDev();
+      return readContext(context, observedBits);
     },
     useEffect: function (create, deps) {
       currentHookNameInDev = 'useEffect';
       warnInvalidHookAccess();
+      mountHookTypesDev();
       return mountEffect(create, deps);
     },
     useImperativeHandle: function (ref, create, deps) {
       currentHookNameInDev = 'useImperativeHandle';
       warnInvalidHookAccess();
+      mountHookTypesDev();
       return mountImperativeHandle(ref, create, deps);
     },
     useLayoutEffect: function (create, deps) {
       currentHookNameInDev = 'useLayoutEffect';
       warnInvalidHookAccess();
+      mountHookTypesDev();
       return mountLayoutEffect(create, deps);
     },
     useMemo: function (create, deps) {
       currentHookNameInDev = 'useMemo';
       warnInvalidHookAccess();
+      mountHookTypesDev();
       var prevDispatcher = ReactCurrentDispatcher$1.current;
       ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
       try {
@@ -21196,6 +22139,7 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     useReducer: function (reducer, initialArg, init) {
       currentHookNameInDev = 'useReducer';
       warnInvalidHookAccess();
+      mountHookTypesDev();
       var prevDispatcher = ReactCurrentDispatcher$1.current;
       ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
       try {
@@ -21207,11 +22151,13 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     useRef: function (initialValue) {
       currentHookNameInDev = 'useRef';
       warnInvalidHookAccess();
+      mountHookTypesDev();
       return mountRef(initialValue);
     },
     useState: function (initialState) {
       currentHookNameInDev = 'useState';
       warnInvalidHookAccess();
+      mountHookTypesDev();
       var prevDispatcher = ReactCurrentDispatcher$1.current;
       ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
       try {
@@ -21223,6 +22169,7 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     useDebugValue: function (value, formatterFn) {
       currentHookNameInDev = 'useDebugValue';
       warnInvalidHookAccess();
+      mountHookTypesDev();
       return mountDebugValue(value, formatterFn);
     }
   };
@@ -21235,31 +22182,37 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     useCallback: function (callback, deps) {
       currentHookNameInDev = 'useCallback';
       warnInvalidHookAccess();
+      updateHookTypesDev();
       return updateCallback(callback, deps);
     },
     useContext: function (context, observedBits) {
       currentHookNameInDev = 'useContext';
       warnInvalidHookAccess();
-      return updateContext(context, observedBits);
+      updateHookTypesDev();
+      return readContext(context, observedBits);
     },
     useEffect: function (create, deps) {
       currentHookNameInDev = 'useEffect';
       warnInvalidHookAccess();
+      updateHookTypesDev();
       return updateEffect(create, deps);
     },
     useImperativeHandle: function (ref, create, deps) {
       currentHookNameInDev = 'useImperativeHandle';
       warnInvalidHookAccess();
+      updateHookTypesDev();
       return updateImperativeHandle(ref, create, deps);
     },
     useLayoutEffect: function (create, deps) {
       currentHookNameInDev = 'useLayoutEffect';
       warnInvalidHookAccess();
+      updateHookTypesDev();
       return updateLayoutEffect(create, deps);
     },
     useMemo: function (create, deps) {
       currentHookNameInDev = 'useMemo';
       warnInvalidHookAccess();
+      updateHookTypesDev();
       var prevDispatcher = ReactCurrentDispatcher$1.current;
       ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
       try {
@@ -21271,6 +22224,7 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     useReducer: function (reducer, initialArg, init) {
       currentHookNameInDev = 'useReducer';
       warnInvalidHookAccess();
+      updateHookTypesDev();
       var prevDispatcher = ReactCurrentDispatcher$1.current;
       ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
       try {
@@ -21282,11 +22236,13 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     useRef: function (initialValue) {
       currentHookNameInDev = 'useRef';
       warnInvalidHookAccess();
+      updateHookTypesDev();
       return updateRef(initialValue);
     },
     useState: function (initialState) {
       currentHookNameInDev = 'useState';
       warnInvalidHookAccess();
+      updateHookTypesDev();
       var prevDispatcher = ReactCurrentDispatcher$1.current;
       ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
       try {
@@ -21298,6 +22254,7 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     useDebugValue: function (value, formatterFn) {
       currentHookNameInDev = 'useDebugValue';
       warnInvalidHookAccess();
+      updateHookTypesDev();
       return updateDebugValue(value, formatterFn);
     }
   };
@@ -28032,7 +28989,7 @@ implementation) {
 
 // TODO: this is special because it gets imported during build.
 
-var ReactVersion = '16.8.3';
+var ReactVersion = '16.8.4';
 
 // TODO: This type is shared between the reconciler and ReactDOM, but will
 // eventually be lifted out to the renderer.
@@ -28560,26 +29517,26 @@ module.exports = reactDom;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 48 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(49);
+  module.exports = __webpack_require__(57);
 } else {
-  module.exports = __webpack_require__(50);
+  module.exports = __webpack_require__(58);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 49 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/** @license React v0.13.3
+/** @license React v0.13.4
  * scheduler-tracing.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -28592,11 +29549,11 @@ Object.defineProperty(exports,"__esModule",{value:!0});var b=0;exports.__interac
 
 
 /***/ }),
-/* 50 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/** @license React v0.13.3
+/* WEBPACK VAR INJECTION */(function(process) {/** @license React v0.13.4
  * scheduler-tracing.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -29023,16 +29980,16 @@ exports.unstable_unsubscribe = unstable_unsubscribe;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 51 */
+/* 59 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_inheritsLoose__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_inheritsLoose__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Context__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Context__ = __webpack_require__(21);
 
 
 
@@ -29128,7 +30085,7 @@ Provider.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (Provider);
 
 /***/ }),
-/* 52 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29150,7 +30107,7 @@ exports.isSuspense=function(a){return t(a)===p};
 
 
 /***/ }),
-/* 53 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29385,7 +30342,7 @@ exports.isSuspense = isSuspense;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 54 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29398,11 +30355,11 @@ exports.isSuspense = isSuspense;
 
 
 
-var ReactIs = __webpack_require__(9);
-var assign = __webpack_require__(7);
+var ReactIs = __webpack_require__(12);
+var assign = __webpack_require__(9);
 
-var ReactPropTypesSecret = __webpack_require__(14);
-var checkPropTypes = __webpack_require__(13);
+var ReactPropTypesSecret = __webpack_require__(19);
+var checkPropTypes = __webpack_require__(18);
 
 var has = Function.call.bind(Object.prototype.hasOwnProperty);
 var printWarning = function() {};
@@ -29984,7 +30941,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 55 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29997,7 +30954,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
 
 
-var ReactPropTypesSecret = __webpack_require__(14);
+var ReactPropTypesSecret = __webpack_require__(19);
 
 function emptyFunction() {}
 function emptyFunctionWithReset() {}
@@ -30055,7 +31012,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 56 */
+/* 64 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30069,7 +31026,7 @@ function _assertThisInitialized(self) {
 }
 
 /***/ }),
-/* 57 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30079,7 +31036,7 @@ function _assertThisInitialized(self) {
  * Copyright 2015, Yahoo! Inc.
  * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
  */
-var ReactIs = __webpack_require__(9);
+var ReactIs = __webpack_require__(12);
 var REACT_STATICS = {
     childContextTypes: true,
     contextType: true,
@@ -30179,19 +31136,19 @@ module.exports = hoistNonReactStatics;
 
 
 /***/ }),
-/* 58 */
+/* 66 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export createConnect */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_extends__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_connectAdvanced__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_shallowEqual__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mapDispatchToProps__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mapStateToProps__ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__mergeProps__ = __webpack_require__(66);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__selectorFactory__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_extends__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_connectAdvanced__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_shallowEqual__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mapDispatchToProps__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mapStateToProps__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__mergeProps__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__selectorFactory__ = __webpack_require__(75);
 
 
 
@@ -30292,7 +31249,7 @@ function createConnect(_temp) {
 /* harmony default export */ __webpack_exports__["a"] = (createConnect());
 
 /***/ }),
-/* 59 */
+/* 67 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30328,15 +31285,15 @@ function shallowEqual(objA, objB) {
 }
 
 /***/ }),
-/* 60 */
+/* 68 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export whenMapDispatchToPropsIsFunction */
 /* unused harmony export whenMapDispatchToPropsIsMissing */
 /* unused harmony export whenMapDispatchToPropsIsObject */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__wrapMapToProps__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__wrapMapToProps__ = __webpack_require__(37);
 
 
 function whenMapDispatchToPropsIsFunction(mapDispatchToProps) {
@@ -30357,11 +31314,11 @@ function whenMapDispatchToPropsIsObject(mapDispatchToProps) {
 /* harmony default export */ __webpack_exports__["a"] = ([whenMapDispatchToPropsIsFunction, whenMapDispatchToPropsIsMissing, whenMapDispatchToPropsIsObject]);
 
 /***/ }),
-/* 61 */
+/* 69 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global, module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ponyfill_js__ = __webpack_require__(63);
+/* WEBPACK VAR INJECTION */(function(global, module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ponyfill_js__ = __webpack_require__(71);
 /* global window */
 
 
@@ -30382,10 +31339,10 @@ if (typeof self !== 'undefined') {
 var result = Object(__WEBPACK_IMPORTED_MODULE_0__ponyfill_js__["a" /* default */])(root);
 /* harmony default export */ __webpack_exports__["a"] = (result);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(15), __webpack_require__(62)(module)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(20), __webpack_require__(70)(module)))
 
 /***/ }),
-/* 62 */
+/* 70 */
 /***/ (function(module, exports) {
 
 module.exports = function(originalModule) {
@@ -30415,7 +31372,7 @@ module.exports = function(originalModule) {
 
 
 /***/ }),
-/* 63 */
+/* 71 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30440,7 +31397,7 @@ function symbolObservablePonyfill(root) {
 
 
 /***/ }),
-/* 64 */
+/* 72 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30463,13 +31420,13 @@ function isPlainObject(obj) {
 }
 
 /***/ }),
-/* 65 */
+/* 73 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export whenMapStateToPropsIsFunction */
 /* unused harmony export whenMapStateToPropsIsMissing */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__wrapMapToProps__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__wrapMapToProps__ = __webpack_require__(37);
 
 function whenMapStateToPropsIsFunction(mapStateToProps) {
   return typeof mapStateToProps === 'function' ? Object(__WEBPACK_IMPORTED_MODULE_0__wrapMapToProps__["b" /* wrapMapToPropsFunc */])(mapStateToProps, 'mapStateToProps') : undefined;
@@ -30482,7 +31439,7 @@ function whenMapStateToPropsIsMissing(mapStateToProps) {
 /* harmony default export */ __webpack_exports__["a"] = ([whenMapStateToPropsIsFunction, whenMapStateToPropsIsMissing]);
 
 /***/ }),
-/* 66 */
+/* 74 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30490,8 +31447,8 @@ function whenMapStateToPropsIsMissing(mapStateToProps) {
 /* unused harmony export wrapMergePropsFunc */
 /* unused harmony export whenMergePropsIsFunction */
 /* unused harmony export whenMergePropsIsOmitted */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_extends__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_verifyPlainObject__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_extends__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_verifyPlainObject__ = __webpack_require__(38);
 
 
 function defaultMergeProps(stateProps, dispatchProps, ownProps) {
@@ -30531,15 +31488,15 @@ function whenMergePropsIsOmitted(mergeProps) {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 67 */
+/* 75 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/* unused harmony export impureFinalPropsSelectorFactory */
 /* unused harmony export pureFinalPropsSelectorFactory */
 /* harmony export (immutable) */ __webpack_exports__["a"] = finalPropsSelectorFactory;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__verifySubselectors__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__verifySubselectors__ = __webpack_require__(76);
 
 
 function impureFinalPropsSelectorFactory(mapStateToProps, mapDispatchToProps, mergeProps, dispatch) {
@@ -30630,12 +31587,12 @@ function finalPropsSelectorFactory(dispatch, _ref2) {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 68 */
+/* 76 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = verifySubselectors;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_warning__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_warning__ = __webpack_require__(39);
 
 
 function verify(selector, methodName, displayName) {
@@ -30655,7 +31612,7 @@ function verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps, dis
 }
 
 /***/ }),
-/* 69 */
+/* 77 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30682,7 +31639,7 @@ thunk.withExtraArgument = createThunkMiddleware;
 /* harmony default export */ __webpack_exports__["default"] = (thunk);
 
 /***/ }),
-/* 70 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30692,21 +31649,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _redux = __webpack_require__(19);
+var _redux = __webpack_require__(24);
 
-var _characters = __webpack_require__(71);
+var _characters = __webpack_require__(79);
 
 var _characters2 = _interopRequireDefault(_characters);
 
-var _characterOrder = __webpack_require__(72);
+var _characterOrder = __webpack_require__(80);
 
 var _characterOrder2 = _interopRequireDefault(_characterOrder);
 
-var _powerCards = __webpack_require__(73);
+var _powerCards = __webpack_require__(81);
 
 var _powerCards2 = _interopRequireDefault(_powerCards);
 
-var _monsters = __webpack_require__(74);
+var _monsters = __webpack_require__(82);
 
 var _monsters2 = _interopRequireDefault(_monsters);
 
@@ -30720,7 +31677,7 @@ exports.default = (0, _redux.combineReducers)({
 });
 
 /***/ }),
-/* 71 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30761,7 +31718,7 @@ function updateCharacter(id, cards, characters) {
 }
 
 /***/ }),
-/* 72 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30805,7 +31762,7 @@ function updateCharacter(id, cards, characters) {
 }
 
 /***/ }),
-/* 73 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30831,7 +31788,7 @@ var reducer = function reducer() {
 exports.default = reducer;
 
 /***/ }),
-/* 74 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30857,7 +31814,7 @@ var reducer = function reducer() {
 exports.default = reducer;
 
 /***/ }),
-/* 75 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30869,7 +31826,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _Board = __webpack_require__(76);
+var _Board = __webpack_require__(84);
 
 var _Board2 = _interopRequireDefault(_Board);
 
@@ -30877,29 +31834,29 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(21);
+var _reactRouterDom = __webpack_require__(29);
 
-var _TimeTract = __webpack_require__(33);
+var _TimeTract = __webpack_require__(41);
 
 var _TimeTract2 = _interopRequireDefault(_TimeTract);
 
-var _EncounterTreasure = __webpack_require__(112);
+var _EncounterTreasure = __webpack_require__(137);
 
 var _EncounterTreasure2 = _interopRequireDefault(_EncounterTreasure);
 
-var _Home = __webpack_require__(113);
+var _Home = __webpack_require__(138);
 
 var _Home2 = _interopRequireDefault(_Home);
 
-var _Characters = __webpack_require__(114);
+var _Characters = __webpack_require__(139);
 
 var _Characters2 = _interopRequireDefault(_Characters);
 
-var _Powers = __webpack_require__(116);
+var _Powers = __webpack_require__(141);
 
 var _Powers2 = _interopRequireDefault(_Powers);
 
-var _Home3 = __webpack_require__(117);
+var _Home3 = __webpack_require__(142);
 
 var _Home4 = _interopRequireDefault(_Home3);
 
@@ -30955,7 +31912,7 @@ var App = function (_Component) {
 exports.default = App;
 
 /***/ }),
-/* 76 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30971,23 +31928,23 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Tile = __webpack_require__(77);
+var _Tile = __webpack_require__(85);
 
 var _Tile2 = _interopRequireDefault(_Tile);
 
-var _reactRedux = __webpack_require__(5);
+var _reactRedux = __webpack_require__(7);
 
-var _pathfinding = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"pathfinding\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _pathfinding = __webpack_require__(87);
 
 var _pathfinding2 = _interopRequireDefault(_pathfinding);
 
-var _tiles = __webpack_require__(79);
+var _tiles = __webpack_require__(104);
 
 var _tiles2 = _interopRequireDefault(_tiles);
 
-var _actions = __webpack_require__(10);
+var _actions = __webpack_require__(15);
 
-var _TimeTract = __webpack_require__(33);
+var _TimeTract = __webpack_require__(41);
 
 var _TimeTract2 = _interopRequireDefault(_TimeTract);
 
@@ -32466,7 +33423,7 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(Board);
 
 /***/ }),
-/* 77 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32482,7 +33439,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Square = __webpack_require__(78);
+var _Square = __webpack_require__(86);
 
 var _Square2 = _interopRequireDefault(_Square);
 
@@ -32596,7 +33553,7 @@ var Tile = function (_Component) {
 exports.default = Tile;
 
 /***/ }),
-/* 78 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32688,13 +33645,1907 @@ var Square = function (_Component) {
 exports.default = Square;
 
 /***/ }),
-/* 79 */
+/* 87 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(88);
+
+
+/***/ }),
+/* 88 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = {
+    'Heap'                      : __webpack_require__(13),
+    'Node'                      : __webpack_require__(25),
+    'Grid'                      : __webpack_require__(91),
+    'Util'                      : __webpack_require__(6),
+    'DiagonalMovement'          : __webpack_require__(3),
+    'Heuristic'                 : __webpack_require__(10),
+    'AStarFinder'               : __webpack_require__(26),
+    'BestFirstFinder'           : __webpack_require__(92),
+    'BreadthFirstFinder'        : __webpack_require__(93),
+    'DijkstraFinder'            : __webpack_require__(94),
+    'BiAStarFinder'             : __webpack_require__(27),
+    'BiBestFirstFinder'         : __webpack_require__(95),
+    'BiBreadthFirstFinder'      : __webpack_require__(96),
+    'BiDijkstraFinder'          : __webpack_require__(97),
+    'IDAStarFinder'             : __webpack_require__(98),
+    'JumpPointFinder'           : __webpack_require__(99),
+};
+
+
+/***/ }),
+/* 89 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(module) {// Generated by CoffeeScript 1.8.0
+(function() {
+  var Heap, defaultCmp, floor, heapify, heappop, heappush, heappushpop, heapreplace, insort, min, nlargest, nsmallest, updateItem, _siftdown, _siftup;
+
+  floor = Math.floor, min = Math.min;
+
+
+  /*
+  Default comparison function to be used
+   */
+
+  defaultCmp = function(x, y) {
+    if (x < y) {
+      return -1;
+    }
+    if (x > y) {
+      return 1;
+    }
+    return 0;
+  };
+
+
+  /*
+  Insert item x in list a, and keep it sorted assuming a is sorted.
+  
+  If x is already in a, insert it to the right of the rightmost x.
+  
+  Optional args lo (default 0) and hi (default a.length) bound the slice
+  of a to be searched.
+   */
+
+  insort = function(a, x, lo, hi, cmp) {
+    var mid;
+    if (lo == null) {
+      lo = 0;
+    }
+    if (cmp == null) {
+      cmp = defaultCmp;
+    }
+    if (lo < 0) {
+      throw new Error('lo must be non-negative');
+    }
+    if (hi == null) {
+      hi = a.length;
+    }
+    while (lo < hi) {
+      mid = floor((lo + hi) / 2);
+      if (cmp(x, a[mid]) < 0) {
+        hi = mid;
+      } else {
+        lo = mid + 1;
+      }
+    }
+    return ([].splice.apply(a, [lo, lo - lo].concat(x)), x);
+  };
+
+
+  /*
+  Push item onto heap, maintaining the heap invariant.
+   */
+
+  heappush = function(array, item, cmp) {
+    if (cmp == null) {
+      cmp = defaultCmp;
+    }
+    array.push(item);
+    return _siftdown(array, 0, array.length - 1, cmp);
+  };
+
+
+  /*
+  Pop the smallest item off the heap, maintaining the heap invariant.
+   */
+
+  heappop = function(array, cmp) {
+    var lastelt, returnitem;
+    if (cmp == null) {
+      cmp = defaultCmp;
+    }
+    lastelt = array.pop();
+    if (array.length) {
+      returnitem = array[0];
+      array[0] = lastelt;
+      _siftup(array, 0, cmp);
+    } else {
+      returnitem = lastelt;
+    }
+    return returnitem;
+  };
+
+
+  /*
+  Pop and return the current smallest value, and add the new item.
+  
+  This is more efficient than heappop() followed by heappush(), and can be
+  more appropriate when using a fixed size heap. Note that the value
+  returned may be larger than item! That constrains reasonable use of
+  this routine unless written as part of a conditional replacement:
+      if item > array[0]
+        item = heapreplace(array, item)
+   */
+
+  heapreplace = function(array, item, cmp) {
+    var returnitem;
+    if (cmp == null) {
+      cmp = defaultCmp;
+    }
+    returnitem = array[0];
+    array[0] = item;
+    _siftup(array, 0, cmp);
+    return returnitem;
+  };
+
+
+  /*
+  Fast version of a heappush followed by a heappop.
+   */
+
+  heappushpop = function(array, item, cmp) {
+    var _ref;
+    if (cmp == null) {
+      cmp = defaultCmp;
+    }
+    if (array.length && cmp(array[0], item) < 0) {
+      _ref = [array[0], item], item = _ref[0], array[0] = _ref[1];
+      _siftup(array, 0, cmp);
+    }
+    return item;
+  };
+
+
+  /*
+  Transform list into a heap, in-place, in O(array.length) time.
+   */
+
+  heapify = function(array, cmp) {
+    var i, _i, _j, _len, _ref, _ref1, _results, _results1;
+    if (cmp == null) {
+      cmp = defaultCmp;
+    }
+    _ref1 = (function() {
+      _results1 = [];
+      for (var _j = 0, _ref = floor(array.length / 2); 0 <= _ref ? _j < _ref : _j > _ref; 0 <= _ref ? _j++ : _j--){ _results1.push(_j); }
+      return _results1;
+    }).apply(this).reverse();
+    _results = [];
+    for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+      i = _ref1[_i];
+      _results.push(_siftup(array, i, cmp));
+    }
+    return _results;
+  };
+
+
+  /*
+  Update the position of the given item in the heap.
+  This function should be called every time the item is being modified.
+   */
+
+  updateItem = function(array, item, cmp) {
+    var pos;
+    if (cmp == null) {
+      cmp = defaultCmp;
+    }
+    pos = array.indexOf(item);
+    if (pos === -1) {
+      return;
+    }
+    _siftdown(array, 0, pos, cmp);
+    return _siftup(array, pos, cmp);
+  };
+
+
+  /*
+  Find the n largest elements in a dataset.
+   */
+
+  nlargest = function(array, n, cmp) {
+    var elem, result, _i, _len, _ref;
+    if (cmp == null) {
+      cmp = defaultCmp;
+    }
+    result = array.slice(0, n);
+    if (!result.length) {
+      return result;
+    }
+    heapify(result, cmp);
+    _ref = array.slice(n);
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      elem = _ref[_i];
+      heappushpop(result, elem, cmp);
+    }
+    return result.sort(cmp).reverse();
+  };
+
+
+  /*
+  Find the n smallest elements in a dataset.
+   */
+
+  nsmallest = function(array, n, cmp) {
+    var elem, i, los, result, _i, _j, _len, _ref, _ref1, _results;
+    if (cmp == null) {
+      cmp = defaultCmp;
+    }
+    if (n * 10 <= array.length) {
+      result = array.slice(0, n).sort(cmp);
+      if (!result.length) {
+        return result;
+      }
+      los = result[result.length - 1];
+      _ref = array.slice(n);
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        elem = _ref[_i];
+        if (cmp(elem, los) < 0) {
+          insort(result, elem, 0, null, cmp);
+          result.pop();
+          los = result[result.length - 1];
+        }
+      }
+      return result;
+    }
+    heapify(array, cmp);
+    _results = [];
+    for (i = _j = 0, _ref1 = min(n, array.length); 0 <= _ref1 ? _j < _ref1 : _j > _ref1; i = 0 <= _ref1 ? ++_j : --_j) {
+      _results.push(heappop(array, cmp));
+    }
+    return _results;
+  };
+
+  _siftdown = function(array, startpos, pos, cmp) {
+    var newitem, parent, parentpos;
+    if (cmp == null) {
+      cmp = defaultCmp;
+    }
+    newitem = array[pos];
+    while (pos > startpos) {
+      parentpos = (pos - 1) >> 1;
+      parent = array[parentpos];
+      if (cmp(newitem, parent) < 0) {
+        array[pos] = parent;
+        pos = parentpos;
+        continue;
+      }
+      break;
+    }
+    return array[pos] = newitem;
+  };
+
+  _siftup = function(array, pos, cmp) {
+    var childpos, endpos, newitem, rightpos, startpos;
+    if (cmp == null) {
+      cmp = defaultCmp;
+    }
+    endpos = array.length;
+    startpos = pos;
+    newitem = array[pos];
+    childpos = 2 * pos + 1;
+    while (childpos < endpos) {
+      rightpos = childpos + 1;
+      if (rightpos < endpos && !(cmp(array[childpos], array[rightpos]) < 0)) {
+        childpos = rightpos;
+      }
+      array[pos] = array[childpos];
+      pos = childpos;
+      childpos = 2 * pos + 1;
+    }
+    array[pos] = newitem;
+    return _siftdown(array, startpos, pos, cmp);
+  };
+
+  Heap = (function() {
+    Heap.push = heappush;
+
+    Heap.pop = heappop;
+
+    Heap.replace = heapreplace;
+
+    Heap.pushpop = heappushpop;
+
+    Heap.heapify = heapify;
+
+    Heap.updateItem = updateItem;
+
+    Heap.nlargest = nlargest;
+
+    Heap.nsmallest = nsmallest;
+
+    function Heap(cmp) {
+      this.cmp = cmp != null ? cmp : defaultCmp;
+      this.nodes = [];
+    }
+
+    Heap.prototype.push = function(x) {
+      return heappush(this.nodes, x, this.cmp);
+    };
+
+    Heap.prototype.pop = function() {
+      return heappop(this.nodes, this.cmp);
+    };
+
+    Heap.prototype.peek = function() {
+      return this.nodes[0];
+    };
+
+    Heap.prototype.contains = function(x) {
+      return this.nodes.indexOf(x) !== -1;
+    };
+
+    Heap.prototype.replace = function(x) {
+      return heapreplace(this.nodes, x, this.cmp);
+    };
+
+    Heap.prototype.pushpop = function(x) {
+      return heappushpop(this.nodes, x, this.cmp);
+    };
+
+    Heap.prototype.heapify = function() {
+      return heapify(this.nodes, this.cmp);
+    };
+
+    Heap.prototype.updateItem = function(x) {
+      return updateItem(this.nodes, x, this.cmp);
+    };
+
+    Heap.prototype.clear = function() {
+      return this.nodes = [];
+    };
+
+    Heap.prototype.empty = function() {
+      return this.nodes.length === 0;
+    };
+
+    Heap.prototype.size = function() {
+      return this.nodes.length;
+    };
+
+    Heap.prototype.clone = function() {
+      var heap;
+      heap = new Heap();
+      heap.nodes = this.nodes.slice(0);
+      return heap;
+    };
+
+    Heap.prototype.toArray = function() {
+      return this.nodes.slice(0);
+    };
+
+    Heap.prototype.insert = Heap.prototype.push;
+
+    Heap.prototype.top = Heap.prototype.peek;
+
+    Heap.prototype.front = Heap.prototype.peek;
+
+    Heap.prototype.has = Heap.prototype.contains;
+
+    Heap.prototype.copy = Heap.prototype.clone;
+
+    return Heap;
+
+  })();
+
+  if (typeof module !== "undefined" && module !== null ? module.exports : void 0) {
+    module.exports = Heap;
+  } else {
+    window.Heap = Heap;
+  }
+
+}).call(this);
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(90)(module)))
+
+/***/ }),
+/* 90 */
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if(!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if(!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
+/* 91 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Node = __webpack_require__(25);
+var DiagonalMovement = __webpack_require__(3);
+
+/**
+ * The Grid class, which serves as the encapsulation of the layout of the nodes.
+ * @constructor
+ * @param {number|Array<Array<(number|boolean)>>} width_or_matrix Number of columns of the grid, or matrix
+ * @param {number} height Number of rows of the grid.
+ * @param {Array<Array<(number|boolean)>>} [matrix] - A 0-1 matrix
+ *     representing the walkable status of the nodes(0 or false for walkable).
+ *     If the matrix is not supplied, all the nodes will be walkable.  */
+function Grid(width_or_matrix, height, matrix) {
+    var width;
+
+    if (typeof width_or_matrix !== 'object') {
+        width = width_or_matrix;
+    } else {
+        height = width_or_matrix.length;
+        width = width_or_matrix[0].length;
+        matrix = width_or_matrix;
+    }
+
+    /**
+     * The number of columns of the grid.
+     * @type number
+     */
+    this.width = width;
+    /**
+     * The number of rows of the grid.
+     * @type number
+     */
+    this.height = height;
+
+    /**
+     * A 2D array of nodes.
+     */
+    this.nodes = this._buildNodes(width, height, matrix);
+}
+
+/**
+ * Build and return the nodes.
+ * @private
+ * @param {number} width
+ * @param {number} height
+ * @param {Array<Array<number|boolean>>} [matrix] - A 0-1 matrix representing
+ *     the walkable status of the nodes.
+ * @see Grid
+ */
+Grid.prototype._buildNodes = function(width, height, matrix) {
+    var i, j,
+        nodes = new Array(height);
+
+    for (i = 0; i < height; ++i) {
+        nodes[i] = new Array(width);
+        for (j = 0; j < width; ++j) {
+            nodes[i][j] = new Node(j, i);
+        }
+    }
+
+
+    if (matrix === undefined) {
+        return nodes;
+    }
+
+    if (matrix.length !== height || matrix[0].length !== width) {
+        throw new Error('Matrix size does not fit');
+    }
+
+    for (i = 0; i < height; ++i) {
+        for (j = 0; j < width; ++j) {
+            if (matrix[i][j]) {
+                // 0, false, null will be walkable
+                // while others will be un-walkable
+                nodes[i][j].walkable = false;
+            }
+        }
+    }
+
+    return nodes;
+};
+
+
+Grid.prototype.getNodeAt = function(x, y) {
+    return this.nodes[y][x];
+};
+
+
+/**
+ * Determine whether the node at the given position is walkable.
+ * (Also returns false if the position is outside the grid.)
+ * @param {number} x - The x coordinate of the node.
+ * @param {number} y - The y coordinate of the node.
+ * @return {boolean} - The walkability of the node.
+ */
+Grid.prototype.isWalkableAt = function(x, y) {
+    return this.isInside(x, y) && this.nodes[y][x].walkable;
+};
+
+
+/**
+ * Determine whether the position is inside the grid.
+ * XXX: `grid.isInside(x, y)` is wierd to read.
+ * It should be `(x, y) is inside grid`, but I failed to find a better
+ * name for this method.
+ * @param {number} x
+ * @param {number} y
+ * @return {boolean}
+ */
+Grid.prototype.isInside = function(x, y) {
+    return (x >= 0 && x < this.width) && (y >= 0 && y < this.height);
+};
+
+
+/**
+ * Set whether the node on the given position is walkable.
+ * NOTE: throws exception if the coordinate is not inside the grid.
+ * @param {number} x - The x coordinate of the node.
+ * @param {number} y - The y coordinate of the node.
+ * @param {boolean} walkable - Whether the position is walkable.
+ */
+Grid.prototype.setWalkableAt = function(x, y, walkable) {
+    this.nodes[y][x].walkable = walkable;
+};
+
+
+/**
+ * Get the neighbors of the given node.
+ *
+ *     offsets      diagonalOffsets:
+ *  +---+---+---+    +---+---+---+
+ *  |   | 0 |   |    | 0 |   | 1 |
+ *  +---+---+---+    +---+---+---+
+ *  | 3 |   | 1 |    |   |   |   |
+ *  +---+---+---+    +---+---+---+
+ *  |   | 2 |   |    | 3 |   | 2 |
+ *  +---+---+---+    +---+---+---+
+ *
+ *  When allowDiagonal is true, if offsets[i] is valid, then
+ *  diagonalOffsets[i] and
+ *  diagonalOffsets[(i + 1) % 4] is valid.
+ * @param {Node} node
+ * @param {DiagonalMovement} diagonalMovement
+ */
+Grid.prototype.getNeighbors = function(node, diagonalMovement) {
+    var x = node.x,
+        y = node.y,
+        neighbors = [],
+        s0 = false, d0 = false,
+        s1 = false, d1 = false,
+        s2 = false, d2 = false,
+        s3 = false, d3 = false,
+        nodes = this.nodes;
+
+    // ↑
+    if (this.isWalkableAt(x, y - 1)) {
+        neighbors.push(nodes[y - 1][x]);
+        s0 = true;
+    }
+    // →
+    if (this.isWalkableAt(x + 1, y)) {
+        neighbors.push(nodes[y][x + 1]);
+        s1 = true;
+    }
+    // ↓
+    if (this.isWalkableAt(x, y + 1)) {
+        neighbors.push(nodes[y + 1][x]);
+        s2 = true;
+    }
+    // ←
+    if (this.isWalkableAt(x - 1, y)) {
+        neighbors.push(nodes[y][x - 1]);
+        s3 = true;
+    }
+
+    if (diagonalMovement === DiagonalMovement.Never) {
+        return neighbors;
+    }
+
+    if (diagonalMovement === DiagonalMovement.OnlyWhenNoObstacles) {
+        d0 = s3 && s0;
+        d1 = s0 && s1;
+        d2 = s1 && s2;
+        d3 = s2 && s3;
+    } else if (diagonalMovement === DiagonalMovement.IfAtMostOneObstacle) {
+        d0 = s3 || s0;
+        d1 = s0 || s1;
+        d2 = s1 || s2;
+        d3 = s2 || s3;
+    } else if (diagonalMovement === DiagonalMovement.Always) {
+        d0 = true;
+        d1 = true;
+        d2 = true;
+        d3 = true;
+    } else {
+        throw new Error('Incorrect value of diagonalMovement');
+    }
+
+    // ↖
+    if (d0 && this.isWalkableAt(x - 1, y - 1)) {
+        neighbors.push(nodes[y - 1][x - 1]);
+    }
+    // ↗
+    if (d1 && this.isWalkableAt(x + 1, y - 1)) {
+        neighbors.push(nodes[y - 1][x + 1]);
+    }
+    // ↘
+    if (d2 && this.isWalkableAt(x + 1, y + 1)) {
+        neighbors.push(nodes[y + 1][x + 1]);
+    }
+    // ↙
+    if (d3 && this.isWalkableAt(x - 1, y + 1)) {
+        neighbors.push(nodes[y + 1][x - 1]);
+    }
+
+    return neighbors;
+};
+
+
+/**
+ * Get a clone of this grid.
+ * @return {Grid} Cloned grid.
+ */
+Grid.prototype.clone = function() {
+    var i, j,
+
+        width = this.width,
+        height = this.height,
+        thisNodes = this.nodes,
+
+        newGrid = new Grid(width, height),
+        newNodes = new Array(height);
+
+    for (i = 0; i < height; ++i) {
+        newNodes[i] = new Array(width);
+        for (j = 0; j < width; ++j) {
+            newNodes[i][j] = new Node(j, i, thisNodes[i][j].walkable);
+        }
+    }
+
+    newGrid.nodes = newNodes;
+
+    return newGrid;
+};
+
+module.exports = Grid;
+
+
+/***/ }),
+/* 92 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var AStarFinder = __webpack_require__(26);
+
+/**
+ * Best-First-Search path-finder.
+ * @constructor
+ * @extends AStarFinder
+ * @param {Object} opt
+ * @param {boolean} opt.allowDiagonal Whether diagonal movement is allowed.
+ *     Deprecated, use diagonalMovement instead.
+ * @param {boolean} opt.dontCrossCorners Disallow diagonal movement touching
+ *     block corners. Deprecated, use diagonalMovement instead.
+ * @param {DiagonalMovement} opt.diagonalMovement Allowed diagonal movement.
+ * @param {function} opt.heuristic Heuristic function to estimate the distance
+ *     (defaults to manhattan).
+ */
+function BestFirstFinder(opt) {
+    AStarFinder.call(this, opt);
+
+    var orig = this.heuristic;
+    this.heuristic = function(dx, dy) {
+        return orig(dx, dy) * 1000000;
+    };
+}
+
+BestFirstFinder.prototype = new AStarFinder();
+BestFirstFinder.prototype.constructor = BestFirstFinder;
+
+module.exports = BestFirstFinder;
+
+
+/***/ }),
+/* 93 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Util = __webpack_require__(6);
+var DiagonalMovement = __webpack_require__(3);
+
+/**
+ * Breadth-First-Search path finder.
+ * @constructor
+ * @param {Object} opt
+ * @param {boolean} opt.allowDiagonal Whether diagonal movement is allowed.
+ *     Deprecated, use diagonalMovement instead.
+ * @param {boolean} opt.dontCrossCorners Disallow diagonal movement touching
+ *     block corners. Deprecated, use diagonalMovement instead.
+ * @param {DiagonalMovement} opt.diagonalMovement Allowed diagonal movement.
+ */
+function BreadthFirstFinder(opt) {
+    opt = opt || {};
+    this.allowDiagonal = opt.allowDiagonal;
+    this.dontCrossCorners = opt.dontCrossCorners;
+    this.diagonalMovement = opt.diagonalMovement;
+
+    if (!this.diagonalMovement) {
+        if (!this.allowDiagonal) {
+            this.diagonalMovement = DiagonalMovement.Never;
+        } else {
+            if (this.dontCrossCorners) {
+                this.diagonalMovement = DiagonalMovement.OnlyWhenNoObstacles;
+            } else {
+                this.diagonalMovement = DiagonalMovement.IfAtMostOneObstacle;
+            }
+        }
+    }
+}
+
+/**
+ * Find and return the the path.
+ * @return {Array<Array<number>>} The path, including both start and
+ *     end positions.
+ */
+BreadthFirstFinder.prototype.findPath = function(startX, startY, endX, endY, grid) {
+    var openList = [],
+        diagonalMovement = this.diagonalMovement,
+        startNode = grid.getNodeAt(startX, startY),
+        endNode = grid.getNodeAt(endX, endY),
+        neighbors, neighbor, node, i, l;
+
+    // push the start pos into the queue
+    openList.push(startNode);
+    startNode.opened = true;
+
+    // while the queue is not empty
+    while (openList.length) {
+        // take the front node from the queue
+        node = openList.shift();
+        node.closed = true;
+
+        // reached the end position
+        if (node === endNode) {
+            return Util.backtrace(endNode);
+        }
+
+        neighbors = grid.getNeighbors(node, diagonalMovement);
+        for (i = 0, l = neighbors.length; i < l; ++i) {
+            neighbor = neighbors[i];
+
+            // skip this neighbor if it has been inspected before
+            if (neighbor.closed || neighbor.opened) {
+                continue;
+            }
+
+            openList.push(neighbor);
+            neighbor.opened = true;
+            neighbor.parent = node;
+        }
+    }
+    
+    // fail to find the path
+    return [];
+};
+
+module.exports = BreadthFirstFinder;
+
+
+/***/ }),
+/* 94 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var AStarFinder = __webpack_require__(26);
+
+/**
+ * Dijkstra path-finder.
+ * @constructor
+ * @extends AStarFinder
+ * @param {Object} opt
+ * @param {boolean} opt.allowDiagonal Whether diagonal movement is allowed.
+ *     Deprecated, use diagonalMovement instead.
+ * @param {boolean} opt.dontCrossCorners Disallow diagonal movement touching
+ *     block corners. Deprecated, use diagonalMovement instead.
+ * @param {DiagonalMovement} opt.diagonalMovement Allowed diagonal movement.
+ */
+function DijkstraFinder(opt) {
+    AStarFinder.call(this, opt);
+    this.heuristic = function(dx, dy) {
+        return 0;
+    };
+}
+
+DijkstraFinder.prototype = new AStarFinder();
+DijkstraFinder.prototype.constructor = DijkstraFinder;
+
+module.exports = DijkstraFinder;
+
+
+/***/ }),
+/* 95 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var BiAStarFinder = __webpack_require__(27);
+
+/**
+ * Bi-direcitional Best-First-Search path-finder.
+ * @constructor
+ * @extends BiAStarFinder
+ * @param {Object} opt
+ * @param {boolean} opt.allowDiagonal Whether diagonal movement is allowed.
+ *     Deprecated, use diagonalMovement instead.
+ * @param {boolean} opt.dontCrossCorners Disallow diagonal movement touching
+ *     block corners. Deprecated, use diagonalMovement instead.
+ * @param {DiagonalMovement} opt.diagonalMovement Allowed diagonal movement.
+ * @param {function} opt.heuristic Heuristic function to estimate the distance
+ *     (defaults to manhattan).
+ */
+function BiBestFirstFinder(opt) {
+    BiAStarFinder.call(this, opt);
+
+    var orig = this.heuristic;
+    this.heuristic = function(dx, dy) {
+        return orig(dx, dy) * 1000000;
+    };
+}
+
+BiBestFirstFinder.prototype = new BiAStarFinder();
+BiBestFirstFinder.prototype.constructor = BiBestFirstFinder;
+
+module.exports = BiBestFirstFinder;
+
+
+/***/ }),
+/* 96 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Util = __webpack_require__(6);
+var DiagonalMovement = __webpack_require__(3);
+
+/**
+ * Bi-directional Breadth-First-Search path finder.
+ * @constructor
+ * @param {object} opt
+ * @param {boolean} opt.allowDiagonal Whether diagonal movement is allowed.
+ *     Deprecated, use diagonalMovement instead.
+ * @param {boolean} opt.dontCrossCorners Disallow diagonal movement touching
+ *     block corners. Deprecated, use diagonalMovement instead.
+ * @param {DiagonalMovement} opt.diagonalMovement Allowed diagonal movement.
+ */
+function BiBreadthFirstFinder(opt) {
+    opt = opt || {};
+    this.allowDiagonal = opt.allowDiagonal;
+    this.dontCrossCorners = opt.dontCrossCorners;
+    this.diagonalMovement = opt.diagonalMovement;
+
+    if (!this.diagonalMovement) {
+        if (!this.allowDiagonal) {
+            this.diagonalMovement = DiagonalMovement.Never;
+        } else {
+            if (this.dontCrossCorners) {
+                this.diagonalMovement = DiagonalMovement.OnlyWhenNoObstacles;
+            } else {
+                this.diagonalMovement = DiagonalMovement.IfAtMostOneObstacle;
+            }
+        }
+    }
+}
+
+
+/**
+ * Find and return the the path.
+ * @return {Array<Array<number>>} The path, including both start and
+ *     end positions.
+ */
+BiBreadthFirstFinder.prototype.findPath = function(startX, startY, endX, endY, grid) {
+    var startNode = grid.getNodeAt(startX, startY),
+        endNode = grid.getNodeAt(endX, endY),
+        startOpenList = [], endOpenList = [],
+        neighbors, neighbor, node,
+        diagonalMovement = this.diagonalMovement,
+        BY_START = 0, BY_END = 1,
+        i, l;
+
+    // push the start and end nodes into the queues
+    startOpenList.push(startNode);
+    startNode.opened = true;
+    startNode.by = BY_START;
+
+    endOpenList.push(endNode);
+    endNode.opened = true;
+    endNode.by = BY_END;
+
+    // while both the queues are not empty
+    while (startOpenList.length && endOpenList.length) {
+
+        // expand start open list
+
+        node = startOpenList.shift();
+        node.closed = true;
+
+        neighbors = grid.getNeighbors(node, diagonalMovement);
+        for (i = 0, l = neighbors.length; i < l; ++i) {
+            neighbor = neighbors[i];
+
+            if (neighbor.closed) {
+                continue;
+            }
+            if (neighbor.opened) {
+                // if this node has been inspected by the reversed search,
+                // then a path is found.
+                if (neighbor.by === BY_END) {
+                    return Util.biBacktrace(node, neighbor);
+                }
+                continue;
+            }
+            startOpenList.push(neighbor);
+            neighbor.parent = node;
+            neighbor.opened = true;
+            neighbor.by = BY_START;
+        }
+
+        // expand end open list
+
+        node = endOpenList.shift();
+        node.closed = true;
+
+        neighbors = grid.getNeighbors(node, diagonalMovement);
+        for (i = 0, l = neighbors.length; i < l; ++i) {
+            neighbor = neighbors[i];
+
+            if (neighbor.closed) {
+                continue;
+            }
+            if (neighbor.opened) {
+                if (neighbor.by === BY_START) {
+                    return Util.biBacktrace(neighbor, node);
+                }
+                continue;
+            }
+            endOpenList.push(neighbor);
+            neighbor.parent = node;
+            neighbor.opened = true;
+            neighbor.by = BY_END;
+        }
+    }
+
+    // fail to find the path
+    return [];
+};
+
+module.exports = BiBreadthFirstFinder;
+
+
+/***/ }),
+/* 97 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var BiAStarFinder = __webpack_require__(27);
+
+/**
+ * Bi-directional Dijkstra path-finder.
+ * @constructor
+ * @extends BiAStarFinder
+ * @param {Object} opt
+ * @param {boolean} opt.allowDiagonal Whether diagonal movement is allowed.
+ *     Deprecated, use diagonalMovement instead.
+ * @param {boolean} opt.dontCrossCorners Disallow diagonal movement touching
+ *     block corners. Deprecated, use diagonalMovement instead.
+ * @param {DiagonalMovement} opt.diagonalMovement Allowed diagonal movement.
+ */
+function BiDijkstraFinder(opt) {
+    BiAStarFinder.call(this, opt);
+    this.heuristic = function(dx, dy) {
+        return 0;
+    };
+}
+
+BiDijkstraFinder.prototype = new BiAStarFinder();
+BiDijkstraFinder.prototype.constructor = BiDijkstraFinder;
+
+module.exports = BiDijkstraFinder;
+
+
+/***/ }),
+/* 98 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Util       = __webpack_require__(6);
+var Heuristic  = __webpack_require__(10);
+var Node       = __webpack_require__(25);
+var DiagonalMovement = __webpack_require__(3);
+
+/**
+ * Iterative Deeping A Star (IDA*) path-finder.
+ *
+ * Recursion based on:
+ *   http://www.apl.jhu.edu/~hall/AI-Programming/IDA-Star.html
+ *
+ * Path retracing based on:
+ *  V. Nageshwara Rao, Vipin Kumar and K. Ramesh
+ *  "A Parallel Implementation of Iterative-Deeping-A*", January 1987.
+ *  ftp://ftp.cs.utexas.edu/.snapshot/hourly.1/pub/AI-Lab/tech-reports/UT-AI-TR-87-46.pdf
+ *
+ * @author Gerard Meier (www.gerardmeier.com)
+ *
+ * @constructor
+ * @param {Object} opt
+ * @param {boolean} opt.allowDiagonal Whether diagonal movement is allowed.
+ *     Deprecated, use diagonalMovement instead.
+ * @param {boolean} opt.dontCrossCorners Disallow diagonal movement touching
+ *     block corners. Deprecated, use diagonalMovement instead.
+ * @param {DiagonalMovement} opt.diagonalMovement Allowed diagonal movement.
+ * @param {function} opt.heuristic Heuristic function to estimate the distance
+ *     (defaults to manhattan).
+ * @param {number} opt.weight Weight to apply to the heuristic to allow for
+ *     suboptimal paths, in order to speed up the search.
+ * @param {boolean} opt.trackRecursion Whether to track recursion for
+ *     statistical purposes.
+ * @param {number} opt.timeLimit Maximum execution time. Use <= 0 for infinite.
+ */
+function IDAStarFinder(opt) {
+    opt = opt || {};
+    this.allowDiagonal = opt.allowDiagonal;
+    this.dontCrossCorners = opt.dontCrossCorners;
+    this.diagonalMovement = opt.diagonalMovement;
+    this.heuristic = opt.heuristic || Heuristic.manhattan;
+    this.weight = opt.weight || 1;
+    this.trackRecursion = opt.trackRecursion || false;
+    this.timeLimit = opt.timeLimit || Infinity; // Default: no time limit.
+
+    if (!this.diagonalMovement) {
+        if (!this.allowDiagonal) {
+            this.diagonalMovement = DiagonalMovement.Never;
+        } else {
+            if (this.dontCrossCorners) {
+                this.diagonalMovement = DiagonalMovement.OnlyWhenNoObstacles;
+            } else {
+                this.diagonalMovement = DiagonalMovement.IfAtMostOneObstacle;
+            }
+        }
+    }
+
+    // When diagonal movement is allowed the manhattan heuristic is not
+    // admissible, it should be octile instead
+    if (this.diagonalMovement === DiagonalMovement.Never) {
+        this.heuristic = opt.heuristic || Heuristic.manhattan;
+    } else {
+        this.heuristic = opt.heuristic || Heuristic.octile;
+    }
+}
+
+/**
+ * Find and return the the path. When an empty array is returned, either
+ * no path is possible, or the maximum execution time is reached.
+ *
+ * @return {Array<Array<number>>} The path, including both start and
+ *     end positions.
+ */
+IDAStarFinder.prototype.findPath = function(startX, startY, endX, endY, grid) {
+    // Used for statistics:
+    var nodesVisited = 0;
+
+    // Execution time limitation:
+    var startTime = new Date().getTime();
+
+    // Heuristic helper:
+    var h = function(a, b) {
+        return this.heuristic(Math.abs(b.x - a.x), Math.abs(b.y - a.y));
+    }.bind(this);
+
+    // Step cost from a to b:
+    var cost = function(a, b) {
+        return (a.x === b.x || a.y === b.y) ? 1 : Math.SQRT2;
+    };
+
+    /**
+     * IDA* search implementation.
+     *
+     * @param {Node} The node currently expanding from.
+     * @param {number} Cost to reach the given node.
+     * @param {number} Maximum search depth (cut-off value).
+     * @param {Array<Array<number>>} The found route.
+     * @param {number} Recursion depth.
+     *
+     * @return {Object} either a number with the new optimal cut-off depth,
+     * or a valid node instance, in which case a path was found.
+     */
+    var search = function(node, g, cutoff, route, depth) {
+        nodesVisited++;
+
+        // Enforce timelimit:
+        if (this.timeLimit > 0 &&
+            new Date().getTime() - startTime > this.timeLimit * 1000) {
+            // Enforced as "path-not-found".
+            return Infinity;
+        }
+
+        var f = g + h(node, end) * this.weight;
+
+        // We've searched too deep for this iteration.
+        if (f > cutoff) {
+            return f;
+        }
+
+        if (node == end) {
+            route[depth] = [node.x, node.y];
+            return node;
+        }
+
+        var min, t, k, neighbour;
+
+        var neighbours = grid.getNeighbors(node, this.diagonalMovement);
+
+        // Sort the neighbours, gives nicer paths. But, this deviates
+        // from the original algorithm - so I left it out.
+        //neighbours.sort(function(a, b){
+        //    return h(a, end) - h(b, end);
+        //});
+
+        
+        /*jshint -W084 *///Disable warning: Expected a conditional expression and instead saw an assignment
+        for (k = 0, min = Infinity; neighbour = neighbours[k]; ++k) {
+        /*jshint +W084 *///Enable warning: Expected a conditional expression and instead saw an assignment
+            if (this.trackRecursion) {
+                // Retain a copy for visualisation. Due to recursion, this
+                // node may be part of other paths too.
+                neighbour.retainCount = neighbour.retainCount + 1 || 1;
+
+                if(neighbour.tested !== true) {
+                    neighbour.tested = true;
+                }
+            }
+
+            t = search(neighbour, g + cost(node, neighbour), cutoff, route, depth + 1);
+
+            if (t instanceof Node) {
+                route[depth] = [node.x, node.y];
+
+                // For a typical A* linked list, this would work:
+                // neighbour.parent = node;
+                return t;
+            }
+
+            // Decrement count, then determine whether it's actually closed.
+            if (this.trackRecursion && (--neighbour.retainCount) === 0) {
+                neighbour.tested = false;
+            }
+
+            if (t < min) {
+                min = t;
+            }
+        }
+
+        return min;
+
+    }.bind(this);
+
+    // Node instance lookups:
+    var start = grid.getNodeAt(startX, startY);
+    var end   = grid.getNodeAt(endX, endY);
+
+    // Initial search depth, given the typical heuristic contraints,
+    // there should be no cheaper route possible.
+    var cutOff = h(start, end);
+
+    var j, route, t;
+
+    // With an overflow protection.
+    for (j = 0; true; ++j) {
+
+        route = [];
+
+        // Search till cut-off depth:
+        t = search(start, 0, cutOff, route, 0);
+
+        // Route not possible, or not found in time limit.
+        if (t === Infinity) {
+            return [];
+        }
+
+        // If t is a node, it's also the end node. Route is now
+        // populated with a valid path to the end node.
+        if (t instanceof Node) {
+            return route;
+        }
+
+        // Try again, this time with a deeper cut-off. The t score
+        // is the closest we got to the end node.
+        cutOff = t;
+    }
+
+    // This _should_ never to be reached.
+    return [];
+};
+
+module.exports = IDAStarFinder;
+
+
+/***/ }),
+/* 99 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author aniero / https://github.com/aniero
+ */
+var DiagonalMovement = __webpack_require__(3);
+var JPFNeverMoveDiagonally = __webpack_require__(100);
+var JPFAlwaysMoveDiagonally = __webpack_require__(101);
+var JPFMoveDiagonallyIfNoObstacles = __webpack_require__(102);
+var JPFMoveDiagonallyIfAtMostOneObstacle = __webpack_require__(103);
+
+/**
+ * Path finder using the Jump Point Search algorithm
+ * @param {Object} opt
+ * @param {function} opt.heuristic Heuristic function to estimate the distance
+ *     (defaults to manhattan).
+ * @param {DiagonalMovement} opt.diagonalMovement Condition under which diagonal
+ *      movement will be allowed.
+ */
+function JumpPointFinder(opt) {
+    opt = opt || {};
+    if (opt.diagonalMovement === DiagonalMovement.Never) {
+        return new JPFNeverMoveDiagonally(opt);
+    } else if (opt.diagonalMovement === DiagonalMovement.Always) {
+        return new JPFAlwaysMoveDiagonally(opt);
+    } else if (opt.diagonalMovement === DiagonalMovement.OnlyWhenNoObstacles) {
+        return new JPFMoveDiagonallyIfNoObstacles(opt);
+    } else {
+        return new JPFMoveDiagonallyIfAtMostOneObstacle(opt);
+    }
+}
+
+module.exports = JumpPointFinder;
+
+
+/***/ }),
+/* 100 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author imor / https://github.com/imor
+ */
+var JumpPointFinderBase = __webpack_require__(14);
+var DiagonalMovement = __webpack_require__(3);
+
+/**
+ * Path finder using the Jump Point Search algorithm allowing only horizontal
+ * or vertical movements.
+ */
+function JPFNeverMoveDiagonally(opt) {
+    JumpPointFinderBase.call(this, opt);
+}
+
+JPFNeverMoveDiagonally.prototype = new JumpPointFinderBase();
+JPFNeverMoveDiagonally.prototype.constructor = JPFNeverMoveDiagonally;
+
+/**
+ * Search recursively in the direction (parent -> child), stopping only when a
+ * jump point is found.
+ * @protected
+ * @return {Array<Array<number>>} The x, y coordinate of the jump point
+ *     found, or null if not found
+ */
+JPFNeverMoveDiagonally.prototype._jump = function(x, y, px, py) {
+    var grid = this.grid,
+        dx = x - px, dy = y - py;
+
+    if (!grid.isWalkableAt(x, y)) {
+        return null;
+    }
+
+    if(this.trackJumpRecursion === true) {
+        grid.getNodeAt(x, y).tested = true;
+    }
+
+    if (grid.getNodeAt(x, y) === this.endNode) {
+        return [x, y];
+    }
+
+    if (dx !== 0) {
+        if ((grid.isWalkableAt(x, y - 1) && !grid.isWalkableAt(x - dx, y - 1)) ||
+            (grid.isWalkableAt(x, y + 1) && !grid.isWalkableAt(x - dx, y + 1))) {
+            return [x, y];
+        }
+    }
+    else if (dy !== 0) {
+        if ((grid.isWalkableAt(x - 1, y) && !grid.isWalkableAt(x - 1, y - dy)) ||
+            (grid.isWalkableAt(x + 1, y) && !grid.isWalkableAt(x + 1, y - dy))) {
+            return [x, y];
+        }
+        //When moving vertically, must check for horizontal jump points
+        if (this._jump(x + 1, y, x, y) || this._jump(x - 1, y, x, y)) {
+            return [x, y];
+        }
+    }
+    else {
+        throw new Error("Only horizontal and vertical movements are allowed");
+    }
+
+    return this._jump(x + dx, y + dy, x, y);
+};
+
+/**
+ * Find the neighbors for the given node. If the node has a parent,
+ * prune the neighbors based on the jump point search algorithm, otherwise
+ * return all available neighbors.
+ * @return {Array<Array<number>>} The neighbors found.
+ */
+JPFNeverMoveDiagonally.prototype._findNeighbors = function(node) {
+    var parent = node.parent,
+        x = node.x, y = node.y,
+        grid = this.grid,
+        px, py, nx, ny, dx, dy,
+        neighbors = [], neighborNodes, neighborNode, i, l;
+
+    // directed pruning: can ignore most neighbors, unless forced.
+    if (parent) {
+        px = parent.x;
+        py = parent.y;
+        // get the normalized direction of travel
+        dx = (x - px) / Math.max(Math.abs(x - px), 1);
+        dy = (y - py) / Math.max(Math.abs(y - py), 1);
+
+        if (dx !== 0) {
+            if (grid.isWalkableAt(x, y - 1)) {
+                neighbors.push([x, y - 1]);
+            }
+            if (grid.isWalkableAt(x, y + 1)) {
+                neighbors.push([x, y + 1]);
+            }
+            if (grid.isWalkableAt(x + dx, y)) {
+                neighbors.push([x + dx, y]);
+            }
+        }
+        else if (dy !== 0) {
+            if (grid.isWalkableAt(x - 1, y)) {
+                neighbors.push([x - 1, y]);
+            }
+            if (grid.isWalkableAt(x + 1, y)) {
+                neighbors.push([x + 1, y]);
+            }
+            if (grid.isWalkableAt(x, y + dy)) {
+                neighbors.push([x, y + dy]);
+            }
+        }
+    }
+    // return all neighbors
+    else {
+        neighborNodes = grid.getNeighbors(node, DiagonalMovement.Never);
+        for (i = 0, l = neighborNodes.length; i < l; ++i) {
+            neighborNode = neighborNodes[i];
+            neighbors.push([neighborNode.x, neighborNode.y]);
+        }
+    }
+
+    return neighbors;
+};
+
+module.exports = JPFNeverMoveDiagonally;
+
+
+/***/ }),
+/* 101 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author imor / https://github.com/imor
+ */
+var JumpPointFinderBase = __webpack_require__(14);
+var DiagonalMovement = __webpack_require__(3);
+
+/**
+ * Path finder using the Jump Point Search algorithm which always moves
+ * diagonally irrespective of the number of obstacles.
+ */
+function JPFAlwaysMoveDiagonally(opt) {
+    JumpPointFinderBase.call(this, opt);
+}
+
+JPFAlwaysMoveDiagonally.prototype = new JumpPointFinderBase();
+JPFAlwaysMoveDiagonally.prototype.constructor = JPFAlwaysMoveDiagonally;
+
+/**
+ * Search recursively in the direction (parent -> child), stopping only when a
+ * jump point is found.
+ * @protected
+ * @return {Array<Array<number>>} The x, y coordinate of the jump point
+ *     found, or null if not found
+ */
+JPFAlwaysMoveDiagonally.prototype._jump = function(x, y, px, py) {
+    var grid = this.grid,
+        dx = x - px, dy = y - py;
+
+    if (!grid.isWalkableAt(x, y)) {
+        return null;
+    }
+
+    if(this.trackJumpRecursion === true) {
+        grid.getNodeAt(x, y).tested = true;
+    }
+
+    if (grid.getNodeAt(x, y) === this.endNode) {
+        return [x, y];
+    }
+
+    // check for forced neighbors
+    // along the diagonal
+    if (dx !== 0 && dy !== 0) {
+        if ((grid.isWalkableAt(x - dx, y + dy) && !grid.isWalkableAt(x - dx, y)) ||
+            (grid.isWalkableAt(x + dx, y - dy) && !grid.isWalkableAt(x, y - dy))) {
+            return [x, y];
+        }
+        // when moving diagonally, must check for vertical/horizontal jump points
+        if (this._jump(x + dx, y, x, y) || this._jump(x, y + dy, x, y)) {
+            return [x, y];
+        }
+    }
+    // horizontally/vertically
+    else {
+        if( dx !== 0 ) { // moving along x
+            if((grid.isWalkableAt(x + dx, y + 1) && !grid.isWalkableAt(x, y + 1)) ||
+               (grid.isWalkableAt(x + dx, y - 1) && !grid.isWalkableAt(x, y - 1))) {
+                return [x, y];
+            }
+        }
+        else {
+            if((grid.isWalkableAt(x + 1, y + dy) && !grid.isWalkableAt(x + 1, y)) ||
+               (grid.isWalkableAt(x - 1, y + dy) && !grid.isWalkableAt(x - 1, y))) {
+                return [x, y];
+            }
+        }
+    }
+
+    return this._jump(x + dx, y + dy, x, y);
+};
+
+/**
+ * Find the neighbors for the given node. If the node has a parent,
+ * prune the neighbors based on the jump point search algorithm, otherwise
+ * return all available neighbors.
+ * @return {Array<Array<number>>} The neighbors found.
+ */
+JPFAlwaysMoveDiagonally.prototype._findNeighbors = function(node) {
+    var parent = node.parent,
+        x = node.x, y = node.y,
+        grid = this.grid,
+        px, py, nx, ny, dx, dy,
+        neighbors = [], neighborNodes, neighborNode, i, l;
+
+    // directed pruning: can ignore most neighbors, unless forced.
+    if (parent) {
+        px = parent.x;
+        py = parent.y;
+        // get the normalized direction of travel
+        dx = (x - px) / Math.max(Math.abs(x - px), 1);
+        dy = (y - py) / Math.max(Math.abs(y - py), 1);
+
+        // search diagonally
+        if (dx !== 0 && dy !== 0) {
+            if (grid.isWalkableAt(x, y + dy)) {
+                neighbors.push([x, y + dy]);
+            }
+            if (grid.isWalkableAt(x + dx, y)) {
+                neighbors.push([x + dx, y]);
+            }
+            if (grid.isWalkableAt(x + dx, y + dy)) {
+                neighbors.push([x + dx, y + dy]);
+            }
+            if (!grid.isWalkableAt(x - dx, y)) {
+                neighbors.push([x - dx, y + dy]);
+            }
+            if (!grid.isWalkableAt(x, y - dy)) {
+                neighbors.push([x + dx, y - dy]);
+            }
+        }
+        // search horizontally/vertically
+        else {
+            if(dx === 0) {
+                if (grid.isWalkableAt(x, y + dy)) {
+                    neighbors.push([x, y + dy]);
+                }
+                if (!grid.isWalkableAt(x + 1, y)) {
+                    neighbors.push([x + 1, y + dy]);
+                }
+                if (!grid.isWalkableAt(x - 1, y)) {
+                    neighbors.push([x - 1, y + dy]);
+                }
+            }
+            else {
+                if (grid.isWalkableAt(x + dx, y)) {
+                    neighbors.push([x + dx, y]);
+                }
+                if (!grid.isWalkableAt(x, y + 1)) {
+                    neighbors.push([x + dx, y + 1]);
+                }
+                if (!grid.isWalkableAt(x, y - 1)) {
+                    neighbors.push([x + dx, y - 1]);
+                }
+            }
+        }
+    }
+    // return all neighbors
+    else {
+        neighborNodes = grid.getNeighbors(node, DiagonalMovement.Always);
+        for (i = 0, l = neighborNodes.length; i < l; ++i) {
+            neighborNode = neighborNodes[i];
+            neighbors.push([neighborNode.x, neighborNode.y]);
+        }
+    }
+
+    return neighbors;
+};
+
+module.exports = JPFAlwaysMoveDiagonally;
+
+
+/***/ }),
+/* 102 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author imor / https://github.com/imor
+ */
+var JumpPointFinderBase = __webpack_require__(14);
+var DiagonalMovement = __webpack_require__(3);
+
+/**
+ * Path finder using the Jump Point Search algorithm which moves
+ * diagonally only when there are no obstacles.
+ */
+function JPFMoveDiagonallyIfNoObstacles(opt) {
+    JumpPointFinderBase.call(this, opt);
+}
+
+JPFMoveDiagonallyIfNoObstacles.prototype = new JumpPointFinderBase();
+JPFMoveDiagonallyIfNoObstacles.prototype.constructor = JPFMoveDiagonallyIfNoObstacles;
+
+/**
+ * Search recursively in the direction (parent -> child), stopping only when a
+ * jump point is found.
+ * @protected
+ * @return {Array<Array<number>>} The x, y coordinate of the jump point
+ *     found, or null if not found
+ */
+JPFMoveDiagonallyIfNoObstacles.prototype._jump = function(x, y, px, py) {
+    var grid = this.grid,
+        dx = x - px, dy = y - py;
+
+    if (!grid.isWalkableAt(x, y)) {
+        return null;
+    }
+
+    if(this.trackJumpRecursion === true) {
+        grid.getNodeAt(x, y).tested = true;
+    }
+
+    if (grid.getNodeAt(x, y) === this.endNode) {
+        return [x, y];
+    }
+
+    // check for forced neighbors
+    // along the diagonal
+    if (dx !== 0 && dy !== 0) {
+        // if ((grid.isWalkableAt(x - dx, y + dy) && !grid.isWalkableAt(x - dx, y)) ||
+            // (grid.isWalkableAt(x + dx, y - dy) && !grid.isWalkableAt(x, y - dy))) {
+            // return [x, y];
+        // }
+        // when moving diagonally, must check for vertical/horizontal jump points
+        if (this._jump(x + dx, y, x, y) || this._jump(x, y + dy, x, y)) {
+            return [x, y];
+        }
+    }
+    // horizontally/vertically
+    else {
+        if (dx !== 0) {
+            if ((grid.isWalkableAt(x, y - 1) && !grid.isWalkableAt(x - dx, y - 1)) ||
+                (grid.isWalkableAt(x, y + 1) && !grid.isWalkableAt(x - dx, y + 1))) {
+                return [x, y];
+            }
+        }
+        else if (dy !== 0) {
+            if ((grid.isWalkableAt(x - 1, y) && !grid.isWalkableAt(x - 1, y - dy)) ||
+                (grid.isWalkableAt(x + 1, y) && !grid.isWalkableAt(x + 1, y - dy))) {
+                return [x, y];
+            }
+            // When moving vertically, must check for horizontal jump points
+            // if (this._jump(x + 1, y, x, y) || this._jump(x - 1, y, x, y)) {
+                // return [x, y];
+            // }
+        }
+    }
+
+    // moving diagonally, must make sure one of the vertical/horizontal
+    // neighbors is open to allow the path
+    if (grid.isWalkableAt(x + dx, y) && grid.isWalkableAt(x, y + dy)) {
+        return this._jump(x + dx, y + dy, x, y);
+    } else {
+        return null;
+    }
+};
+
+/**
+ * Find the neighbors for the given node. If the node has a parent,
+ * prune the neighbors based on the jump point search algorithm, otherwise
+ * return all available neighbors.
+ * @return {Array<Array<number>>} The neighbors found.
+ */
+JPFMoveDiagonallyIfNoObstacles.prototype._findNeighbors = function(node) {
+    var parent = node.parent,
+        x = node.x, y = node.y,
+        grid = this.grid,
+        px, py, nx, ny, dx, dy,
+        neighbors = [], neighborNodes, neighborNode, i, l;
+
+    // directed pruning: can ignore most neighbors, unless forced.
+    if (parent) {
+        px = parent.x;
+        py = parent.y;
+        // get the normalized direction of travel
+        dx = (x - px) / Math.max(Math.abs(x - px), 1);
+        dy = (y - py) / Math.max(Math.abs(y - py), 1);
+
+        // search diagonally
+        if (dx !== 0 && dy !== 0) {
+            if (grid.isWalkableAt(x, y + dy)) {
+                neighbors.push([x, y + dy]);
+            }
+            if (grid.isWalkableAt(x + dx, y)) {
+                neighbors.push([x + dx, y]);
+            }
+            if (grid.isWalkableAt(x, y + dy) && grid.isWalkableAt(x + dx, y)) {
+                neighbors.push([x + dx, y + dy]);
+            }
+        }
+        // search horizontally/vertically
+        else {
+            var isNextWalkable;
+            if (dx !== 0) {
+                isNextWalkable = grid.isWalkableAt(x + dx, y);
+                var isTopWalkable = grid.isWalkableAt(x, y + 1);
+                var isBottomWalkable = grid.isWalkableAt(x, y - 1);
+
+                if (isNextWalkable) {
+                    neighbors.push([x + dx, y]);
+                    if (isTopWalkable) {
+                        neighbors.push([x + dx, y + 1]);
+                    }
+                    if (isBottomWalkable) {
+                        neighbors.push([x + dx, y - 1]);
+                    }
+                }
+                if (isTopWalkable) {
+                    neighbors.push([x, y + 1]);
+                }
+                if (isBottomWalkable) {
+                    neighbors.push([x, y - 1]);
+                }
+            }
+            else if (dy !== 0) {
+                isNextWalkable = grid.isWalkableAt(x, y + dy);
+                var isRightWalkable = grid.isWalkableAt(x + 1, y);
+                var isLeftWalkable = grid.isWalkableAt(x - 1, y);
+
+                if (isNextWalkable) {
+                    neighbors.push([x, y + dy]);
+                    if (isRightWalkable) {
+                        neighbors.push([x + 1, y + dy]);
+                    }
+                    if (isLeftWalkable) {
+                        neighbors.push([x - 1, y + dy]);
+                    }
+                }
+                if (isRightWalkable) {
+                    neighbors.push([x + 1, y]);
+                }
+                if (isLeftWalkable) {
+                    neighbors.push([x - 1, y]);
+                }
+            }
+        }
+    }
+    // return all neighbors
+    else {
+        neighborNodes = grid.getNeighbors(node, DiagonalMovement.OnlyWhenNoObstacles);
+        for (i = 0, l = neighborNodes.length; i < l; ++i) {
+            neighborNode = neighborNodes[i];
+            neighbors.push([neighborNode.x, neighborNode.y]);
+        }
+    }
+
+    return neighbors;
+};
+
+module.exports = JPFMoveDiagonallyIfNoObstacles;
+
+
+/***/ }),
+/* 103 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author imor / https://github.com/imor
+ */
+var JumpPointFinderBase = __webpack_require__(14);
+var DiagonalMovement = __webpack_require__(3);
+
+/**
+ * Path finder using the Jump Point Search algorithm which moves
+ * diagonally only when there is at most one obstacle.
+ */
+function JPFMoveDiagonallyIfAtMostOneObstacle(opt) {
+    JumpPointFinderBase.call(this, opt);
+}
+
+JPFMoveDiagonallyIfAtMostOneObstacle.prototype = new JumpPointFinderBase();
+JPFMoveDiagonallyIfAtMostOneObstacle.prototype.constructor = JPFMoveDiagonallyIfAtMostOneObstacle;
+
+/**
+ * Search recursively in the direction (parent -> child), stopping only when a
+ * jump point is found.
+ * @protected
+ * @return {Array<Array<number>>} The x, y coordinate of the jump point
+ *     found, or null if not found
+ */
+JPFMoveDiagonallyIfAtMostOneObstacle.prototype._jump = function(x, y, px, py) {
+    var grid = this.grid,
+        dx = x - px, dy = y - py;
+
+    if (!grid.isWalkableAt(x, y)) {
+        return null;
+    }
+
+    if(this.trackJumpRecursion === true) {
+        grid.getNodeAt(x, y).tested = true;
+    }
+
+    if (grid.getNodeAt(x, y) === this.endNode) {
+        return [x, y];
+    }
+
+    // check for forced neighbors
+    // along the diagonal
+    if (dx !== 0 && dy !== 0) {
+        if ((grid.isWalkableAt(x - dx, y + dy) && !grid.isWalkableAt(x - dx, y)) ||
+            (grid.isWalkableAt(x + dx, y - dy) && !grid.isWalkableAt(x, y - dy))) {
+            return [x, y];
+        }
+        // when moving diagonally, must check for vertical/horizontal jump points
+        if (this._jump(x + dx, y, x, y) || this._jump(x, y + dy, x, y)) {
+            return [x, y];
+        }
+    }
+    // horizontally/vertically
+    else {
+        if( dx !== 0 ) { // moving along x
+            if((grid.isWalkableAt(x + dx, y + 1) && !grid.isWalkableAt(x, y + 1)) ||
+               (grid.isWalkableAt(x + dx, y - 1) && !grid.isWalkableAt(x, y - 1))) {
+                return [x, y];
+            }
+        }
+        else {
+            if((grid.isWalkableAt(x + 1, y + dy) && !grid.isWalkableAt(x + 1, y)) ||
+               (grid.isWalkableAt(x - 1, y + dy) && !grid.isWalkableAt(x - 1, y))) {
+                return [x, y];
+            }
+        }
+    }
+
+    // moving diagonally, must make sure one of the vertical/horizontal
+    // neighbors is open to allow the path
+    if (grid.isWalkableAt(x + dx, y) || grid.isWalkableAt(x, y + dy)) {
+        return this._jump(x + dx, y + dy, x, y);
+    } else {
+        return null;
+    }
+};
+
+/**
+ * Find the neighbors for the given node. If the node has a parent,
+ * prune the neighbors based on the jump point search algorithm, otherwise
+ * return all available neighbors.
+ * @return {Array<Array<number>>} The neighbors found.
+ */
+JPFMoveDiagonallyIfAtMostOneObstacle.prototype._findNeighbors = function(node) {
+    var parent = node.parent,
+        x = node.x, y = node.y,
+        grid = this.grid,
+        px, py, nx, ny, dx, dy,
+        neighbors = [], neighborNodes, neighborNode, i, l;
+
+    // directed pruning: can ignore most neighbors, unless forced.
+    if (parent) {
+        px = parent.x;
+        py = parent.y;
+        // get the normalized direction of travel
+        dx = (x - px) / Math.max(Math.abs(x - px), 1);
+        dy = (y - py) / Math.max(Math.abs(y - py), 1);
+
+        // search diagonally
+        if (dx !== 0 && dy !== 0) {
+            if (grid.isWalkableAt(x, y + dy)) {
+                neighbors.push([x, y + dy]);
+            }
+            if (grid.isWalkableAt(x + dx, y)) {
+                neighbors.push([x + dx, y]);
+            }
+            if (grid.isWalkableAt(x, y + dy) || grid.isWalkableAt(x + dx, y)) {
+                neighbors.push([x + dx, y + dy]);
+            }
+            if (!grid.isWalkableAt(x - dx, y) && grid.isWalkableAt(x, y + dy)) {
+                neighbors.push([x - dx, y + dy]);
+            }
+            if (!grid.isWalkableAt(x, y - dy) && grid.isWalkableAt(x + dx, y)) {
+                neighbors.push([x + dx, y - dy]);
+            }
+        }
+        // search horizontally/vertically
+        else {
+            if(dx === 0) {
+                if (grid.isWalkableAt(x, y + dy)) {
+                    neighbors.push([x, y + dy]);
+                    if (!grid.isWalkableAt(x + 1, y)) {
+                        neighbors.push([x + 1, y + dy]);
+                    }
+                    if (!grid.isWalkableAt(x - 1, y)) {
+                        neighbors.push([x - 1, y + dy]);
+                    }
+                }
+            }
+            else {
+                if (grid.isWalkableAt(x + dx, y)) {
+                    neighbors.push([x + dx, y]);
+                    if (!grid.isWalkableAt(x, y + 1)) {
+                        neighbors.push([x + dx, y + 1]);
+                    }
+                    if (!grid.isWalkableAt(x, y - 1)) {
+                        neighbors.push([x + dx, y - 1]);
+                    }
+                }
+            }
+        }
+    }
+    // return all neighbors
+    else {
+        neighborNodes = grid.getNeighbors(node, DiagonalMovement.IfAtMostOneObstacle);
+        for (i = 0, l = neighborNodes.length; i < l; ++i) {
+            neighborNode = neighborNodes[i];
+            neighbors.push([neighborNode.x, neighborNode.y]);
+        }
+    }
+
+    return neighbors;
+};
+
+module.exports = JPFMoveDiagonallyIfAtMostOneObstacle;
+
+
+/***/ }),
+/* 104 */
 /***/ (function(module, exports) {
 
 module.exports = [{"id":0,"image":"images/tiles/38.jpg","grid":[[0,0,0,0],[0,0,0,0],[0,2,0,0],[0,0,0,0]],"arrow":true,"skull":true,"name":null,"players":[]},{"id":1,"image":"images/tiles/39.jpg","grid":[[1,1,1,1],[0,0,0,0],[0,0,2,0],[1,0,0,1]],"arrow":true,"skull":false,"name":null,"players":[]},{"id":2,"image":"images/tiles/11.jpg","grid":[[1,1,1,1],[0,0,2,1],[0,0,0,1],[0,0,0,1]],"arrow":false,"skull":true,"name":"Crypt Corner 6-10","players":[]},{"id":3,"image":"images/tiles/37.jpg","grid":[[1,0,2,0],[1,0,0,0],[1,0,0,0],[1,0,0,0]],"arrow":false,"skull":false,"name":"Workshop","players":[]},{"id":4,"image":"images/tiles/42.jpg","grid":[[0,0,0,1],[0,2,0,1],[0,0,0,1],[0,0,0,1]],"arrow":true,"skull":true,"name":"Arcrane Circle","players":[]},{"id":5,"image":"images/tiles/40.jpg","grid":[[1,0,0,1],[1,2,0,0],[1,0,0,0],[1,0,0,1]],"arrow":false,"skull":true,"name":null,"players":[]},{"id":6,"image":"images/tiles/5.jpg","grid":[[0,0,0,1],[0,2,0,0],[0,0,0,0],[0,0,0,1]],"arrow":true,"skull":true,"name":null,"players":[]},{"id":7,"image":"images/tiles/3.jpg","grid":[[1,1,1,1],[0,0,0,0],[0,2,0,0],[0,0,0,0]],"arrow":true,"skull":true,"name":"Crypt of Sergei Von Zarovich","players":[]},{"id":8,"image":"images/tiles/28.jpg","grid":[[1,1,1,1],[0,0,0,1],[0,2,0,1],[0,0,0,1]],"arrow":true,"skull":false,"name":"Crypt of Artimus","players":[]},{"id":9,"image":"images/tiles/6.jpg","grid":[[0,0,0,0],[0,2,0,0],[0,0,0,0],[0,0,0,0]],"arrow":true,"skull":true,"name":null,"players":[]},{"id":10,"image":"images/tiles/21.jpg","grid":[[1,0,0,1],[0,0,2,1],[0,0,0,1],[1,0,0,1]],"arrow":false,"skull":true,"name":null,"players":[]},{"id":11,"image":"images/tiles/2.jpg","grid":[[1,1,1,1],[1,0,0,0],[1,0,2,0],[1,0,0,0]],"arrow":true,"skull":false,"name":"Prince Auriels Crypt","players":[]},{"id":12,"image":"images/tiles/41.jpg","grid":[[1,1,1,1],[1,0,0,0],[1,2,0,0],[1,0,0,0]],"arrow":true,"skull":true,"name":"Crypt Corner 11-15","players":[]},{"id":13,"image":"images/tiles/9.jpg","grid":[[0,2,0,1],[0,0,0,1],[0,0,0,1],[0,0,0,1]],"arrow":false,"skull":false,"name":"Dark Fountain","players":[]},{"id":14,"image":"images/tiles/36.jpg","grid":[[1,0,0,1],[0,2,0,1],[0,0,0,1],[1,0,0,1]],"arrow":false,"skull":true,"name":null,"players":[]},{"id":15,"image":"images/tiles/12.jpg","grid":[[1,0,0,1],[0,0,0,0],[0,2,0,0],[1,0,0,1]],"arrow":true,"skull":true,"name":null,"players":[]},{"id":16,"image":"images/tiles/1.jpg","grid":[[1,1,1,1],[0,0,0,1],[0,0,2,1],[0,0,0,1]],"arrow":true,"skull":true,"name":"Crypt Corner 16-20","players":[]},{"id":17,"image":"images/tiles/8.jpg","grid":[[1,0,0,1],[0,0,2,0],[0,0,0,0],[0,0,0,0]],"arrow":true,"skull":true,"name":"Kings Crypt","players":[]},{"id":18,"image":"images/tiles/17.jpg","grid":[[1,1,1,1],[0,0,0,0],[0,0,2,0],[0,0,0,0]],"arrow":true,"skull":true,"name":"Crypt of Barov and Ravenovia","players":[]},{"id":19,"image":"images/tiles/15.jpg","grid":[[1,1,1,1],[1,0,0,0],[1,0,0,2],[1,0,0,0]],"arrow":false,"skull":false,"name":"Rotting Nook","players":[]},{"id":20,"image":"images/tiles/7.jpg","grid":[[1,0,0,1],[0,0,0,1],[0,2,0,1],[0,0,0,1]],"arrow":true,"skull":true,"name":null,"players":[]},{"id":21,"image":"images/tiles/18.jpg","grid":[[1,0,0,1],[1,0,0,0],[1,0,0,2],[1,0,0,0]],"arrow":true,"skull":true,"name":"Ireena Kolyana's Crypt","players":[]},{"id":22,"image":"images/tiles/16.jpg","grid":[[1,0,0,0],[0,0,2,0],[0,0,0,0],[1,0,0,0]],"arrow":true,"skull":true,"name":null,"players":[]},{"id":23,"image":"images/tiles/14.jpg","grid":[[0,0,0,1],[0,0,0,1],[2,0,0,1],[0,0,0,1]],"arrow":true,"skull":true,"name":"Lonely Crypt ","players":[]},{"id":24,"image":"images/tiles/23.jpg","grid":[[1,0,0,0],[1,0,0,0],[1,2,0,0],[1,0,0,0]],"arrow":false,"skull":true,"name":"Chapel","players":[]},{"id":25,"image":"images/tiles/4.jpg","grid":[[1,0,0,1],[1,0,2,0],[1,0,0,0],[1,0,0,1]],"arrow":false,"skull":true,"name":null,"players":[]},{"id":26,"image":"images/tiles/13.jpg","grid":[[1,0,0,1],[1,0,0,1],[1,0,2,1],[1,0,0,1]],"arrow":false,"skull":false,"name":null,"players":[]},{"id":27,"image":"images/tiles/24.jpg","grid":[[1,0,0,1],[1,0,2,1],[1,0,0,1],[1,0,0,1]],"arrow":false,"skull":false,"name":null,"players":[]},{"id":28,"image":"images/tiles/22.jpg","grid":[[1,0,0,1],[1,0,2,1],[1,0,0,1],[1,0,0,1]],"arrow":true,"skull":false,"name":null,"players":[]},{"id":29,"image":"images/tiles/20.jpg","grid":[[1,1,1,1],[0,0,0,0],[0,2,0,0],[0,0,0,0]],"arrow":false,"skull":true,"name":"Strahds Crypt","players":[]},{"id":30,"image":"images/tiles/29.jpg","grid":[[1,1,1,1],[0,0,0,1],[2,0,0,1],[0,0,0,1]],"arrow":false,"skull":false,"name":"Secret Stairway","players":[]},{"id":31,"image":"images/tiles/27.jpg","grid":[[1,1,1,1],[1,2,0,0],[1,0,0,0],[1,0,0,0]],"arrow":false,"skull":true,"name":"Crypt Corner 1-5 ","players":[]},{"id":32,"image":"images/tiles/19.jpg","grid":[[1,0,0,1],[1,0,0,1],[1,0,2,1],[1,0,0,1]],"arrow":true,"skull":false,"name":null,"players":[]},{"id":33,"image":"images/tiles/10.jpg","grid":[[1,0,0,1],[1,0,2,1],[1,0,0,1],[1,0,0,1]],"arrow":false,"skull":true,"name":null,"players":[]},{"id":34,"image":"images/tiles/30.jpg","grid":[[1,0,0,1],[1,0,0,1],[1,2,0,1],[1,0,0,1]],"arrow":true,"skull":false,"name":null,"players":[]},{"id":35,"image":"images/tiles/26.jpg","grid":[[1,1,1,1],[0,0,0,2],[0,0,0,0],[0,0,0,0]],"arrow":false,"skull":true,"name":"Laboratory","players":[]},{"id":36,"image":"images/tiles/25.jpg","grid":[[1,0,0,1],[1,2,0,1],[1,0,0,1],[1,0,0,1]],"arrow":true,"skull":false,"name":null,"players":[]},{"id":37,"image":"images/tiles/33.jpg","grid":[[0,0,0,0],[0,0,2,0],[0,0,0,0],[0,0,0,0]],"arrow":true,"skull":true,"name":null,"players":[]},{"id":38,"image":"images/tiles/31.jpg","grid":[[1,1,1,1],[0,2,0,0],[0,0,0,0],[0,0,0,0]],"arrow":false,"skull":true,"name":"Fetid Den","players":[]},{"id":39,"image":"images/tiles/32.jpg","grid":[[1,0,0,0],[1,0,0,0],[1,0,2,0],[1,0,0,0]],"arrow":false,"skull":true,"name":null,"players":[]},{"id":40,"image":"images/tiles/35start.jpg","grid":[[0,0,0,0],[2,0,0,0],[0,0,0,0],[0,0,0,0]],"arrow":false,"skull":false,"name":"Start 2","players":[]},{"id":41,"image":"images/tiles/34start.jpg","grid":[[0,0,0,0],[0,0,0,2],[0,0,0,0],[1,1,1,1]],"arrow":false,"skull":false,"name":"Start","players":[]}]
 
 /***/ }),
-/* 80 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32706,7 +35557,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.randomEncounter = randomEncounter;
 exports.getAllMonsters = getAllMonsters;
 
-var _superagent = __webpack_require__(20);
+var _superagent = __webpack_require__(28);
 
 var _superagent2 = _interopRequireDefault(_superagent);
 
@@ -32725,7 +35576,7 @@ function getAllMonsters() {
 }
 
 /***/ }),
-/* 81 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -32894,7 +35745,7 @@ Emitter.prototype.hasListeners = function(event){
 
 
 /***/ }),
-/* 82 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32903,7 +35754,7 @@ Emitter.prototype.hasListeners = function(event){
 /**
  * Module of mixed-in functions shared between node and client code
  */
-const isObject = __webpack_require__(32);
+const isObject = __webpack_require__(40);
 
 /**
  * Expose `RequestBase`.
@@ -33604,7 +36455,7 @@ RequestBase.prototype._setTimeouts = function() {
 
 
 /***/ }),
-/* 83 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33614,7 +36465,7 @@ RequestBase.prototype._setTimeouts = function() {
  * Module dependencies.
  */
 
-const utils = __webpack_require__(84);
+const utils = __webpack_require__(109);
 
 /**
  * Expose `ResponseBase`.
@@ -33747,7 +36598,7 @@ ResponseBase.prototype._setStatusProperties = function(status){
 
 
 /***/ }),
-/* 84 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33819,7 +36670,7 @@ exports.cleanHeader = (header, changesOrigin) => {
 
 
 /***/ }),
-/* 85 */
+/* 110 */
 /***/ (function(module, exports) {
 
 function Agent() {
@@ -33845,7 +36696,7 @@ module.exports = Agent;
 
 
 /***/ }),
-/* 86 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33857,7 +36708,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.getAllCharacters = getAllCharacters;
 exports.getCardsByCharacter = getCardsByCharacter;
 
-var _superagent = __webpack_require__(20);
+var _superagent = __webpack_require__(28);
 
 var _superagent2 = _interopRequireDefault(_superagent);
 
@@ -33876,7 +36727,7 @@ function getCardsByCharacter(id) {
 }
 
 /***/ }),
-/* 87 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33887,7 +36738,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.randomTreasure = randomTreasure;
 
-var _superagent = __webpack_require__(20);
+var _superagent = __webpack_require__(28);
 
 var _superagent2 = _interopRequireDefault(_superagent);
 
@@ -33900,18 +36751,18 @@ function randomTreasure() {
 }
 
 /***/ }),
-/* 88 */
+/* 113 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_history__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Router__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_history__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Router__ = __webpack_require__(31);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -33966,18 +36817,18 @@ BrowserRouter.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (BrowserRouter);
 
 /***/ }),
-/* 89 */
+/* 114 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(42);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -34270,7 +37121,7 @@ var createBrowserHistory = function createBrowserHistory() {
 /* harmony default export */ __webpack_exports__["a"] = (createBrowserHistory);
 
 /***/ }),
-/* 90 */
+/* 115 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -34346,7 +37197,7 @@ function resolvePathname(to) {
 /* harmony default export */ __webpack_exports__["a"] = (resolvePathname);
 
 /***/ }),
-/* 91 */
+/* 116 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -34390,18 +37241,18 @@ function valueEqual(a, b) {
 /* harmony default export */ __webpack_exports__["a"] = (valueEqual);
 
 /***/ }),
-/* 92 */
+/* 117 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(42);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 
@@ -34711,15 +37562,15 @@ var createHashHistory = function createHashHistory() {
 /* harmony default export */ __webpack_exports__["a"] = (createHashHistory);
 
 /***/ }),
-/* 93 */
+/* 118 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PathUtils__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__createTransitionManager__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PathUtils__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__createTransitionManager__ = __webpack_require__(30);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -34879,18 +37730,18 @@ var createMemoryHistory = function createMemoryHistory() {
 /* harmony default export */ __webpack_exports__["a"] = (createMemoryHistory);
 
 /***/ }),
-/* 94 */
+/* 119 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_history__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Router__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_history__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Router__ = __webpack_require__(31);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -34944,29 +37795,29 @@ HashRouter.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (HashRouter);
 
 /***/ }),
-/* 95 */
+/* 120 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_MemoryRouter__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_MemoryRouter__ = __webpack_require__(121);
 // Written in this round about way for babel-transform-imports
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_MemoryRouter__["a" /* default */]);
 
 /***/ }),
-/* 96 */
+/* 121 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_history__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Router__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_history__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Router__ = __webpack_require__(32);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -35021,7 +37872,7 @@ MemoryRouter.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (MemoryRouter);
 
 /***/ }),
-/* 97 */
+/* 122 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -35029,8 +37880,8 @@ MemoryRouter.propTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Route__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Link__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Route__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Link__ = __webpack_require__(43);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35107,7 +37958,7 @@ NavLink.defaultProps = {
 /* harmony default export */ __webpack_exports__["a"] = (NavLink);
 
 /***/ }),
-/* 98 */
+/* 123 */
 /***/ (function(module, exports) {
 
 module.exports = Array.isArray || function (arr) {
@@ -35116,18 +37967,18 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 99 */
+/* 124 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Prompt__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Prompt__ = __webpack_require__(125);
 // Written in this round about way for babel-transform-imports
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_Prompt__["a" /* default */]);
 
 /***/ }),
-/* 100 */
+/* 125 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -35135,7 +37986,7 @@ module.exports = Array.isArray || function (arr) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_invariant__);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -35218,18 +38069,18 @@ Prompt.contextTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (Prompt);
 
 /***/ }),
-/* 101 */
+/* 126 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Redirect__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Redirect__ = __webpack_require__(127);
 // Written in this round about way for babel-transform-imports
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_Redirect__["a" /* default */]);
 
 /***/ }),
-/* 102 */
+/* 127 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -35237,12 +38088,12 @@ Prompt.contextTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_warning__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_warning__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_invariant__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_history__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__generatePath__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_history__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__generatePath__ = __webpack_require__(47);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -35358,31 +38209,31 @@ Redirect.contextTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (Redirect);
 
 /***/ }),
-/* 103 */
+/* 128 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_StaticRouter__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_StaticRouter__ = __webpack_require__(129);
 // Written in this round about way for babel-transform-imports
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_StaticRouter__["a" /* default */]);
 
 /***/ }),
-/* 104 */
+/* 129 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_history__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Router__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_history__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Router__ = __webpack_require__(32);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -35535,18 +38386,18 @@ StaticRouter.childContextTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (StaticRouter);
 
 /***/ }),
-/* 105 */
+/* 130 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Switch__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Switch__ = __webpack_require__(131);
 // Written in this round about way for babel-transform-imports
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_Switch__["a" /* default */]);
 
 /***/ }),
-/* 106 */
+/* 131 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -35554,11 +38405,11 @@ StaticRouter.childContextTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_warning__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_warning__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_invariant__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__matchPath__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__matchPath__ = __webpack_require__(33);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -35638,40 +38489,40 @@ Switch.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (Switch);
 
 /***/ }),
-/* 107 */
+/* 132 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_generatePath__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_generatePath__ = __webpack_require__(47);
 // Written in this round about way for babel-transform-imports
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_generatePath__["a" /* default */]);
 
 /***/ }),
-/* 108 */
+/* 133 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_matchPath__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_matchPath__ = __webpack_require__(33);
 // Written in this round about way for babel-transform-imports
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_matchPath__["a" /* default */]);
 
 /***/ }),
-/* 109 */
+/* 134 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_withRouter__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_withRouter__ = __webpack_require__(135);
 // Written in this round about way for babel-transform-imports
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_withRouter__["a" /* default */]);
 
 /***/ }),
-/* 110 */
+/* 135 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -35679,9 +38530,9 @@ Switch.propTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_hoist_non_react_statics__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_hoist_non_react_statics__ = __webpack_require__(136);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_hoist_non_react_statics___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_hoist_non_react_statics__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Route__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Route__ = __webpack_require__(45);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -35720,7 +38571,7 @@ var withRouter = function withRouter(Component) {
 /* harmony default export */ __webpack_exports__["a"] = (withRouter);
 
 /***/ }),
-/* 111 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35795,7 +38646,7 @@ module.exports = hoistNonReactStatics;
 
 
 /***/ }),
-/* 112 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35811,9 +38662,9 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _actions = __webpack_require__(10);
+var _actions = __webpack_require__(15);
 
-var _reactRedux = __webpack_require__(5);
+var _reactRedux = __webpack_require__(7);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35966,7 +38817,7 @@ var EncounterTreasure = function (_Component) {
 exports.default = (0, _reactRedux.connect)()(EncounterTreasure);
 
 /***/ }),
-/* 113 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36030,7 +38881,7 @@ var Home2 = function (_React$Component) {
 exports.default = Home2;
 
 /***/ }),
-/* 114 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36046,11 +38897,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(5);
+var _reactRedux = __webpack_require__(7);
 
-var _actions = __webpack_require__(10);
+var _actions = __webpack_require__(15);
 
-var _CharacterOrder = __webpack_require__(115);
+var _CharacterOrder = __webpack_require__(140);
 
 var _CharacterOrder2 = _interopRequireDefault(_CharacterOrder);
 
@@ -36220,7 +39071,7 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(Characters);
 
 /***/ }),
-/* 115 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36236,9 +39087,9 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(5);
+var _reactRedux = __webpack_require__(7);
 
-var _reactRouterDom = __webpack_require__(21);
+var _reactRouterDom = __webpack_require__(29);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -36326,7 +39177,7 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(CharacterOrder);
 
 /***/ }),
-/* 116 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36342,11 +39193,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(5);
+var _reactRedux = __webpack_require__(7);
 
-var _reactRouterDom = __webpack_require__(21);
+var _reactRouterDom = __webpack_require__(29);
 
-var _actions = __webpack_require__(10);
+var _actions = __webpack_require__(15);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -37271,7 +40122,7 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(Powers);
 
 /***/ }),
-/* 117 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37286,6 +40137,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(29);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -37363,6 +40216,15 @@ var Home = function (_Component) {
                 "Dengeons & Dragons:Castle Ravenloft Board Game"
               ),
               " is a cooperative adventure game. You and your fellow Heroes must work as a team to succeed in the adventures that unfold within the castle. You either win together or lose togather Each player selects a Hero, who has come to Barovia to discover the secrets of Catle Ravenloft. Choose from the Dragonborn Fighter, Human Rogue, Dwarf Cleric, Eladrin Wizard, Human Ranger, or a Hero from another D&D Adventure System board game. Heroes explore the dungeon beneath the castle, solve mysteries, fight Monster, and Villains contained within the halls of Castle Ravenloft(with a littel help from you)."
+            ),
+            _react2.default.createElement(
+              _reactRouterDom.Link,
+              { to: "/char-select" },
+              _react2.default.createElement(
+                "div",
+                { className: "startbutton charSelectLink" },
+                "Go to Character Selection"
+              )
             )
           )
         )
