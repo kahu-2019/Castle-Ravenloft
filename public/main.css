@@ -10,6 +10,10 @@
     background-image: url('./images/brick.jpg');
     background-size: 100%;
 }
+.surgeToken{
+  border-radius: 50%;
+ 
+}
 
 .tile {
   display: grid;
@@ -38,7 +42,8 @@
 .card {
   -webkit-box-shadow: inset 0px 0px 125px -11px rgba(0, 0, 0, 0.51);
   -moz-box-shadow: inset 0px 0px 125px -11px rgba(0, 0, 0, 0.51);
-  box-shadow: inset 0px 0px 125px -11px rgba(0, 0, 0, 0.51);
+  box-shadow: inset 0px 0px 125px -11px rgba(0, 0, 0, 0.51);;
+  margin:25px
 }
 
 .character-card {
@@ -703,3 +708,42 @@ margin: 0 auto;
 .buttonStyles{
   font-size: 30px !important 
 }
+.characterBoardView{
+  height:90px
+}
+.characterBoardDiv{
+position: fixed;
+left: 30px;
+bottom: 5px;
+ border-style: solid;
+ border-color: white;
+ border-width: 1px;
+ border-radius:3px;
+ width:92px;
+ background-color: rgba(39, 39, 39, 0.342);
+ color:white
+}
+.surgePosition{
+  position:fixed;
+  left:900px;
+  top:0px;
+  width:300px;
+  background-color: transparent
+}
+.pcbv{
+  position: fixed;
+  left: 170px;
+  bottom: 5px;
+   width:600px;
+   background-color: rgba(39, 39, 39, 0.342);
+   color:white
+  }
+.pcbvi{
+   border-style: solid;
+   border-color: white!important;
+   border-width: 1px !important;
+   border-radius:3px!important;
+   width:150px;
+   background-color: rgba(39, 39, 39, 0.342);
+   color:white
+  }

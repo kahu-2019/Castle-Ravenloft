@@ -1,7 +1,6 @@
 // import {diceRoll} from './functions'
 const {roll} = require('./functions')
 const {isSquareAdjacent} = require('./functions')
-const {totalPosition} = require('./functions')
 const {detailedPosition} = require('./functions')
 
 //Test data
@@ -50,7 +49,6 @@ if(playerDetails.players){
 
 
 
-    // console.log(closestPlayer)
 
     //from pos finder function with player.x and player.y, monster.x and monster.y
     //DETAILED POSITION
@@ -58,8 +56,6 @@ if(playerDetails.players){
 
     var monPos = detailedPosition(playerDetails.monster)
 
-    // console.log('playerPos',playerPos)
-    // console.log('monPos',monPos)
 
     //Checks for square adjacent
 
@@ -67,8 +63,6 @@ if(playerDetails.players){
         var squareAdjacent = isSquareAdjacent(playerPos.squareX,playerPos.squareY,monPos.squareX,monPos.squareY)
     }
 
-    // console.log(closestPlayer)
-    // console.log(tileAdjacent)
 
 
     // Blazing Skeleton attack stats
@@ -84,24 +78,22 @@ if(playerDetails.players){
         var characters = []
         for(var i = 0; i < heroes.length; i++){
             diceRoll = roll()
-            // console.log('dice roll:',diceRoll)
             //if hit, burn them 2 dmg
             if(diceRoll + ballOfFire.att > heroes[i].AC){
-                // console.log('Oh no!', heroes[i].name + ' got hurt with ' + ballOfFire.dmg + ' damage!')
+                console.log('Oh no!', heroes[i].name + ' got hurt with ' + ballOfFire.dmg + ' damage!')
                 characters.push({
                     id:heroes[i].id,
                     damage:ballOfFire.dmg,
                 })
             //if miss, burn them 1 dmg
             } else if(diceRoll + ballOfFire.att <= heroes[i].AC){
-                // console.log('Oh no!', heroes[i].name + ' got hurt with ' + ballOfFire.miss + ' damage!')
+                console.log('Oh no!', heroes[i].name + ' got hurt with ' + ballOfFire.miss + ' damage!')
                 characters.push({
                     id:heroes[i].id,
                     damage:ballOfFire.miss
                 })
             } 
         }
-        // console.log('character data:',characters)
         return {
             characters
         }
@@ -129,7 +121,6 @@ if(playerDetails.players){
             for(let tile of dataSet){
                 if(squareX > (tile.x-1)*4 && squareX <= (tile.x-1)*4+4 && squareY > (tile.y-1)*4 && squareY <= (tile.y-1)*4+4){
                     if(tile != monsterTile){
-                        // nextTile = tile
                         nextSquare = {
                             x: squareX,
                             y: squareY

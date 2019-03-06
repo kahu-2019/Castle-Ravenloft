@@ -36,19 +36,26 @@ class SurgeTokens extends Component {
         console.log(this.props.characters)
         if (this.state.surgeTokens == 2) {
             return (
-                <div>
-                    <button type="button" className="btn btn-primary" onClick={this.buttonClicked} >Surge Token</button>
-                    <button type="button" className="btn btn-primary" onClick={this.buttonClicked}>Surge Token</button>
+                <div className="surgePosition">
+                    <button type="button"  className=" surgeToken" onClick={this.buttonClicked} >Surge Token</button>
+                    <button type="button" className=" surgeToken" onClick={this.buttonClicked}>Surge Token</button>
                 </div>)
 
+            }
+    
+       
+   
+   else if (this.state.surgeTokens == 1) {
+       return(
+           <div className="surgePosition">
 
-        }
-        else if (this.state.surgeTokens == 1) {
-            return (
-                <button type="button" className="btn btn-primary" onClick={this.buttonClicked}>Surge Token</button>
-            )
+               <button type="button" className="surgeToken" onClick={ this.buttonClicked }>Surge Token</button>
+           </div>
+       )
+       
+   }
 
-        }
+        
 
         else {
             return (

@@ -6,8 +6,16 @@ import PF from 'pathfinding'
 import allTiles from '../../public/game_assets/tiles.json'
 import { getAllMonsters } from '../actions';
 import TimeTract from './TimeTract'
+import ScrollViewer from './ScrollViewer'
+import DisplayCharactersBoard from './DisplayCharactersBoard'
+import PowerCardsBoardView from './PowerCardsBoardView'
 
 import blazingSkeleton from '../../public/game_assets/monster_tactics/blazing_skeleton.js'
+import skeleton from '../../public/game_assets/monster_tactics/skeleton.js'
+import spider from '../../public/game_assets/monster_tactics/spider.js'
+import wraith from '../../public/game_assets/monster_tactics/wraith.js'
+import gargoyle from '../../public/game_assets/monster_tactics/gargoyle.js'
+import findCard from '../../public/game_assets/hero_tactics/index.js'
 
 /*  Main board component, renders tile and square sub-components
 
@@ -120,7 +128,7 @@ class Board extends Component {
         //  Removes Secret Stairway tile for the ending piece
         let endingPiece = temp.splice(29, 1)[0]
 
-        this.setState({ players: tempPlayers, dataSet: strahdsCrypt, cleanTileSet: strahdsCrypt, completeTileSet: temp, endingPiece, speed: tempPlayers[0].speed+this.state.speedModifier }, () => {
+        this.setState({ players: tempPlayers, dataSet: strahdsCrypt, cleanTileSet: strahdsCrypt, completeTileSet: temp, endingPiece, speed: tempPlayers[0].speed + this.state.speedModifier }, () => {
             this.processCharacters()
         })
     }
@@ -203,7 +211,7 @@ class Board extends Component {
     nextPlayer() {
         let temp = this.state.players
         temp.push(temp.shift())
-        this.setState({ players: temp, speed: temp[0].speed+this.state.speedModifier }, () => this.checkSidesOfCharacter())
+        this.setState({ players: temp, speed: temp[0].speed + this.state.speedModifier }, () => this.checkSidesOfCharacter())
     }
 
     attackTester(){
@@ -211,6 +219,18 @@ class Board extends Component {
         if(data){
             data.cardId = 27
             let newOwner = findCard(data)
+            let tempPlayers = this.state.players
+
+            let newPlayer = 0
+            for(let player in tempPlayers){
+                if(tempPlayers[player].id == data.owner.id){
+                    newPlayer = player
+                    break
+                }
+            }
+            tempPlayers[newPlayer] = newOwner.owner
+            console.log(tempPlayers, newOwner.owner)
+            this.setState({players: tempPlayers}, () => this.processCharacters())
         }
     }
 
@@ -263,8 +283,8 @@ class Board extends Component {
         
         if(result.position){
             let tempMonsters = this.state.players[0].monsters
-            for(let monmon of tempMonsters){
-                if(monmon == monster){
+            for (let monmon of tempMonsters) {
+                if (monmon == monster) {
                     monmon.x = result.position.x
                     monmon.y = result.position.y
                     break
@@ -273,10 +293,10 @@ class Board extends Component {
             tempPlayers[0].monsters = tempMonsters
         }
 
-        if(result.characters){
-            for(let character of result.characters){
-                for(let player of tempPlayers){
-                    if(character.id == player.id){
+        if (result.characters) {
+            for (let character of result.characters) {
+                for (let player of tempPlayers) {
+                    if (character.id == player.id) {
                         player.HP = player.HP - character.damage
                     }
                 }
@@ -923,7 +943,7 @@ class Board extends Component {
                 }
             }
             let newMonster = this.getMonster(monster.x, monster.y)
-            if(newMonster){
+            if (newMonster) {
                 this.state.players[0].monsters.push(this.getMonster(monster.x, monster.y))
             }
 
@@ -961,7 +981,7 @@ class Board extends Component {
                 }
             }
             let newMonster = this.getMonster(monster.x, monster.y)
-            if(newMonster){
+            if (newMonster) {
                 this.state.players[0].monsters.push(this.getMonster(monster.x, monster.y))
             }
 
@@ -988,7 +1008,7 @@ class Board extends Component {
             }
         }
         let newMonster = this.getMonster(monster.x, monster.y)
-        if(newMonster){
+        if (newMonster) {
             this.state.players[0].monsters.push(this.getMonster(monster.x, monster.y))
         }
 
@@ -998,12 +1018,12 @@ class Board extends Component {
     }
 
     getMonster(x, y) {
-        if(this.state.players[0].monsters.length === 10) return null
+        if (this.state.players[0].monsters.length === 10) return null
         let monsters = JSON.parse(JSON.stringify(this.state.allMonsters))
         outerloop:
-        for(let mon of this.state.players[0].monsters){
-            for(let i = 0; i < monsters.length; i++){
-                if(mon.id === monsters[i].id){
+        for (let mon of this.state.players[0].monsters) {
+            for (let i = 0; i < monsters.length; i++) {
+                if (mon.id === monsters[i].id) {
                     monsters.splice(i, 1)
                     continue outerloop
                 }
@@ -1034,7 +1054,7 @@ class Board extends Component {
 
         let position = this.getTileAndSquareForCharacter(char)
 
-        let speed = this.state.speed-1
+        let speed = this.state.speed - 1
 
         let tileExists = false
         for (let item of this.state.cleanTileSet) {
@@ -1047,7 +1067,7 @@ class Board extends Component {
                 }
             }
         }
-        if (!tileExists){ char[dir] = char[dir] - val; speed++}
+        if (!tileExists) { char[dir] = char[dir] - val; speed++ }
 
         let tempPlayers = this.state.players
         tempPlayers[0] = char
@@ -1111,9 +1131,9 @@ class Board extends Component {
 
     //  Gets the position of every character and monster, and puts them on the 'dataSet' stored in state
     processCharacters() {
-        for(let player of this.state.players){
-            if(player.HP <= 0){
-                this.setState({lose:true})
+        for (let player of this.state.players) {
+            if (player.HP <= 0) {
+                this.setState({ lose: true })
                 return
             }
         }
@@ -1134,7 +1154,7 @@ class Board extends Component {
             }
         }
 
-        for (let char of this.state.players){
+        for (let char of this.state.players) {
             outerloop:
             for (let monster of char.monsters) {
 
@@ -1162,37 +1182,40 @@ class Board extends Component {
         })
         return (
             false ? 'You lose' :
-            <div style={{overflow:'hidden'}}>
-                <TimeTract />
-                <div className='board-container'>
-                    <div style={{
-                        display: 'grid',
-                        width: (200 * cols) + 'px',
-                        height: (200 * rows) + 'px',
-                        gridTemplateRows: `repeat(${rows}, 200px)`,
-                        gridTemplateColumns: `repeat(${cols}, 200px)`,
-                        transform: `translate(${this.state.transform.x}px, ${this.state.transform.y}px)`
-                    }}
-                        onMouseDown={this.mouseDown} onMouseUp={this.mouseUp} onMouseMove={this.mouseMove}>
-                        {this.state.dataSet && this.state.dataSet.map((tile, key) => {
-                            return (<div key={key} style={{ 'gridColumnStart': tile.x, 'gridColumnEnd': tile.x + 1, 'gridRowStart': tile.y, 'gridRowEnd': tile.y + 1 }}>
-                                <Tile tile={tile} />
-                            </div>)
-                        })}
+                <div style={{ overflow: 'hidden' }}>
+                    <TimeTract />
+                    <div className='board-container'>
+                        <div style={{
+                            display: 'grid',
+                            width: (200 * cols) + 'px',
+                            height: (200 * rows) + 'px',
+                            gridTemplateRows: `repeat(${rows}, 200px)`,
+                            gridTemplateColumns: `repeat(${cols}, 200px)`,
+                            transform: `translate(${this.state.transform.x}px, ${this.state.transform.y}px)`
+                        }}
+                            onMouseDown={this.mouseDown} onMouseUp={this.mouseUp} onMouseMove={this.mouseMove}>
+                            {this.state.dataSet && this.state.dataSet.map((tile, key) => {
+                                return (<div key={key} style={{ 'gridColumnStart': tile.x, 'gridColumnEnd': tile.x + 1, 'gridRowStart': tile.y, 'gridRowEnd': tile.y + 1 }}>
+                                    <Tile tile={tile} />
+                                </div>)
+                            })}
+                        </div>
                     </div>
-                </div>
-                <div style={{ position: 'absolute', top: '10px', left: '10px' }}>
+                    <div style={{ position: 'absolute', top: '10px', left: '10px' }}>
 
-                    <div className="alert alert-light" style={{ color: 'black' }}>
-                        {this.state.players[0].name}<br />
+                        <div className="alert alert-light" style={{ color: 'black' }}>
+                            {this.state.players[0].name}<br />
+                        </div>
+                        <button onClick={() => this.nextPlayer()}>End turn</button><br />
+                        {this.state.explore.left && <React.Fragment><button onClick={() => this.prepTileForAdding(3)}>Explore left</button><br /></React.Fragment>}
+                        {this.state.explore.right && <React.Fragment><button onClick={() => this.prepTileForAdding(1)}>Explore right</button><br /></React.Fragment>}
+                        {this.state.explore.top && <React.Fragment><button onClick={() => this.prepTileForAdding(0)}>Explore top</button><br /></React.Fragment>}
+                        {this.state.explore.bottom && <button onClick={() => this.prepTileForAdding(2)}>Explore bottom</button>}
+                        <ScrollViewer />
+                        <DisplayCharactersBoard player={this.state.players} />
+                        <div className="pcbv row"><PowerCardsBoardView player={this.state.players} /></div>
                     </div>
-                    <button onClick={() => this.nextPlayer()}>End turn</button><br />
-                    {this.state.explore.left && <React.Fragment><button onClick={() => this.prepTileForAdding(3)}>Explore left</button><br /></React.Fragment>}
-                    {this.state.explore.right && <React.Fragment><button onClick={() => this.prepTileForAdding(1)}>Explore right</button><br /></React.Fragment>}
-                    {this.state.explore.top && <React.Fragment><button onClick={() => this.prepTileForAdding(0)}>Explore top</button><br /></React.Fragment>}
-                    {this.state.explore.bottom && <button onClick={() => this.prepTileForAdding(2)}>Explore bottom</button>}
                 </div>
-            </div>
         )
     }
 }
