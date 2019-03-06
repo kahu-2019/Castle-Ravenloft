@@ -17,15 +17,15 @@ export default class DisplayCharactersBoard extends Component {
 }
 
   render() {
+    console.log(this.props.player)
     return (
-
       <div className="characterBoardDiv">
-        <div><img className="characterBoardView" src={"./images/icons/"+this.state.character.name+".jpg"}/></div>
-        <div>{this.state.character.name}</div>
-        <div> HP: {this.state.character.HP}</div>
-        <div> AC: {this.state.character.AC}</div>
-        <div> Speed: {this.state.character.speed}</div>
-        <div> Surge: {this.state.character.SurgeValue}</div>
+        <div><img className="characterBoardView" src={"./images/icons/"+this.props.player[0].name+".jpg"}/></div>
+        <div>{this.props.player[0].name}</div>
+        <div> HP: {this.props.player[0].HP}</div>
+        <div> AC: {this.props.player[0].AC}</div>
+        <div> Speed: {this.props.player[0].speed}</div>
+        <div> Surge: {this.props.player[0].SurgeValue}</div>
 
 
       </div>

@@ -1010,7 +1010,7 @@ class Board extends Component {
                     {this.state.explore.top && <React.Fragment><button onClick={() => this.prepTileForAdding(0)}>Explore top</button><br /></React.Fragment>}
                     {this.state.explore.bottom && <button onClick={() => this.prepTileForAdding(2)}>Explore bottom</button>}
                 <ScrollViewer/>
-                <DisplayCharactersBoard/>
+                <DisplayCharactersBoard player={this.state.players}/>
                 </div>
             </React.Fragment>
         )
