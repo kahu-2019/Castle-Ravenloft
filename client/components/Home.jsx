@@ -1,9 +1,5 @@
 import React, { Component } from "react";
-<<<<<<< HEAD
 import { Link } from "react-router-dom";
-=======
-import {Link} from 'react-router-dom'
->>>>>>> 8096519d1189923adad3a5b125db1dbc4ee07a23
 
 class Home extends Component {
   render() {
