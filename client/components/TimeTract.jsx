@@ -23,7 +23,7 @@ class TimeTract extends Component {
               <div className="contaniner" id="circle">
                 <h5>1</h5>
                 {this.state.sunTrack === 1 && (
-                  <img height="40" src="/images/icons/sun.png" />
+                  <img height="45" src="/images/icons/sun2.png" />
                 )}
 
                 <div className="time">
@@ -36,25 +36,25 @@ class TimeTract extends Component {
               <div className="contaniner" id="circle">
                 <h5>2</h5>
                 {this.state.sunTrack === 2 && (
-                  <img height="40" src="/images/icons/sun.png" />
+                  <img height="45" src="/images/icons/sun2.png" />
                 )}
               </div>
               <div className="contaniner" id="circle">
                 <h5>3</h5>
                 {this.state.sunTrack === 3 && (
-                  <img height="40" src="/images/icons/sun.png" />
+                  <img height="45" src="/images/icons/sun2.png" />
                 )}
               </div>
               <div className="contaniner" id="circle">
                 <h5>4</h5>
                 {this.state.sunTrack === 4 && (
-                  <img height="40" src="/images/icons/sun.png" />
+                  <img height="45" src="/images/icons/sun2.png" />
                 )}
               </div>
               <div className="contaniner" id="circle">
                 <h5>5</h5>
                 {this.state.sunTrack === 5 && (
-                  <img height="40" src="/images/icons/sun.png" />
+                  <img height="45" src="/images/icons/sun2.png" />
                 )}
                 <span>Strahd wakes up!</span>
                 <div className="time1">

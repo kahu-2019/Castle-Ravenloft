@@ -12,7 +12,6 @@ class App extends Component {
   render() {
     return (
       <div style={{ overflow: "hidden" }}>
-        <div className="container-fluid">
           <Router>
             <Fragment>
               <Route exact path="/" component={Home2} />
@@ -25,7 +24,6 @@ class App extends Component {
             </Fragment>
           </Router>
         </div>
-      </div>
     );
   }
 }
