@@ -5,6 +5,7 @@ import PF from 'pathfinding'
 
 import allTiles from '../../public/game_assets/tiles.json'
 import { getAllMonsters } from '../actions';
+import TimeTract from './TimeTract'
 
 import blazingSkeleton from '../../public/game_assets/monster_tactics/blazing_skeleton.js'
 
@@ -197,6 +198,7 @@ class Board extends Component {
         this.setState({ players: temp, speed: temp[0].speed }, () => this.checkSidesOfCharacter())
     }
 
+<<<<<<< HEAD
     adjacentTester(){
 
         for(let monster of this.state.players[0].monsters){
@@ -269,10 +271,15 @@ class Board extends Component {
 
         this.setState({players: tempPlayers}, () => this.processCharacters())
         // console.log(result)
+=======
+    adjacentTester() {
+        let closestPlayer = this.checkAdjacentSquares(this.state.monsters[0])
+        console.log(closestPlayer)
+>>>>>>> ee3a1908634d3df3e8c5815ba726ed50bddf5c00
     }
 
     //  Checks the adjacent two squares of a given tile
-    checkAdjacentSquares(monster){
+    checkAdjacentSquares(monster) {
 
         let coords = this.getTileAndSquareForCharacter(monster)
 
@@ -280,93 +287,93 @@ class Board extends Component {
         let right = this.checkTwoAdjacentRight(coords)
         let top = this.checkTwoAdjacentTop(coords)
         let bottom = this.checkTwoAdjacentBottom(coords)
-        
+
 
         let leftPlayers = []
-        for(let row in left){
-            for(let col in left[row]){
-                if(left[row][col] === 11){
+        for (let row in left) {
+            for (let col in left[row]) {
+                if (left[row][col] === 11) {
                     left[row][col] = 0
                     let player = {
                         x: col,
                         y: row
                     }
-                    let relativeX = 8+Number(coords.squareX) - player.x  
-                    let relativeY = 4+Number(coords.squareY) - player.y
+                    let relativeX = 8 + Number(coords.squareX) - player.x
+                    let relativeY = 4 + Number(coords.squareY) - player.y
                     this.state.players.map(tempPlayer => {
-                        if(tempPlayer.x === (coords.tileX-1)*4+coords.squareX+1-relativeX && tempPlayer.y === (coords.tileY-1)*4+coords.squareY+1-relativeY){
+                        if (tempPlayer.x === (coords.tileX - 1) * 4 + coords.squareX + 1 - relativeX && tempPlayer.y === (coords.tileY - 1) * 4 + coords.squareY + 1 - relativeY) {
                             player.id = tempPlayer.id
                             leftPlayers.push(player)
                         }
                     })
                 }
-                else if(left[row][col] === 21 || left[row][col] === 2) left[row][col] = 0
+                else if (left[row][col] === 21 || left[row][col] === 2) left[row][col] = 0
             }
         }
 
         let rightPlayers = []
-        for(let row in right){
-            for(let col in right[row]){
-                if(right[row][col] === 11){
+        for (let row in right) {
+            for (let col in right[row]) {
+                if (right[row][col] === 11) {
                     right[row][col] = 0
                     let player = {
                         x: col,
                         y: row
                     }
                     let relativeX = Number(coords.squareX) - player.x
-                    let relativeY = 4+Number(coords.squareY) - player.y
+                    let relativeY = 4 + Number(coords.squareY) - player.y
                     this.state.players.map(tempPlayer => {
-                        if(tempPlayer.x === (coords.tileX-1)*4+coords.squareX+1-relativeX && tempPlayer.y === (coords.tileY-1)*4+coords.squareY+1-relativeY){
+                        if (tempPlayer.x === (coords.tileX - 1) * 4 + coords.squareX + 1 - relativeX && tempPlayer.y === (coords.tileY - 1) * 4 + coords.squareY + 1 - relativeY) {
                             player.id = tempPlayer.id
                             rightPlayers.push(player)
                         }
                     })
                 }
-                else if(right[row][col] === 21 || right[row][col] === 2) right[row][col] = 0
+                else if (right[row][col] === 21 || right[row][col] === 2) right[row][col] = 0
             }
         }
 
         let topPlayers = []
-        for(let row in top){
-            for(let col in top[row]){
-                if(top[row][col] === 11){
+        for (let row in top) {
+            for (let col in top[row]) {
+                if (top[row][col] === 11) {
                     top[row][col] = 0
                     let player = {
                         x: col,
                         y: row
                     }
-                    let relativeX = 4+Number(coords.squareX) - player.x
-                    let relativeY = 8+Number(coords.squareY) - player.y
+                    let relativeX = 4 + Number(coords.squareX) - player.x
+                    let relativeY = 8 + Number(coords.squareY) - player.y
                     this.state.players.map(tempPlayer => {
-                        if(tempPlayer.x === (coords.tileX-1)*4+coords.squareX+1-relativeX && tempPlayer.y === (coords.tileY-1)*4+coords.squareY+1-relativeY){
+                        if (tempPlayer.x === (coords.tileX - 1) * 4 + coords.squareX + 1 - relativeX && tempPlayer.y === (coords.tileY - 1) * 4 + coords.squareY + 1 - relativeY) {
                             player.id = tempPlayer.id
                             topPlayers.push(player)
                         }
                     })
                 }
-                else if(top[row][col] === 21 || top[row][col] === 2) top[row][col] = 0
+                else if (top[row][col] === 21 || top[row][col] === 2) top[row][col] = 0
             }
         }
 
         let bottomPlayers = []
-        for(let row in bottom){
-            for(let col in bottom[row]){
-                if(bottom[row][col] === 11){
+        for (let row in bottom) {
+            for (let col in bottom[row]) {
+                if (bottom[row][col] === 11) {
                     bottom[row][col] = 0
                     let player = {
                         x: col,
                         y: row
                     }
-                    let relativeX = 4+Number(coords.squareX) - player.x
+                    let relativeX = 4 + Number(coords.squareX) - player.x
                     let relativeY = Number(coords.squareY) - player.y
                     this.state.players.map(tempPlayer => {
-                        if(tempPlayer.x === (coords.tileX-1)*4+coords.squareX+1-relativeX && tempPlayer.y === (coords.tileY-1)*4+coords.squareY+1-relativeY){
+                        if (tempPlayer.x === (coords.tileX - 1) * 4 + coords.squareX + 1 - relativeX && tempPlayer.y === (coords.tileY - 1) * 4 + coords.squareY + 1 - relativeY) {
                             player.id = tempPlayer.id
                             bottomPlayers.push(player)
                         }
                     })
                 }
-                else if(bottom[row][col] === 21 || bottom[row][col] === 2) bottom[row][col] = 0
+                else if (bottom[row][col] === 21 || bottom[row][col] === 2) bottom[row][col] = 0
             }
         }
 
@@ -376,42 +383,42 @@ class Board extends Component {
             let grid = new PF.Grid(left)
             let finder = new PF.AStarFinder()
             let path = finder.findPath(coords.squareX + 8, coords.squareY + 4, player.x, player.y, grid)
-            if(path.length > 0) paths.push({id:player.id, path:path, length: path.length-2})
+            if (path.length > 0) paths.push({ id: player.id, path: path, length: path.length - 2 })
         })
-        
+
         rightPlayers.map(player => {
             let grid = new PF.Grid(right)
             let finder = new PF.AStarFinder()
             let path = finder.findPath(coords.squareX, coords.squareY + 4, player.x, player.y, grid)
-            if(path.length > 0) paths.push({id:player.id, path:path, length: path.length-2})
+            if (path.length > 0) paths.push({ id: player.id, path: path, length: path.length - 2 })
         })
 
         topPlayers.map(player => {
             let grid = new PF.Grid(top)
             let finder = new PF.AStarFinder()
             let path = finder.findPath(coords.squareX + 4, coords.squareY + 8, player.x, player.y, grid)
-            if(path.length > 0) paths.push({id:player.id, path:path, length: path.length-2})
+            if (path.length > 0) paths.push({ id: player.id, path: path, length: path.length - 2 })
         })
 
         bottomPlayers.map(player => {
             let grid = new PF.Grid(bottom)
             let finder = new PF.AStarFinder()
             let path = finder.findPath(coords.squareX + 4, coords.squareY, player.x, player.y, grid)
-            if(path.length > 0) paths.push({id:player.id, path:path, length: path.length-2})
+            if (path.length > 0) paths.push({ id: player.id, path: path, length: path.length - 2 })
         })
 
-        if(paths.length === 0){
+        if (paths.length === 0) {
             return this.monsterPathfinder(monster)
         }
 
         let oneTilePlayers = []
 
-        for(let player of paths){
-            for(let char of this.state.players){
-                if(char.id === player.id){
+        for (let player of paths) {
+            for (let char of this.state.players) {
+                if (char.id === player.id) {
                     let charPosition = this.getTileAndSquareForCharacter(char)
                     let relativeTile = Math.abs(coords.tileX - charPosition.tileX) + Math.abs(coords.tileY - charPosition.tileY)
-                    if(relativeTile === 0 || relativeTile === 1){
+                    if (relativeTile === 0 || relativeTile === 1) {
                         player.distance = {
                             tiles: relativeTile
                         }
@@ -424,12 +431,12 @@ class Board extends Component {
 
         let closestPlayer = undefined
 
-        if(oneTilePlayers.length > 0){
+        if (oneTilePlayers.length > 0) {
             closestPlayer = oneTilePlayers.sort((a, b) => {
                 return a.length - b.length
             })[0]
         }
-        else{
+        else {
             closestPlayer = paths.sort((a, b) => {
                 return a.length - b.length
             })[0]
@@ -444,15 +451,15 @@ class Board extends Component {
         let playersOnTile = []
 
         outerloop:
-        for(let player of this.state.players){
-            if(player.id === closestPlayer.id){
+        for (let player of this.state.players) {
+            if (player.id === closestPlayer.id) {
                 let playerCoords = this.getTileAndSquareForCharacter(player)
-                for(let tile of this.state.dataSet){
-                    if(tile.x === playerCoords.tileX && tile.y === playerCoords.tileY){
-                        playerTile =  JSON.parse(JSON.stringify(tile.grid))
-                        for(let player2 of this.state.players){
+                for (let tile of this.state.dataSet) {
+                    if (tile.x === playerCoords.tileX && tile.y === playerCoords.tileY) {
+                        playerTile = JSON.parse(JSON.stringify(tile.grid))
+                        for (let player2 of this.state.players) {
                             let player2Coords = this.getTileAndSquareForCharacter(player2)
-                            if(player2Coords.tileX === playerCoords.tileX && player2Coords.tileY === playerCoords.tileY){
+                            if (player2Coords.tileX === playerCoords.tileX && player2Coords.tileY === playerCoords.tileY) {
                                 playersOnTile.push(JSON.parse(JSON.stringify(player2)))
                             }
                         }
@@ -474,7 +481,7 @@ class Board extends Component {
         return closestPlayer
     }
 
-    checkTwoAdjacentLeft(coords){
+    checkTwoAdjacentLeft(coords) {
         let cols = 12 //    3 tiles -> 12 Squares
         let rows = 12 //    3 tiles -> 12 Squares
 
@@ -488,55 +495,55 @@ class Board extends Component {
 
         let dataSetCopy = JSON.parse(JSON.stringify(this.state.dataSet))
         dataSetCopy.map(tile => {
-            if(tile.x === coords.tileX-1 && tile.y === coords.tileY)   centerTile = tile
-            if(tile.x === coords.tileX-2 && tile.y === coords.tileY)     leftTile = tile
-            if(tile.x === coords.tileX-1 && tile.y === coords.tileY-1)    topTile = tile
-            if(tile.x === coords.tileX-1 && tile.y === coords.tileY+1) bottomTile = tile
-            if(tile.x === coords.tileX   && tile.y === coords.tileY)    rightTile = tile
+            if (tile.x === coords.tileX - 1 && tile.y === coords.tileY) centerTile = tile
+            if (tile.x === coords.tileX - 2 && tile.y === coords.tileY) leftTile = tile
+            if (tile.x === coords.tileX - 1 && tile.y === coords.tileY - 1) topTile = tile
+            if (tile.x === coords.tileX - 1 && tile.y === coords.tileY + 1) bottomTile = tile
+            if (tile.x === coords.tileX && tile.y === coords.tileY) rightTile = tile
         })
 
 
-        if(centerTile){
-            for(let y = 0; y < centerTile.grid.length; y++){
-                for(let x = 0; x < centerTile.grid[y].length; x++){
+        if (centerTile) {
+            for (let y = 0; y < centerTile.grid.length; y++) {
+                for (let x = 0; x < centerTile.grid[y].length; x++) {
                     bigArray[4 + Number(y)][4 + Number(x)] = centerTile.grid[y][x]
                 }
             }
         }
-        else {return bigArray}
+        else { return bigArray }
 
-        if(leftTile){
-            for(let y = 0; y < leftTile.grid.length; y++){
-                for(let x = 0; x < leftTile.grid[y].length; x++){
+        if (leftTile) {
+            for (let y = 0; y < leftTile.grid.length; y++) {
+                for (let x = 0; x < leftTile.grid[y].length; x++) {
                     bigArray[4 + Number(y)][x] = leftTile.grid[y][x]
                 }
             }
         }
-        if(rightTile){
-            for(let y = 0; y < rightTile.grid.length; y++){
-                for(let x = 0; x < rightTile.grid[y].length; x++){
+        if (rightTile) {
+            for (let y = 0; y < rightTile.grid.length; y++) {
+                for (let x = 0; x < rightTile.grid[y].length; x++) {
                     bigArray[4 + Number(y)][8 + Number(x)] = rightTile.grid[y][x]
                 }
             }
         }
-        if(topTile){
-            for(let y = 0; y < topTile.grid.length; y++){
-                for(let x = 0; x < topTile.grid[y].length; x++){
+        if (topTile) {
+            for (let y = 0; y < topTile.grid.length; y++) {
+                for (let x = 0; x < topTile.grid[y].length; x++) {
                     bigArray[y][4 + Number(x)] = topTile.grid[y][x]
                 }
             }
         }
-        if(bottomTile){
-            for(let y = 0; y < bottomTile.grid.length; y++){
-                for(let x = 0; x < bottomTile.grid[y].length; x++){
+        if (bottomTile) {
+            for (let y = 0; y < bottomTile.grid.length; y++) {
+                for (let x = 0; x < bottomTile.grid[y].length; x++) {
                     bigArray[8 + Number(y)][4 + Number(x)] = bottomTile.grid[y][x]
                 }
             }
         }
         return bigArray
     }
-    
-    checkTwoAdjacentRight(coords){
+
+    checkTwoAdjacentRight(coords) {
         let cols = 12 //    3 tiles -> 12 Squares
         let rows = 12 //    3 tiles -> 12 Squares
 
@@ -544,52 +551,52 @@ class Board extends Component {
 
         let centerTile = null
         let leftTile = null // Checks right, so start left
-        let rightTile = null 
+        let rightTile = null
         let topTile = null
         let bottomTile = null
 
         let dataSetCopy = JSON.parse(JSON.stringify(this.state.dataSet))
         dataSetCopy.map(tile => {
-            if(tile.x === coords.tileX+1 && tile.y === coords.tileY)   centerTile = tile
-            if(tile.x === coords.tileX+2 && tile.y === coords.tileY)    rightTile = tile
-            if(tile.x === coords.tileX+1 && tile.y === coords.tileY-1)    topTile = tile
-            if(tile.x === coords.tileX+1 && tile.y === coords.tileY+1) bottomTile = tile
-            if(tile.x === coords.tileX   && tile.y === coords.tileY)     leftTile = tile
+            if (tile.x === coords.tileX + 1 && tile.y === coords.tileY) centerTile = tile
+            if (tile.x === coords.tileX + 2 && tile.y === coords.tileY) rightTile = tile
+            if (tile.x === coords.tileX + 1 && tile.y === coords.tileY - 1) topTile = tile
+            if (tile.x === coords.tileX + 1 && tile.y === coords.tileY + 1) bottomTile = tile
+            if (tile.x === coords.tileX && tile.y === coords.tileY) leftTile = tile
         })
 
-        if(centerTile){
-            for(let y = 0; y < centerTile.grid.length; y++){
-                for(let x = 0; x < centerTile.grid[y].length; x++){
+        if (centerTile) {
+            for (let y = 0; y < centerTile.grid.length; y++) {
+                for (let x = 0; x < centerTile.grid[y].length; x++) {
                     bigArray[4 + Number(y)][4 + Number(x)] = centerTile.grid[y][x]
                 }
             }
         }
-        else {return bigArray}
+        else { return bigArray }
 
-        if(leftTile){
-            for(let y = 0; y < leftTile.grid.length; y++){
-                for(let x = 0; x < leftTile.grid[y].length; x++){
+        if (leftTile) {
+            for (let y = 0; y < leftTile.grid.length; y++) {
+                for (let x = 0; x < leftTile.grid[y].length; x++) {
                     bigArray[4 + Number(y)][x] = leftTile.grid[y][x]
                 }
             }
         }
-        if(rightTile){
-            for(let y = 0; y < rightTile.grid.length; y++){
-                for(let x = 0; x < rightTile.grid[y].length; x++){
+        if (rightTile) {
+            for (let y = 0; y < rightTile.grid.length; y++) {
+                for (let x = 0; x < rightTile.grid[y].length; x++) {
                     bigArray[4 + Number(y)][8 + Number(x)] = rightTile.grid[y][x]
                 }
             }
         }
-        if(topTile){
-            for(let y = 0; y < topTile.grid.length; y++){
-                for(let x = 0; x < topTile.grid[y].length; x++){
+        if (topTile) {
+            for (let y = 0; y < topTile.grid.length; y++) {
+                for (let x = 0; x < topTile.grid[y].length; x++) {
                     bigArray[y][4 + Number(x)] = topTile.grid[y][x]
                 }
             }
         }
-        if(bottomTile){
-            for(let y = 0; y < bottomTile.grid.length; y++){
-                for(let x = 0; x < bottomTile.grid[y].length; x++){
+        if (bottomTile) {
+            for (let y = 0; y < bottomTile.grid.length; y++) {
+                for (let x = 0; x < bottomTile.grid[y].length; x++) {
                     bigArray[8 + Number(y)][4 + Number(x)] = bottomTile.grid[y][x]
                 }
             }
@@ -597,7 +604,7 @@ class Board extends Component {
         return bigArray
     }
 
-    checkTwoAdjacentTop(coords){
+    checkTwoAdjacentTop(coords) {
         let cols = 12 //    3 tiles -> 12 Squares
         let rows = 12 //    3 tiles -> 12 Squares
 
@@ -605,52 +612,52 @@ class Board extends Component {
 
         let centerTile = null
         let leftTile = null
-        let rightTile = null 
+        let rightTile = null
         let topTile = null
         let bottomTile = null // Checks top, so start bottom
 
         let dataSetCopy = JSON.parse(JSON.stringify(this.state.dataSet))
         dataSetCopy.map(tile => {
-            if(tile.x === coords.tileX-1 && tile.y === coords.tileY-1)   leftTile = tile
-            if(tile.x === coords.tileX+1 && tile.y === coords.tileY-1)  rightTile = tile
-            if(tile.x === coords.tileX && tile.y === coords.tileY-2)      topTile = tile
-            if(tile.x === coords.tileX && tile.y === coords.tileY-1)   centerTile = tile
-            if(tile.x === coords.tileX && tile.y === coords.tileY)     bottomTile = tile
+            if (tile.x === coords.tileX - 1 && tile.y === coords.tileY - 1) leftTile = tile
+            if (tile.x === coords.tileX + 1 && tile.y === coords.tileY - 1) rightTile = tile
+            if (tile.x === coords.tileX && tile.y === coords.tileY - 2) topTile = tile
+            if (tile.x === coords.tileX && tile.y === coords.tileY - 1) centerTile = tile
+            if (tile.x === coords.tileX && tile.y === coords.tileY) bottomTile = tile
         })
 
-        if(centerTile){
-            for(let y = 0; y < centerTile.grid.length; y++){
-                for(let x = 0; x < centerTile.grid[y].length; x++){
+        if (centerTile) {
+            for (let y = 0; y < centerTile.grid.length; y++) {
+                for (let x = 0; x < centerTile.grid[y].length; x++) {
                     bigArray[4 + Number(y)][4 + Number(x)] = centerTile.grid[y][x]
                 }
             }
         }
-        else {return bigArray}
+        else { return bigArray }
 
-        if(leftTile){
-            for(let y = 0; y < leftTile.grid.length; y++){
-                for(let x = 0; x < leftTile.grid[y].length; x++){
+        if (leftTile) {
+            for (let y = 0; y < leftTile.grid.length; y++) {
+                for (let x = 0; x < leftTile.grid[y].length; x++) {
                     bigArray[4 + Number(y)][x] = leftTile.grid[y][x]
                 }
             }
         }
-        if(rightTile){
-            for(let y = 0; y < rightTile.grid.length; y++){
-                for(let x = 0; x < rightTile.grid[y].length; x++){
+        if (rightTile) {
+            for (let y = 0; y < rightTile.grid.length; y++) {
+                for (let x = 0; x < rightTile.grid[y].length; x++) {
                     bigArray[4 + Number(y)][8 + Number(x)] = rightTile.grid[y][x]
                 }
             }
         }
-        if(topTile){
-            for(let y = 0; y < topTile.grid.length; y++){
-                for(let x = 0; x < topTile.grid[y].length; x++){
+        if (topTile) {
+            for (let y = 0; y < topTile.grid.length; y++) {
+                for (let x = 0; x < topTile.grid[y].length; x++) {
                     bigArray[y][4 + Number(x)] = topTile.grid[y][x]
                 }
             }
         }
-        if(bottomTile){
-            for(let y = 0; y < bottomTile.grid.length; y++){
-                for(let x = 0; x < bottomTile.grid[y].length; x++){
+        if (bottomTile) {
+            for (let y = 0; y < bottomTile.grid.length; y++) {
+                for (let x = 0; x < bottomTile.grid[y].length; x++) {
                     bigArray[8 + Number(y)][4 + Number(x)] = bottomTile.grid[y][x]
                 }
             }
@@ -658,7 +665,7 @@ class Board extends Component {
         return bigArray
     }
 
-    checkTwoAdjacentBottom(coords){
+    checkTwoAdjacentBottom(coords) {
         let cols = 12 //    3 tiles -> 12 Squares
         let rows = 12 //    3 tiles -> 12 Squares
 
@@ -666,52 +673,52 @@ class Board extends Component {
 
         let centerTile = null
         let leftTile = null
-        let rightTile = null 
+        let rightTile = null
         let topTile = null  //  Checks bottom, so start top
-        let bottomTile = null 
+        let bottomTile = null
 
         let dataSetCopy = JSON.parse(JSON.stringify(this.state.dataSet))
         dataSetCopy.map(tile => {
-            if(tile.x === coords.tileX-1 && tile.y === coords.tileY+1)   leftTile = tile
-            if(tile.x === coords.tileX+1 && tile.y === coords.tileY+1)  rightTile = tile
-            if(tile.x === coords.tileX && tile.y === coords.tileY+2)      bottomTile = tile
-            if(tile.x === coords.tileX && tile.y === coords.tileY+1)   centerTile = tile
-            if(tile.x === coords.tileX && tile.y === coords.tileY)   topTile = tile
+            if (tile.x === coords.tileX - 1 && tile.y === coords.tileY + 1) leftTile = tile
+            if (tile.x === coords.tileX + 1 && tile.y === coords.tileY + 1) rightTile = tile
+            if (tile.x === coords.tileX && tile.y === coords.tileY + 2) bottomTile = tile
+            if (tile.x === coords.tileX && tile.y === coords.tileY + 1) centerTile = tile
+            if (tile.x === coords.tileX && tile.y === coords.tileY) topTile = tile
         })
 
-        if(centerTile){
-            for(let y = 0; y < centerTile.grid.length; y++){
-                for(let x = 0; x < centerTile.grid[y].length; x++){
+        if (centerTile) {
+            for (let y = 0; y < centerTile.grid.length; y++) {
+                for (let x = 0; x < centerTile.grid[y].length; x++) {
                     bigArray[4 + Number(y)][4 + Number(x)] = centerTile.grid[y][x]
                 }
             }
         }
-        else {return bigArray}
+        else { return bigArray }
 
-        if(leftTile){
-            for(let y = 0; y < leftTile.grid.length; y++){
-                for(let x = 0; x < leftTile.grid[y].length; x++){
+        if (leftTile) {
+            for (let y = 0; y < leftTile.grid.length; y++) {
+                for (let x = 0; x < leftTile.grid[y].length; x++) {
                     bigArray[4 + Number(y)][x] = leftTile.grid[y][x]
                 }
             }
         }
-        if(rightTile){
-            for(let y = 0; y < rightTile.grid.length; y++){
-                for(let x = 0; x < rightTile.grid[y].length; x++){
+        if (rightTile) {
+            for (let y = 0; y < rightTile.grid.length; y++) {
+                for (let x = 0; x < rightTile.grid[y].length; x++) {
                     bigArray[4 + Number(y)][8 + Number(x)] = rightTile.grid[y][x]
                 }
             }
         }
-        if(topTile){
-            for(let y = 0; y < topTile.grid.length; y++){
-                for(let x = 0; x < topTile.grid[y].length; x++){
+        if (topTile) {
+            for (let y = 0; y < topTile.grid.length; y++) {
+                for (let x = 0; x < topTile.grid[y].length; x++) {
                     bigArray[y][4 + Number(x)] = topTile.grid[y][x]
                 }
             }
         }
-        if(bottomTile){
-            for(let y = 0; y < bottomTile.grid.length; y++){
-                for(let x = 0; x < bottomTile.grid[y].length; x++){
+        if (bottomTile) {
+            for (let y = 0; y < bottomTile.grid.length; y++) {
+                for (let x = 0; x < bottomTile.grid[y].length; x++) {
                     bigArray[8 + Number(y)][4 + Number(x)] = bottomTile.grid[y][x]
                 }
             }
@@ -721,35 +728,35 @@ class Board extends Component {
 
 
     //  Constructs one large array from every square on every tile, necessary for pathfinding library
-    monsterPathfinder(monster){
+    monsterPathfinder(monster) {
         let cols = 0
         let rows = 0
 
         let dataSetCopy = JSON.parse(JSON.stringify(this.state.dataSet))
         dataSetCopy.map(tile => {
-            if(tile.x > cols) cols = tile.x
-            if(tile.y > rows) rows = tile.y
+            if (tile.x > cols) cols = tile.x
+            if (tile.y > rows) rows = tile.y
         })
 
-        rows*=4
-        cols*=4
+        rows *= 4
+        cols *= 4
 
         let bigArray = JSON.parse(JSON.stringify(new Array(rows).fill(new Array(cols).fill(1))))
 
         this.state.dataSet.map(tile => {
-            for(let y = 0; y < tile.grid.length; y++){
-                for(let x = 0; x < tile.grid[y].length; x++){
-                    bigArray[(Number(tile.y)-1)*4 + Number(y)][(Number(tile.x)-1)*4 + Number(x)] = (tile.grid[y][x] === 21 || tile.grid[y][x] === 11) ? 0 : tile.grid[y][x]
+            for (let y = 0; y < tile.grid.length; y++) {
+                for (let x = 0; x < tile.grid[y].length; x++) {
+                    bigArray[(Number(tile.y) - 1) * 4 + Number(y)][(Number(tile.x) - 1) * 4 + Number(x)] = (tile.grid[y][x] === 21 || tile.grid[y][x] === 11) ? 0 : tile.grid[y][x]
                 }
             }
         })
 
         let paths = []
-        for(let player of this.state.players){
+        for (let player of this.state.players) {
             let grid = new PF.Grid(bigArray)
             let finder = new PF.AStarFinder()
-            let path = finder.findPath(Number(monster.x)-1, Number(monster.y)-1, Number(player.x)-1, Number(player.y)-1, grid)
-            if(path.length > 0){
+            let path = finder.findPath(Number(monster.x) - 1, Number(monster.y) - 1, Number(player.x) - 1, Number(player.y) - 1, grid)
+            if (path.length > 0) {
                 paths.push({
                     id: player.id,
                     player: JSON.parse(JSON.stringify(player)),
@@ -1084,6 +1091,7 @@ class Board extends Component {
         })
         return (
             <React.Fragment>
+                <TimeTract />
                 <div className='board-container'>
                     <div style={{
                         display: 'grid',
