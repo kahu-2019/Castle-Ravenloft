@@ -198,47 +198,50 @@ class Board extends Component {
     adjacentTester(){
 
         for(let monster of this.state.players[0].monsters){
-            console.log(monster)
+            // console.log(monster)
         }
 
         let monsterId = this.state.players[0].monsters[0].id
         let monster = this.state.players[0].monsters.find(monster => monster.id === monsterId)
-        console.log(monster)
+        // console.log(monster)
         let closestPlayer = this.checkAdjacentSquares(monster)
         
-        let result = undefined
-        switch (monsterId){
-            case 1:
-                result = zombie(closestPlayer)
-                break
-            case 2:
-                result = ghoul(closestPlayer)
-                break
-            case 3:
-                result = wolf(closestPlayer)
-                break
-            case 4:
-                result = ratSwarm(closestPlayer)
-                break
-            case 5:
-                result = gargoyle(closestPlayer)
-                break
-            case 6:
-                result = spider(closestPlayer)
-                break
-            case 7:
-                result = skeleton(closestPlayer)
-                break
-            case 8:
-                result = koboldSkirmisher(closestPlayer)
-                break
-            case 9:
-                result = blazingSkeleton(closestPlayer)
-                break
-            case 10:
-                result = wraith(closestPlayer)
-        }
+        let result = blazingSkeleton(closestPlayer)
+        // let result = undefined
+        // switch (monsterId){
+        //     case 1:
+        //         result = zombie(closestPlayer)
+        //         break
+        //     case 2:
+        //         result = ghoul(closestPlayer)
+        //         break
+        //     case 3:
+        //         result = wolf(closestPlayer)
+        //         break
+        //     case 4:
+        //         result = ratSwarm(closestPlayer)
+        //         break
+        //     case 5:
+        //         result = gargoyle(closestPlayer)
+        //         break
+        //     case 6:
+        //         result = spider(closestPlayer)
+        //         break
+        //     case 7:
+        //         result = skeleton(closestPlayer)
+        //         break
+        //     case 8:
+        //         result = koboldSkirmisher(closestPlayer)
+        //         break
+        //     case 9:
+        //         result = blazingSkeleton(closestPlayer)
+        //         break
+        //     case 10:
+        //         result = wraith(closestPlayer)
+        // }
 
+        
+        let tempPlayers = this.state.players
         if(result.position){
             let tempMonsters = this.state.players[0].monsters
             for(let monmon of tempMonsters){
@@ -250,8 +253,22 @@ class Board extends Component {
             }
             let tempPlayers = this.state.players
             tempPlayers[0].monsters = tempMonsters
-            this.setState({players: tempPlayers}, () => this.processCharacters())
         }
+
+        if(result.characters){
+            for(let character of result.characters){
+                for(let player of tempPlayers){
+                    if(character.id == player.id){
+                        player.HP = player.HP - character.damage
+                    }
+                }
+            }
+        }
+
+        console.log(tempPlayers)
+
+        
+        this.setState({players: tempPlayers}, () => this.processCharacters())
         // console.log(result)
     }
 
