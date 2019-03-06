@@ -1,5 +1,5 @@
-
 import React, { Component } from "react";
+import { Link } from 'react-router-dom'
 
 class Home extends Component {
   render() {
@@ -53,6 +53,7 @@ class Home extends Component {
               contained within the halls of Castle Ravenloft(with a littel help
               from you).
             </p>
+            <Link to="/char-select"><div className='startbutton charSelectLink'>Go to Character Selection</div></Link>
           </div>
         </div>
       </div>

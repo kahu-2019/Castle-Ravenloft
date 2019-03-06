@@ -12,9 +12,9 @@
 }
 
 .tile {
-    display:grid;
-    grid-template-rows: repeat(4, 50px);
-    grid-template-columns: repeat(4, 50px);
+  display: grid;
+  grid-template-rows: repeat(4, 50px);
+  grid-template-columns: repeat(4, 50px);
 }
 
 .error {
@@ -35,28 +35,34 @@
   text-align: center;
 }
 
-.card{
-  -webkit-box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
-  -moz-box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
-  box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
+.card {
+  -webkit-box-shadow: inset 0px 0px 125px -11px rgba(0, 0, 0, 0.51);
+  -moz-box-shadow: inset 0px 0px 125px -11px rgba(0, 0, 0, 0.51);
+  box-shadow: inset 0px 0px 125px -11px rgba(0, 0, 0, 0.51);
 }
 
-
-
-.character-card{
-  animation:scale-out-center 0.2s cubic-bezier(.55,.085,.68,.53) both
+.character-card {
+  animation: scale-out-center 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
 }
 /* .scale-out-center{} */
 
- @keyframes scale-out-center{0%{transform:scale(1);opacity:1}100%{transform:scale(0);opacity:1}}
+@keyframes scale-out-center {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 1;
+  }
+}
 
-.char-card{
-  color:rgb(223, 219, 219);
-  
+.char-card {
+  color: rgb(223, 219, 219);
 }
 
 /* HIDE RADIO */
-[type=radio] { 
+[type="radio"] {
   position: absolute;
   opacity: 0;
   width: 0;
@@ -64,23 +70,21 @@
 }
 
 /* IMAGE STYLES */
-[type=radio] + .card {
+[type="radio"] + .card {
   cursor: pointer;
 }
 
-[type=radio]:hover + .card {
+[type="radio"]:hover + .card {
   outline: 2px solid lightblue;
-  
 }
 
 /* CHECKED STYLES */
-[type=radio]:checked + .card {
+[type="radio"]:checked + .card {
   outline: 2px solid greenyellow;
 }
-
 
 /* HIDE CHECK */
-[type=checkbox] { 
+[type="checkbox"] {
   position: absolute;
   opacity: 0;
   width: 0;
@@ -88,41 +92,62 @@
 }
 
 /* IMAGE STYLES */
-[type=checkbox] + .card {
+[type="checkbox"] + .card {
   cursor: pointer;
 }
 
-[type=checkbox]:hover + .card {
+[type="checkbox"]:hover + .card {
   outline: 2px solid lightblue;
-  
 }
 
 /* CHECKED STYLES */
-[type=checkbox]:checked + .card {
+[type="checkbox"]:checked + .card {
   outline: 2px solid greenyellow;
 }
 
-.power-titles{
+.power-titles {
   text-align: center;
 }
-
 
 .card-text {
   color: rgb(223, 219, 219);
 }
+
+/*TIME-TRACT*/
+.time-containers {
+  background-image: url(./images/time-track/time-track1.png);
+  width: 620px;
+  height: 200px;
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  justify-content: flex-end;
+  display: flex;
+  margin-left: 61%;
+  position: absolute;
+}
+
 .Time-tract {
-  text-align: center;
   margin-top: 10px;
   z-index: 0;
 }
-.Time-tract h2 {
-  margin-bottom: 20px;
-  color: rgb(51, 30, 5);
+.time-title {
+  width: 200px;
+  right: 12% !important;
+  color: #702906;
+  position: absolute;
 }
 .contaniner1 {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-end !important;
+  width: 590px;
+  position: absolute;
+}
+.timecontainer1 {
+  right: 54px !important;
+  top: 60px !important;
+  position: absolute;
 }
 .containers,
 .contaniner1 {
@@ -136,27 +161,29 @@
 }
 .contaniner1 {
   z-index: 2;
-  top: 120px;
-  height: 5em;
 }
 
 .time {
-  margin-top: 20px;
+  top: 100px;
   color: rgb(100, 57, 8);
+  left: 65px;
+  position: absolute;
 }
 .time1 {
-  margin-top: 70px;
+  top: 100px;
+  right: 30px;
   color: rgb(100, 57, 8);
+  position: absolute;
 }
 
 #circle {
-  width: 120px;
-  height: 120px;
+  width: 84px;
+  height: 84px;
   color: rgb(126, 87, 41);
-  background: rgb(250, 235, 217);
+  background: rgb(167, 153, 137);
   border-radius: 80%;
   border-color: rgb(99, 71, 37);
-  margin-right: 50px;
+  margin-right: 15px;
   text-align: center;
   border-color: #b6926b !important;
 }
@@ -172,136 +199,149 @@ span {
 }
 
 .home {
-  background-color: black;
-}
-.home img {
+  background-image: url(./images/main/main-img1.png) !important;
   background-repeat: no-repeat;
-  background-position: center;
   background-size: cover;
-  overflow: hidden;
-  padding-bottom: 100px;
+  width: 100%;
+  height: 130vh;
   position: relative;
-  z-index: 1;
-  height: auto;
-  max-width: 100%;
-  margin-left: 7%;
 }
 
 .display {
-  background-color: rgb(247, 241, 224) !important;
   color: rgb(48, 46, 46);
   display: flex !important;
   flex-wrap: wrap !important;
-  width: 80%;
-  margin: 0 auto;
-}
 
+  flex-direction: row;
+  padding: 15px;
+  width: 100%;
+  align-items: flex-end;
+}
 .display1 {
-  position: absolute;
-  z-index: 2;
-  left: 12%;
-  top: 500px;
+  background-color: rgba(247, 241, 224, 0.85) !important;
+  width: 38%;
+  margin-left: 4%;
+  padding: 25px;
+  border-radius: 5px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  margin-top: 20%;
+}
+#square1 {
+  margin-top: 27% !important;
+}
+.display2 {
+  background-color: rgba(247, 241, 224, 0.85) !important;
   width: 30%;
-  height: 650px;
-  opacity: 0.8;
-  border-radius: 15px;
-  background-color: rgb(247, 241, 224) !important;
+  margin-left: 17%;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
-.display2 {
-  position: absolute;
-  z-index: 3;
-  height: 400px;
-  width: 28%;
-  right: 14%;
-  top: 500px;
-  opacity: 0.8;
-  border-radius: 15px;
-  background-color: rgb(247, 241, 224) !important;
+.treasure {
+  margin-left: 1px;
+  margin: 1px !important;
 }
-.textBox{
-  background-image: url('./images/scroll.png');
+.encounter {
+  margin: 1px !important;
+}
+
+.card1 {
+  max-width: 40%;
+  margin: 1px !important;
+
+  color: rgba(17, 6, 1, 0.959) !important;
+  background-color: rgba(75, 64, 49, 0.85);
+  -webkit-box-shadow: inset 0px 0px 125px -11px rgba(202, 195, 188, 0.51) !important;
+  -moz-box-shadow: inset 0px 0px 125px -11px rgba(129, 104, 81, 0.51) !important;
+  box-shadow: inset 0px 0px 125px -11px rgba(129, 104, 81, 0.51) !important;
+}
+.card2 {
+  margin: 1px !important;
+
+  color: rgba(17, 6, 1, 0.959) !important;
+  background-color: rgba(211, 190, 150, 0.85);
+  -webkit-box-shadow: inset 0px 0px 125px -11px rgba(202, 195, 188, 0.51) !important;
+  -moz-box-shadow: inset 0px 0px 125px -11px rgba(129, 104, 81, 0.51) !important;
+  box-shadow: inset 0px 0px 125px -11px rgba(129, 104, 81, 0.51) !important;
+}
+.textBox {
+  background-image: url("./images/scroll.png");
   background-size: 100% 100%;
   height: 500px;
   width: 500px;
   position: fixed;
-  top:50%;
-  left:50%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  font-family: 'IM Fell DW Pica', serif;
+  font-family: "IM Fell DW Pica", serif;
   padding-left: 50px;
-  padding-right: 50px
+  padding-right: 50px;
 }
 
-.sealButton{
-  height: 100px
+.sealButton {
+  height: 100px;
 }
 
-.home-main{
-  position:fixed;
+.home-main {
+  position: fixed;
   width: 100%;
-  height:100%;
-  background-image: url('./images/darkcastle.jpg');
-  
-
+  height: 100%;
+  background-image: url("./images/darkcastle.jpg");
 }
 
-.cr-logo{
-  height: 200px
+.cr-logo {
+  height: 200px;
 }
 
-.logo-div{
-  position:fixed;
+.logo-div {
+  position: fixed;
   top: 20%;
   left: 50%;
-  
 }
-.rain{
-  height:100vh;
-  background: url('./images/rain.png');
-  animation: rain .5s linear infinite;
-  
+.rain {
+  height: 100vh;
+  background: url("./images/rain.png");
+  animation: rain 0.5s linear infinite;
 }
 
-.rain:before{
-  content:'';
+.rain:before {
+  content: "";
   position: absolute;
   width: 100%;
-  height:100%;
+  height: 100%;
   background: #fff;
   animation: lightning 1s 4s infinite alternate backwards;
   opacity: 0;
-
 }
 
 @keyframes rain {
-  0%{
-    background-position: 0% 0%
+  0% {
+    background-position: 0% 0%;
   }
-  100%{
-    background-position: 20% 100%
+  100% {
+    background-position: 20% 100%;
   }
 }
 
 @keyframes lightning {
-  0%{
+  0% {
     opacity: 0;
   }
-  10%{
+  10% {
     opacity: 0.2;
   }
-  11%{
+  11% {
     opacity: 0;
   }
-
 }
 
-.dnd-logo{
+.dnd-logo {
   position: absolute;
   bottom: 5%;
-  left:43%;
-  height: 60px
+  left: 43%;
+  height: 60px;
 }
 
 .startbutton{
@@ -314,17 +354,16 @@ span {
   text-decoration: none!important
 }
 
-@keyframes start{
-  0%{
+@keyframes start {
+  0% {
     opacity: 1;
   }
-  50%{
+  50% {
     opacity: 0;
   }
-  100%{
+  100% {
     opacity: 1;
   }
-
 }
 
 /* The Following is for Character selection cards */
@@ -402,11 +441,11 @@ line-height: 15pt;
   position: absolute;
   left: 30px;
   top: 250px;
-  color:black;
+  color: black;
   font-size: 15px;
   width: 250px;
   line-height: 15pt;
-  }
+}
 
   .bg-Alisa {
     background-color: #228B22!important;
@@ -468,8 +507,8 @@ line-height: 15pt;
   text-align: center;
 }
 
-.charSelectBg{
-  background-image: url('./images/brick.jpg');
+.charSelectBg {
+  background-image: url("./images/brick.jpg");
   background-size: 100%;
   height:100%;
   width:100%;
@@ -477,50 +516,50 @@ line-height: 15pt;
 
 }
 .slide-out-blurred-top {
-	-webkit-animation: slide-out-blurred-top 0.45s cubic-bezier(0.755, 0.050, 0.855, 0.060) both;
-	        animation: slide-out-blurred-top 0.45s cubic-bezier(0.755, 0.050, 0.855, 0.060) both;
+  -webkit-animation: slide-out-blurred-top 0.45s
+    cubic-bezier(0.755, 0.05, 0.855, 0.06) both;
+  animation: slide-out-blurred-top 0.45s cubic-bezier(0.755, 0.05, 0.855, 0.06)
+    both;
 }
 @-webkit-keyframes slide-out-blurred-top {
   0% {
     -webkit-transform: translateY(0) scaleY(1) scaleX(1);
-            transform: translateY(0) scaleY(1) scaleX(1);
+    transform: translateY(0) scaleY(1) scaleX(1);
     -webkit-transform-origin: 50% 0%;
-            transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
     -webkit-filter: blur(0);
-            filter: blur(0);
+    filter: blur(0);
     opacity: 1;
     pointer-events: none
   }
   100% {
     -webkit-transform: translateY(-1000px) scaleY(2) scaleX(0.2);
-            transform: translateY(-1000px) scaleY(2) scaleX(0.2);
+    transform: translateY(-1000px) scaleY(2) scaleX(0.2);
     -webkit-transform-origin: 50% 0%;
-            transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
     -webkit-filter: blur(40px);
-            filter: blur(40px);
+    filter: blur(40px);
     opacity: 0;
     pointer-events: none
   }
 }
 
-
-
 /* End of character selection styling */
 
-.orderStyle{
+.orderStyle {
   color: white;
-  font-family: 'IM Fell DW Pica', serif;
+  font-family: "IM Fell DW Pica", serif;
   text-align: center;
-  position:absolute;
+  position: absolute;
   font-size: 30px;
-  left:280px
+  left: 280px;
 }
 
-.orderList{
+.orderList {
   color: white;
-  font-family: 'IM Fell DW Pica', serif;
+  font-family: "IM Fell DW Pica", serif;
   text-align: center;
-  font-size: 30px
+  font-size: 30px;
 }
 
 .choosePowersInactive{
@@ -537,6 +576,10 @@ line-height: 15pt;
   opacity: 1;
   animation: start 2s linear infinite;
   text-decoration:none!important;
+}
+
+.charSelectLink{
+  color: black !important
 }
 
 /* Player card styling */
