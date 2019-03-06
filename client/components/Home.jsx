@@ -4,10 +4,8 @@ class Home extends Component {
   render() {
     return (
       <div className="home">
-        <img src="./images/main/main-img2.png" alt="Responsive image" />
-
         <div className="display">
-          <div className="display1" id="square">
+          <div className="display1" id="square1">
             <h4>INTRODUCTION</h4>
             <p className="ptext">
               <i>

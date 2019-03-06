@@ -10,7 +10,8 @@
         ],
         "arrow": true,
         "skull": true,
-        "name":  null
+        "name":  null,
+        "players": []
 
     },
 
@@ -25,7 +26,8 @@
         ],
         "arrow":true,
         "skull":false,
-        "name":  null
+        "name":  null,
+        "players": []
     },
 
     {
@@ -39,7 +41,8 @@
         ],
         "arrow":false,
         "skull":true,
-        "name":  "Crypt Corner 6-10"
+        "name":  "Crypt Corner 6-10",
+        "players": []
     },
 
    
@@ -55,7 +58,8 @@
         ],
         "arrow":false,
         "skull":false,
-        "name":  "Workshop"
+        "name":  "Workshop",
+        "players": []
     },
 
     {
@@ -69,7 +73,8 @@
         ],
         "arrow":true,
         "skull":true,
-        "name":  "Arcrane Circle"
+        "name":  "Arcrane Circle",
+        "players": []
     },
 
     {
@@ -83,7 +88,8 @@
         ],
         "arrow":false,
         "skull":true,
-        "name":  null
+        "name":  null,
+        "players": []
     },
 
     {
@@ -97,7 +103,8 @@
         ],
         "arrow":true,
         "skull":true,
-        "name":  null
+        "name":  null,
+        "players": []
     },
 
     {
@@ -111,7 +118,8 @@
         ],
         "arrow":true,
         "skull":true,
-        "name": "Crypt of Sergei Von Zarovich"
+        "name": "Crypt of Sergei Von Zarovich",
+        "players": []
     },
 
     {
@@ -125,7 +133,8 @@
         ],
         "arrow":true,
         "skull":false,
-        "name": "Crypt of Artimus"
+        "name": "Crypt of Artimus",
+        "players": []
     },
 
     {
@@ -139,7 +148,8 @@
         ],
         "arrow":true,
         "skull":true,
-        "name": null
+        "name": null,
+        "players": []
     },
 
     {
@@ -153,7 +163,8 @@
         ],
         "arrow":false,
         "skull":true,
-        "name": null
+        "name": null,
+        "players": []
     },
 
     {
@@ -167,7 +178,8 @@
         ],
         "arrow":true,
         "skull":false,
-        "name": "Prince Auriels Crypt"
+        "name": "Prince Auriels Crypt",
+        "players": []
     },
 
     {
@@ -181,7 +193,8 @@
         ],
         "arrow":true,
         "skull":true,
-        "name": "Crypt Corner 11-15"
+        "name": "Crypt Corner 11-15",
+        "players": []
         },
 
         {
@@ -195,7 +208,8 @@
             ],
             "arrow":false,
             "skull":false,
-            "name": "Dark Fountain"
+            "name": "Dark Fountain",
+            "players": []
         },
 
         {
@@ -209,7 +223,8 @@
             ],
             "arrow":false,
             "skull":true,
-            "name": null
+            "name": null,
+            "players": []
         },
 
         {
@@ -223,7 +238,8 @@
             ],
             "arrow":true,
             "skull":true,
-            "name": null
+            "name": null,
+            "players": []
         },
 
         {
@@ -233,11 +249,12 @@
                 [1,1,1,1],
                 [0,0,0,1],
                 [0,0,2,1],
-                [1,0,0,1]
+                [0,0,0,1]
             ],
             "arrow":true,
             "skull":true,
-            "name": "Crypt Corner 16-20"
+            "name": "Crypt Corner 16-20",
+            "players": []
         },
 
         {
@@ -251,7 +268,8 @@
             ],
             "arrow":true,
             "skull":true,
-            "name": "Kings Crypt"
+            "name": "Kings Crypt",
+            "players": []
         },
 
         {
@@ -265,7 +283,8 @@
             ],
             "arrow":true,
             "skull":true,
-            "name": "Crypt of Barov and Ravenovia"
+            "name": "Crypt of Barov and Ravenovia",
+            "players": []
         },
 
         {
@@ -279,7 +298,8 @@
             ],
             "arrow":false,
             "skull":false,
-            "name": "Rotting Nook"
+            "name": "Rotting Nook",
+            "players": []
         },
 
         {
@@ -293,7 +313,8 @@
             ],
             "arrow":true,
             "skull":true,
-            "name": null
+            "name": null,
+            "players": []
         },
 
         {
@@ -307,7 +328,8 @@
             ],
             "arrow":true,
             "skull":true,
-            "name": "Ireena Kolyana's Crypt"
+            "name": "Ireena Kolyana's Crypt",
+            "players": []
         },
 
         {
@@ -321,7 +343,8 @@
             ],
             "arrow":true,
             "skull":true,
-            "name": null
+            "name": null,
+            "players": []
         },
 
         {
@@ -335,7 +358,8 @@
             ],
             "arrow":true,
             "skull":true,
-            "name": "Lonely Crypt "
+            "name": "Lonely Crypt ",
+            "players": []
         },
 
         {
@@ -349,7 +373,8 @@
             ],
             "arrow":false,
             "skull":true,
-            "name": "Chapel"
+            "name": "Chapel",
+            "players": []
         },
 
         {
@@ -363,7 +388,8 @@
             ],
             "arrow":false,
             "skull":true,
-            "name": null
+            "name": null,
+            "players": []
         },
 
         {
@@ -377,7 +403,8 @@
             ],
             "arrow":false,
             "skull":false,
-            "name": null
+            "name": null,
+            "players": []
         },
 
         {
@@ -391,7 +418,8 @@
             ],
             "arrow":false,
             "skull":false,
-            "name": null
+            "name": null,
+            "players": []
         },
 
         {
@@ -405,7 +433,8 @@
             ],
             "arrow":true,
             "skull":false,
-            "name": null
+            "name": null,
+            "players": []
         },
 
         {
@@ -419,7 +448,8 @@
             ],
             "arrow":false,
             "skull":true,
-            "name": "Strahds Crypt"
+            "name": "Strahds Crypt",
+            "players": []
         },
 
         {
@@ -433,7 +463,8 @@
             ],
             "arrow":false,
             "skull":false,
-            "name": "Secret Stairway"
+            "name": "Secret Stairway",
+            "players": []
         },
 
         {
@@ -447,7 +478,8 @@
             ],
             "arrow":false,
             "skull":true,
-            "name": "Crypt Corner 1-5 "
+            "name": "Crypt Corner 1-5 ",
+            "players": []
         },
 
         {
@@ -461,7 +493,8 @@
             ],
             "arrow":true,
             "skull":false,
-            "name": null
+            "name": null,
+            "players": []
         },
 
         {
@@ -475,7 +508,8 @@
             ],
             "arrow":false,
             "skull":true,
-            "name": null
+            "name": null,
+            "players": []
         },
 
         {
@@ -489,7 +523,8 @@
             ],
             "arrow":true,
             "skull":false,
-            "name": null
+            "name": null,
+            "players": []
         },
 
         {
@@ -503,7 +538,8 @@
             ],
             "arrow":false,
             "skull":true,
-            "name": "Laboratory"
+            "name": "Laboratory",
+            "players": []
         },
 
         {
@@ -517,7 +553,8 @@
             ],
             "arrow":true,
             "skull":false,
-            "name": null
+            "name": null,
+            "players": []
         },
 
         {
@@ -531,7 +568,8 @@
             ],
             "arrow":true,
             "skull":true,
-            "name": null
+            "name": null,
+            "players": []
         },
 
         {
@@ -545,7 +583,8 @@
             ],
             "arrow":false,
             "skull":true,
-            "name": "Fetid Den"
+            "name": "Fetid Den",
+            "players": []
         },
         {
             "id": 39,
@@ -558,7 +597,8 @@
             ],
             "arrow":false,
             "skull":true,
-            "name": null
+            "name": null,
+            "players": []
         },
         {
             "id": 40,
@@ -571,7 +611,8 @@
             ],
             "arrow":false,
             "skull":false,
-            "name": "Start 2"
+            "name": "Start 2",
+            "players": []
         },
         {
             "id": 41,
@@ -584,6 +625,7 @@
             ],
             "arrow":false,
             "skull":false,
-            "name": "Start"
+            "name": "Start",
+            "players": []
         }
 ]

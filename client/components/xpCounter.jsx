@@ -1,28 +1,32 @@
 import React, { Component } from 'react'
 
-export class xpCounter extends Component {
-    constructor(props){
-        super(props)
-        this.state={
-            monsterXP:[1,2,3],
-            pooledXP:0
-        }
+export class XpCounter extends Component {
+  constructor(props) {
+    super(props)
 
-poolXp = () => {
-    this.state.monsterXP.map(xpValue)
+    this.state = {
+      monsterXP: 7,
+      pooledXP: 0,
+      hello: 9
 
-    this.state.pooledXP + xpValue
-}
+    }
+  }
+
+  poolXp = () => {
+
+    return this.state.pooledXP + this.state.monsterXP + this.state.hello
+
+  }
 
   render() {
-      console.log(this.state.pooledXP)
+    console.log(this.poolXp())
     return (
       <div>
-        dfedf
+        <button className="btn btn-danger  " onClick={this.poolXp}>hello</button>
       </div>
     )
   }
 }
-}
 
-export default xpCounter
+
+export default XpCounter
