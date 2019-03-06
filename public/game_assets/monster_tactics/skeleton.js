@@ -1,3 +1,9 @@
+// import {diceRoll} from './functions'
+const {roll} = require('./functions')
+const {isSquareAdjacent} = require('./functions')
+const {totalPosition} = require('./functions')
+const {detailedPosition} = require('./functions')
+
 //Test data
 var playerDetails = {
     adjacentTile:false,
@@ -6,46 +12,29 @@ var playerDetails = {
                 [0,11,0,0],
                 [11,0,0,1],
                 [0,0,0,1]],
-    players:[{id: 1, name:'Karl', AC:20,x:2,y:2},{id: 2,name:'Sam the Gimp',AC:16,x:1,y:3}]
+    players:[{id: 1, name:'Karl', AC:20,x:2,y:2},{id: 2,name:'Sam the Gimp',AC:16,x:1,y:3}],
+    monster:{id:1,name:'blazing skeleton',x:1,y:1}
 }
 
-//from pos finder function with player.x and player.y, monster.x and monster.y
-//TOTAL POSITION
-
-var playerPos = {
-    tileX: 1,
-    tileY:1,
-    squareX:3,
-    squareY:3
-}
-
-var monPos = {
-    tileX:1,
-    tileY:1,
-    squareX:3,
-    squareY:4
-}
-
-console.log('first monpos', monPos)
 
 var dataSet = [{x:1,y:1,grid:[
     [1,1,1,1],
     [0,0,0,0],
     [0,2,1,1],
     [0,0,0,0]
-    ]},
-    {x:1,y:2,grid:[
-            [0,0,0,0],
-            [0,0,0,0],
-            [0,2,0,0],
-            [0,0,0,0]
-        ]},
-        {x:2,y:2,grid:[
-            [0,0,0,0],
-            [0,0,0,0],
-            [0,2,0,0],
-            [0,0,0,0]
-        ]}]
+]},
+{x:1,y:2,grid:[
+    [0,0,0,0],
+    [0,0,0,0],
+    [0,2,0,0],
+    [0,0,0,0]
+]},
+{x:2,y:2,grid:[
+    [0,0,0,0],
+    [0,0,0,0],
+    [0,2,0,0],
+    [0,0,0,0]
+]}]
 
 
 
@@ -55,19 +44,26 @@ var heroes = playerDetails.players
 var tileAdjacent = playerDetails.adjacentTile
 var squareAdjacent = false
 
+console.log(closestPlayer)
+
+//from pos finder function with player.x and player.y, monster.x and monster.y
+//DETAILED POSITION
+var playerPos = detailedPosition(closestPlayer)
+
+var monPos = detailedPosition(playerDetails.monster)
+
+console.log('playerPos',playerPos)
+console.log('monPos',monPos)
+
 //Checks for square adjacent
-if(playerPos.squareX -1 == monPos.squareX && playerPos.squareY == monPos.squareY){
-    squareAdjacent = true
-} else if(playerPos.squareX +1 == monPos.squareX && playerPos.squareY == monPos.squareY){
-    squareAdjacent = true
-} else if(playerPos.squareX == monPos.squareX && playerPos.squareY -1 == monPos.squareY){
-    squareAdjacent = true
-} else if(playerPos.squareX == monPos.squareX && playerPos.squareY + 1 == monPos.squareY){
-    squareAdjacent = true
-} else {squareAdjacent = false}
+
+if(tileAdjacent){
+    var squareAdjacent = isSquareAdjacent(playerPos.squareX,playerPos.squareY,monPos.squareX,monPos.squareY)
+}
 
 console.log(closestPlayer)
 console.log(tileAdjacent)
+
 
 // Skeleton attack stats
 var scimitar = {
@@ -79,7 +75,6 @@ var slice = {
     att: 9,
     dmg: 2
 }
-
 
 
 

@@ -13,30 +13,26 @@ var playerDetails = {
                 [11,0,0,1],
                 [0,0,0,1]],
     players:[{id: 1, name:'Karl', AC:20,x:2,y:2},{id: 2,name:'Sam the Gimp',AC:16,x:1,y:3}],
-    monster:{id:1,name:'blazing skeleton',x:1,y:1}
+    monster:{id:1,name:'blazing skeleton',x:1,y:1},
+    dataSet:[{x:1,y:1,grid:[
+        [1,1,1,1],
+        [0,0,0,0],
+        [0,2,1,1],
+        [0,0,0,0]
+    ]},
+    {x:1,y:2,grid:[
+        [0,0,0,0],
+        [0,0,0,0],
+        [0,2,0,0],
+        [0,0,0,0]
+    ]},
+    {x:2,y:2,grid:[
+        [0,0,0,0],
+        [0,0,0,0],
+        [0,2,0,0],
+        [0,0,0,0]
+    ]}]
 }
-
-
-var dataSet = [{x:1,y:1,grid:[
-    [1,1,1,1],
-    [0,0,0,0],
-    [0,2,1,1],
-    [0,0,0,0]
-]},
-{x:1,y:2,grid:[
-    [0,0,0,0],
-    [0,0,0,0],
-    [0,2,0,0],
-    [0,0,0,0]
-]},
-{x:2,y:2,grid:[
-    [0,0,0,0],
-    [0,0,0,0],
-    [0,2,0,0],
-    [0,0,0,0]
-]}]
-
-
 
 //values i need
 var closestPlayer = playerDetails.players.find(player => player.id == playerDetails.id)
@@ -109,7 +105,7 @@ if(tileAdjacent || squareAdjacent){
 
     var destination = {x:monX - playX,y:monY - playY}
 
-    var tileExists = dataSet.find(tile => {
+    var tileExists = playerDetails.dataSet.find(tile => {
         tile.x == destination.x && tile.y == destination.y
         return true
     })
