@@ -1,8 +1,23 @@
-import { randomEncounter as apiGetRandomEncounter } from "../api/ecounter";
+import { randomEncounter as apiGetRandomEncounter, getAllMonsters as apiAllMonsters } from "../api/encounter";
 import {
   getAllCharacters as apiGetAllCharacters,
   getCardsByCharacter as apiGetCardsByCharacter
 } from "../api/characters";
+
+export function getAllMonsters(){
+    return dispatch => {
+        return apiAllMonsters().then(monsters => {
+            dispatch(saveAllMonsters(monsters))
+        })
+    }
+}
+
+export function saveAllMonsters(monsters){
+    return {
+        type: "SAVE_ALL_MONSTERS",
+        monsters
+    }
+}
 
 export function getRandomEncounter() {
   return dispatch => {

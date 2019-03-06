@@ -11,6 +11,9 @@ const reducer = (state = initialState, action) => {
                  return c
             }) 
 
+        return action.allCharacters
+        case 'ADD_POWER_CARDS':
+        return updateCharacter(action.id,action.powerCards,state)
         default:
             return state
     }
@@ -18,9 +21,14 @@ const reducer = (state = initialState, action) => {
 
 export default reducer
 
-// var x  = this.getCurrentCharacter()
-//                 if(x){
-//                 x.AC = x.AC + 1    
-//             console.log(x)
-//             this.setState({character1: x})
-//             }
+function updateCharacter(id,cards,characters){
+    var updatedCharacters = characters.map(character => {
+        if(character.id == id){
+            character.cards = cards
+            return character
+        } else{
+            return character
+        }
+    })
+    return updatedCharacters
+}

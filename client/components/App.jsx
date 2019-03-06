@@ -3,7 +3,7 @@ import React, { Component, Fragment } from "react";
 import { HashRouter as Router, Route } from "react-router-dom";
 import TimeTract from "./TimeTract";
 import EncounterTreasure from "./EncounterTreasure";
-import Home from "./Home";
+import Home2 from "./Home2";
 import Characters from "./Characters";
 import Powers from "./Powers";
 import SurgeTokens from './SurgeTokens';
@@ -11,6 +11,7 @@ import XpCounter from './XpCounter';
 import LevelUp from './LevelUp';
 
 class App extends Component {
+
   render() {
     return (
       <div>
