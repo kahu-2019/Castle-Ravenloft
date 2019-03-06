@@ -32,10 +32,10 @@
   text-align: center;
 }
 
-.card {
-  -webkit-box-shadow: inset 0px 0px 125px -11px rgba(0, 0, 0, 0.51);
-  -moz-box-shadow: inset 0px 0px 125px -11px rgba(0, 0, 0, 0.51);
-  box-shadow: inset 0px 0px 125px -11px rgba(0, 0, 0, 0.51);
+.card{
+  -webkit-box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
+  -moz-box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
+  box-shadow: inset 0px 0px 125px -11px rgba(0,0,0,0.51);
 }
 
 
@@ -321,7 +321,7 @@ span {
 }
 
 /* HIDE RADIO */
-[type="radio"] {
+[type=radio] { 
   position: absolute;
   opacity: 0;
   width: 0;
@@ -329,21 +329,23 @@ span {
 }
 
 /* IMAGE STYLES */
-[type="radio"] + .card {
+[type=radio] + .card {
   cursor: pointer;
 }
 
-[type="radio"]:hover + .card {
+[type=radio]:hover + .card {
   outline: 2px solid lightblue;
+  
 }
 
 /* CHECKED STYLES */
-[type="radio"]:checked + .card {
+[type=radio]:checked + .card {
   outline: 2px solid greenyellow;
 }
+
 
 /* HIDE CHECK */
-[type="checkbox"] {
+[type=checkbox] { 
   position: absolute;
   opacity: 0;
   width: 0;
@@ -351,42 +353,39 @@ span {
 }
 
 /* IMAGE STYLES */
-[type="checkbox"] + .card {
+[type=checkbox] + .card {
   cursor: pointer;
 }
 
-[type="checkbox"]:hover + .card {
+[type=checkbox]:hover + .card {
   outline: 2px solid lightblue;
+  
 }
 
 /* CHECKED STYLES */
-[type="checkbox"]:checked + .card {
+[type=checkbox]:checked + .card {
   outline: 2px solid greenyellow;
 }
 
-.power-titles {
+.power-titles{
   text-align: center;
 }
 
-.card-text {
-  color: rgb(223, 219, 219);
-}
 
 
 .Time-tract {
-  text-align: right;
+  text-align: center;
   margin-top: 10px;
-
   z-index: 0;
 }
-.Time-tract h4 {
+.Time-tract h2 {
   margin-bottom: 20px;
   color: rgb(51, 30, 5);
 }
 .contaniner1 {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-end !important;
+  justify-content: center;
 }
 .containers,
 .contaniner1 {
@@ -400,8 +399,8 @@ span {
 }
 .contaniner1 {
   z-index: 2;
-  /* top: 120px; */
-  /* height: 5em; */
+  top: 120px;
+  height: 5em;
 }
 
 .time {
@@ -436,88 +435,276 @@ span {
 }
 
 .home {
-  background-image: url(./images/main/main-img1.png) !important;
+  background-color: black;
+}
+.home img {
   background-repeat: no-repeat;
+  background-position: center;
   background-size: cover;
-  width: 100%;
-  height: 130vh;
+  overflow: hidden;
+  padding-bottom: 100px;
   position: relative;
+  z-index: 1;
+  height: auto;
+  max-width: 100%;
+  margin-left: 7%;
 }
 
 .display {
+  background-color: rgb(247, 241, 224) !important;
   color: rgb(48, 46, 46);
   display: flex !important;
   flex-wrap: wrap !important;
-
-  flex-direction: row;
-  padding: 15px;
-  width: 100%;
-  align-items: flex-end;
+  width: 80%;
+  margin: 0 auto;
 }
+
 .display1 {
-  background-color: rgba(247, 241, 224, 0.85) !important;
-  width: 38%;
-  margin-left: 4%;
-  padding: 25px;
-  border-radius: 5px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-  margin-top: 20%;
-}
-#square1 {
-  margin-top: 27% !important;
-}
-.display2 {
-  background-color: rgba(247, 241, 224, 0.85) !important;
+  position: absolute;
+  z-index: 2;
+  left: 12%;
+  top: 500px;
   width: 30%;
-  margin-left: 17%;
-  padding: 15px;
-  border-radius: 5px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  height: 650px;
+  opacity: 0.8;
+  border-radius: 15px;
+  background-color: rgb(247, 241, 224) !important;
 }
 
-.time-tractcontainer {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+.display2 {
+  position: absolute;
+  z-index: 3;
+  height: 400px;
+  width: 28%;
+  right: 14%;
+  top: 500px;
+  opacity: 0.8;
+  border-radius: 15px;
+  background-color: rgb(247, 241, 224) !important;
 }
-.timetractchildcontainers {
-  background-image: url(./images/time-track/time-track1.png);
-  width: 900px;
-  height: 350px;
-  background-position: center;
+/* The Following is for Character selection cards */
+.imFont{
+  font-family: 'IM Fell DW Pica', serif;
+  
+}
+.acPosition{
+position: absolute;
+left: 15px;
+color:black;
+font-size: 20px
+}
+
+.statRow{
+position: absolute;
+top: 190px;
+}
+.hpPosition{
+position: absolute;
+left: 20px;
+color:black;
+font-size: 20px
+}
+.speedPosition{
+position: absolute;
+left: 32px;
+color:black;
+font-size: 20px
+}
+
+.surgePosition{
+position: absolute;
+left: 50px;
+color:black;
+font-size: 20px
+}
+
+.namePosition{
+position: absolute;
+left: 30px;
+top: 25px;
+color:White;
+font-size: 30px
+}
+
+.subtitlePosition{
+position: absolute;
+left: 30px;
+top: 60px;
+color:rgb(184, 184, 184);
+font-size: 20px
+}
+
+.descriptionPosition{
+position: absolute;
+left: 30px;
+top: 80px;
+color:white;
+font-size: 15px;
+width: 230px;
+line-height: 15pt;
+}
+
+.abilityPosition{
+position: absolute;
+left: 30px;
+top: 230px;
+color:black;
+font-size: 15px;
+width: 250px;
+line-height: 15pt;
+}
+.powerPosition{
+  position: absolute;
+  left: 30px;
+  top: 250px;
+  color:black;
+  font-size: 15px;
+  width: 250px;
+  line-height: 15pt;
+  }
+
+  .bg-Alisa {
+    background-color: #228B22!important;
+    height:500px;
+    width:500px;
+    background-image: url(./images/characterTemplates/allisa.jpg);
+    background-size: cover;
+    max-width: 500px;
+    min-width: 500px;
+  }
+  
+  .bg-Arjhan {
+    background-color: 	#800000!important;
+    height:500px;
+    width:500px;
+    background-image: url(./images/characterTemplates/arjhan.jpg);
+    background-size: cover;
+    max-width: 500px;
+    min-width: 500px;
+  }
+  
+  .bg-Immeril {
+    background-color: #4f3584!important;
+    height:500px;
+    width:500px;
+    background-image: url(./images/characterTemplates/immeril.jpg);
+    background-size: cover;
+    max-width: 500px;
+    min-width: 500px;
+  }
+  
+  .bg-Kat {
+    background-color: #013554!important;
+    height:500px;
+    width:500px;
+    background-image: url(./images/characterTemplates/kat.jpg);
+    background-size: cover;
+    max-width: 500px;
+    min-width: 500px;
+  }
+  
+  .bg-Thorgrim {
+    background-color: #9e8f0b!important;
+    background-image: url(./images/characterTemplates/thorgrim.jpg);
+    background-size: cover;
+    height:500px;
+    width:500px;
+    max-width: 500px;
+    min-width: 500px;
+  
+  }
+.selectWarriors{
+  width:100%;
+  font-family: 'IM Fell DW Pica', serif;
+  color:white;
+  text-align: center;
+}
+
+.charSelectBg{
+  background-image: url('./images/brick.jpg');
   background-size: 100%;
-  background-repeat: no-repeat;
-  align-items: center;
-  justify-content: center;
-  display: flex;
+  height:100%;
+  width:100%;
+  min-height:1000px
+  /* position:fixed */
+
+}
+.slide-out-blurred-top {
+	-webkit-animation: slide-out-blurred-top 0.45s cubic-bezier(0.755, 0.050, 0.855, 0.060) both;
+	        animation: slide-out-blurred-top 0.45s cubic-bezier(0.755, 0.050, 0.855, 0.060) both;
+}
+@-webkit-keyframes slide-out-blurred-top {
+  0% {
+    -webkit-transform: translateY(0) scaleY(1) scaleX(1);
+            transform: translateY(0) scaleY(1) scaleX(1);
+    -webkit-transform-origin: 50% 0%;
+            transform-origin: 50% 0%;
+    -webkit-filter: blur(0);
+            filter: blur(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateY(-1000px) scaleY(2) scaleX(0.2);
+            transform: translateY(-1000px) scaleY(2) scaleX(0.2);
+    -webkit-transform-origin: 50% 0%;
+            transform-origin: 50% 0%;
+    -webkit-filter: blur(40px);
+            filter: blur(40px);
+    opacity: 0;
+  }
+}
+@keyframes slide-out-blurred-top {
+  0% {
+    -webkit-transform: translateY(0) scaleY(1) scaleX(1);
+            transform: translateY(0) scaleY(1) scaleX(1);
+    -webkit-transform-origin: 50% 0%;
+            transform-origin: 50% 0%;
+    -webkit-filter: blur(0);
+            filter: blur(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateY(-1000px) scaleY(2) scaleX(0.2);
+            transform: translateY(-1000px) scaleY(2) scaleX(0.2);
+    -webkit-transform-origin: 50% 0%;
+            transform-origin: 50% 0%;
+    -webkit-filter: blur(40px);
+            filter: blur(40px);
+    opacity: 0;
+  }
 }
 
-.timecontainer1 {
-  left: 23% !important;
-  margin-right: 0 !important;
-}
-.treasure {
-  margin-left: 1px;
-  margin: 1px !important;
-}
-.encounter {
-  margin: 1px !important;
+
+/* End of character selection styling */
+
+.orderStyle{
+  color: white;
+  font-family: 'IM Fell DW Pica', serif;
+  text-align: center;
+  position:absolute;
+  font-size: 30px;
+  left:280px
 }
 
-.card1 {
-  margin: 1px !important;
-  margin-right: 5px !important;
-  color: rgba(17, 6, 1, 0.959) !important;
-  background-color: rgba(75, 64, 49, 0.85);
-  -webkit-box-shadow: inset 0px 0px 125px -11px rgba(202, 195, 188, 0.51) !important;
-  -moz-box-shadow: inset 0px 0px 125px -11px rgba(129, 104, 81, 0.51) !important;
-  box-shadow: inset 0px 0px 125px -11px rgba(129, 104, 81, 0.51) !important;
+.orderList{
+  color: white;
+  font-family: 'IM Fell DW Pica', serif;
+  text-align: center;
+  font-size: 30px
 }
-.card2 {
-  margin: 1px !important;
-  color: rgba(17, 6, 1, 0.959) !important;
-  background-color: rgba(211, 190, 150, 0.85);
-  -webkit-box-shadow: inset 0px 0px 125px -11px rgba(202, 195, 188, 0.51) !important;
-  -moz-box-shadow: inset 0px 0px 125px -11px rgba(129, 104, 81, 0.51) !important;
-  box-shadow: inset 0px 0px 125px -11px rgba(129, 104, 81, 0.51) !important;
+
+.choosePowersInactive{
+  color: rgb(105, 105, 105) !important;
+  font-family: 'IM Fell DW Pica', serif;
+  font-size: 30px;
+  text-decoration:none !important;
+}
+
+.choosepowersActive{
+  color: white !important;
+  font-family: 'IM Fell DW Pica', serif;
+  font-size: 30px;
+  opacity: 1;
+  animation: start 2s linear infinite;
+  text-decoration:none !important;
 }
