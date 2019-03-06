@@ -19,10 +19,7 @@ var lifeDrainingClaw = {
     miss:1,
 }
 
-var movement = {
-    instruction: "move",
-    moveValue: 1
-}
+
 
 console.log('dice roll:',diceRoll)
 
