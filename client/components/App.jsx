@@ -9,18 +9,19 @@ import Powers from "./Powers";
 import SurgeTokens from './SurgeTokens';
 import XpCounter from './XpCounter';
 import LevelUp from './LevelUp';
+import DisplayCharactersBoard from './DisplayCharactersBoard';
 
 class App extends Component {
 
   render() {
     return (
       <div>
-        <SurgeTokens />
-        <XpCounter />
-        <LevelUp />
+        {/* <SurgeTokens /> */}
+        {/* <XpCounter /> */}
+        {/* <LevelUp /> */}
 
         <div style={{ overflow: 'hidden' }}>
-          <div className="container-fluid">
+          <div >
             <Router>
               <Fragment>
                 <Route exact path="/" component={Home2} />
@@ -29,6 +30,8 @@ class App extends Component {
                 <Route path="/timetract" component={TimeTract} />
                 <Route path="/encounter-treasure" component={EncounterTreasure} />
                 <Route path="/board" component={Board} />
+                <Route path="/test" component={DisplayCharactersBoard} />
+                
               </Fragment>
             </Router>
           </div>
