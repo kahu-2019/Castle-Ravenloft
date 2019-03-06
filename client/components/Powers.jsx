@@ -326,7 +326,7 @@ class Powers extends Component {
                     <div className="form-group">
                     <br/><br/>
                         <h2 className='power-titles orderList'>Select One Daily Power:</h2>
-                        <div className="row">
+                        <div className="row justify-content-center">
                             {this.state.daily.map((daily, i) => {
                                 return (
                                     <Fragment key={i}>
