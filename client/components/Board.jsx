@@ -213,7 +213,6 @@ class Board extends Component {
                     break
                 }
             }
-            console.log(tempMonsters)
             this.setState({monsters: tempMonsters}, () => this.processCharacters())
         }
         // console.log(result)

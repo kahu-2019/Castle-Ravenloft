@@ -35,15 +35,20 @@ var playerDetails = {
 }
 
 export default function blazingSkeleton(playerDetails){
-    //values i need
-    var closestPlayer = playerDetails.players.find(player => player.id == playerDetails.id) || undefined
-    var heroes = playerDetails.players
-    var tileAdjacent = playerDetails.adjacent
-    var squareAdjacent = false
-    var path = playerDetails.path
-    var monster = playerDetails.monster
-    var dataSet = playerDetails.dataSet
-    var monsterTile = undefined
+//values i need
+var closestPlayer = playerDetails.id
+var heroes = playerDetails.players
+var tileAdjacent = playerDetails.adjacent
+var squareAdjacent = false
+var path = playerDetails.path
+var monster = playerDetails.monster
+var dataSet = playerDetails.dataSet
+
+if(playerDetails.players){
+    closestPlayer = playerDetails.players.find(player => player.id == playerDetails.id)
+}
+
+
 
     // console.log(closestPlayer)
 
@@ -105,6 +110,7 @@ export default function blazingSkeleton(playerDetails){
     else{
         //convert to detailedPosition
         let monsterTileCoords = detailedPosition(monster)
+        let monsterTile = undefined
 
         for(let tile of dataSet){
             if(tile.x === monsterTileCoords.tileX && tile.y === monsterTileCoords.tileY){ monsterTile = tile; break}
