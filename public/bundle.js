@@ -280,7 +280,7 @@ process.umask = function() { return 0; };
  */
 
 if (process.env.NODE_ENV !== 'production') {
-  var ReactIs = __webpack_require__(12);
+  var ReactIs = __webpack_require__(13);
 
   // By explicitly using `prop-types` you are opting into new development behavior.
   // http://fb.me/prop-types-in-prod
@@ -694,7 +694,7 @@ exports.compressPath = compressPath;
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Provider__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Context__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Context__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__connect_connect__ = __webpack_require__(66);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Provider", function() { return __WEBPACK_IMPORTED_MODULE_0__components_Provider__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "connectAdvanced", function() { return __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__["a"]; });
@@ -717,10 +717,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__createHashHistory__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__createMemoryHistory__ = __webpack_require__(118);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_2__createMemoryHistory__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__LocationUtils__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__LocationUtils__ = __webpack_require__(18);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_3__LocationUtils__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_3__LocationUtils__["b"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__PathUtils__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__PathUtils__ = __webpack_require__(12);
 /* unused harmony reexport parsePath */
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_4__PathUtils__["b"]; });
 
@@ -889,6 +889,69 @@ module.exports = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__ = __webpack_require__(113);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "BrowserRouter", function() { return __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HashRouter__ = __webpack_require__(119);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "HashRouter", function() { return __WEBPACK_IMPORTED_MODULE_1__HashRouter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Link__ = __webpack_require__(43);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Link", function() { return __WEBPACK_IMPORTED_MODULE_2__Link__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__ = __webpack_require__(120);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "MemoryRouter", function() { return __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__NavLink__ = __webpack_require__(122);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "NavLink", function() { return __WEBPACK_IMPORTED_MODULE_4__NavLink__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Prompt__ = __webpack_require__(124);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Prompt", function() { return __WEBPACK_IMPORTED_MODULE_5__Prompt__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__(126);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Redirect", function() { return __WEBPACK_IMPORTED_MODULE_6__Redirect__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__(44);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Route", function() { return __WEBPACK_IMPORTED_MODULE_7__Route__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Router__ = __webpack_require__(31);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Router", function() { return __WEBPACK_IMPORTED_MODULE_8__Router__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__StaticRouter__ = __webpack_require__(128);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "StaticRouter", function() { return __WEBPACK_IMPORTED_MODULE_9__StaticRouter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Switch__ = __webpack_require__(130);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Switch", function() { return __WEBPACK_IMPORTED_MODULE_10__Switch__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__generatePath__ = __webpack_require__(132);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "generatePath", function() { return __WEBPACK_IMPORTED_MODULE_11__generatePath__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__matchPath__ = __webpack_require__(133);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "matchPath", function() { return __WEBPACK_IMPORTED_MODULE_12__matchPath__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__withRouter__ = __webpack_require__(134);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "withRouter", function() { return __WEBPACK_IMPORTED_MODULE_13__withRouter__["a"]; });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return addLeadingSlash; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return stripLeadingSlash; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return hasBasename; });
@@ -956,7 +1019,7 @@ var createPath = function createPath(location) {
 };
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -971,20 +1034,20 @@ if (process.env.NODE_ENV === 'production') {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(89);
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
  * @author imor / https://github.com/imor
  */
-var Heap       = __webpack_require__(13);
+var Heap       = __webpack_require__(14);
 var Util       = __webpack_require__(6);
 var Heuristic  = __webpack_require__(10);
 var DiagonalMovement = __webpack_require__(3);
@@ -1098,7 +1161,7 @@ module.exports = JumpPointFinderBase;
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1216,7 +1279,7 @@ function addPowerCards(id, powerCards) {
 }
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1284,7 +1347,7 @@ module.exports = warning;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1292,7 +1355,7 @@ module.exports = warning;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return locationsAreEqual; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_resolve_pathname__ = __webpack_require__(115);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_value_equal__ = __webpack_require__(116);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PathUtils__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PathUtils__ = __webpack_require__(12);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 
@@ -1360,7 +1423,7 @@ var locationsAreEqual = function locationsAreEqual(a, b) {
 };
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1376,7 +1439,7 @@ var locationsAreEqual = function locationsAreEqual(a, b) {
 var printWarning = function() {};
 
 if (process.env.NODE_ENV !== 'production') {
-  var ReactPropTypesSecret = __webpack_require__(19);
+  var ReactPropTypesSecret = __webpack_require__(20);
   var loggedTypeFailures = {};
   var has = Function.call.bind(Object.prototype.hasOwnProperty);
 
@@ -1470,7 +1533,7 @@ module.exports = checkPropTypes;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1489,7 +1552,7 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports) {
 
 var g;
@@ -1516,7 +1579,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1528,7 +1591,7 @@ var ReactReduxContext = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createCont
 /* unused harmony default export */ var _unused_webpack_default_export = (ReactReduxContext);
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1552,7 +1615,7 @@ function _extends() {
 }
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1573,7 +1636,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 }
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2225,7 +2288,7 @@ if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' 
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports) {
 
 /**
@@ -2259,10 +2322,10 @@ module.exports = Node;
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Heap       = __webpack_require__(13);
+var Heap       = __webpack_require__(14);
 var Util       = __webpack_require__(6);
 var Heuristic  = __webpack_require__(10);
 var DiagonalMovement = __webpack_require__(3);
@@ -2391,10 +2454,10 @@ module.exports = AStarFinder;
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Heap       = __webpack_require__(13);
+var Heap       = __webpack_require__(14);
 var Util       = __webpack_require__(6);
 var Heuristic  = __webpack_require__(10);
 var DiagonalMovement = __webpack_require__(3);
@@ -2578,7 +2641,7 @@ module.exports = BiAStarFinder;
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -3503,74 +3566,11 @@ request.put = (url, data, fn) => {
 
 
 /***/ }),
-/* 29 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__ = __webpack_require__(113);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "BrowserRouter", function() { return __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HashRouter__ = __webpack_require__(119);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "HashRouter", function() { return __WEBPACK_IMPORTED_MODULE_1__HashRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Link__ = __webpack_require__(43);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Link", function() { return __WEBPACK_IMPORTED_MODULE_2__Link__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__ = __webpack_require__(120);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "MemoryRouter", function() { return __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__NavLink__ = __webpack_require__(122);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "NavLink", function() { return __WEBPACK_IMPORTED_MODULE_4__NavLink__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Prompt__ = __webpack_require__(124);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Prompt", function() { return __WEBPACK_IMPORTED_MODULE_5__Prompt__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__(126);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Redirect", function() { return __WEBPACK_IMPORTED_MODULE_6__Redirect__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__(44);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Route", function() { return __WEBPACK_IMPORTED_MODULE_7__Route__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Router__ = __webpack_require__(31);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Router", function() { return __WEBPACK_IMPORTED_MODULE_8__Router__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__StaticRouter__ = __webpack_require__(128);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "StaticRouter", function() { return __WEBPACK_IMPORTED_MODULE_9__StaticRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Switch__ = __webpack_require__(130);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Switch", function() { return __WEBPACK_IMPORTED_MODULE_10__Switch__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__generatePath__ = __webpack_require__(132);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "generatePath", function() { return __WEBPACK_IMPORTED_MODULE_11__generatePath__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__matchPath__ = __webpack_require__(133);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "matchPath", function() { return __WEBPACK_IMPORTED_MODULE_12__matchPath__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__withRouter__ = __webpack_require__(134);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "withRouter", function() { return __WEBPACK_IMPORTED_MODULE_13__withRouter__["a"]; });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/***/ }),
 /* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
 
 
@@ -3895,17 +3895,17 @@ function _inheritsLoose(subClass, superClass) {
 /* WEBPACK VAR INJECTION */(function(process) {/* harmony export (immutable) */ __webpack_exports__["a"] = connectAdvanced;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_assertThisInitialized__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_inheritsLoose__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__babel_runtime_helpers_esm_extends__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__babel_runtime_helpers_esm_extends__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_hoist_non_react_statics__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_hoist_non_react_statics___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_hoist_non_react_statics__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_invariant__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react_is__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react_is__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react_is___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_react_is__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Context__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Context__ = __webpack_require__(22);
 
 
 
@@ -5250,7 +5250,7 @@ var _reactDom = __webpack_require__(51);
 
 var _reactRedux = __webpack_require__(7);
 
-var _redux = __webpack_require__(24);
+var _redux = __webpack_require__(25);
 
 var _reduxThunk = __webpack_require__(77);
 
@@ -5332,7 +5332,7 @@ if (process.env.NODE_ENV !== "production") {
 'use strict';
 
 var _assign = __webpack_require__(9);
-var checkPropTypes = __webpack_require__(18);
+var checkPropTypes = __webpack_require__(19);
 
 // TODO: this is special because it gets imported during build.
 
@@ -7269,7 +7269,7 @@ if (process.env.NODE_ENV === 'production') {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/** @license React v16.8.4
+/** @license React v16.8.3
  * react-dom.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -7537,7 +7537,7 @@ function Ti(a,b){var c=2<arguments.length&&void 0!==arguments[2]?arguments[2]:nu
 var Vi={createPortal:Ti,findDOMNode:function(a){if(null==a)return null;if(1===a.nodeType)return a;var b=a._reactInternalFiber;void 0===b&&("function"===typeof a.render?x("188"):x("268",Object.keys(a)));a=hd(b);a=null===a?null:a.stateNode;return a},hydrate:function(a,b,c){Qi(b)?void 0:x("200");return Si(null,a,b,!0,c)},render:function(a,b,c){Qi(b)?void 0:x("200");return Si(null,a,b,!1,c)},unstable_renderSubtreeIntoContainer:function(a,b,c,d){Qi(c)?void 0:x("200");null==a||void 0===a._reactInternalFiber?
 x("38"):void 0;return Si(a,b,c,!1,d)},unmountComponentAtNode:function(a){Qi(a)?void 0:x("40");return a._reactRootContainer?(Hi(function(){Si(null,null,a,!1,function(){a._reactRootContainer=null})}),!0):!1},unstable_createPortal:function(){return Ti.apply(void 0,arguments)},unstable_batchedUpdates:Gi,unstable_interactiveUpdates:Ii,flushSync:function(a,b){W?x("187"):void 0;var c=X;X=!0;try{return ki(a,b)}finally{X=c,Yh(1073741823,!1)}},unstable_createRoot:Ui,unstable_flushControlled:function(a){var b=
 X;X=!0;try{ki(a)}finally{(X=b)||W||Yh(1073741823,!1)}},__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:{Events:[Ia,Ja,Ka,Ba.injectEventPluginsByName,pa,Qa,function(a){ya(a,Pa)},Eb,Fb,Dd,Da]}};function Ui(a,b){Qi(a)?void 0:x("299","unstable_createRoot");return new Pi(a,!0,null!=b&&!0===b.hydrate)}
-(function(a){var b=a.findFiberByHostInstance;return Te(n({},a,{overrideProps:null,currentDispatcherRef:Tb.ReactCurrentDispatcher,findHostInstanceByFiber:function(a){a=hd(a);return null===a?null:a.stateNode},findFiberByHostInstance:function(a){return b?b(a):null}}))})({findFiberByHostInstance:Ha,bundleType:0,version:"16.8.4",rendererPackageName:"react-dom"});var Wi={default:Vi},Xi=Wi&&Vi||Wi;module.exports=Xi.default||Xi;
+(function(a){var b=a.findFiberByHostInstance;return Te(n({},a,{overrideProps:null,currentDispatcherRef:Tb.ReactCurrentDispatcher,findHostInstanceByFiber:function(a){a=hd(a);return null===a?null:a.stateNode},findFiberByHostInstance:function(a){return b?b(a):null}}))})({findFiberByHostInstance:Ha,bundleType:0,version:"16.8.3",rendererPackageName:"react-dom"});var Wi={default:Vi},Xi=Wi&&Vi||Wi;module.exports=Xi.default||Xi;
 
 
 /***/ }),
@@ -7545,7 +7545,7 @@ X;X=!0;try{ki(a)}finally{(X=b)||W||Yh(1073741823,!1)}},__SECRET_INTERNALS_DO_NOT
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global) {/** @license React v0.13.4
+/* WEBPACK VAR INJECTION */(function(global) {/** @license React v0.13.3
  * scheduler.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -7567,14 +7567,14 @@ exports.unstable_scheduleCallback=function(a,b){var c=-1!==k?k:exports.unstable_
 b=c.previous;b.next=c.previous=a;a.next=c;a.previous=b}return a};exports.unstable_cancelCallback=function(a){var b=a.next;if(null!==b){if(b===a)d=null;else{a===d&&(d=b);var c=a.previous;c.next=b;b.previous=c}a.next=a.previous=null}};exports.unstable_wrapCallback=function(a){var b=g;return function(){var c=g,f=k;g=b;k=exports.unstable_now();try{return a.apply(this,arguments)}finally{g=c,k=f,v()}}};exports.unstable_getCurrentPriorityLevel=function(){return g};
 exports.unstable_shouldYield=function(){return!e&&(null!==d&&d.expirationTime<l||w())};exports.unstable_continueExecution=function(){null!==d&&p()};exports.unstable_pauseExecution=function(){};exports.unstable_getFirstCallbackNode=function(){return d};
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(20)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21)))
 
 /***/ }),
 /* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process, global) {/** @license React v0.13.4
+/* WEBPACK VAR INJECTION */(function(process, global) {/** @license React v0.13.3
  * scheduler.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -8274,14 +8274,14 @@ exports.unstable_getFirstCallbackNode = unstable_getFirstCallbackNode;
   })();
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(20)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(21)))
 
 /***/ }),
 /* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/** @license React v16.8.4
+/* WEBPACK VAR INJECTION */(function(process) {/** @license React v16.8.3
  * react-dom.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -8300,7 +8300,7 @@ if (process.env.NODE_ENV !== "production") {
 
 var React = __webpack_require__(0);
 var _assign = __webpack_require__(9);
-var checkPropTypes = __webpack_require__(18);
+var checkPropTypes = __webpack_require__(19);
 var scheduler = __webpack_require__(34);
 var tracing = __webpack_require__(56);
 
@@ -18284,7 +18284,6 @@ function FiberNode(tag, pendingProps, key, mode) {
     this._debugSource = null;
     this._debugOwner = null;
     this._debugIsCurrentlyTiming = false;
-    this._debugHookTypes = null;
     if (!hasBadMapPolyfill && typeof Object.preventExtensions === 'function') {
       Object.preventExtensions(this);
     }
@@ -18352,7 +18351,6 @@ function createWorkInProgress(current, pendingProps, expirationTime) {
       workInProgress._debugID = current._debugID;
       workInProgress._debugSource = current._debugSource;
       workInProgress._debugOwner = current._debugOwner;
-      workInProgress._debugHookTypes = current._debugHookTypes;
     }
 
     workInProgress.alternate = current;
@@ -18620,7 +18618,6 @@ function assignFiberPropertiesInDEV(target, source) {
   target._debugSource = source._debugSource;
   target._debugOwner = source._debugOwner;
   target._debugIsCurrentlyTiming = source._debugIsCurrentlyTiming;
-  target._debugHookTypes = source._debugHookTypes;
   return target;
 }
 
@@ -21006,6 +21003,7 @@ var currentlyRenderingFiber$1 = null;
 // current hook list is the list that belongs to the current fiber. The
 // work-in-progress hook list is a new list that will be added to the
 // work-in-progress fiber.
+var firstCurrentHook = null;
 var currentHook = null;
 var nextCurrentHook = null;
 var firstWorkInProgressHook = null;
@@ -21035,67 +21033,39 @@ var RE_RENDER_LIMIT = 25;
 // In DEV, this is the name of the currently executing primitive hook
 var currentHookNameInDev = null;
 
-// In DEV, this list ensures that hooks are called in the same order between renders.
-// The list stores the order of hooks used during the initial render (mount).
-// Subsequent renders (updates) reference this list.
-var hookTypesDev = null;
-var hookTypesUpdateIndexDev = -1;
-
-function mountHookTypesDev() {
-  {
-    var hookName = currentHookNameInDev;
-
-    if (hookTypesDev === null) {
-      hookTypesDev = [hookName];
-    } else {
-      hookTypesDev.push(hookName);
-    }
-  }
-}
-
-function updateHookTypesDev() {
-  {
-    var hookName = currentHookNameInDev;
-
-    if (hookTypesDev !== null) {
-      hookTypesUpdateIndexDev++;
-      if (hookTypesDev[hookTypesUpdateIndexDev] !== hookName) {
-        warnOnHookMismatchInDev(hookName);
-      }
-    }
-  }
-}
-
-function warnOnHookMismatchInDev(currentHookName) {
+function warnOnHookMismatchInDev() {
   {
     var componentName = getComponentName(currentlyRenderingFiber$1.type);
     if (!didWarnAboutMismatchedHooksForComponent.has(componentName)) {
       didWarnAboutMismatchedHooksForComponent.add(componentName);
 
-      if (hookTypesDev !== null) {
-        var table = '';
+      var secondColumnStart = 22;
 
-        var secondColumnStart = 30;
+      var table = '';
+      var prevHook = firstCurrentHook;
+      var nextHook = firstWorkInProgressHook;
+      var n = 1;
+      while (prevHook !== null && nextHook !== null) {
+        var oldHookName = prevHook._debugType;
+        var newHookName = nextHook._debugType;
 
-        for (var i = 0; i <= hookTypesUpdateIndexDev; i++) {
-          var oldHookName = hookTypesDev[i];
-          var newHookName = i === hookTypesUpdateIndexDev ? currentHookName : oldHookName;
+        var row = n + '. ' + oldHookName;
 
-          var row = i + 1 + '. ' + oldHookName;
-
-          // Extra space so second column lines up
-          // lol @ IE not supporting String#repeat
-          while (row.length < secondColumnStart) {
-            row += ' ';
-          }
-
-          row += newHookName + '\n';
-
-          table += row;
+        // Extra space so second column lines up
+        // lol @ IE not supporting String#repeat
+        while (row.length < secondColumnStart) {
+          row += ' ';
         }
 
-        warning$1(false, 'React has detected a change in the order of Hooks called by %s. ' + 'This will lead to bugs and errors if not fixed. ' + 'For more information, read the Rules of Hooks: https://fb.me/rules-of-hooks\n\n' + '   Previous render            Next render\n' + '   ------------------------------------------------------\n' + '%s' + '   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', componentName, table);
+        row += newHookName + '\n';
+
+        table += row;
+        prevHook = prevHook.next;
+        nextHook = nextHook.next;
+        n++;
       }
+
+      warning$1(false, 'React has detected a change in the order of Hooks called by %s. ' + 'This will lead to bugs and errors if not fixed. ' + 'For more information, read the Rules of Hooks: https://fb.me/rules-of-hooks\n\n' + '   Previous render    Next render\n' + '   -------------------------------\n' + '%s' + '   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', componentName, table);
     }
   }
 }
@@ -21131,12 +21101,7 @@ function areHookInputsEqual(nextDeps, prevDeps) {
 function renderWithHooks(current, workInProgress, Component, props, refOrContext, nextRenderExpirationTime) {
   renderExpirationTime = nextRenderExpirationTime;
   currentlyRenderingFiber$1 = workInProgress;
-  nextCurrentHook = current !== null ? current.memoizedState : null;
-
-  {
-    hookTypesDev = current !== null ? current._debugHookTypes : null;
-    hookTypesUpdateIndexDev = -1;
-  }
+  firstCurrentHook = nextCurrentHook = current !== null ? current.memoizedState : null;
 
   // The following should have already been reset
   // currentHook = null;
@@ -21150,26 +21115,8 @@ function renderWithHooks(current, workInProgress, Component, props, refOrContext
   // numberOfReRenders = 0;
   // sideEffectTag = 0;
 
-  // TODO Warn if no hooks are used at all during mount, then some are used during update.
-  // Currently we will identify the update render as a mount because nextCurrentHook === null.
-  // This is tricky because it's valid for certain types of components (e.g. React.lazy)
-
-  // Using nextCurrentHook to differentiate between mount/update only works if at least one stateful hook is used.
-  // Non-stateful hooks (e.g. context) don't get added to memoizedState,
-  // so nextCurrentHook would be null during updates and mounts.
   {
-    if (nextCurrentHook !== null) {
-      ReactCurrentDispatcher$1.current = HooksDispatcherOnUpdateInDEV;
-    } else if (hookTypesDev !== null) {
-      // This dispatcher handles an edge case where a component is updating,
-      // but no stateful hooks have been used.
-      // We want to match the production code behavior (which will use HooksDispatcherOnMount),
-      // but with the extra DEV validation to ensure hooks ordering hasn't changed.
-      // This dispatcher does that.
-      ReactCurrentDispatcher$1.current = HooksDispatcherOnMountWithHookTypesInDEV;
-    } else {
-      ReactCurrentDispatcher$1.current = HooksDispatcherOnMountInDEV;
-    }
+    ReactCurrentDispatcher$1.current = nextCurrentHook === null ? HooksDispatcherOnMountInDEV : HooksDispatcherOnUpdateInDEV;
   }
 
   var children = Component(props, refOrContext);
@@ -21180,17 +21127,12 @@ function renderWithHooks(current, workInProgress, Component, props, refOrContext
       numberOfReRenders += 1;
 
       // Start over from the beginning of the list
-      nextCurrentHook = current !== null ? current.memoizedState : null;
+      firstCurrentHook = nextCurrentHook = current !== null ? current.memoizedState : null;
       nextWorkInProgressHook = firstWorkInProgressHook;
 
       currentHook = null;
       workInProgressHook = null;
       componentUpdateQueue = null;
-
-      {
-        // Also validate hook order for cascading updates.
-        hookTypesUpdateIndexDev = -1;
-      }
 
       ReactCurrentDispatcher$1.current = HooksDispatcherOnUpdateInDEV;
 
@@ -21199,6 +21141,10 @@ function renderWithHooks(current, workInProgress, Component, props, refOrContext
 
     renderPhaseUpdates = null;
     numberOfReRenders = 0;
+  }
+
+  {
+    currentHookNameInDev = null;
   }
 
   // We can assume the previous dispatcher is always this one, since we set it
@@ -21212,28 +21158,17 @@ function renderWithHooks(current, workInProgress, Component, props, refOrContext
   renderedWork.updateQueue = componentUpdateQueue;
   renderedWork.effectTag |= sideEffectTag;
 
-  {
-    renderedWork._debugHookTypes = hookTypesDev;
-  }
-
-  // This check uses currentHook so that it works the same in DEV and prod bundles.
-  // hookTypesDev could catch more cases (e.g. context) but only in DEV bundles.
   var didRenderTooFewHooks = currentHook !== null && currentHook.next !== null;
 
   renderExpirationTime = NoWork;
   currentlyRenderingFiber$1 = null;
 
+  firstCurrentHook = null;
   currentHook = null;
   nextCurrentHook = null;
   firstWorkInProgressHook = null;
   workInProgressHook = null;
   nextWorkInProgressHook = null;
-
-  {
-    currentHookNameInDev = null;
-    hookTypesDev = null;
-    hookTypesUpdateIndexDev = -1;
-  }
 
   remainingExpirationTime = NoWork;
   componentUpdateQueue = null;
@@ -21268,22 +21203,20 @@ function resetHooks() {
   renderExpirationTime = NoWork;
   currentlyRenderingFiber$1 = null;
 
+  firstCurrentHook = null;
   currentHook = null;
   nextCurrentHook = null;
   firstWorkInProgressHook = null;
   workInProgressHook = null;
   nextWorkInProgressHook = null;
 
-  {
-    hookTypesDev = null;
-    hookTypesUpdateIndexDev = -1;
-
-    currentHookNameInDev = null;
-  }
-
   remainingExpirationTime = NoWork;
   componentUpdateQueue = null;
   sideEffectTag = 0;
+
+  {
+    currentHookNameInDev = null;
+  }
 
   didScheduleRenderPhaseUpdate = false;
   renderPhaseUpdates = null;
@@ -21301,6 +21234,9 @@ function mountWorkInProgressHook() {
     next: null
   };
 
+  {
+    hook._debugType = currentHookNameInDev;
+  }
   if (workInProgressHook === null) {
     // This is the first hook in the list
     firstWorkInProgressHook = workInProgressHook = hook;
@@ -21347,6 +21283,13 @@ function updateWorkInProgressHook() {
       workInProgressHook = workInProgressHook.next = newHook;
     }
     nextCurrentHook = currentHook.next;
+
+    {
+      newHook._debugType = currentHookNameInDev;
+      if (currentHookNameInDev !== currentHook._debugType) {
+        warnOnHookMismatchInDev();
+      }
+    }
   }
   return workInProgressHook;
 }
@@ -21359,6 +21302,20 @@ function createFunctionComponentUpdateQueue() {
 
 function basicStateReducer(state, action) {
   return typeof action === 'function' ? action(state) : action;
+}
+
+function mountContext(context, observedBits) {
+  {
+    mountWorkInProgressHook();
+  }
+  return readContext(context, observedBits);
+}
+
+function updateContext(context, observedBits) {
+  {
+    updateWorkInProgressHook();
+  }
+  return readContext(context, observedBits);
 }
 
 function mountReducer(reducer, initialArg, init) {
@@ -21853,7 +21810,6 @@ var ContextOnlyDispatcher = {
 };
 
 var HooksDispatcherOnMountInDEV = null;
-var HooksDispatcherOnMountWithHookTypesInDEV = null;
 var HooksDispatcherOnUpdateInDEV = null;
 var InvalidNestedHooksDispatcherOnMountInDEV = null;
 var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
@@ -21873,32 +21829,26 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     },
     useCallback: function (callback, deps) {
       currentHookNameInDev = 'useCallback';
-      mountHookTypesDev();
       return mountCallback(callback, deps);
     },
     useContext: function (context, observedBits) {
       currentHookNameInDev = 'useContext';
-      mountHookTypesDev();
-      return readContext(context, observedBits);
+      return mountContext(context, observedBits);
     },
     useEffect: function (create, deps) {
       currentHookNameInDev = 'useEffect';
-      mountHookTypesDev();
       return mountEffect(create, deps);
     },
     useImperativeHandle: function (ref, create, deps) {
       currentHookNameInDev = 'useImperativeHandle';
-      mountHookTypesDev();
       return mountImperativeHandle(ref, create, deps);
     },
     useLayoutEffect: function (create, deps) {
       currentHookNameInDev = 'useLayoutEffect';
-      mountHookTypesDev();
       return mountLayoutEffect(create, deps);
     },
     useMemo: function (create, deps) {
       currentHookNameInDev = 'useMemo';
-      mountHookTypesDev();
       var prevDispatcher = ReactCurrentDispatcher$1.current;
       ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
       try {
@@ -21909,7 +21859,6 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     },
     useReducer: function (reducer, initialArg, init) {
       currentHookNameInDev = 'useReducer';
-      mountHookTypesDev();
       var prevDispatcher = ReactCurrentDispatcher$1.current;
       ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
       try {
@@ -21920,12 +21869,10 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     },
     useRef: function (initialValue) {
       currentHookNameInDev = 'useRef';
-      mountHookTypesDev();
       return mountRef(initialValue);
     },
     useState: function (initialState) {
       currentHookNameInDev = 'useState';
-      mountHookTypesDev();
       var prevDispatcher = ReactCurrentDispatcher$1.current;
       ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
       try {
@@ -21936,81 +21883,6 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     },
     useDebugValue: function (value, formatterFn) {
       currentHookNameInDev = 'useDebugValue';
-      mountHookTypesDev();
-      return mountDebugValue(value, formatterFn);
-    }
-  };
-
-  HooksDispatcherOnMountWithHookTypesInDEV = {
-    readContext: function (context, observedBits) {
-      return readContext(context, observedBits);
-    },
-    useCallback: function (callback, deps) {
-      currentHookNameInDev = 'useCallback';
-      updateHookTypesDev();
-      return mountCallback(callback, deps);
-    },
-    useContext: function (context, observedBits) {
-      currentHookNameInDev = 'useContext';
-      updateHookTypesDev();
-      return readContext(context, observedBits);
-    },
-    useEffect: function (create, deps) {
-      currentHookNameInDev = 'useEffect';
-      updateHookTypesDev();
-      return mountEffect(create, deps);
-    },
-    useImperativeHandle: function (ref, create, deps) {
-      currentHookNameInDev = 'useImperativeHandle';
-      updateHookTypesDev();
-      return mountImperativeHandle(ref, create, deps);
-    },
-    useLayoutEffect: function (create, deps) {
-      currentHookNameInDev = 'useLayoutEffect';
-      updateHookTypesDev();
-      return mountLayoutEffect(create, deps);
-    },
-    useMemo: function (create, deps) {
-      currentHookNameInDev = 'useMemo';
-      updateHookTypesDev();
-      var prevDispatcher = ReactCurrentDispatcher$1.current;
-      ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
-      try {
-        return mountMemo(create, deps);
-      } finally {
-        ReactCurrentDispatcher$1.current = prevDispatcher;
-      }
-    },
-    useReducer: function (reducer, initialArg, init) {
-      currentHookNameInDev = 'useReducer';
-      updateHookTypesDev();
-      var prevDispatcher = ReactCurrentDispatcher$1.current;
-      ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
-      try {
-        return mountReducer(reducer, initialArg, init);
-      } finally {
-        ReactCurrentDispatcher$1.current = prevDispatcher;
-      }
-    },
-    useRef: function (initialValue) {
-      currentHookNameInDev = 'useRef';
-      updateHookTypesDev();
-      return mountRef(initialValue);
-    },
-    useState: function (initialState) {
-      currentHookNameInDev = 'useState';
-      updateHookTypesDev();
-      var prevDispatcher = ReactCurrentDispatcher$1.current;
-      ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
-      try {
-        return mountState(initialState);
-      } finally {
-        ReactCurrentDispatcher$1.current = prevDispatcher;
-      }
-    },
-    useDebugValue: function (value, formatterFn) {
-      currentHookNameInDev = 'useDebugValue';
-      updateHookTypesDev();
       return mountDebugValue(value, formatterFn);
     }
   };
@@ -22021,32 +21893,26 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     },
     useCallback: function (callback, deps) {
       currentHookNameInDev = 'useCallback';
-      updateHookTypesDev();
       return updateCallback(callback, deps);
     },
     useContext: function (context, observedBits) {
       currentHookNameInDev = 'useContext';
-      updateHookTypesDev();
-      return readContext(context, observedBits);
+      return updateContext(context, observedBits);
     },
     useEffect: function (create, deps) {
       currentHookNameInDev = 'useEffect';
-      updateHookTypesDev();
       return updateEffect(create, deps);
     },
     useImperativeHandle: function (ref, create, deps) {
       currentHookNameInDev = 'useImperativeHandle';
-      updateHookTypesDev();
       return updateImperativeHandle(ref, create, deps);
     },
     useLayoutEffect: function (create, deps) {
       currentHookNameInDev = 'useLayoutEffect';
-      updateHookTypesDev();
       return updateLayoutEffect(create, deps);
     },
     useMemo: function (create, deps) {
       currentHookNameInDev = 'useMemo';
-      updateHookTypesDev();
       var prevDispatcher = ReactCurrentDispatcher$1.current;
       ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
       try {
@@ -22057,7 +21923,6 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     },
     useReducer: function (reducer, initialArg, init) {
       currentHookNameInDev = 'useReducer';
-      updateHookTypesDev();
       var prevDispatcher = ReactCurrentDispatcher$1.current;
       ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
       try {
@@ -22068,12 +21933,10 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     },
     useRef: function (initialValue) {
       currentHookNameInDev = 'useRef';
-      updateHookTypesDev();
       return updateRef(initialValue);
     },
     useState: function (initialState) {
       currentHookNameInDev = 'useState';
-      updateHookTypesDev();
       var prevDispatcher = ReactCurrentDispatcher$1.current;
       ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
       try {
@@ -22084,7 +21947,6 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     },
     useDebugValue: function (value, formatterFn) {
       currentHookNameInDev = 'useDebugValue';
-      updateHookTypesDev();
       return updateDebugValue(value, formatterFn);
     }
   };
@@ -22097,37 +21959,31 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     useCallback: function (callback, deps) {
       currentHookNameInDev = 'useCallback';
       warnInvalidHookAccess();
-      mountHookTypesDev();
       return mountCallback(callback, deps);
     },
     useContext: function (context, observedBits) {
       currentHookNameInDev = 'useContext';
       warnInvalidHookAccess();
-      mountHookTypesDev();
-      return readContext(context, observedBits);
+      return mountContext(context, observedBits);
     },
     useEffect: function (create, deps) {
       currentHookNameInDev = 'useEffect';
       warnInvalidHookAccess();
-      mountHookTypesDev();
       return mountEffect(create, deps);
     },
     useImperativeHandle: function (ref, create, deps) {
       currentHookNameInDev = 'useImperativeHandle';
       warnInvalidHookAccess();
-      mountHookTypesDev();
       return mountImperativeHandle(ref, create, deps);
     },
     useLayoutEffect: function (create, deps) {
       currentHookNameInDev = 'useLayoutEffect';
       warnInvalidHookAccess();
-      mountHookTypesDev();
       return mountLayoutEffect(create, deps);
     },
     useMemo: function (create, deps) {
       currentHookNameInDev = 'useMemo';
       warnInvalidHookAccess();
-      mountHookTypesDev();
       var prevDispatcher = ReactCurrentDispatcher$1.current;
       ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
       try {
@@ -22139,7 +21995,6 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     useReducer: function (reducer, initialArg, init) {
       currentHookNameInDev = 'useReducer';
       warnInvalidHookAccess();
-      mountHookTypesDev();
       var prevDispatcher = ReactCurrentDispatcher$1.current;
       ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
       try {
@@ -22151,13 +22006,11 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     useRef: function (initialValue) {
       currentHookNameInDev = 'useRef';
       warnInvalidHookAccess();
-      mountHookTypesDev();
       return mountRef(initialValue);
     },
     useState: function (initialState) {
       currentHookNameInDev = 'useState';
       warnInvalidHookAccess();
-      mountHookTypesDev();
       var prevDispatcher = ReactCurrentDispatcher$1.current;
       ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
       try {
@@ -22169,7 +22022,6 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     useDebugValue: function (value, formatterFn) {
       currentHookNameInDev = 'useDebugValue';
       warnInvalidHookAccess();
-      mountHookTypesDev();
       return mountDebugValue(value, formatterFn);
     }
   };
@@ -22182,37 +22034,31 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     useCallback: function (callback, deps) {
       currentHookNameInDev = 'useCallback';
       warnInvalidHookAccess();
-      updateHookTypesDev();
       return updateCallback(callback, deps);
     },
     useContext: function (context, observedBits) {
       currentHookNameInDev = 'useContext';
       warnInvalidHookAccess();
-      updateHookTypesDev();
-      return readContext(context, observedBits);
+      return updateContext(context, observedBits);
     },
     useEffect: function (create, deps) {
       currentHookNameInDev = 'useEffect';
       warnInvalidHookAccess();
-      updateHookTypesDev();
       return updateEffect(create, deps);
     },
     useImperativeHandle: function (ref, create, deps) {
       currentHookNameInDev = 'useImperativeHandle';
       warnInvalidHookAccess();
-      updateHookTypesDev();
       return updateImperativeHandle(ref, create, deps);
     },
     useLayoutEffect: function (create, deps) {
       currentHookNameInDev = 'useLayoutEffect';
       warnInvalidHookAccess();
-      updateHookTypesDev();
       return updateLayoutEffect(create, deps);
     },
     useMemo: function (create, deps) {
       currentHookNameInDev = 'useMemo';
       warnInvalidHookAccess();
-      updateHookTypesDev();
       var prevDispatcher = ReactCurrentDispatcher$1.current;
       ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
       try {
@@ -22224,7 +22070,6 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     useReducer: function (reducer, initialArg, init) {
       currentHookNameInDev = 'useReducer';
       warnInvalidHookAccess();
-      updateHookTypesDev();
       var prevDispatcher = ReactCurrentDispatcher$1.current;
       ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
       try {
@@ -22236,13 +22081,11 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     useRef: function (initialValue) {
       currentHookNameInDev = 'useRef';
       warnInvalidHookAccess();
-      updateHookTypesDev();
       return updateRef(initialValue);
     },
     useState: function (initialState) {
       currentHookNameInDev = 'useState';
       warnInvalidHookAccess();
-      updateHookTypesDev();
       var prevDispatcher = ReactCurrentDispatcher$1.current;
       ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
       try {
@@ -22254,7 +22097,6 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
     useDebugValue: function (value, formatterFn) {
       currentHookNameInDev = 'useDebugValue';
       warnInvalidHookAccess();
-      updateHookTypesDev();
       return updateDebugValue(value, formatterFn);
     }
   };
@@ -28989,7 +28831,7 @@ implementation) {
 
 // TODO: this is special because it gets imported during build.
 
-var ReactVersion = '16.8.4';
+var ReactVersion = '16.8.3';
 
 // TODO: This type is shared between the reconciler and ReactDOM, but will
 // eventually be lifted out to the renderer.
@@ -29536,7 +29378,7 @@ if (process.env.NODE_ENV === 'production') {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/** @license React v0.13.4
+/** @license React v0.13.3
  * scheduler-tracing.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -29553,7 +29395,7 @@ Object.defineProperty(exports,"__esModule",{value:!0});var b=0;exports.__interac
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/** @license React v0.13.4
+/* WEBPACK VAR INJECTION */(function(process) {/** @license React v0.13.3
  * scheduler-tracing.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -29989,7 +29831,7 @@ exports.unstable_unsubscribe = unstable_unsubscribe;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Context__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Context__ = __webpack_require__(22);
 
 
 
@@ -30355,11 +30197,11 @@ exports.isSuspense = isSuspense;
 
 
 
-var ReactIs = __webpack_require__(12);
+var ReactIs = __webpack_require__(13);
 var assign = __webpack_require__(9);
 
-var ReactPropTypesSecret = __webpack_require__(19);
-var checkPropTypes = __webpack_require__(18);
+var ReactPropTypesSecret = __webpack_require__(20);
+var checkPropTypes = __webpack_require__(19);
 
 var has = Function.call.bind(Object.prototype.hasOwnProperty);
 var printWarning = function() {};
@@ -30954,7 +30796,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
 
 
-var ReactPropTypesSecret = __webpack_require__(19);
+var ReactPropTypesSecret = __webpack_require__(20);
 
 function emptyFunction() {}
 function emptyFunctionWithReset() {}
@@ -31036,7 +30878,7 @@ function _assertThisInitialized(self) {
  * Copyright 2015, Yahoo! Inc.
  * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
  */
-var ReactIs = __webpack_require__(12);
+var ReactIs = __webpack_require__(13);
 var REACT_STATICS = {
     childContextTypes: true,
     contextType: true,
@@ -31141,8 +30983,8 @@ module.exports = hoistNonReactStatics;
 
 "use strict";
 /* unused harmony export createConnect */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_extends__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_extends__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_connectAdvanced__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_shallowEqual__ = __webpack_require__(67);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mapDispatchToProps__ = __webpack_require__(68);
@@ -31292,7 +31134,7 @@ function shallowEqual(objA, objB) {
 /* unused harmony export whenMapDispatchToPropsIsFunction */
 /* unused harmony export whenMapDispatchToPropsIsMissing */
 /* unused harmony export whenMapDispatchToPropsIsObject */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__wrapMapToProps__ = __webpack_require__(37);
 
 
@@ -31339,7 +31181,7 @@ if (typeof self !== 'undefined') {
 var result = Object(__WEBPACK_IMPORTED_MODULE_0__ponyfill_js__["a" /* default */])(root);
 /* harmony default export */ __webpack_exports__["a"] = (result);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(20), __webpack_require__(70)(module)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(21), __webpack_require__(70)(module)))
 
 /***/ }),
 /* 70 */
@@ -31447,7 +31289,7 @@ function whenMapStateToPropsIsMissing(mapStateToProps) {
 /* unused harmony export wrapMergePropsFunc */
 /* unused harmony export whenMergePropsIsFunction */
 /* unused harmony export whenMergePropsIsOmitted */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_extends__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_extends__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_verifyPlainObject__ = __webpack_require__(38);
 
 
@@ -31495,7 +31337,7 @@ function whenMergePropsIsOmitted(mergeProps) {
 /* WEBPACK VAR INJECTION */(function(process) {/* unused harmony export impureFinalPropsSelectorFactory */
 /* unused harmony export pureFinalPropsSelectorFactory */
 /* harmony export (immutable) */ __webpack_exports__["a"] = finalPropsSelectorFactory;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__verifySubselectors__ = __webpack_require__(76);
 
 
@@ -31649,7 +31491,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _redux = __webpack_require__(24);
+var _redux = __webpack_require__(25);
 
 var _characters = __webpack_require__(79);
 
@@ -31834,7 +31676,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(29);
+var _reactRouterDom = __webpack_require__(11);
 
 var _TimeTract = __webpack_require__(41);
 
@@ -31848,17 +31690,17 @@ var _Home = __webpack_require__(138);
 
 var _Home2 = _interopRequireDefault(_Home);
 
-var _Characters = __webpack_require__(139);
+var _Home3 = __webpack_require__(139);
+
+var _Home4 = _interopRequireDefault(_Home3);
+
+var _Characters = __webpack_require__(140);
 
 var _Characters2 = _interopRequireDefault(_Characters);
 
-var _Powers = __webpack_require__(141);
+var _Powers = __webpack_require__(142);
 
 var _Powers2 = _interopRequireDefault(_Powers);
-
-var _Home3 = __webpack_require__(142);
-
-var _Home4 = _interopRequireDefault(_Home3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31942,7 +31784,7 @@ var _tiles = __webpack_require__(104);
 
 var _tiles2 = _interopRequireDefault(_tiles);
 
-var _actions = __webpack_require__(15);
+var _actions = __webpack_require__(16);
 
 var _TimeTract = __webpack_require__(41);
 
@@ -33656,17 +33498,17 @@ module.exports = __webpack_require__(88);
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
-    'Heap'                      : __webpack_require__(13),
-    'Node'                      : __webpack_require__(25),
+    'Heap'                      : __webpack_require__(14),
+    'Node'                      : __webpack_require__(26),
     'Grid'                      : __webpack_require__(91),
     'Util'                      : __webpack_require__(6),
     'DiagonalMovement'          : __webpack_require__(3),
     'Heuristic'                 : __webpack_require__(10),
-    'AStarFinder'               : __webpack_require__(26),
+    'AStarFinder'               : __webpack_require__(27),
     'BestFirstFinder'           : __webpack_require__(92),
     'BreadthFirstFinder'        : __webpack_require__(93),
     'DijkstraFinder'            : __webpack_require__(94),
-    'BiAStarFinder'             : __webpack_require__(27),
+    'BiAStarFinder'             : __webpack_require__(28),
     'BiBestFirstFinder'         : __webpack_require__(95),
     'BiBreadthFirstFinder'      : __webpack_require__(96),
     'BiDijkstraFinder'          : __webpack_require__(97),
@@ -34083,7 +33925,7 @@ module.exports = function(module) {
 /* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Node = __webpack_require__(25);
+var Node = __webpack_require__(26);
 var DiagonalMovement = __webpack_require__(3);
 
 /**
@@ -34334,7 +34176,7 @@ module.exports = Grid;
 /* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var AStarFinder = __webpack_require__(26);
+var AStarFinder = __webpack_require__(27);
 
 /**
  * Best-First-Search path-finder.
@@ -34453,7 +34295,7 @@ module.exports = BreadthFirstFinder;
 /* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var AStarFinder = __webpack_require__(26);
+var AStarFinder = __webpack_require__(27);
 
 /**
  * Dijkstra path-finder.
@@ -34483,7 +34325,7 @@ module.exports = DijkstraFinder;
 /* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var BiAStarFinder = __webpack_require__(27);
+var BiAStarFinder = __webpack_require__(28);
 
 /**
  * Bi-direcitional Best-First-Search path-finder.
@@ -34638,7 +34480,7 @@ module.exports = BiBreadthFirstFinder;
 /* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var BiAStarFinder = __webpack_require__(27);
+var BiAStarFinder = __webpack_require__(28);
 
 /**
  * Bi-directional Dijkstra path-finder.
@@ -34670,7 +34512,7 @@ module.exports = BiDijkstraFinder;
 
 var Util       = __webpack_require__(6);
 var Heuristic  = __webpack_require__(10);
-var Node       = __webpack_require__(25);
+var Node       = __webpack_require__(26);
 var DiagonalMovement = __webpack_require__(3);
 
 /**
@@ -34923,7 +34765,7 @@ module.exports = JumpPointFinder;
 /**
  * @author imor / https://github.com/imor
  */
-var JumpPointFinderBase = __webpack_require__(14);
+var JumpPointFinderBase = __webpack_require__(15);
 var DiagonalMovement = __webpack_require__(3);
 
 /**
@@ -35049,7 +34891,7 @@ module.exports = JPFNeverMoveDiagonally;
 /**
  * @author imor / https://github.com/imor
  */
-var JumpPointFinderBase = __webpack_require__(14);
+var JumpPointFinderBase = __webpack_require__(15);
 var DiagonalMovement = __webpack_require__(3);
 
 /**
@@ -35204,7 +35046,7 @@ module.exports = JPFAlwaysMoveDiagonally;
 /**
  * @author imor / https://github.com/imor
  */
-var JumpPointFinderBase = __webpack_require__(14);
+var JumpPointFinderBase = __webpack_require__(15);
 var DiagonalMovement = __webpack_require__(3);
 
 /**
@@ -35384,7 +35226,7 @@ module.exports = JPFMoveDiagonallyIfNoObstacles;
 /**
  * @author imor / https://github.com/imor
  */
-var JumpPointFinderBase = __webpack_require__(14);
+var JumpPointFinderBase = __webpack_require__(15);
 var DiagonalMovement = __webpack_require__(3);
 
 /**
@@ -35557,7 +35399,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.randomEncounter = randomEncounter;
 exports.getAllMonsters = getAllMonsters;
 
-var _superagent = __webpack_require__(28);
+var _superagent = __webpack_require__(29);
 
 var _superagent2 = _interopRequireDefault(_superagent);
 
@@ -36708,7 +36550,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.getAllCharacters = getAllCharacters;
 exports.getCardsByCharacter = getCardsByCharacter;
 
-var _superagent = __webpack_require__(28);
+var _superagent = __webpack_require__(29);
 
 var _superagent2 = _interopRequireDefault(_superagent);
 
@@ -36738,7 +36580,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.randomTreasure = randomTreasure;
 
-var _superagent = __webpack_require__(28);
+var _superagent = __webpack_require__(29);
 
 var _superagent2 = _interopRequireDefault(_superagent);
 
@@ -36821,12 +36663,12 @@ BrowserRouter.propTypes = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(42);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37245,12 +37087,12 @@ function valueEqual(a, b) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(42);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -37566,10 +37408,10 @@ var createHashHistory = function createHashHistory() {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PathUtils__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PathUtils__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__createTransitionManager__ = __webpack_require__(30);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -38662,7 +38504,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _actions = __webpack_require__(15);
+var _actions = __webpack_require__(16);
 
 var _reactRedux = __webpack_require__(7);
 
@@ -38833,6 +38675,8 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouterDom = __webpack_require__(11);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -38858,17 +38702,21 @@ var Home2 = function (_React$Component) {
                 { className: 'home-main' },
                 _react2.default.createElement(
                     'div',
-                    { className: 'logo-div' },
-                    _react2.default.createElement('img', { className: 'cr-logo', src: './images/crlogo.png' }),
-                    _react2.default.createElement(
-                        'p',
-                        { className: 'startbutton' },
-                        'START'
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
                     { className: 'rain' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'logo-div' },
+                        _react2.default.createElement('img', { className: 'cr-logo', src: './images/crlogo.png' }),
+                        _react2.default.createElement(
+                            _reactRouterDom.Link,
+                            { to: '/home' },
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'startbutton' },
+                                'START'
+                            )
+                        )
+                    ),
                     _react2.default.createElement('img', { className: 'dnd-logo', src: './images/dndeda.png' })
                 )
             );
@@ -38888,6 +38736,122 @@ exports.default = Home2;
 
 
 Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(11);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Home = function (_Component) {
+  _inherits(Home, _Component);
+
+  function Home() {
+    _classCallCheck(this, Home);
+
+    return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).apply(this, arguments));
+  }
+
+  _createClass(Home, [{
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "div",
+        { className: "home" },
+        _react2.default.createElement(
+          "div",
+          { className: "display" },
+          _react2.default.createElement(
+            "div",
+            { className: "display1", id: "square1" },
+            _react2.default.createElement(
+              "h4",
+              null,
+              "INTRODUCTION"
+            ),
+            _react2.default.createElement(
+              "p",
+              { className: "ptext" },
+              _react2.default.createElement(
+                "i",
+                null,
+                "In an ancient time and place,magic permeates the land and monsters stalk the shadows that gather along the edges of civilization. in this age of dungeons and dragons, the world needs Heroes. Encased in varied types of armor and armed with swords, bows, staves, and spells, these Heroes explore ancient ruins, take on daring quests, and challenge the most fearsome monsters. One such quest takes Heroes to a dark and mysterious place called Castle Ravenloft."
+              )
+            ),
+            _react2.default.createElement(
+              "h4",
+              null,
+              "Castle Ravenloft"
+            ),
+            _react2.default.createElement(
+              "p",
+              { className: "ptext" },
+              "The master of Castle Ravenloft is having quests for dinner-and you are invited! ",
+              _react2.default.createElement("br", null),
+              "The castle rises over the dark forests of the land of Barovia, looking down upon a sad,frightened village surrounded by an endless sea of dense fog and mist. The master of the castle, Count Strahd, is a vampire,and the night and its creatures belong to him. As long as Strahd exists, Barovia and the land around it will never be safe. ",
+              _react2.default.createElement("br", null),
+              " A group of Heroes has recently arrived in Barovia, stepping out of the mists to find themselves caught up in the evil emanating from Castle Ravenloft. These Heroes have chosen to enter the castle and discover the secrets waiting within. The dangers are great, the monsters are deadly,and only the bravest Heroes stand a chance of surviving of defeating Strahd and his minions"
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "display2", id: "square" },
+            _react2.default.createElement(
+              "h4",
+              null,
+              "GAME OVERVIEW"
+            ),
+            _react2.default.createElement(
+              "p",
+              { className: "ptext" },
+              "The ",
+              _react2.default.createElement(
+                "i",
+                null,
+                "Dungeons & Dragons:Castle Ravenloft Board Game"
+              ),
+              " is a cooperative adventure game. You and your fellow Heroes must work as a team to succeed in the adventures that unfold within the castle. You either win together or lose togather Each player selects a Hero, who has come to Barovia to discover the secrets of Catle Ravenloft. Choose from the Dragonborn Fighter, Human Rogue, Dwarf Cleric, Eladrin Wizard, Human Ranger, or a Hero from another D&D Adventure System board game. Heroes explore the dungeon beneath the castle, solve mysteries, fight Monster, and Villains contained within the halls of Castle Ravenloft(with a littel help from you)."
+            ),
+            _react2.default.createElement(
+              _reactRouterDom.Link,
+              { to: "/char-select" },
+              _react2.default.createElement(
+                "div",
+                { className: "startbutton charSelectLink" },
+                "Go to Character Selection"
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Home;
+}(_react.Component);
+
+exports.default = Home;
+
+/***/ }),
+/* 140 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
@@ -38899,9 +38863,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(7);
 
-var _actions = __webpack_require__(15);
+var _actions = __webpack_require__(16);
 
-var _CharacterOrder = __webpack_require__(140);
+var _CharacterOrder = __webpack_require__(141);
 
 var _CharacterOrder2 = _interopRequireDefault(_CharacterOrder);
 
@@ -39071,7 +39035,7 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(Characters);
 
 /***/ }),
-/* 140 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39089,7 +39053,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(7);
 
-var _reactRouterDom = __webpack_require__(29);
+var _reactRouterDom = __webpack_require__(11);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -39128,21 +39092,18 @@ var CharacterOrder = function (_Component) {
       return _react2.default.createElement(
         _react.Fragment,
         null,
-        _react2.default.createElement(
-          'div',
-          { className: 'col orderStyle' },
-          _react2.default.createElement(
-            'p',
-            null,
-            'Order:'
-          )
-        ),
+        _react2.default.createElement('div', { className: 'col orderStyle' }),
         _react2.default.createElement(
           'div',
           { className: 'col' },
           _react2.default.createElement(
             'ul',
             { className: 'list-inline' },
+            _react2.default.createElement(
+              'li',
+              { className: 'list-inline-item orderList' },
+              'Order:'
+            ),
             this.props.characterOrder.map(function (character, i) {
               return _react2.default.createElement(
                 'li',
@@ -39177,7 +39138,7 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(CharacterOrder);
 
 /***/ }),
-/* 141 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39195,9 +39156,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(7);
 
-var _reactRouterDom = __webpack_require__(29);
+var _reactRouterDom = __webpack_require__(11);
 
-var _actions = __webpack_require__(15);
+var _actions = __webpack_require__(16);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -39457,46 +39418,55 @@ var Powers = function (_Component) {
             var _this5 = this;
 
             return _react2.default.createElement(
-                _react.Fragment,
-                null,
+                'div',
+                { className: 'charSelectBg' },
                 _react2.default.createElement(
-                    'h1',
-                    null,
-                    this.state.character.name
-                ),
-                _react2.default.createElement(
-                    'h2',
-                    null,
-                    this.state.character.subtitle
+                    'div',
+                    { className: 'justify-content-center' },
+                    _react2.default.createElement(
+                        'h1',
+                        { className: 'nameTitle' },
+                        this.state.character.name
+                    ),
+                    _react2.default.createElement(
+                        'h2',
+                        { className: 'orderList' },
+                        this.state.character.subtitle
+                    ),
+                    _react2.default.createElement(
+                        'p',
+                        { className: 'nameTitle' },
+                        _react2.default.createElement('img', { className: 'displayFace', src: './images/icons/' + this.state.character.name + '.jpg' })
+                    )
                 ),
                 this.state.sneakAttack ? _react2.default.createElement(
                     _react.Fragment,
                     null,
                     _react2.default.createElement(
                         'h3',
-                        null,
-                        'You get this by default'
+                        { className: 'orderList' },
+                        'You get this by default:'
                     ),
                     _react2.default.createElement(
                         'div',
-                        { className: 'card' },
+                        { className: 'row justify-content-center' },
                         _react2.default.createElement(
                             'div',
-                            { className: 'container-fluid' },
+                            { className: 'card' },
                             _react2.default.createElement(
                                 'div',
-                                { className: 'card-body' },
+                                { className: 'utilityCard powerCardDefault' },
                                 _react2.default.createElement(
                                     'div',
                                     { className: 'row' },
                                     _react2.default.createElement(
                                         'h5',
-                                        { className: 'card-title' },
+                                        { className: 'card-title powerCardTitle' },
                                         this.state.sneakAttack.title
                                     ),
                                     _react2.default.createElement(
                                         'p',
-                                        { className: 'card-subtitle mb-2 text-muted card-text' },
+                                        { className: 'powerCardSubtitle' },
                                         _react2.default.createElement(
                                             'b',
                                             null,
@@ -39504,15 +39474,18 @@ var Powers = function (_Component) {
                                         )
                                     ),
                                     _react2.default.createElement(
-                                        'p',
-                                        null,
+                                        'div',
+                                        { className: 'PowerCardInst' },
                                         _react2.default.createElement(
-                                            'b',
+                                            'p',
                                             null,
                                             this.state.sneakAttack.instruction_1
                                         ),
-                                        ' ',
-                                        this.state.sneakAttack.instruction_2
+                                        _react2.default.createElement(
+                                            'p',
+                                            null,
+                                            this.state.sneakAttack.instruction_2
+                                        )
                                     )
                                 ),
                                 _react2.default.createElement(
@@ -39520,8 +39493,8 @@ var Powers = function (_Component) {
                                     null,
                                     _react2.default.createElement(
                                         'small',
-                                        { className: 'text-muted' },
-                                        'FILP THIS CARD OVER AFTER YOU USE THE POWER'
+                                        { className: 'powerCardUse' },
+                                        'YOU MAY ONLY USE THIS POWER ONCE'
                                     )
                                 )
                             )
@@ -39532,61 +39505,60 @@ var Powers = function (_Component) {
                     null,
                     _react2.default.createElement(
                         'h3',
-                        null,
-                        'You get this by default'
+                        { className: 'orderList' },
+                        'You get this by default:'
                     ),
                     _react2.default.createElement(
                         'div',
-                        { className: 'card' },
+                        { className: 'row justify-content-center' },
                         _react2.default.createElement(
                             'div',
-                            { className: 'container-fluid' },
+                            { className: 'card' },
                             _react2.default.createElement(
                                 'div',
-                                { className: 'card-body' },
+                                { className: 'dailyCard' },
                                 _react2.default.createElement(
                                     'div',
                                     { className: 'row' },
                                     _react2.default.createElement(
                                         'h5',
-                                        { className: 'card-title' },
+                                        { className: 'card-title powerCardTitle' },
                                         this.state.dragonsBreath.title
                                     ),
                                     _react2.default.createElement(
                                         'p',
-                                        { className: 'card-subtitle mb-2 text-muted card-text' },
-                                        _react2.default.createElement(
-                                            'b',
-                                            null,
-                                            this.state.dragonsBreath.subtitle
-                                        )
+                                        { className: 'powerCardSubtitle' },
+                                        this.state.dragonsBreath.subtitle
                                     ),
                                     _react2.default.createElement(
-                                        'p',
-                                        null,
+                                        'div',
+                                        { className: 'PowerCardInst' },
                                         _react2.default.createElement(
-                                            'b',
+                                            'p',
                                             null,
                                             this.state.dragonsBreath.instruction_1
                                         ),
-                                        ' ',
-                                        this.state.dragonsBreath.instruction_2
+                                        _react2.default.createElement(
+                                            'p',
+                                            null,
+                                            this.state.dragonsBreath.instruction_2
+                                        )
                                     )
                                 ),
                                 this.state.dragonsBreath.damage && _react2.default.createElement(
-                                    _react.Fragment,
-                                    null,
+                                    'div',
+                                    { className: 'powerCardNumberBox2' },
                                     _react2.default.createElement(
                                         'div',
                                         { className: 'row' },
                                         _react2.default.createElement(
                                             'div',
-                                            { className: 'col attribs-title card-text' },
+                                            { className: 'col attribs-title card-text pcb' },
                                             'Attack'
                                         ),
                                         _react2.default.createElement(
                                             'div',
-                                            { className: 'col attribs-title card-text' },
+                                            { className: 'col attribs-title card-text pcb' },
                                             'Damage'
                                         )
                                     ),
@@ -39595,25 +39567,25 @@ var Powers = function (_Component) {
                                         { className: 'row' },
                                         _react2.default.createElement(
                                             'div',
-                                            { className: 'col attribs card-text' },
+                                            { className: 'col attribs card-text pcb' },
                                             '+ ',
                                             this.state.dragonsBreath.attack
                                         ),
                                         _react2.default.createElement(
                                             'div',
-                                            { className: 'col attribs card-text' },
-                                            this.state.dragonsBreath.damage,
-                                            this.state.dragonsBreath.miss && _react2.default.createElement(
-                                                _react.Fragment,
-                                                null,
-                                                _react2.default.createElement(
-                                                    'p',
-                                                    null,
-                                                    'Miss: ',
-                                                    this.state.dragonsBreath.miss,
-                                                    ' Damage'
-                                                )
-                                            )
+                                            { className: 'col attribs card-text pcb' },
+                                            this.state.dragonsBreath.damage
+                                        )
+                                    ),
+                                    this.state.dragonsBreath.miss && _react2.default.createElement(
+                                        _react.Fragment,
+                                        null,
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: '' },
+                                            'Miss: ',
+                                            this.state.dragonsBreath.miss,
+                                            ' Damage'
                                         )
                                     )
                                 ),
@@ -39622,8 +39594,8 @@ var Powers = function (_Component) {
                                     null,
                                     _react2.default.createElement(
                                         'small',
-                                        { className: 'text-muted' },
-                                        'FILP THIS CARD AFTER USE'
+                                        { className: 'powerCardUse2' },
+                                        'CAN ONLY USE ONCE'
                                     )
                                 )
                             )
@@ -39634,29 +39606,29 @@ var Powers = function (_Component) {
                     null,
                     _react2.default.createElement(
                         'h3',
-                        null,
-                        'You get this by default'
+                        { className: 'orderList' },
+                        'You get this by default:'
                     ),
                     _react2.default.createElement(
                         'div',
-                        { className: 'card' },
+                        { className: 'row justify-content-center' },
                         _react2.default.createElement(
                             'div',
-                            { className: 'container-fluid' },
+                            { className: 'card' },
                             _react2.default.createElement(
                                 'div',
-                                { className: 'card-body' },
+                                { className: 'utilityCard' },
                                 _react2.default.createElement(
                                     'div',
                                     { className: 'row' },
                                     _react2.default.createElement(
                                         'h5',
-                                        { className: 'card-title' },
+                                        { className: 'card-title powerCardTitle' },
                                         this.state.healingWord.title
                                     ),
                                     _react2.default.createElement(
                                         'p',
-                                        { className: 'card-subtitle mb-2 text-muted card-text' },
+                                        { className: 'powerCardSubtitle' },
                                         _react2.default.createElement(
                                             'b',
                                             null,
@@ -39664,15 +39636,18 @@ var Powers = function (_Component) {
                                         )
                                     ),
                                     _react2.default.createElement(
-                                        'p',
-                                        null,
+                                        'div',
+                                        { className: 'PowerCardInst' },
                                         _react2.default.createElement(
-                                            'b',
+                                            'p',
                                             null,
                                             this.state.healingWord.instruction_1
                                         ),
-                                        ' ',
-                                        this.state.healingWord.instruction_2
+                                        _react2.default.createElement(
+                                            'p',
+                                            null,
+                                            this.state.healingWord.instruction_2
+                                        )
                                     )
                                 ),
                                 _react2.default.createElement(
@@ -39680,8 +39655,8 @@ var Powers = function (_Component) {
                                     null,
                                     _react2.default.createElement(
                                         'small',
-                                        { className: 'text-muted' },
-                                        'FILP THIS CARD OVER AFTER YOU USE THE POWER'
+                                        { className: 'powerCardUse' },
+                                        'YOU MAY ONLY USE THIS POWER ONCE'
                                     )
                                 )
                             )
@@ -39692,29 +39667,29 @@ var Powers = function (_Component) {
                     null,
                     _react2.default.createElement(
                         'h3',
-                        null,
-                        'You get this by default'
+                        { className: 'orderList' },
+                        'You get this Power by default:'
                     ),
                     _react2.default.createElement(
                         'div',
-                        { className: 'card' },
+                        { className: 'row justify-content-center' },
                         _react2.default.createElement(
                             'div',
-                            { className: 'container-fluid' },
+                            { className: 'card' },
                             _react2.default.createElement(
                                 'div',
-                                { className: 'card-body' },
+                                { className: 'utilityCard' },
                                 _react2.default.createElement(
                                     'div',
                                     { className: 'row' },
                                     _react2.default.createElement(
                                         'h5',
-                                        { className: 'card-title' },
+                                        { className: 'card-title powerCardTitle' },
                                         this.state.feySted.title
                                     ),
                                     _react2.default.createElement(
                                         'p',
-                                        { className: 'card-subtitle mb-2 text-muted card-text' },
+                                        { className: 'powerCardSubtitle' },
                                         _react2.default.createElement(
                                             'b',
                                             null,
@@ -39722,15 +39697,18 @@ var Powers = function (_Component) {
                                         )
                                     ),
                                     _react2.default.createElement(
-                                        'p',
-                                        null,
+                                        'div',
+                                        { className: 'PowerCardInst' },
                                         _react2.default.createElement(
-                                            'b',
+                                            'p',
                                             null,
                                             this.state.feySted.instruction_1
                                         ),
-                                        ' ',
-                                        this.state.feySted.instruction_2
+                                        _react2.default.createElement(
+                                            'p',
+                                            null,
+                                            this.state.feySted.instruction_2
+                                        )
                                     )
                                 ),
                                 _react2.default.createElement(
@@ -39738,8 +39716,8 @@ var Powers = function (_Component) {
                                     null,
                                     _react2.default.createElement(
                                         'small',
-                                        { className: 'text-muted' },
-                                        'FILP THIS CARD OVER AFTER YOU USE THE POWER'
+                                        { className: 'powerCardUse' },
+                                        'YOU MAY ONLY USE THIS POWER ONCE'
                                     )
                                 )
                             )
@@ -39752,14 +39730,16 @@ var Powers = function (_Component) {
                     _react2.default.createElement(
                         'div',
                         { className: 'form-group' },
+                        _react2.default.createElement('br', null),
+                        _react2.default.createElement('br', null),
                         _react2.default.createElement(
                             'h2',
-                            { className: 'power-titles' },
-                            'Daily'
+                            { className: 'power-titles orderList' },
+                            'Select One Daily Power:'
                         ),
                         _react2.default.createElement(
                             'div',
-                            { className: 'row' },
+                            { className: 'row justify-content-center' },
                             this.state.daily.map(function (daily, i) {
                                 return _react2.default.createElement(
                                     _react.Fragment,
@@ -39779,91 +39759,86 @@ var Powers = function (_Component) {
                                                     { className: 'card' },
                                                     _react2.default.createElement(
                                                         'div',
-                                                        { className: 'container-fluid' },
+                                                        { className: 'dailyCard' },
                                                         _react2.default.createElement(
                                                             'div',
-                                                            { className: 'card-body' },
+                                                            { className: 'row' },
+                                                            _react2.default.createElement(
+                                                                'h5',
+                                                                { className: 'card-title powerCardTitle' },
+                                                                daily.title
+                                                            ),
+                                                            _react2.default.createElement(
+                                                                'p',
+                                                                { className: 'powerCardSubtitle' },
+                                                                daily.subtitle
+                                                            ),
                                                             _react2.default.createElement(
                                                                 'div',
-                                                                { className: 'row' },
-                                                                _react2.default.createElement(
-                                                                    'h5',
-                                                                    { className: 'card-title' },
-                                                                    daily.title
-                                                                ),
+                                                                { className: 'PowerCardInst' },
                                                                 _react2.default.createElement(
                                                                     'p',
-                                                                    { className: 'card-subtitle mb-2 text-muted card-text' },
-                                                                    _react2.default.createElement(
-                                                                        'b',
-                                                                        null,
-                                                                        daily.subtitle
-                                                                    )
+                                                                    null,
+                                                                    daily.instruction_1
                                                                 ),
                                                                 _react2.default.createElement(
                                                                     'p',
                                                                     null,
-                                                                    _react2.default.createElement(
-                                                                        'b',
-                                                                        null,
-                                                                        daily.instruction_1
-                                                                    ),
-                                                                    ' ',
                                                                     daily.instruction_2
                                                                 )
+                                                            )
+                                                        ),
+                                                        daily.damage && _react2.default.createElement(
+                                                            'div',
+                                                            { className: 'powerCardNumberBox2' },
+                                                            _react2.default.createElement(
+                                                                'div',
+                                                                { className: 'row' },
+                                                                _react2.default.createElement(
+                                                                    'div',
+                                                                    { className: 'col attribs-title card-text pcb' },
+                                                                    'Attack'
+                                                                ),
+                                                                _react2.default.createElement(
+                                                                    'div',
+                                                                    { className: 'col attribs-title card-text pcb' },
+                                                                    'Damage'
+                                                                )
                                                             ),
-                                                            daily.damage && _react2.default.createElement(
+                                                            _react2.default.createElement(
+                                                                'div',
+                                                                { className: 'row' },
+                                                                _react2.default.createElement(
+                                                                    'div',
+                                                                    { className: 'col attribs card-text pcb' },
+                                                                    '+ ',
+                                                                    daily.attack
+                                                                ),
+                                                                _react2.default.createElement(
+                                                                    'div',
+                                                                    { className: 'col attribs card-text pcb' },
+                                                                    daily.damage
+                                                                )
+                                                            ),
+                                                            daily.miss && _react2.default.createElement(
                                                                 _react.Fragment,
                                                                 null,
                                                                 _react2.default.createElement(
                                                                     'div',
-                                                                    { className: 'row' },
-                                                                    _react2.default.createElement(
-                                                                        'div',
-                                                                        { className: 'col attribs-title card-text' },
-                                                                        'Attack'
-                                                                    ),
-                                                                    _react2.default.createElement(
-                                                                        'div',
-                                                                        { className: 'col attribs-title card-text' },
-                                                                        'Damage'
-                                                                    )
-                                                                ),
-                                                                _react2.default.createElement(
-                                                                    'div',
-                                                                    { className: 'row' },
-                                                                    _react2.default.createElement(
-                                                                        'div',
-                                                                        { className: 'col attribs card-text' },
-                                                                        '+ ',
-                                                                        daily.attack
-                                                                    ),
-                                                                    _react2.default.createElement(
-                                                                        'div',
-                                                                        { className: 'col attribs card-text' },
-                                                                        daily.damage,
-                                                                        daily.miss && _react2.default.createElement(
-                                                                            _react.Fragment,
-                                                                            null,
-                                                                            _react2.default.createElement(
-                                                                                'p',
-                                                                                null,
-                                                                                'Miss: ',
-                                                                                daily.miss,
-                                                                                ' Damage'
-                                                                            )
-                                                                        )
-                                                                    )
+                                                                    { className: '' },
+                                                                    'Miss: ',
+                                                                    daily.miss,
+                                                                    ' Damage'
                                                                 )
-                                                            ),
+                                                            )
+                                                        ),
+                                                        _react2.default.createElement(
+                                                            'p',
+                                                            null,
                                                             _react2.default.createElement(
-                                                                'p',
-                                                                null,
-                                                                _react2.default.createElement(
-                                                                    'small',
-                                                                    { className: 'text-muted' },
-                                                                    'FILP THIS CARD AFTER USE'
-                                                                )
+                                                                'small',
+                                                                { className: 'powerCardUse2' },
+                                                                'CAN ONLY USE ONCE'
                                                             )
                                                         )
                                                     )
@@ -39878,10 +39853,12 @@ var Powers = function (_Component) {
                     _react2.default.createElement(
                         'div',
                         { className: 'form-group' },
+                        _react2.default.createElement('br', null),
+                        _react2.default.createElement('br', null),
                         _react2.default.createElement(
                             'h2',
-                            { className: 'power-titles' },
-                            'Utility'
+                            { className: 'power-titles orderList' },
+                            'Select One Utility Power:'
                         ),
                         _react2.default.createElement(
                             'div',
@@ -39905,47 +39882,46 @@ var Powers = function (_Component) {
                                                     { className: 'card' },
                                                     _react2.default.createElement(
                                                         'div',
-                                                        { className: 'container-fluid' },
+                                                        { className: 'utilityCard' },
                                                         _react2.default.createElement(
                                                             'div',
-                                                            { className: 'card-body' },
+                                                            { className: 'row' },
+                                                            _react2.default.createElement(
+                                                                'h5',
+                                                                { className: 'card-title powerCardTitle' },
+                                                                utility.title
+                                                            ),
+                                                            _react2.default.createElement(
+                                                                'p',
+                                                                { className: 'powerCardSubtitle' },
+                                                                _react2.default.createElement(
+                                                                    'b',
+                                                                    null,
+                                                                    utility.subtitle
+                                                                )
+                                                            ),
                                                             _react2.default.createElement(
                                                                 'div',
-                                                                { className: 'row' },
-                                                                _react2.default.createElement(
-                                                                    'h5',
-                                                                    { className: 'card-title' },
-                                                                    utility.title
-                                                                ),
+                                                                { className: 'PowerCardInst' },
                                                                 _react2.default.createElement(
                                                                     'p',
-                                                                    { className: 'card-subtitle mb-2 text-muted card-text' },
-                                                                    _react2.default.createElement(
-                                                                        'b',
-                                                                        null,
-                                                                        utility.subtitle
-                                                                    )
+                                                                    null,
+                                                                    utility.instruction_1
                                                                 ),
                                                                 _react2.default.createElement(
                                                                     'p',
                                                                     null,
-                                                                    _react2.default.createElement(
-                                                                        'b',
-                                                                        null,
-                                                                        utility.instruction_1
-                                                                    ),
-                                                                    ' ',
                                                                     utility.instruction_2
                                                                 )
-                                                            ),
+                                                            )
+                                                        ),
+                                                        _react2.default.createElement(
+                                                            'p',
+                                                            null,
                                                             _react2.default.createElement(
-                                                                'p',
-                                                                null,
-                                                                _react2.default.createElement(
-                                                                    'small',
-                                                                    { className: 'text-muted' },
-                                                                    'FILP THIS CARD OVER AFTER YOU USE THE POWER'
-                                                                )
+                                                                'small',
+                                                                { className: 'powerCardUse' },
+                                                                'YOU MAY ONLY USE THIS POWER ONCE'
                                                             )
                                                         )
                                                     )
@@ -39960,10 +39936,12 @@ var Powers = function (_Component) {
                     _react2.default.createElement(
                         'div',
                         { className: 'form-group' },
+                        _react2.default.createElement('br', null),
+                        _react2.default.createElement('br', null),
                         _react2.default.createElement(
                             'h2',
-                            { className: 'power-titles' },
-                            'At Will'
+                            { className: 'power-titles orderList' },
+                            'Select Two At Will Powers:'
                         ),
                         _react2.default.createElement(
                             'div',
@@ -39987,81 +39965,72 @@ var Powers = function (_Component) {
                                                     { className: 'card' },
                                                     _react2.default.createElement(
                                                         'div',
-                                                        { className: 'container-fluid' },
+                                                        { className: 'atWillCard' },
                                                         _react2.default.createElement(
                                                             'div',
-                                                            { className: 'card-body' },
+                                                            { className: 'row' },
+                                                            _react2.default.createElement(
+                                                                'h5',
+                                                                { className: 'card-title powerCardTitle' },
+                                                                atWill.title
+                                                            ),
+                                                            _react2.default.createElement(
+                                                                'p',
+                                                                { className: 'powerCardSubtitle' },
+                                                                atWill.subtitle
+                                                            ),
                                                             _react2.default.createElement(
                                                                 'div',
-                                                                { className: 'row' },
-                                                                _react2.default.createElement(
-                                                                    'h5',
-                                                                    { className: 'card-title' },
-                                                                    atWill.title
-                                                                ),
+                                                                { className: 'PowerCardInst' },
                                                                 _react2.default.createElement(
                                                                     'p',
-                                                                    { className: 'card-subtitle mb-2 text-muted card-text' },
-                                                                    _react2.default.createElement(
-                                                                        'b',
-                                                                        null,
-                                                                        atWill.subtitle
-                                                                    )
+                                                                    null,
+                                                                    atWill.instruction_1
                                                                 ),
                                                                 _react2.default.createElement(
                                                                     'p',
                                                                     null,
-                                                                    _react2.default.createElement(
-                                                                        'b',
-                                                                        null,
-                                                                        atWill.instruction_1
-                                                                    ),
-                                                                    ' ',
                                                                     atWill.instruction_2
                                                                 )
-                                                            ),
-                                                            atWill.damage && _react2.default.createElement(
-                                                                _react.Fragment,
-                                                                null,
+                                                            )
+                                                        ),
+                                                        atWill.damage && _react2.default.createElement(
+                                                            'div',
+                                                            { className: 'powerCardNumberBox' },
+                                                            _react2.default.createElement(
+                                                                'div',
+                                                                { className: 'row' },
                                                                 _react2.default.createElement(
                                                                     'div',
-                                                                    { className: 'row' },
-                                                                    _react2.default.createElement(
-                                                                        'div',
-                                                                        { className: 'col attribs-title card-text' },
-                                                                        'Attack'
-                                                                    ),
-                                                                    _react2.default.createElement(
-                                                                        'div',
-                                                                        { className: 'col attribs-title card-text' },
-                                                                        'Damage'
-                                                                    )
+                                                                    { className: 'col attribs-title card-text pcb' },
+                                                                    'Attack'
                                                                 ),
                                                                 _react2.default.createElement(
                                                                     'div',
-                                                                    { className: 'row' },
-                                                                    _react2.default.createElement(
-                                                                        'div',
-                                                                        { className: 'col attribs card-text' },
-                                                                        '+ ',
-                                                                        atWill.attack
-                                                                    ),
-                                                                    _react2.default.createElement(
-                                                                        'div',
-                                                                        { className: 'col attribs card-text' },
-                                                                        atWill.damage
-                                                                    )
+                                                                    { className: 'col attribs-title card-textpcb' },
+                                                                    'Damage'
                                                                 )
                                                             ),
                                                             _react2.default.createElement(
-                                                                'p',
-                                                                null,
+                                                                'div',
+                                                                { className: 'row' },
                                                                 _react2.default.createElement(
-                                                                    'small',
-                                                                    { className: 'text-muted' },
-                                                                    'FILP THIS CARD AFTER USE'
+                                                                    'div',
+                                                                    { className: 'col attribs card-text pcb' },
+                                                                    '+ ',
+                                                                    atWill.attack
+                                                                ),
+                                                                _react2.default.createElement(
+                                                                    'div',
+                                                                    { className: 'col attribs card-text pcb' },
+                                                                    atWill.damage
                                                                 )
                                                             )
+                                                        ),
+                                                        _react2.default.createElement(
+                                                            'p',
+                                                            null,
+                                                            _react2.default.createElement('small', { className: 'powerCardUse' })
                                                         )
                                                     )
                                                 )
@@ -40074,33 +40043,31 @@ var Powers = function (_Component) {
                     ),
                     _react2.default.createElement(
                         'div',
-                        { className: 'row' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'col' },
+                        { className: 'row justify-content-center' },
+                        this.state.playGame ? _react2.default.createElement('p', null) : _react2.default.createElement(
+                            'p',
+                            null,
                             _react2.default.createElement(
                                 'button',
-                                { type: 'submit', className: 'btn btn-primary' },
+                                { type: 'submit', className: 'btn submitPower orderList choosepowersActive buttonStyles' },
                                 'Submit'
                             )
                         ),
                         this.state.nextCharacter && _react2.default.createElement(
-                            'div',
-                            { className: 'col' },
-                            _react2.default.createElement(
-                                _reactRouterDom.Link,
-                                { to: '/powers/' + this.state.nextCharId, className: 'btn btn-secondary' },
-                                'Next character'
-                            )
+                            _reactRouterDom.Link,
+                            { to: '/powers/' + this.state.nextCharId, className: 'btn submitPower orderList choosepowersActive buttonStyles' },
+                            'Next character'
                         ),
                         this.state.playGame && _react2.default.createElement(
-                            'div',
-                            { className: 'col' },
+                            _react.Fragment,
+                            null,
                             _react2.default.createElement(
                                 _reactRouterDom.Link,
-                                { to: '/board', className: 'btn btn-secondary' },
-                                'Play Game!'
-                            )
+                                { to: '/board', className: 'submitPower choosepowersActive' },
+                                'Enter Castle Ravenloft'
+                            ),
+                            _react2.default.createElement('br', null),
+                            _react2.default.createElement('br', null)
                         )
                     )
                 )
@@ -40120,122 +40087,6 @@ function mapStateToProps(state) {
 }
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(Powers);
-
-/***/ }),
-/* 142 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRouterDom = __webpack_require__(29);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Home = function (_Component) {
-  _inherits(Home, _Component);
-
-  function Home() {
-    _classCallCheck(this, Home);
-
-    return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).apply(this, arguments));
-  }
-
-  _createClass(Home, [{
-    key: "render",
-    value: function render() {
-      return _react2.default.createElement(
-        "div",
-        { className: "home" },
-        _react2.default.createElement(
-          "div",
-          { className: "display" },
-          _react2.default.createElement(
-            "div",
-            { className: "display1", id: "square1" },
-            _react2.default.createElement(
-              "h4",
-              null,
-              "INTRODUCTION"
-            ),
-            _react2.default.createElement(
-              "p",
-              { className: "ptext" },
-              _react2.default.createElement(
-                "i",
-                null,
-                "In an ancient time and place,magic permeates the land and monsters stalk the shadows that gather along the edges of civilization. in this age of dungeons and dragons, the world needs Heroes. Encased in varied types of armor and armed with swords, bows, staves, and spells, these Heroes explore ancient ruins, take on daring quests, and challenge the most fearsome monsters. One such quest takes Heroes to a dark and mysterious place called Castle Ravenloft."
-              )
-            ),
-            _react2.default.createElement(
-              "h4",
-              null,
-              "Castle Ravenloft"
-            ),
-            _react2.default.createElement(
-              "p",
-              { className: "ptext" },
-              "The master of Castle Ravenloft is having quests for dinner-and you are invited! ",
-              _react2.default.createElement("br", null),
-              "The castle rises over the dark forests of the land of Barovia, looking down upon a sad,frightened village surrounded by an endless sea of dense fog and mist. The master of the castle, Count Strahd, is a vampire,and the night and its creatures belong to him. As long as Strahd exists, Barovia and the land around it will never be safe. ",
-              _react2.default.createElement("br", null),
-              " A group of Heroes has recently arrived in Barovia, stepping out of the mists to find themselves caught up in the evil emanating from Castle Ravenloft. These Heroes have chosen to enter the castle and discover the secrets waiting within. The dangers are great, the monsters are deadly,and only the bravest Heroes stand a chance of surviving of defeating Strahd and his minions"
-            )
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "display2", id: "square" },
-            _react2.default.createElement(
-              "h4",
-              null,
-              "GAME OVERVIEW"
-            ),
-            _react2.default.createElement(
-              "p",
-              { className: "ptext" },
-              "The ",
-              _react2.default.createElement(
-                "i",
-                null,
-                "Dengeons & Dragons:Castle Ravenloft Board Game"
-              ),
-              " is a cooperative adventure game. You and your fellow Heroes must work as a team to succeed in the adventures that unfold within the castle. You either win together or lose togather Each player selects a Hero, who has come to Barovia to discover the secrets of Catle Ravenloft. Choose from the Dragonborn Fighter, Human Rogue, Dwarf Cleric, Eladrin Wizard, Human Ranger, or a Hero from another D&D Adventure System board game. Heroes explore the dungeon beneath the castle, solve mysteries, fight Monster, and Villains contained within the halls of Castle Ravenloft(with a littel help from you)."
-            ),
-            _react2.default.createElement(
-              _reactRouterDom.Link,
-              { to: "/char-select" },
-              _react2.default.createElement(
-                "div",
-                { className: "startbutton charSelectLink" },
-                "Go to Character Selection"
-              )
-            )
-          )
-        )
-      );
-    }
-  }]);
-
-  return Home;
-}(_react.Component);
-
-exports.default = Home;
 
 /***/ })
 /******/ ]);

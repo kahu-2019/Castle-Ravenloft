@@ -1,11 +1,14 @@
-.board-container {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background-image: url("./images/brick.jpg");
-  background-size: 100%;
+*{
+  text-decoration: none !important
+}
+.board-container{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-image: url('./images/brick.jpg');
+    background-size: 100%;
 }
 
 .tile {
@@ -341,13 +344,14 @@ span {
   height: 60px;
 }
 
-.startbutton {
-  color: rgb(238, 232, 223);
-  font-family: "IM Fell DW Pica", serif;
+.startbutton{
+  color: rgb(238, 232, 223)!important;
+  font-family: 'IM Fell DW Pica', serif;
   text-align: center;
   font-size: 30px;
   opacity: 1;
   animation: start 2s linear infinite;
+  text-decoration: none!important
 }
 
 @keyframes start {
@@ -362,125 +366,78 @@ span {
   }
 }
 
-/* HIDE RADIO */
-[type="radio"] {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-/* IMAGE STYLES */
-[type="radio"] + .card {
-  cursor: pointer;
-}
-
-[type="radio"]:hover + .card {
-  outline: 2px solid lightblue;
-}
-
-/* CHECKED STYLES */
-[type="radio"]:checked + .card {
-  outline: 2px solid greenyellow;
-}
-
-/* HIDE CHECK */
-[type="checkbox"] {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-/* IMAGE STYLES */
-[type="checkbox"] + .card {
-  cursor: pointer;
-}
-
-[type="checkbox"]:hover + .card {
-  outline: 2px solid lightblue;
-}
-
-/* CHECKED STYLES */
-[type="checkbox"]:checked + .card {
-  outline: 2px solid greenyellow;
-}
-
-.power-titles {
-  text-align: center;
-}
-
 /* The Following is for Character selection cards */
-.imFont {
-  font-family: "IM Fell DW Pica", serif;
+.imFont{
+  font-family: 'IM Fell DW Pica', serif;
+  
 }
-.acPosition {
-  position: absolute;
-  left: 15px;
-  color: black;
-  font-size: 20px;
-}
-
-.statRow {
-  position: absolute;
-  top: 190px;
-}
-.hpPosition {
-  position: absolute;
-  left: 20px;
-  color: black;
-  font-size: 20px;
-}
-.speedPosition {
-  position: absolute;
-  left: 32px;
-  color: black;
-  font-size: 20px;
+.acPosition{
+position: absolute;
+left: 15px;
+color:black;
+font-size: 20px
 }
 
-.surgePosition {
-  position: absolute;
-  left: 50px;
-  color: black;
-  font-size: 20px;
+.statRow{
+position: absolute;
+top: 190px;
+}
+.hpPosition{
+position: absolute;
+left: 20px;
+color:black;
+font-size: 20px
+}
+.speedPosition{
+position: absolute;
+left: 32px;
+color:black;
+font-size: 20px
 }
 
-.namePosition {
-  position: absolute;
-  left: 30px;
-  top: 25px;
-  color: White;
-  font-size: 30px;
+.surgePosition{
+position: absolute;
+left: 50px;
+color:black;
+font-size: 20px
 }
 
-.subtitlePosition {
-  position: absolute;
-  left: 30px;
-  top: 60px;
-  color: rgb(184, 184, 184);
-  font-size: 20px;
+.namePosition{
+position: absolute;
+left: 30px;
+top: 25px;
+color:White;
+font-size: 30px
 }
 
-.descriptionPosition {
-  position: absolute;
-  left: 30px;
-  top: 80px;
-  color: white;
-  font-size: 15px;
-  width: 230px;
-  line-height: 15pt;
+.subtitlePosition{
+position: absolute;
+left: 30px;
+top: 60px;
+color:rgb(184, 184, 184);
+font-size: 20px
 }
 
-.abilityPosition {
-  position: absolute;
-  left: 30px;
-  top: 230px;
-  color: black;
-  font-size: 15px;
-  width: 250px;
-  line-height: 15pt;
+.descriptionPosition{
+position: absolute;
+left: 30px;
+top: 80px;
+color:white;
+font-size: 15px;
+width: 230px;
+line-height: 15pt;
 }
-.powerPosition {
+
+.abilityPosition{
+position: absolute;
+left: 30px;
+top: 230px;
+color:black;
+font-size: 15px;
+width: 250px;
+line-height: 15pt;
+}
+.powerPosition{
   position: absolute;
   left: 30px;
   top: 250px;
@@ -490,69 +447,73 @@ span {
   line-height: 15pt;
 }
 
-.bg-Alisa {
-  background-color: #228b22 !important;
-  height: 500px;
-  width: 500px;
-  background-image: url(./images/characterTemplates/allisa.jpg);
-  background-size: cover;
-  max-width: 500px;
-  min-width: 500px;
-}
-
-.bg-Arjhan {
-  background-color: #800000 !important;
-  height: 500px;
-  width: 500px;
-  background-image: url(./images/characterTemplates/arjhan.jpg);
-  background-size: cover;
-  max-width: 500px;
-  min-width: 500px;
-}
-
-.bg-Immeril {
-  background-color: #4f3584 !important;
-  height: 500px;
-  width: 500px;
-  background-image: url(./images/characterTemplates/immeril.jpg);
-  background-size: cover;
-  max-width: 500px;
-  min-width: 500px;
-}
-
-.bg-Kat {
-  background-color: #013554 !important;
-  height: 500px;
-  width: 500px;
-  background-image: url(./images/characterTemplates/kat.jpg);
-  background-size: cover;
-  max-width: 500px;
-  min-width: 500px;
-}
-
-.bg-Thorgrim {
-  background-color: #9e8f0b !important;
-  background-image: url(./images/characterTemplates/thorgrim.jpg);
-  background-size: cover;
-  height: 500px;
-  width: 500px;
-  max-width: 500px;
-  min-width: 500px;
-}
-.selectWarriors {
-  width: 100%;
-  font-family: "IM Fell DW Pica", serif;
-  color: white;
+  .bg-Alisa {
+    background-color: #228B22!important;
+    height:500px;
+    width:500px;
+    background-image: url(./images/characterTemplates/allisa.jpg);
+    background-size: cover;
+    max-width: 500px;
+    min-width: 500px;
+    
+    
+    
+  }
+  
+  .bg-Arjhan {
+    background-color: 	#800000!important;
+    height:500px;
+    width:500px;
+    background-image: url(./images/characterTemplates/arjhan.jpg);
+    background-size: cover;
+    max-width: 500px;
+    min-width: 500px;
+  }
+  
+  .bg-Immeril {
+    background-color: #4f3584!important;
+    height:500px;
+    width:500px;
+    background-image: url(./images/characterTemplates/immeril.jpg);
+    background-size: cover;
+    max-width: 500px;
+    min-width: 500px;
+  }
+  
+  .bg-Kat {
+    background-color: #013554!important;
+    height:500px;
+    width:500px;
+    background-image: url(./images/characterTemplates/kat.jpg);
+    background-size: cover;
+    max-width: 500px;
+    min-width: 500px;
+  }
+  
+  .bg-Thorgrim {
+    background-color: #9e8f0b!important;
+    background-image: url(./images/characterTemplates/thorgrim.jpg);
+    background-size: cover;
+    height:500px;
+    width:500px;
+    max-width: 500px;
+    min-width: 500px;
+  
+  }
+.selectWarriors{
+  width:100%;
+  font-family: 'IM Fell DW Pica', serif;
+  color:white;
   text-align: center;
 }
 
 .charSelectBg {
   background-image: url("./images/brick.jpg");
   background-size: 100%;
-  height: 100%;
-  width: 100%;
-  min-height: 1000px;
-  /* position:fixed */
+  height:100%;
+  width:100%;
+  min-height:1000px
+
 }
 .slide-out-blurred-top {
   -webkit-animation: slide-out-blurred-top 0.45s
@@ -569,6 +530,7 @@ span {
     -webkit-filter: blur(0);
     filter: blur(0);
     opacity: 1;
+    pointer-events: none
   }
   100% {
     -webkit-transform: translateY(-1000px) scaleY(2) scaleX(0.2);
@@ -578,26 +540,7 @@ span {
     -webkit-filter: blur(40px);
     filter: blur(40px);
     opacity: 0;
-  }
-}
-@keyframes slide-out-blurred-top {
-  0% {
-    -webkit-transform: translateY(0) scaleY(1) scaleX(1);
-    transform: translateY(0) scaleY(1) scaleX(1);
-    -webkit-transform-origin: 50% 0%;
-    transform-origin: 50% 0%;
-    -webkit-filter: blur(0);
-    filter: blur(0);
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: translateY(-1000px) scaleY(2) scaleX(0.2);
-    transform: translateY(-1000px) scaleY(2) scaleX(0.2);
-    -webkit-transform-origin: 50% 0%;
-    transform-origin: 50% 0%;
-    -webkit-filter: blur(40px);
-    filter: blur(40px);
-    opacity: 0;
+    pointer-events: none
   }
 }
 
@@ -619,21 +562,145 @@ span {
   font-size: 30px;
 }
 
-.choosePowersInactive {
-  color: rgb(105, 105, 105) !important;
-  font-family: "IM Fell DW Pica", serif;
+.choosePowersInactive{
+  color: rgb(105, 105, 105)!important;
+  font-family: 'IM Fell DW Pica', serif;
   font-size: 30px;
-  text-decoration: none !important;
+  text-decoration:none!important;
 }
 
-.choosepowersActive {
-  color: white !important;
-  font-family: "IM Fell DW Pica", serif;
+.choosepowersActive{
+  color: white!important;
+  font-family: 'IM Fell DW Pica', serif;
   font-size: 30px;
   opacity: 1;
   animation: start 2s linear infinite;
-  text-decoration: none !important;
+  text-decoration:none!important;
 }
+
 .charSelectLink{
   color: black !important
+}
+
+/* Player card styling */
+.utilityCard{
+  background-color: grey;
+  height:450px;
+  width:320px;
+  background-image: url(./images/powerCards/utility.jpg);
+  background-size: 100%;
+  border-radius: 7px;
+  font-family: 'IM Fell DW Pica', serif;
+}
+
+.atWillCard{
+  background-color: green;
+  height:450px;
+  width:320px;
+  background-image: url(./images/powerCards/atWill.jpg);
+  background-size: 100%;
+  border-radius: 7px;
+  font-family: 'IM Fell DW Pica', serif;
+}
+.dailyCard{
+  background-color: rgb(78, 78, 128);
+  height:450px;
+  width:320px;
+  background-image: url(./images/powerCards/daily.jpg);
+  background-size: 100%;
+  border-radius: 7px;
+  font-family: 'IM Fell DW Pica', serif;
+}
+
+
+.powerCardTitle{
+  position: absolute;
+  left:30px;
+  top:30px;
+  color:white;
+  font-size: 35px;
+}
+.powerCardSubtitle{
+  position: absolute;
+  left:30px;
+  top:100px;
+  color:white !important;
+  font-size: 16px;
+  width:270px;
+  line-height: 16px
+
+}
+.PowerCardInst{
+color:black;
+position: absolute;
+font-size: 15px;
+left:40px;
+top:170px;
+width: 230px
+}
+
+.powerCardNumberBox{
+  color:black;
+  position: absolute;
+  top:330px;
+  left: 90px
+}
+.powerCardNumberBox2{
+  color:black;
+  position: absolute;
+  top:300px;
+  left: 90px
+}
+.pcb{
+  color:black!important
+}
+
+.powerCardUse{
+position:absolute;
+left:40px;
+top:360px;
+color:black
+}
+.powerCardUse2{
+  position:absolute;
+  left:40px;
+  top:380px;
+  color:black
+  }
+
+.powerCardMiss{
+  position:absolute;
+left:40px;
+top:360px;
+color:black
+}
+
+.powerCardDefault{
+margin: 0 auto; 
+}
+
+.nameTitle{
+  color: white;
+  font-family: 'IM Fell DW Pica', serif;
+  text-align: center;
+  font-size: 60px;
+}
+.displayFace{
+  height: 200px;
+  text-align: center;
+  border-radius:50%
+}
+.submitPower{
+  border:none;
+  background:transparent !important;
+  background-image: url('./images/buttonclear.png');
+  text-align: center;
+}
+.btn:focus, .btn:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.buttonStyles{
+  font-size: 30px !important 
 }
