@@ -23,7 +23,7 @@ class App extends Component {
           <div className="container-fluid">
             <Router>
               <Fragment>
-                <Route exact path="/" component={Home} />
+                <Route exact path="/" component={Home2} />
                 <Route path="/char-select" component={Characters} />
                 <Route path="/powers/:id" component={Powers} />
                 <Route path="/timetract" component={TimeTract} />

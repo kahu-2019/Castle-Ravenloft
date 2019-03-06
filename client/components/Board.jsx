@@ -5,6 +5,7 @@ import PF from 'pathfinding'
 
 import allTiles from '../../public/game_assets/tiles.json'
 import { getAllMonsters } from '../actions';
+import DisplayCharactersBoard from './DisplayCharactersBoard'
 
 /*  Main board component, renders tile and square sub-components
 
@@ -1006,6 +1007,7 @@ class Board extends Component {
                     {this.state.explore.top && <React.Fragment><button onClick={() => this.prepTileForAdding(0)}>Explore top</button><br /></React.Fragment>}
                     {this.state.explore.bottom && <button onClick={() => this.prepTileForAdding(2)}>Explore bottom</button>}
                 </div>
+                <DisplayCharactersBoard />
             </React.Fragment>
         )
     }

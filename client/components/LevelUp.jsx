@@ -50,7 +50,7 @@ class LevelUp extends Component {
 
 
             <div>
-            // replace hardcoded 3 with "this.props.id"
+            {/* // replace hardcoded 3 with "this.props.id" */}
             {this.state.isVisible && <button className= "btn btn-danger" onClick={ () => { this.state.isVisible = false ;  this.props.updateLevel(3)}}> Level Up </button>} 
             </div>
         )
