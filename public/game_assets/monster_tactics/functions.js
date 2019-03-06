@@ -12,18 +12,6 @@ function roll(){
     return Math.floor(Math.random()*20) + 1
 }
 
-// function isSquareAdjacent(playerX,playerY,monX,monY){
-//     if(playerX -1 == monX && playerY == monY){
-//         return true
-//     } else if(playerX +1 == monX && playerY == monY){
-//         return true
-//     } else if(playerX == monX && playerY -1 == monY){
-//         return true
-//     } else if(playerX == monX && playerY + 1 == monY){
-//         return true
-//     } else {return false}
-//     }
-
 function isSquareAdjacent(path){
     if(path.length == 2){
         return true

@@ -65,7 +65,6 @@ if(playerDetails.players){
     // if(playerPos.tileX === monPos.tileX && playerPos.tileY === monPos.tileY){}
 
     //Checks for square adjacent
-        console.log('hit')
         if(tileAdjacent){
             var squareAdjacent = isSquareAdjacent(path)
         }
