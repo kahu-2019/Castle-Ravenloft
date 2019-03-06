@@ -40,6 +40,19 @@ var closestPlayer = playerDetails.players.find(player => player.id == playerDeta
 var heroes = playerDetails.players
 var tileAdjacent = playerDetails.adjacent
 var squareAdjacent = false
+var path = playerDetails.path
+
+let pathX = 0
+let pathY = 0
+
+if(path.length >= 6){
+    pathX = path[6][0] - path[0][0]
+    pathY = path[6][1] - path[0][1]
+}
+else{
+    pathX = path[path.length][0] - path[0][0]
+    pathY = path[path.length][1] - path[0][1]
+}
 
 console.log(closestPlayer)
 
@@ -147,6 +160,9 @@ if(tileAdjacent || squareAdjacent){
     
     console.log('coming closer', movement)
 
-    return movement
+    return {
+        x: playerDetails.monster.x + pathX,
+        y: playerDetails.monster.y + pathY
+    }
 }
 }
