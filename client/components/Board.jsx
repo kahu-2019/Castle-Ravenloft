@@ -93,6 +93,7 @@ class Board extends Component {
         this.checkTwoAdjacentBottom = this.checkTwoAdjacentBottom.bind(this)
         this.checkTileForMonsters = this.checkTileForMonsters.bind(this)
         this.adjacentTester = this.adjacentTester.bind(this)
+        this.attackTester = this.attackTester.bind(this)
     }
 
     componentDidMount() {
@@ -186,6 +187,9 @@ class Board extends Component {
             case "t":
                 this.adjacentTester()
                 break
+            case "a":
+                this.attackTester()
+                break
         }
     }
 
@@ -200,6 +204,14 @@ class Board extends Component {
         let temp = this.state.players
         temp.push(temp.shift())
         this.setState({ players: temp, speed: temp[0].speed+this.state.speedModifier }, () => this.checkSidesOfCharacter())
+    }
+
+    attackTester(){
+        let data = this.checkTileForMonsters(this.state.players[0])
+        if(data){
+            data.cardId = 27
+            let newOwner = findCard(data)
+        }
     }
 
     adjacentTester(){
@@ -1149,7 +1161,7 @@ class Board extends Component {
             if (set.y > rows) rows = set.y
         })
         return (
-            this.state.lose ? 'You lose' :
+            false ? 'You lose' :
             <div style={{overflow:'hidden'}}>
                 <TimeTract />
                 <div className='board-container'>
