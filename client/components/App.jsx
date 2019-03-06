@@ -7,6 +7,7 @@ import Home2 from "./Home2";
 import Home from "./Home";
 import Characters from "./Characters";
 import Powers from "./Powers";
+// import PowerCardsBoardView from './PowerCardsBoardView'
 
 class App extends Component {
   render() {

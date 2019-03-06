@@ -35,7 +35,7 @@ class Characters extends Component {
                 <div className="row">
                     <CharacterOrder />
                 </div>
-                <div className="card-columns imFont">
+                <div className="row justify-content-center imFont">
                     {this.props.characters.map((character, i) => {
                         var id = character.id
                         return (
