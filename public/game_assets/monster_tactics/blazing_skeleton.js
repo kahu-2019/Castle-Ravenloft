@@ -106,8 +106,12 @@ if(tileAdjacent || squareAdjacent){
 
     var destination = {x:monX - playX,y:monY - playY}
 
+    let grid = null
+
     var tileExists = playerDetails.dataSet.find(tile => {
         tile.x == destination.x && tile.y == destination.y
+        grid = tileExists.grid
+        tileExists = detailedPosition(tileExists)
         return true
     })
     
