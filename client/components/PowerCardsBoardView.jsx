@@ -6,7 +6,7 @@ class PowerCardsBoardView extends React.Component{
     }
 
 render(){
-    console.log(this.props.player[0].cards.atWill)
+    // console.log(this.props.player[0].cards.atWill)
     //console.log(this.state)
     return(
         this.props.player[0].cards.atWill.map((item,i)=>{

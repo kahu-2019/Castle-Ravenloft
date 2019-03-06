@@ -15,6 +15,7 @@ import skeleton from '../../public/game_assets/monster_tactics/skeleton.js'
 import spider from '../../public/game_assets/monster_tactics/spider.js'
 import wraith from '../../public/game_assets/monster_tactics/wraith.js'
 import gargoyle from '../../public/game_assets/monster_tactics/gargoyle.js'
+import findCard from '../../public/game_assets/hero_tactics/index.js'
 
 /*  Main board component, renders tile and square sub-components
 
@@ -98,7 +99,9 @@ class Board extends Component {
         this.checkTwoAdjacentRight = this.checkTwoAdjacentRight.bind(this)
         this.checkTwoAdjacentTop = this.checkTwoAdjacentTop.bind(this)
         this.checkTwoAdjacentBottom = this.checkTwoAdjacentBottom.bind(this)
+        this.checkTileForMonsters = this.checkTileForMonsters.bind(this)
         this.adjacentTester = this.adjacentTester.bind(this)
+        this.attackTester = this.attackTester.bind(this)
     }
 
     componentDidMount() {
@@ -192,6 +195,9 @@ class Board extends Component {
             case "t":
                 this.adjacentTester()
                 break
+            case "a":
+                this.attackTester()
+                break
         }
     }
 
@@ -208,17 +214,38 @@ class Board extends Component {
         this.setState({ players: temp, speed: temp[0].speed + this.state.speedModifier }, () => this.checkSidesOfCharacter())
     }
 
-    adjacentTester() {
+    attackTester(){
+        let data = this.checkTileForMonsters(this.state.players[0])
+        if(data){
+            data.cardId = 27
+            let newOwner = findCard(data)
+            let tempPlayers = this.state.players
 
-        for (let monster of this.state.players[0].monsters) {
-            // console.log(monster)
+            let newPlayer = 0
+            for(let player in tempPlayers){
+                if(tempPlayers[player].id == data.owner.id){
+                    newPlayer = player
+                    break
+                }
+            }
+            tempPlayers[newPlayer] = newOwner.owner
+            console.log(tempPlayers, newOwner.owner)
+            this.setState({players: tempPlayers}, () => this.processCharacters())
         }
+    }
 
-        let monsterId = this.state.players[0].monsters[0].id
-        let monster = this.state.players[0].monsters.find(monster => monster.id === monsterId)
-        // console.log(monster)
+    adjacentTester(){
+
+        let tempPlayers = this.state.players
+        for(let monster of this.state.players[0].monsters){
+            // console.log(monster)
+
+        let monsterId = monster.id
         let closestPlayer = this.checkAdjacentSquares(monster)
-
+        console.log('monster', monster)
+        console.log('id', monsterId)
+        console.log('closestPlayer', closestPlayer)
+        
         let result = blazingSkeleton(closestPlayer)
         // let result = undefined
         // switch (monsterId){
@@ -253,9 +280,8 @@ class Board extends Component {
         //         result = wraith(closestPlayer)
         // }
 
-
-        let tempPlayers = this.state.players
-        if (result.position) {
+        
+        if(result.position){
             let tempMonsters = this.state.players[0].monsters
             for (let monmon of tempMonsters) {
                 if (monmon == monster) {
@@ -264,7 +290,6 @@ class Board extends Component {
                     break
                 }
             }
-            let tempPlayers = this.state.players
             tempPlayers[0].monsters = tempMonsters
         }
 
@@ -277,9 +302,62 @@ class Board extends Component {
                 }
             }
         }
+    }
 
-        this.setState({ players: tempPlayers }, () => this.processCharacters())
-        // console.log(result)
+        this.setState({players: tempPlayers}, () => this.processCharacters())
+        // console.log(tempPlayers)
+    }
+
+    checkTileForMonsters(character){
+        let characterCoords = this.getTileAndSquareForCharacter(character)
+        let allCharacters = JSON.parse(JSON.stringify(this.state.players))
+        let monsterArray = []
+        for(let char of allCharacters){
+            char.monsters.map(monster => {
+                let monsterCoords = this.getTileAndSquareForCharacter(monster)
+                if(monsterCoords.tileX === characterCoords.tileX && monsterCoords.tileY === characterCoords.tileY){
+                    let tempMon = {
+                        monsterId: monster.id,
+                        owner: char,
+                        player: character
+                    }
+                    monsterArray.push(tempMon)
+                }
+            })
+        }
+
+        let grid = []
+        for(let item of this.state.cleanTileSet){
+            if(item.x === characterCoords.tileX && item.y === characterCoords.tileY){
+                grid = JSON.parse(JSON.stringify(item.grid))
+            }
+        }
+
+        for(let row in grid){
+            for(let col in grid[row]){
+                if(grid[row][col] == 2) grid[row][col] = 0
+            }
+        }
+
+        let paths = []
+
+        for(let item of monsterArray){
+            let monster = item.owner.monsters.find(mon => mon.id === item.monsterId)
+            let monsterCoords = this.getTileAndSquareForCharacter(monster)
+            let gridFind = new PF.Grid(grid)
+            let finder = new PF.AStarFinder()
+            let path = finder.findPath(Number(characterCoords.squareX), Number(characterCoords.squareY), Number(monsterCoords.squareX), Number(monsterCoords.squareY), gridFind)
+            paths.push({
+                path,
+                player: item.player,
+                owner: item.owner,
+                monsterId: item.monsterId
+            })
+        }
+        
+        return paths.sort((a, b) => {
+            return a.path.length - b.path.length
+        })[0]
     }
 
     //  Checks the adjacent two squares of a given tile
@@ -1096,7 +1174,6 @@ class Board extends Component {
     }
 
     render() {
-        console.log(this.state.speed)
         let rows = 0
         let cols = 0
         this.state.dataSet.map(set => {
@@ -1104,7 +1181,7 @@ class Board extends Component {
             if (set.y > rows) rows = set.y
         })
         return (
-            this.state.lose ? 'You lose' :
+            false ? 'You lose' :
                 <div style={{ overflow: 'hidden' }}>
                     <TimeTract />
                     <div className='board-container'>

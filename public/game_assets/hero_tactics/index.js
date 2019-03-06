@@ -11,7 +11,7 @@ function roll(){
     return Math.floor(Math.random()*20) + 1
 }
 
-function findCard(monsterDetails){
+export default function findCard(monsterDetails){
     switch(monsterDetails.cardId){
         case 27:
         return carefulAttack(monsterDetails)
