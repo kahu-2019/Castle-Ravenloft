@@ -9,9 +9,9 @@ var playerDetails = {
     adjacentTile:false,
     id:1,
     playerTile:[[1,1,1,1],
-                [0,11,0,0],
-                [11,0,0,1],
-                [0,0,0,1]],
+    [0,11,0,0],
+    [11,0,0,1],
+    [0,0,0,1]],
     players:[{id: 1, name:'Karl', AC:20,x:2,y:2},{id: 2,name:'Sam the Gimp',AC:16,x:1,y:3}],
     monster:{id:1,name:'blazing skeleton',x:1,y:1},
     dataSet:[{x:1,y:1,grid:[
@@ -34,111 +34,112 @@ var playerDetails = {
     ]}]
 }
 
+export default function blazingSkeleton(playerDetails){
 //values i need
-var closestPlayer = playerDetails.players.find(player => player.id == playerDetails.id)
+var closestPlayer = playerDetails.id
 var heroes = playerDetails.players
-var tileAdjacent = playerDetails.adjacentTile
+var tileAdjacent = playerDetails.adjacent
 var squareAdjacent = false
+var path = playerDetails.path
+var monster = playerDetails.monster
+var dataSet = playerDetails.dataSet
 
-console.log(closestPlayer)
-
-//from pos finder function with player.x and player.y, monster.x and monster.y
-//DETAILED POSITION
-var playerPos = detailedPosition(closestPlayer)
-
-var monPos = detailedPosition(playerDetails.monster)
-
-console.log('playerPos',playerPos)
-console.log('monPos',monPos)
-
-//Checks for square adjacent
-
-if(tileAdjacent){
-    var squareAdjacent = isSquareAdjacent(playerPos.squareX,playerPos.squareY,monPos.squareX,monPos.squareY)
+if(playerDetails.players){
+    closestPlayer = playerDetails.players.find(player => player.id == playerDetails.id)
 }
 
-console.log(closestPlayer)
-console.log(tileAdjacent)
 
 
-// Blazing Skeleton attack stats
-var ballOfFire = {
-    att: 7,
-    dmg: 2,
-    miss:1,
-}
+    // console.log(closestPlayer)
 
-var diceRoll = null
+    //from pos finder function with player.x and player.y, monster.x and monster.y
+    //DETAILED POSITION
+    var playerPos = detailedPosition(closestPlayer)
 
-if(tileAdjacent || squareAdjacent){
-    var characters = []
-    for(var i = 0; i < heroes.length; i++){
-        diceRoll = roll()
-        console.log('dice roll:',diceRoll)
-        //if hit, burn them 2 dmg
-        if(diceRoll + ballOfFire.att > heroes[i].AC){
-            console.log('Oh no!', heroes[i].name + ' got hurt with ' + ballOfFire.dmg + ' damage!')
-            characters.push({
-                id:heroes[i].id,
-                damage:ballOfFire.dmg,
-            })
-        //if miss, burn them 1 dmg
-        } else if(diceRoll + ballOfFire.att <= heroes[i].AC){
-            console.log('Oh no!', heroes[i].name + ' got hurt with ' + ballOfFire.miss + ' damage!')
-            characters.push({
-                id:heroes[i].id,
-                damage:ballOfFire.miss
-            })
-        } 
+    var monPos = detailedPosition(playerDetails.monster)
+
+    // console.log('playerPos',playerPos)
+    // console.log('monPos',monPos)
+
+    //Checks for square adjacent
+
+    if(tileAdjacent){
+        var squareAdjacent = isSquareAdjacent(playerPos.squareX,playerPos.squareY,monPos.squareX,monPos.squareY)
     }
-    console.log('character data:',characters)
-    return {
-        characters
+
+    // console.log(closestPlayer)
+    // console.log(tileAdjacent)
+
+
+    // Blazing Skeleton attack stats
+    var ballOfFire = {
+        att: 7,
+        dmg: 2,
+        miss:1,
     }
-//move closer
-}else{
-    //convert to detailedPosition
-    var monX = monPos.tileX
-    var monY = monPos.tileY
-    var playX = playerPos.tileX
-    var playY = playerPos.tileY
 
-    var destination = {x:monX - playX,y:monY - playY}
+    var diceRoll = null
 
-    var tileExists = playerDetails.dataSet.find(tile => {
-        tile.x == destination.x && tile.y == destination.y
-        return true
-    })
-    
-    console.log('tile Exists:',tileExists)
+    if(tileAdjacent || squareAdjacent){
+        var characters = []
+        for(var i = 0; i < heroes.length; i++){
+            diceRoll = roll()
+            // console.log('dice roll:',diceRoll)
+            //if hit, burn them 2 dmg
+            if(diceRoll + ballOfFire.att > heroes[i].AC){
+                // console.log('Oh no!', heroes[i].name + ' got hurt with ' + ballOfFire.dmg + ' damage!')
+                characters.push({
+                    id:heroes[i].id,
+                    damage:ballOfFire.dmg,
+                })
+            //if miss, burn them 1 dmg
+            } else if(diceRoll + ballOfFire.att <= heroes[i].AC){
+                // console.log('Oh no!', heroes[i].name + ' got hurt with ' + ballOfFire.miss + ' damage!')
+                characters.push({
+                    id:heroes[i].id,
+                    damage:ballOfFire.miss
+                })
+            } 
+        }
+        // console.log('character data:',characters)
+        return {
+            characters
+        }
+    //move closer
+    }
+    else{
+        //convert to detailedPosition
+        let monsterTileCoords = detailedPosition(monster)
+        let monsterTile = undefined
 
-    if(tileExists != null || tileExists != undefined){
-        if(tileExists.grid[monPos.squareY][monPos.squareX] == 0 || tileExists.grid[monPos.squareY][monPos.squareX] == 2){
-            monPos.tileX = tileExists.x
-            monPos.tileY = tileExists.y
-        }else{
-            //look for first free space and set monPos to the square as well as the tile
-            let square = {}
+        for(let tile of dataSet){
+            if(tile.x === monsterTileCoords.tileX && tile.y === monsterTileCoords.tileY){ monsterTile = tile; break}
+        }
 
-            
-            outerLoop: for(let row in tileExists.grid){
-                for(let col in tileExists.grid[row]){
-                    if(tileExists.grid[row][col] == 0 || tileExists.grid[row][col] == 2){
-                        square.x = Number(col)
-                        square.y = Number(row)
-                        break outerLoop
+        let offsetX = path[0][0]
+        let offsetY = path[0][1]
+
+        // let nextTile = undefined
+        let nextSquare = undefined
+
+        outerloop:
+        for(let i in path){
+            let squareX = monster.x - offsetX + path[i][0]
+            let squareY = monster.y - offsetY + path[i][1]
+            for(let tile of dataSet){
+                if(squareX > (tile.x-1)*4 && squareX <= (tile.x-1)*4+4 && squareY > (tile.y-1)*4 && squareY <= (tile.y-1)*4+4){
+                    if(tile != monsterTile){
+                        // nextTile = tile
+                        nextSquare = {
+                            x: squareX,
+                            y: squareY
+                        }
+                        break outerloop
                     }
                 }
             }
-//convert to total position
-            var movement = totalPosition(tileExists.x,tileExists.y,square.x,square.y)
         }
-
+        
+        return {position: nextSquare}
     }
-
-
-    
-    console.log('coming closer', movement)
-
-    return movement
 }

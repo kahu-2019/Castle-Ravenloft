@@ -49,5 +49,6 @@ function detailedPosition(char){
         squareY
     }
 
+
     return charDetailedPosition
 }
