@@ -104,8 +104,9 @@ if(tileAdjacent || squareAdjacent){
     var playX = playerPos.tileX
     var playY = playerPos.tileY
 
-    var destination = {x:monX - playX,y:monY - playY}
+    var difference = {x:monX - playX,y:monY - playY}
 
+    
     
     var tileExists = playerDetails.dataSet.find(tile => {
         tile.x == destination.x && tile.y == destination.y
@@ -118,6 +119,7 @@ if(tileAdjacent || squareAdjacent){
     console.log('tile Exists:',tileExists)
 
     if(tileExists != null || tileExists != undefined){
+        console.log('free space')
         if(grid[monPos.squareY][monPos.squareX] == 0 || grid[monPos.squareY][monPos.squareX] == 2){
             monPos.tileX = tileExists.x
             monPos.tileY = tileExists.y
