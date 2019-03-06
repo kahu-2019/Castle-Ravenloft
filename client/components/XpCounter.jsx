@@ -22,7 +22,7 @@ poolXp = () => {
       console.log(this.poolXp())
     return (
       <div>
-        <button className= "btn btn-danger  " onClick={ this.poolXp }>hello</button>
+        <button className= "btn btn-danger" onClick={ this.poolXp }>hello</button>
       </div>
     )
   }

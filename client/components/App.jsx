@@ -7,7 +7,8 @@ import Home from "./Home";
 import Characters from "./Characters";
 import Powers from "./Powers";
 import SurgeTokens from './SurgeTokens';
-import XpCounter from './XpCounter'
+import XpCounter from './XpCounter';
+import LevelUp from './LevelUp';
 
 class App extends Component {
   render() {
@@ -15,6 +16,7 @@ class App extends Component {
       <div>
         <SurgeTokens />
         <XpCounter />
+        <LevelUp />
 
         <div style={{ overflow: 'hidden' }}>
           <div className="container-fluid">
