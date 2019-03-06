@@ -35,6 +35,8 @@ class Board extends Component {
                 y: 0
             },
 
+            lose: false,
+
             speed: 0,
             speedModifier: 2,
 
@@ -968,21 +970,24 @@ class Board extends Component {
 
         let position = this.getTileAndSquareForCharacter(char)
 
+        let speed = this.state.speed-1
+
         let tileExists = false
         for (let item of this.state.cleanTileSet) {
             if (position.tileX === item.x && position.tileY === item.y) {
                 tileExists = true
                 if (item.grid[position.squareY][position.squareX] === 1) {
                     char[dir] = char[dir] - val
+                    speed++
                     break
                 }
             }
         }
-        if (!tileExists) char[dir] = char[dir] - val
+        if (!tileExists){ char[dir] = char[dir] - val; speed++}
 
         let tempPlayers = this.state.players
         tempPlayers[0] = char
-        this.setState({ players: tempPlayers, speed: this.state.speed-1 }, () => this.processCharacters())
+        this.setState({ players: tempPlayers, speed }, () => this.processCharacters())
     }
 
     //  Checks each side of the current character, returns an object with values showing if they are on an unexplored edge
@@ -1042,6 +1047,13 @@ class Board extends Component {
 
     //  Gets the position of every character and monster, and puts them on the 'dataSet' stored in state
     processCharacters() {
+        for(let player of this.state.players){
+            if(player.HP <= 0){
+                this.setState({lose:true})
+                return
+            }
+        }
+
         let tempSet = JSON.parse(JSON.stringify(this.state.cleanTileSet)) // Creates a deep copy of the array
 
         outerloop:
@@ -1086,6 +1098,7 @@ class Board extends Component {
             if (set.y > rows) rows = set.y
         })
         return (
+            this.state.lose ? 'You lose' :
             <div style={{overflow:'hidden'}}>
                 <TimeTract />
                 <div className='board-container'>
