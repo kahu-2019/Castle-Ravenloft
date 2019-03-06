@@ -1,10 +1,11 @@
 const express = require("express");
 
-const encounters = require("../db/encounter");
-const character = require("../db/character");
-const randomMonster = require("../db/randomMonster");
-const monster = require("../db/monsters");
-const treasure = require("../db/treasure");
+const encounters = require('../db/encounter')
+const character = require('../db/character')
+const randomMonster = require('../db/randomMonster')
+const monster = require('../db/monsters')
+const treasure = require('../db/treasure')
+const adventures = require('../db/adventures')
 
 const router = express.Router();
 
@@ -118,7 +119,28 @@ router.get("/randomTreasure", (req, res) => {
       res.json(data);
     })
     .catch(err => {
-      res.json(standardError);
-    });
-});
-module.exports = router;
+      res.json(standardError)
+    })
+})
+
+// GET /api/v1/allAdventures returns all adventures
+router.get('/allAdventures', (req, res) => {
+  adventures.getAllAdv().then(data => {
+    res.json(data)
+  })
+    .catch(err => {
+      res.json(standardError)
+    })
+})
+
+// GET /api/v1/allAdventures/:id returns all adventure data for that id
+router.get('/allAdventures/:id', (req, res) => {
+  adventures.getAdvById(req.params.id).then(data => {
+    res.json(data)
+  })
+    .catch(err => {
+      console.log(err)
+      res.json(standardError)
+    })
+})
+module.exports = router
