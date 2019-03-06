@@ -7,7 +7,6 @@ import Home2 from "./Home2";
 import Characters from "./Characters";
 import Powers from "./Powers";
 import SurgeTokens from './SurgeTokens';
-import XpCounter from './XpCounter';
 import LevelUp from './LevelUp';
 import DisplayCharactersBoard from './DisplayCharactersBoard';
 

@@ -39,6 +39,8 @@ class Board extends Component {
                 y: 0
             },
 
+            speed: 0,
+
             explore: {
                 top: false,
                 bottom: false,
@@ -118,7 +120,7 @@ class Board extends Component {
         //  Removes Secret Stairway tile for the ending piece
         let endingPiece = temp.splice(29, 1)[0]
 
-        this.setState({ players: tempPlayers, dataSet: strahdsCrypt, cleanTileSet: strahdsCrypt, completeTileSet: temp, endingPiece }, () => {
+        this.setState({ players: tempPlayers, dataSet: strahdsCrypt, cleanTileSet: strahdsCrypt, completeTileSet: temp, endingPiece, speed: tempPlayers[0].speed }, () => {
             this.processCharacters()
         })
     }
@@ -198,21 +200,21 @@ class Board extends Component {
     nextPlayer() {
         let temp = this.state.players
         temp.push(temp.shift())
-        this.setState({ players: temp }, () => this.checkSidesOfCharacter())
+        this.setState({ players: temp, speed: temp[0].speed }, () => this.checkSidesOfCharacter())
     }
 
     adjacentTester(){
 
         for(let monster of this.state.players[0].monsters){
-            console.log(monster)
+            // console.log(monster)
         }
 
         let monsterId = this.state.players[0].monsters[0].id
         let monster = this.state.players[0].monsters.find(monster => monster.id === monsterId)
-        console.log(monster)
+        // console.log(monster)
         let closestPlayer = this.checkAdjacentSquares(monster)
         
-        let result = gargoyle(closestPlayer)
+        let result = blazingSkeleton(closestPlayer)
         // let result = undefined
         // switch (monsterId){
         //     case 1:
@@ -246,6 +248,8 @@ class Board extends Component {
         //         result = wraith(closestPlayer)
         // }
 
+        
+        let tempPlayers = this.state.players
         if(result.position){
             let tempMonsters = this.state.players[0].monsters
             for(let monmon of tempMonsters){
@@ -257,8 +261,19 @@ class Board extends Component {
             }
             let tempPlayers = this.state.players
             tempPlayers[0].monsters = tempMonsters
-            this.setState({players: tempPlayers}, () => this.processCharacters())
         }
+
+        if(result.characters){
+            for(let character of result.characters){
+                for(let player of tempPlayers){
+                    if(character.id == player.id){
+                        player.HP = player.HP - character.damage
+                    }
+                }
+            }
+        }
+
+        this.setState({players: tempPlayers}, () => this.processCharacters())
         // console.log(result)
     }
 
@@ -950,7 +965,7 @@ class Board extends Component {
 
     //  Updates position of character, includes wall and edge detection
     getPositionOfCharacter(char, dir, val) {
-        if (char[dir] + val < 1) return
+        if (char[dir] + val < 1 || this.state.speed === 0) return
 
         char[dir] = char[dir] + val
 
@@ -970,7 +985,7 @@ class Board extends Component {
 
         let tempPlayers = this.state.players
         tempPlayers[0] = char
-        this.setState({ players: tempPlayers }, () => this.processCharacters())
+        this.setState({ players: tempPlayers, speed: this.state.speed-1 }, () => this.processCharacters())
     }
 
     //  Checks each side of the current character, returns an object with values showing if they are on an unexplored edge
@@ -1066,6 +1081,7 @@ class Board extends Component {
     }
 
     render() {
+        console.log(this.state.speed)
         let rows = 0
         let cols = 0
         this.state.dataSet.map(set => {
