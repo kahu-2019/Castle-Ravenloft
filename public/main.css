@@ -7,6 +7,10 @@
     background-image: url('./images/brick.jpg');
     background-size: 100%;
 }
+.surgeToken{
+  border-radius: 50%;
+  float: right;
+}
 
 .tile {
     display:grid;
