@@ -24,10 +24,11 @@ class CharacterOrder extends Component {
     return (
       <Fragment>
           <div className="col orderStyle">
-            <p>Order:</p>
+            {/* <p>Order:</p> */}
           </div>
           <div className="col">
             <ul className="list-inline">
+            <li className="list-inline-item orderList">Order:</li>
                 {this.props.characterOrder.map((character,i) => {
                     return(
                         <li className="list-inline-item orderList" key={i}>{character.name}</li>
