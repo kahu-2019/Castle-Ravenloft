@@ -17,7 +17,6 @@ export default class DisplayCharactersBoard extends Component {
 }
 
   render() {
-    console.log(this.props.player)
     return (
       <div className="characterBoardDiv">
         <div><img className="characterBoardView" src={"./images/icons/"+this.props.player[0].name+".jpg"}/></div>

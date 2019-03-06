@@ -8,6 +8,7 @@ import { getAllMonsters } from '../actions';
 import TimeTract from './TimeTract'
 import ScrollViewer from './ScrollViewer'
 import DisplayCharactersBoard from './DisplayCharactersBoard'
+import PowerCardsBoardView from './PowerCardsBoardView'
 
 /*  Main board component, renders tile and square sub-components
 
@@ -1011,6 +1012,7 @@ class Board extends Component {
                     {this.state.explore.bottom && <button onClick={() => this.prepTileForAdding(2)}>Explore bottom</button>}
                 <ScrollViewer/>
                 <DisplayCharactersBoard player={this.state.players}/>
+                <div className="pcbv row"><PowerCardsBoardView player={this.state.players}/></div>
                 </div>
             </React.Fragment>
         )
