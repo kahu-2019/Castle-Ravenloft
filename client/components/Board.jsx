@@ -34,6 +34,8 @@ class Board extends Component {
                 y: 0
             },
 
+            lost: false,
+
             speed: 0,
             speedModifier: 2,
 
@@ -1044,6 +1046,13 @@ class Board extends Component {
 
     //  Gets the position of every character and monster, and puts them on the 'dataSet' stored in state
     processCharacters() {
+        for(let player of this.state.players){
+            if(player.HP <= 0){
+                this.setState({lose:true})
+                return
+            }
+        }
+
         let tempSet = JSON.parse(JSON.stringify(this.state.cleanTileSet)) // Creates a deep copy of the array
 
         outerloop:
@@ -1088,6 +1097,7 @@ class Board extends Component {
             if (set.y > rows) rows = set.y
         })
         return (
+            this.state.lose ? 'You lose' :
             <div style={{overflow:'hidden'}}>
                 <TimeTract />
                 <div className='board-container'>
