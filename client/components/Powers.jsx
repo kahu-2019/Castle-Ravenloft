@@ -330,8 +330,6 @@ class Powers extends Component {
                             {this.state.daily.map((daily, i) => {
                                 return (
                                     <Fragment key={i}>
-                                        <div className="col">
-                                            <div className="form-check form-check-inline">
                                                 <label className="form-check-label">
                                                     <input className="form-check-input" type="radio" id={`inlineRadio1${i}`} value={JSON.stringify(daily)} name='dailyResult' onChange={this.handleChange} />
 
@@ -369,8 +367,6 @@ class Powers extends Component {
                                                         
                                                     </div>
                                                 </label>
-                                            </div>
-                                        </div>
                                     </Fragment>
                                 )
                             })}
@@ -379,12 +375,10 @@ class Powers extends Component {
                     <div className="form-group">
                     <br/><br/>
                         <h2 className='power-titles orderList'>Select One Utility Power:</h2>
-                        <div className="row">
+                        <div className="row justify-content-center">
                             {this.state.utility.map((utility, i) => {
                                 return (
                                     <Fragment key={i}>
-                                        <div className="col">
-                                            <div className="form-check form-check-inline">
                                                 <label className="form-check-label">
                                                     <input className="form-check-input" type="radio" id={`inlineRadio2${i}`} value={JSON.stringify(utility)} name='utilityResult' onChange={this.handleChange} />
                                                     <div className="card">
@@ -401,8 +395,6 @@ class Powers extends Component {
                                                             </div>
                                                     </div>
                                                 </label>
-                                            </div>
-                                        </div>
                                     </Fragment>
                                 )
                             })}
@@ -411,12 +403,10 @@ class Powers extends Component {
                     <div className="form-group">
                     <br/><br/>
                         <h2 className='power-titles orderList'>Select Two At Will Powers:</h2>
-                        <div className="row">
+                        <div className="row justify-content-center">
                             {this.state.atWill.map((atWill, i) => {
                                 return (
                                     <Fragment key={i}>
-                                    <div className="col">
-                                        <div className="form-check form-check-inline">
                                             <label className="form-check-label">
                                                 <input className="form-check-input" type="checkbox" id={`inlineCheckbox3${i}`} value={JSON.stringify({ atWill })} name='atWillResults' onChange={this.handleChange} />
 
@@ -449,8 +439,6 @@ class Powers extends Component {
                                                    
                                                 </div>
                                             </label>
-                                        </div>
-                                    </div>
                                 </Fragment>
                                 )
                             })}
