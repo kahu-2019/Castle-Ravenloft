@@ -327,168 +327,6 @@ span {
 
 }
 
-/* HIDE RADIO */
-[type=radio] { 
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-/* IMAGE STYLES */
-[type=radio] + .card {
-  cursor: pointer;
-}
-
-[type=radio]:hover + .card {
-  outline: 2px solid lightblue;
-  
-}
-
-/* CHECKED STYLES */
-[type=radio]:checked + .card {
-  outline: 2px solid greenyellow;
-}
-
-
-/* HIDE CHECK */
-[type=checkbox] { 
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-/* IMAGE STYLES */
-[type=checkbox] + .card {
-  cursor: pointer;
-}
-
-[type=checkbox]:hover + .card {
-  outline: 2px solid lightblue;
-  
-}
-
-/* CHECKED STYLES */
-[type=checkbox]:checked + .card {
-  outline: 2px solid greenyellow;
-}
-
-.power-titles{
-  text-align: center;
-}
-
-
-
-.Time-tract {
-  text-align: center;
-  margin-top: 10px;
-  z-index: 0;
-}
-.Time-tract h2 {
-  margin-bottom: 20px;
-  color: rgb(51, 30, 5);
-}
-.contaniner1 {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.containers,
-.contaniner1 {
-  position: absolute;
-  margin-left: 50px;
-  margin-top: 0;
-}
-.containers {
-  z-index: 1;
-  top: 1px;
-}
-.contaniner1 {
-  z-index: 2;
-  top: 120px;
-  height: 5em;
-}
-
-.time {
-  margin-top: 20px;
-  color: rgb(100, 57, 8);
-}
-.time1 {
-  margin-top: 70px;
-  color: rgb(100, 57, 8);
-}
-
-#circle {
-  width: 120px;
-  height: 120px;
-  color: rgb(126, 87, 41);
-  background: rgb(250, 235, 217);
-  border-radius: 80%;
-  border-color: rgb(99, 71, 37);
-  margin-right: 50px;
-  text-align: center;
-  border-color: #b6926b !important;
-}
-
-span {
-  font-size: 10px;
-  padding: 5px;
-  margin-bottom: 20px;
-}
-
-.h6 {
-  margin-top: 30px important;
-}
-
-.home {
-  background-color: black;
-}
-.home img {
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  overflow: hidden;
-  padding-bottom: 100px;
-  position: relative;
-  z-index: 1;
-  height: auto;
-  max-width: 100%;
-  margin-left: 7%;
-}
-
-.display {
-  background-color: rgb(247, 241, 224) !important;
-  color: rgb(48, 46, 46);
-  display: flex !important;
-  flex-wrap: wrap !important;
-  width: 80%;
-  margin: 0 auto;
-}
-
-.display1 {
-  position: absolute;
-  z-index: 2;
-  left: 12%;
-  top: 500px;
-  width: 30%;
-  height: 650px;
-  opacity: 0.8;
-  border-radius: 15px;
-  background-color: rgb(247, 241, 224) !important;
-}
-
-.display2 {
-  position: absolute;
-  z-index: 3;
-  height: 400px;
-  width: 28%;
-  right: 14%;
-  top: 500px;
-  opacity: 0.8;
-  border-radius: 15px;
-  background-color: rgb(247, 241, 224) !important;
-}
 /* The Following is for Character selection cards */
 .imFont{
   font-family: 'IM Fell DW Pica', serif;
@@ -814,4 +652,12 @@ margin: 0 auto;
   background:transparent !important;
   background-image: url('./images/buttonclear.png');
   text-align: center;
+}
+.btn:focus, .btn:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.buttonStyles{
+  font-size: 30px !important 
 }

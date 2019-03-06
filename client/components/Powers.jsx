@@ -456,19 +456,19 @@ class Powers extends Component {
                             })}
                         </div>
                     </div>
-                    <div className='row'>
-                        <div className='col'>
-                            <p><button type="submit" className="submitPower orderList choosepowersActive">Submit</button></p>
-                        </div>
+                    <div className='row justify-content-center'>
+
+                    {this.state.playGame?<p></p>:<p><button type="submit" className="btn submitPower orderList choosepowersActive buttonStyles">Submit</button></p>}
+
                         {this.state.nextCharacter &&
-                            <div className='col'>
-                                <Link to={`/powers/${this.state.nextCharId}`} className="submitPower choosepowersActive">Next character</Link>
-                            </div>
+
+                                <Link to={`/powers/${this.state.nextCharId}`} className="btn submitPower orderList choosepowersActive buttonStyles">Next character</Link>
+
                         }
                         {this.state.playGame &&
-                            <div className='col'>
-                                <Link to='/board' className="submitPower choosepowersActive">Enter Castle Ravenloft</Link>
-                            </div>
+
+                                <Fragment><Link to='/board' className="submitPower choosepowersActive">Enter Castle Ravenloft</Link><br/><br/></Fragment>
+
                         }
                     </div>
                 </form>
