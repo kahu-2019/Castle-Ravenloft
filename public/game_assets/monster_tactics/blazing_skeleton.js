@@ -36,23 +36,41 @@ var playerDetails = {
 
 export default function blazingSkeleton(playerDetails){
 //values i need
-var closestPlayer = playerDetails.players.find(player => player.id == playerDetails.id)
+var closestPlayer = playerDetails.players.find(player => player.id == playerDetails.id) || undefined
 var heroes = playerDetails.players
 var tileAdjacent = playerDetails.adjacent
 var squareAdjacent = false
 var path = playerDetails.path
+var monster = playerDetails.monster
+var dataSet = playerDetails.dataSet
+var monsterTile = undefined
 
-let pathX = 0
-let pathY = 0
+let monsterTileCoords = detailedPosition(monster)
 
-if(path.length >= 6){
-    pathX = path[6][0] - path[0][0]
-    pathY = path[6][1] - path[0][1]
+for(let tile of dataSet){
+    if(tile.x === monsterTileCoords.tileX && tile.y === monsterTileCoords.tileY){ monsterTile = tile; break}
 }
-else{
-    pathX = path[path.length][0] - path[0][0]
-    pathY = path[path.length][1] - path[0][1]
+
+let offsetX = path[0][0]
+let offsetY = path[0][1]
+
+let nextTile = undefined
+
+outerloop:
+for(let i in path){
+    let squareX = monster.x - offsetX + path[i][0]
+    let squareY = monster.y - offsetY + path[i][1]
+    for(let tile of dataSet){
+        if(squareX > (tile.x-1)*4 && squareX <= (tile.x-1)*4+4 && squareY > (tile.y-1)*4 && squareY <= (tile.y-1)*4+4){
+            if(tile != monsterTile){
+                nextTile = tile
+                break outerloop
+            }
+        }
+    }
 }
+
+console.log('nextTIle', nextTile)
 
 console.log(closestPlayer)
 
@@ -159,8 +177,8 @@ if(tileAdjacent || squareAdjacent){
     console.log('coming closer', movement)
 
     return {
-        x: playerDetails.monster.x + pathX,
-        y: playerDetails.monster.y + pathY
+        // x: playerDetails.monster.x + pathX,
+        // y: playerDetails.monster.y + pathY
     }
 }
 }
