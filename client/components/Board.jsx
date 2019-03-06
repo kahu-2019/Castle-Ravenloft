@@ -34,7 +34,7 @@ class Board extends Component {
                 y: 0
             },
 
-            lost: false,
+            lose: false,
 
             speed: 0,
             speedModifier: 2,
