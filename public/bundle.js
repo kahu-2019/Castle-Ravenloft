@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 48);
+/******/ 	return __webpack_require__(__webpack_require__.s = 49);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -71,9 +71,9 @@
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(49);
-} else {
   module.exports = __webpack_require__(50);
+} else {
+  module.exports = __webpack_require__(51);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
@@ -285,11 +285,11 @@ if (process.env.NODE_ENV !== 'production') {
   // By explicitly using `prop-types` you are opting into new development behavior.
   // http://fb.me/prop-types-in-prod
   var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(62)(ReactIs.isElement, throwOnDirectAccess);
+  module.exports = __webpack_require__(63)(ReactIs.isElement, throwOnDirectAccess);
 } else {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(63)();
+  module.exports = __webpack_require__(64)();
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
@@ -692,10 +692,10 @@ exports.compressPath = compressPath;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Provider__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Context__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__connect_connect__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Provider__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Context__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__connect_connect__ = __webpack_require__(67);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Provider", function() { return __WEBPACK_IMPORTED_MODULE_0__components_Provider__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "connectAdvanced", function() { return __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "ReactReduxContext", function() { return __WEBPACK_IMPORTED_MODULE_2__components_Context__["a"]; });
@@ -711,13 +711,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createBrowserHistory__ = __webpack_require__(114);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createBrowserHistory__ = __webpack_require__(116);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__createBrowserHistory__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__createHashHistory__ = __webpack_require__(117);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__createHashHistory__ = __webpack_require__(119);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__createHashHistory__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__createMemoryHistory__ = __webpack_require__(118);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__createMemoryHistory__ = __webpack_require__(120);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_2__createMemoryHistory__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__LocationUtils__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__LocationUtils__ = __webpack_require__(19);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_3__LocationUtils__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_3__LocationUtils__["b"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__PathUtils__ = __webpack_require__(12);
@@ -890,33 +890,33 @@ module.exports = {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__ = __webpack_require__(113);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__ = __webpack_require__(115);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "BrowserRouter", function() { return __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HashRouter__ = __webpack_require__(119);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HashRouter__ = __webpack_require__(121);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "HashRouter", function() { return __WEBPACK_IMPORTED_MODULE_1__HashRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Link__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Link__ = __webpack_require__(44);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Link", function() { return __WEBPACK_IMPORTED_MODULE_2__Link__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__ = __webpack_require__(120);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__ = __webpack_require__(122);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "MemoryRouter", function() { return __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__NavLink__ = __webpack_require__(122);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__NavLink__ = __webpack_require__(124);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "NavLink", function() { return __WEBPACK_IMPORTED_MODULE_4__NavLink__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Prompt__ = __webpack_require__(124);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Prompt__ = __webpack_require__(126);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Prompt", function() { return __WEBPACK_IMPORTED_MODULE_5__Prompt__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__(126);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__(128);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Redirect", function() { return __WEBPACK_IMPORTED_MODULE_6__Redirect__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__(45);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Route", function() { return __WEBPACK_IMPORTED_MODULE_7__Route__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Router__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Router__ = __webpack_require__(32);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Router", function() { return __WEBPACK_IMPORTED_MODULE_8__Router__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__StaticRouter__ = __webpack_require__(128);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__StaticRouter__ = __webpack_require__(130);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "StaticRouter", function() { return __WEBPACK_IMPORTED_MODULE_9__StaticRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Switch__ = __webpack_require__(130);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Switch__ = __webpack_require__(132);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Switch", function() { return __WEBPACK_IMPORTED_MODULE_10__Switch__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__generatePath__ = __webpack_require__(132);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__generatePath__ = __webpack_require__(134);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "generatePath", function() { return __WEBPACK_IMPORTED_MODULE_11__generatePath__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__matchPath__ = __webpack_require__(133);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__matchPath__ = __webpack_require__(135);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "matchPath", function() { return __WEBPACK_IMPORTED_MODULE_12__matchPath__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__withRouter__ = __webpack_require__(134);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__withRouter__ = __webpack_require__(136);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "withRouter", function() { return __WEBPACK_IMPORTED_MODULE_13__withRouter__["a"]; });
 
 
@@ -1026,9 +1026,9 @@ var createPath = function createPath(location) {
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(60);
-} else {
   module.exports = __webpack_require__(61);
+} else {
+  module.exports = __webpack_require__(62);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
@@ -1037,7 +1037,7 @@ if (process.env.NODE_ENV === 'production') {
 /* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(89);
+module.exports = __webpack_require__(90);
 
 
 /***/ }),
@@ -1183,11 +1183,11 @@ exports.getCardsByCharacter = getCardsByCharacter;
 exports.savePowerCards = savePowerCards;
 exports.addPowerCards = addPowerCards;
 
-var _encounter = __webpack_require__(105);
+var _encounter = __webpack_require__(106);
 
-var _characters = __webpack_require__(111);
+var _characters = __webpack_require__(112);
 
-var _treasure = __webpack_require__(112);
+var _treasure = __webpack_require__(113);
 
 function getAllMonsters() {
   return function (dispatch) {
@@ -1283,6 +1283,69 @@ function addPowerCards(id, powerCards) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+
+
+// export function roll(){
+//     return Math.floor(Math.random()*20) + 1
+// }
+module.exports = {
+    roll: roll,
+    isSquareAdjacent: isSquareAdjacent,
+    totalPosition: totalPosition,
+    detailedPosition: detailedPosition
+};
+
+function roll() {
+    return Math.floor(Math.random() * 20) + 1;
+}
+
+function isSquareAdjacent(playerX, playerY, monX, monY) {
+    if (playerX - 1 == monX && playerY == monY) {
+        return true;
+    } else if (playerX + 1 == monX && playerY == monY) {
+        return true;
+    } else if (playerX == monX && playerY - 1 == monY) {
+        return true;
+    } else if (playerX == monX && playerY + 1 == monY) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function totalPosition(tileX, tileY, squareX, squareY) {
+    var x = (tileX - 1) * 4 + squareX;
+    var y = (tileY - 1) * 4 + squareY;
+
+    var charTotalPosition = {
+        x: x,
+        y: y
+    };
+
+    return charTotalPosition;
+}
+
+function detailedPosition(char) {
+    var tileX = Math.floor(char.x / 4) + (char.x % 4 === 0 ? 0 : 1);
+    var squareX = (char.x - 1) % 4;
+    var tileY = Math.floor(char.y / 4) + (char.y % 4 === 0 ? 0 : 1);
+    var squareY = (char.y - 1) % 4;
+
+    var charDetailedPosition = {
+        tileX: tileX,
+        tileY: tileY,
+        squareX: squareX,
+        squareY: squareY
+    };
+
+    return charDetailedPosition;
+}
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -1347,14 +1410,14 @@ module.exports = warning;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return createLocation; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return locationsAreEqual; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_resolve_pathname__ = __webpack_require__(115);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_value_equal__ = __webpack_require__(116);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_resolve_pathname__ = __webpack_require__(117);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_value_equal__ = __webpack_require__(118);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PathUtils__ = __webpack_require__(12);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -1423,7 +1486,7 @@ var locationsAreEqual = function locationsAreEqual(a, b) {
 };
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1439,7 +1502,7 @@ var locationsAreEqual = function locationsAreEqual(a, b) {
 var printWarning = function() {};
 
 if (process.env.NODE_ENV !== 'production') {
-  var ReactPropTypesSecret = __webpack_require__(20);
+  var ReactPropTypesSecret = __webpack_require__(21);
   var loggedTypeFailures = {};
   var has = Function.call.bind(Object.prototype.hasOwnProperty);
 
@@ -1533,7 +1596,7 @@ module.exports = checkPropTypes;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1552,7 +1615,7 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports) {
 
 var g;
@@ -1579,7 +1642,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1591,7 +1654,7 @@ var ReactReduxContext = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createCont
 /* unused harmony default export */ var _unused_webpack_default_export = (ReactReduxContext);
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1615,7 +1678,7 @@ function _extends() {
 }
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1636,7 +1699,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 }
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1647,7 +1710,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "applyMiddleware", function() { return applyMiddleware; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "compose", function() { return compose; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__DO_NOT_USE__ActionTypes", function() { return ActionTypes; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_symbol_observable__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_symbol_observable__ = __webpack_require__(70);
 
 
 /**
@@ -2288,7 +2351,7 @@ if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' 
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports) {
 
 /**
@@ -2322,7 +2385,7 @@ module.exports = Node;
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Heap       = __webpack_require__(14);
@@ -2454,7 +2517,7 @@ module.exports = AStarFinder;
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Heap       = __webpack_require__(14);
@@ -2641,7 +2704,7 @@ module.exports = BiAStarFinder;
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -2658,11 +2721,11 @@ if (typeof window !== 'undefined') { // Browser window
   root = this;
 }
 
-const Emitter = __webpack_require__(106);
-const RequestBase = __webpack_require__(107);
-const isObject = __webpack_require__(40);
-const ResponseBase = __webpack_require__(108);
-const Agent = __webpack_require__(110);
+const Emitter = __webpack_require__(107);
+const RequestBase = __webpack_require__(108);
+const isObject = __webpack_require__(41);
+const ResponseBase = __webpack_require__(109);
+const Agent = __webpack_require__(111);
 
 /**
  * Noop.
@@ -3566,11 +3629,11 @@ request.put = (url, data, fn) => {
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
 
 
@@ -3651,18 +3714,18 @@ var createTransitionManager = function createTransitionManager() {
 /* harmony default export */ __webpack_exports__["a"] = (createTransitionManager);
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Router__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Router__ = __webpack_require__(33);
 // Written in this round about way for babel-transform-imports
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_Router__["a" /* default */]);
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3781,11 +3844,11 @@ Router.childContextTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (Router);
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_path_to_regexp__);
 
 
@@ -3861,22 +3924,22 @@ var matchPath = function matchPath(pathname) {
 /* harmony default export */ __webpack_exports__["a"] = (matchPath);
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(53);
-} else {
   module.exports = __webpack_require__(54);
+} else {
+  module.exports = __webpack_require__(55);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3888,16 +3951,16 @@ function _inheritsLoose(subClass, superClass) {
 }
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/* harmony export (immutable) */ __webpack_exports__["a"] = connectAdvanced;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_assertThisInitialized__ = __webpack_require__(64);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_inheritsLoose__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__babel_runtime_helpers_esm_extends__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_hoist_non_react_statics__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_assertThisInitialized__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_inheritsLoose__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__babel_runtime_helpers_esm_extends__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_hoist_non_react_statics__ = __webpack_require__(66);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_hoist_non_react_statics___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_hoist_non_react_statics__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_invariant__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_invariant__);
@@ -3905,7 +3968,7 @@ function _inheritsLoose(subClass, superClass) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react_is__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react_is___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_react_is__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Context__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Context__ = __webpack_require__(23);
 
 
 
@@ -4107,14 +4170,14 @@ _ref) {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/* harmony export (immutable) */ __webpack_exports__["a"] = wrapMapToPropsConstant;
 /* unused harmony export getDependsOnOwnProps */
 /* harmony export (immutable) */ __webpack_exports__["b"] = wrapMapToPropsFunc;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_verifyPlainObject__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_verifyPlainObject__ = __webpack_require__(39);
 
 function wrapMapToPropsConstant(getConstant) {
   return function initConstantSelector(dispatch, options) {
@@ -4182,13 +4245,13 @@ function wrapMapToPropsFunc(mapToProps, methodName) {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = verifyPlainObject;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__isPlainObject__ = __webpack_require__(72);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__warning__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__isPlainObject__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__warning__ = __webpack_require__(40);
 
 
 function verifyPlainObject(value, displayName, methodName) {
@@ -4198,7 +4261,7 @@ function verifyPlainObject(value, displayName, methodName) {
 }
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4229,7 +4292,7 @@ function warning(message) {
 }
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4251,7 +4314,7 @@ module.exports = isObject;
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4297,7 +4360,7 @@ var TimeTract = function (_Component) {
         { className: "Time-tract" },
         _react2.default.createElement(
           "div",
-          { className: "" },
+          null,
           _react2.default.createElement(
             "div",
             { className: "time-title text-center" },
@@ -4411,7 +4474,7 @@ var TimeTract = function (_Component) {
 exports.default = TimeTract;
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4477,7 +4540,7 @@ var isExtraneousPopstateEvent = function isExtraneousPopstateEvent(event) {
 };
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4594,18 +4657,18 @@ Link.contextTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (Link);
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Route__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Route__ = __webpack_require__(46);
 // Written in this round about way for babel-transform-imports
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_Route__["a" /* default */]);
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4617,7 +4680,7 @@ Link.contextTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__matchPath__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__matchPath__ = __webpack_require__(34);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4759,10 +4822,10 @@ Route.childContextTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (Route);
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isarray = __webpack_require__(123)
+var isarray = __webpack_require__(125)
 
 /**
  * Expose `pathToRegexp`.
@@ -5191,11 +5254,11 @@ function pathToRegexp (path, keys, options) {
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_path_to_regexp__);
 
 
@@ -5236,7 +5299,7 @@ var generatePath = function generatePath() {
 /* harmony default export */ __webpack_exports__["a"] = (generatePath);
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5246,21 +5309,21 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(51);
+var _reactDom = __webpack_require__(52);
 
 var _reactRedux = __webpack_require__(7);
 
-var _redux = __webpack_require__(25);
+var _redux = __webpack_require__(26);
 
-var _reduxThunk = __webpack_require__(77);
+var _reduxThunk = __webpack_require__(78);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _reducers = __webpack_require__(78);
+var _reducers = __webpack_require__(79);
 
 var _reducers2 = _interopRequireDefault(_reducers);
 
-var _App = __webpack_require__(83);
+var _App = __webpack_require__(84);
 
 var _App2 = _interopRequireDefault(_App);
 
@@ -5278,7 +5341,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5310,7 +5373,7 @@ unstable_ConcurrentMode:x,unstable_Profiler:u,__SECRET_INTERNALS_DO_NOT_USE_OR_Y
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5332,7 +5395,7 @@ if (process.env.NODE_ENV !== "production") {
 'use strict';
 
 var _assign = __webpack_require__(9);
-var checkPropTypes = __webpack_require__(19);
+var checkPropTypes = __webpack_require__(20);
 
 // TODO: this is special because it gets imported during build.
 
@@ -7219,7 +7282,7 @@ module.exports = react;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7257,15 +7320,15 @@ if (process.env.NODE_ENV === 'production') {
   // DCE check should happen before ReactDOM bundle executes so that
   // DevTools can report bad minification during injection.
   checkDCE();
-  module.exports = __webpack_require__(52);
+  module.exports = __webpack_require__(53);
 } else {
-  module.exports = __webpack_require__(55);
+  module.exports = __webpack_require__(56);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7281,7 +7344,7 @@ if (process.env.NODE_ENV === 'production') {
 /*
  Modernizr 3.0.0pre (Custom Build) | MIT
 */
-var aa=__webpack_require__(0),n=__webpack_require__(9),r=__webpack_require__(34);function ba(a,b,c,d,e,f,g,h){if(!a){a=void 0;if(void 0===b)a=Error("Minified exception occurred; use the non-minified dev environment for the full error message and additional helpful warnings.");else{var l=[c,d,e,f,g,h],k=0;a=Error(b.replace(/%s/g,function(){return l[k++]}));a.name="Invariant Violation"}a.framesToPop=1;throw a;}}
+var aa=__webpack_require__(0),n=__webpack_require__(9),r=__webpack_require__(35);function ba(a,b,c,d,e,f,g,h){if(!a){a=void 0;if(void 0===b)a=Error("Minified exception occurred; use the non-minified dev environment for the full error message and additional helpful warnings.");else{var l=[c,d,e,f,g,h],k=0;a=Error(b.replace(/%s/g,function(){return l[k++]}));a.name="Invariant Violation"}a.framesToPop=1;throw a;}}
 function x(a){for(var b=arguments.length-1,c="https://reactjs.org/docs/error-decoder.html?invariant="+a,d=0;d<b;d++)c+="&args[]="+encodeURIComponent(arguments[d+1]);ba(!1,"Minified React error #"+a+"; visit %s for the full message or use the non-minified dev environment for full errors and additional helpful warnings. ",c)}aa?void 0:x("227");function ca(a,b,c,d,e,f,g,h,l){var k=Array.prototype.slice.call(arguments,3);try{b.apply(c,k)}catch(m){this.onError(m)}}
 var da=!1,ea=null,fa=!1,ha=null,ia={onError:function(a){da=!0;ea=a}};function ja(a,b,c,d,e,f,g,h,l){da=!1;ea=null;ca.apply(ia,arguments)}function ka(a,b,c,d,e,f,g,h,l){ja.apply(this,arguments);if(da){if(da){var k=ea;da=!1;ea=null}else x("198"),k=void 0;fa||(fa=!0,ha=k)}}var la=null,ma={};
 function na(){if(la)for(var a in ma){var b=ma[a],c=la.indexOf(a);-1<c?void 0:x("96",a);if(!oa[c]){b.extractEvents?void 0:x("97",a);oa[c]=b;c=b.eventTypes;for(var d in c){var e=void 0;var f=c[d],g=b,h=d;pa.hasOwnProperty(h)?x("99",h):void 0;pa[h]=f;var l=f.phasedRegistrationNames;if(l){for(e in l)l.hasOwnProperty(e)&&qa(l[e],g,h);e=!0}else f.registrationName?(qa(f.registrationName,g,h),e=!0):e=!1;e?void 0:x("98",d,a)}}}}
@@ -7541,7 +7604,7 @@ X;X=!0;try{ki(a)}finally{(X=b)||W||Yh(1073741823,!1)}},__SECRET_INTERNALS_DO_NOT
 
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7567,10 +7630,10 @@ exports.unstable_scheduleCallback=function(a,b){var c=-1!==k?k:exports.unstable_
 b=c.previous;b.next=c.previous=a;a.next=c;a.previous=b}return a};exports.unstable_cancelCallback=function(a){var b=a.next;if(null!==b){if(b===a)d=null;else{a===d&&(d=b);var c=a.previous;c.next=b;b.previous=c}a.next=a.previous=null}};exports.unstable_wrapCallback=function(a){var b=g;return function(){var c=g,f=k;g=b;k=exports.unstable_now();try{return a.apply(this,arguments)}finally{g=c,k=f,v()}}};exports.unstable_getCurrentPriorityLevel=function(){return g};
 exports.unstable_shouldYield=function(){return!e&&(null!==d&&d.expirationTime<l||w())};exports.unstable_continueExecution=function(){null!==d&&p()};exports.unstable_pauseExecution=function(){};exports.unstable_getFirstCallbackNode=function(){return d};
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(22)))
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8274,10 +8337,10 @@ exports.unstable_getFirstCallbackNode = unstable_getFirstCallbackNode;
   })();
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(21)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(22)))
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8300,9 +8363,9 @@ if (process.env.NODE_ENV !== "production") {
 
 var React = __webpack_require__(0);
 var _assign = __webpack_require__(9);
-var checkPropTypes = __webpack_require__(19);
-var scheduler = __webpack_require__(34);
-var tracing = __webpack_require__(56);
+var checkPropTypes = __webpack_require__(20);
+var scheduler = __webpack_require__(35);
+var tracing = __webpack_require__(57);
 
 /**
  * Use invariant() to assert state which your program assumes to be true.
@@ -29359,22 +29422,22 @@ module.exports = reactDom;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(57);
-} else {
   module.exports = __webpack_require__(58);
+} else {
+  module.exports = __webpack_require__(59);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29391,7 +29454,7 @@ Object.defineProperty(exports,"__esModule",{value:!0});var b=0;exports.__interac
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29822,16 +29885,16 @@ exports.unstable_unsubscribe = unstable_unsubscribe;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_inheritsLoose__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_inheritsLoose__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Context__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Context__ = __webpack_require__(23);
 
 
 
@@ -29927,7 +29990,7 @@ Provider.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (Provider);
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29949,7 +30012,7 @@ exports.isSuspense=function(a){return t(a)===p};
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30184,7 +30247,7 @@ exports.isSuspense = isSuspense;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30200,8 +30263,8 @@ exports.isSuspense = isSuspense;
 var ReactIs = __webpack_require__(13);
 var assign = __webpack_require__(9);
 
-var ReactPropTypesSecret = __webpack_require__(20);
-var checkPropTypes = __webpack_require__(19);
+var ReactPropTypesSecret = __webpack_require__(21);
+var checkPropTypes = __webpack_require__(20);
 
 var has = Function.call.bind(Object.prototype.hasOwnProperty);
 var printWarning = function() {};
@@ -30783,7 +30846,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30796,7 +30859,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
 
 
-var ReactPropTypesSecret = __webpack_require__(20);
+var ReactPropTypesSecret = __webpack_require__(21);
 
 function emptyFunction() {}
 function emptyFunctionWithReset() {}
@@ -30854,7 +30917,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30868,7 +30931,7 @@ function _assertThisInitialized(self) {
 }
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30978,19 +31041,19 @@ module.exports = hoistNonReactStatics;
 
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export createConnect */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_extends__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_connectAdvanced__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_shallowEqual__ = __webpack_require__(67);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mapDispatchToProps__ = __webpack_require__(68);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mapStateToProps__ = __webpack_require__(73);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__mergeProps__ = __webpack_require__(74);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__selectorFactory__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_extends__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_connectAdvanced__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_shallowEqual__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mapDispatchToProps__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mapStateToProps__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__mergeProps__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__selectorFactory__ = __webpack_require__(76);
 
 
 
@@ -31091,7 +31154,7 @@ function createConnect(_temp) {
 /* harmony default export */ __webpack_exports__["a"] = (createConnect());
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -31127,15 +31190,15 @@ function shallowEqual(objA, objB) {
 }
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export whenMapDispatchToPropsIsFunction */
 /* unused harmony export whenMapDispatchToPropsIsMissing */
 /* unused harmony export whenMapDispatchToPropsIsObject */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__wrapMapToProps__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__wrapMapToProps__ = __webpack_require__(38);
 
 
 function whenMapDispatchToPropsIsFunction(mapDispatchToProps) {
@@ -31156,11 +31219,11 @@ function whenMapDispatchToPropsIsObject(mapDispatchToProps) {
 /* harmony default export */ __webpack_exports__["a"] = ([whenMapDispatchToPropsIsFunction, whenMapDispatchToPropsIsMissing, whenMapDispatchToPropsIsObject]);
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global, module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ponyfill_js__ = __webpack_require__(71);
+/* WEBPACK VAR INJECTION */(function(global, module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ponyfill_js__ = __webpack_require__(72);
 /* global window */
 
 
@@ -31181,10 +31244,10 @@ if (typeof self !== 'undefined') {
 var result = Object(__WEBPACK_IMPORTED_MODULE_0__ponyfill_js__["a" /* default */])(root);
 /* harmony default export */ __webpack_exports__["a"] = (result);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(21), __webpack_require__(70)(module)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(22), __webpack_require__(71)(module)))
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports) {
 
 module.exports = function(originalModule) {
@@ -31214,7 +31277,7 @@ module.exports = function(originalModule) {
 
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -31239,7 +31302,7 @@ function symbolObservablePonyfill(root) {
 
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -31262,13 +31325,13 @@ function isPlainObject(obj) {
 }
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export whenMapStateToPropsIsFunction */
 /* unused harmony export whenMapStateToPropsIsMissing */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__wrapMapToProps__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__wrapMapToProps__ = __webpack_require__(38);
 
 function whenMapStateToPropsIsFunction(mapStateToProps) {
   return typeof mapStateToProps === 'function' ? Object(__WEBPACK_IMPORTED_MODULE_0__wrapMapToProps__["b" /* wrapMapToPropsFunc */])(mapStateToProps, 'mapStateToProps') : undefined;
@@ -31281,7 +31344,7 @@ function whenMapStateToPropsIsMissing(mapStateToProps) {
 /* harmony default export */ __webpack_exports__["a"] = ([whenMapStateToPropsIsFunction, whenMapStateToPropsIsMissing]);
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -31289,8 +31352,8 @@ function whenMapStateToPropsIsMissing(mapStateToProps) {
 /* unused harmony export wrapMergePropsFunc */
 /* unused harmony export whenMergePropsIsFunction */
 /* unused harmony export whenMergePropsIsOmitted */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_extends__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_verifyPlainObject__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_extends__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_verifyPlainObject__ = __webpack_require__(39);
 
 
 function defaultMergeProps(stateProps, dispatchProps, ownProps) {
@@ -31330,15 +31393,15 @@ function whenMergePropsIsOmitted(mergeProps) {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/* unused harmony export impureFinalPropsSelectorFactory */
 /* unused harmony export pureFinalPropsSelectorFactory */
 /* harmony export (immutable) */ __webpack_exports__["a"] = finalPropsSelectorFactory;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__verifySubselectors__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__verifySubselectors__ = __webpack_require__(77);
 
 
 function impureFinalPropsSelectorFactory(mapStateToProps, mapDispatchToProps, mergeProps, dispatch) {
@@ -31429,12 +31492,12 @@ function finalPropsSelectorFactory(dispatch, _ref2) {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = verifySubselectors;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_warning__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_warning__ = __webpack_require__(40);
 
 
 function verify(selector, methodName, displayName) {
@@ -31454,7 +31517,7 @@ function verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps, dis
 }
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -31481,7 +31544,7 @@ thunk.withExtraArgument = createThunkMiddleware;
 /* harmony default export */ __webpack_exports__["default"] = (thunk);
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31491,21 +31554,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _redux = __webpack_require__(25);
+var _redux = __webpack_require__(26);
 
-var _characters = __webpack_require__(79);
+var _characters = __webpack_require__(80);
 
 var _characters2 = _interopRequireDefault(_characters);
 
-var _characterOrder = __webpack_require__(80);
+var _characterOrder = __webpack_require__(81);
 
 var _characterOrder2 = _interopRequireDefault(_characterOrder);
 
-var _powerCards = __webpack_require__(81);
+var _powerCards = __webpack_require__(82);
 
 var _powerCards2 = _interopRequireDefault(_powerCards);
 
-var _monsters = __webpack_require__(82);
+var _monsters = __webpack_require__(83);
 
 var _monsters2 = _interopRequireDefault(_monsters);
 
@@ -31519,7 +31582,7 @@ exports.default = (0, _redux.combineReducers)({
 });
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31560,7 +31623,7 @@ function updateCharacter(id, cards, characters) {
 }
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31604,7 +31667,7 @@ function updateCharacter(id, cards, characters) {
 }
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31630,7 +31693,7 @@ var reducer = function reducer() {
 exports.default = reducer;
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31656,7 +31719,7 @@ var reducer = function reducer() {
 exports.default = reducer;
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31668,7 +31731,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _Board = __webpack_require__(84);
+var _Board = __webpack_require__(85);
 
 var _Board2 = _interopRequireDefault(_Board);
 
@@ -31678,27 +31741,27 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(11);
 
-var _TimeTract = __webpack_require__(41);
+var _TimeTract = __webpack_require__(42);
 
 var _TimeTract2 = _interopRequireDefault(_TimeTract);
 
-var _EncounterTreasure = __webpack_require__(137);
+var _EncounterTreasure = __webpack_require__(139);
 
 var _EncounterTreasure2 = _interopRequireDefault(_EncounterTreasure);
 
-var _Home = __webpack_require__(138);
+var _Home = __webpack_require__(140);
 
 var _Home2 = _interopRequireDefault(_Home);
 
-var _Home3 = __webpack_require__(139);
+var _Home3 = __webpack_require__(141);
 
 var _Home4 = _interopRequireDefault(_Home3);
 
-var _Characters = __webpack_require__(140);
+var _Characters = __webpack_require__(142);
 
 var _Characters2 = _interopRequireDefault(_Characters);
 
-var _Powers = __webpack_require__(142);
+var _Powers = __webpack_require__(144);
 
 var _Powers2 = _interopRequireDefault(_Powers);
 
@@ -31727,7 +31790,7 @@ var App = function (_Component) {
         { style: { overflow: "hidden" } },
         _react2.default.createElement(
           "div",
-          { className: "container-fluid" },
+          null,
           _react2.default.createElement(
             _reactRouterDom.HashRouter,
             null,
@@ -31754,7 +31817,7 @@ var App = function (_Component) {
 exports.default = App;
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31770,25 +31833,29 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Tile = __webpack_require__(85);
+var _Tile = __webpack_require__(86);
 
 var _Tile2 = _interopRequireDefault(_Tile);
 
 var _reactRedux = __webpack_require__(7);
 
-var _pathfinding = __webpack_require__(87);
+var _pathfinding = __webpack_require__(88);
 
 var _pathfinding2 = _interopRequireDefault(_pathfinding);
 
-var _tiles = __webpack_require__(104);
+var _tiles = __webpack_require__(105);
 
 var _tiles2 = _interopRequireDefault(_tiles);
 
 var _actions = __webpack_require__(16);
 
-var _TimeTract = __webpack_require__(41);
+var _TimeTract = __webpack_require__(42);
 
 var _TimeTract2 = _interopRequireDefault(_TimeTract);
+
+var _blazing_skeleton = __webpack_require__(114);
+
+var _blazing_skeleton2 = _interopRequireDefault(_blazing_skeleton);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31817,8 +31884,6 @@ var Board = function (_Component) {
         _this.state = {
             players: _this.props.characters,
 
-            monsters: [],
-
             allMonsters: _this.props.allMonsters,
 
             transform: {
@@ -31828,6 +31893,9 @@ var Board = function (_Component) {
                 x: 0,
                 y: 0
             },
+
+            speed: 0,
+            speedModifier: 2,
 
             explore: {
                 top: false,
@@ -31897,10 +31965,16 @@ var Board = function (_Component) {
             strahdsCrypt[0].x = 1;
             strahdsCrypt[0].y = 1;
 
+            var tempPlayers = this.state.players;
+            tempPlayers.map(function (player) {
+                player.monsters = [];
+                return player;
+            });
+
             //  Removes Secret Stairway tile for the ending piece
             var endingPiece = temp.splice(29, 1)[0];
 
-            this.setState({ dataSet: strahdsCrypt, cleanTileSet: strahdsCrypt, completeTileSet: temp, endingPiece: endingPiece }, function () {
+            this.setState({ players: tempPlayers, dataSet: strahdsCrypt, cleanTileSet: strahdsCrypt, completeTileSet: temp, endingPiece: endingPiece, speed: tempPlayers[0].speed + this.state.speedModifier }, function () {
                 _this2.processCharacters();
             });
         }
@@ -31996,15 +32070,174 @@ var Board = function (_Component) {
 
             var temp = this.state.players;
             temp.push(temp.shift());
-            this.setState({ players: temp }, function () {
+            this.setState({ players: temp, speed: temp[0].speed + this.state.speedModifier }, function () {
                 return _this3.checkSidesOfCharacter();
             });
         }
     }, {
         key: 'adjacentTester',
         value: function adjacentTester() {
-            var closestPlayer = this.checkAdjacentSquares(this.state.monsters[0]);
-            console.log(closestPlayer);
+            var _this4 = this;
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+
+                for (var _iterator = this.state.players[0].monsters[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    // console.log(monster)
+
+                    var _monster = _step.value;
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            var monsterId = this.state.players[0].monsters[0].id;
+            var monster = this.state.players[0].monsters.find(function (monster) {
+                return monster.id === monsterId;
+            });
+            // console.log(monster)
+            var closestPlayer = this.checkAdjacentSquares(monster);
+
+            var result = (0, _blazing_skeleton2.default)(closestPlayer);
+            // let result = undefined
+            // switch (monsterId){
+            //     case 1:
+            //         result = zombie(closestPlayer)
+            //         break
+            //     case 2:
+            //         result = ghoul(closestPlayer)
+            //         break
+            //     case 3:
+            //         result = wolf(closestPlayer)
+            //         break
+            //     case 4:
+            //         result = ratSwarm(closestPlayer)
+            //         break
+            //     case 5:
+            //         result = gargoyle(closestPlayer)
+            //         break
+            //     case 6:
+            //         result = spider(closestPlayer)
+            //         break
+            //     case 7:
+            //         result = skeleton(closestPlayer)
+            //         break
+            //     case 8:
+            //         result = koboldSkirmisher(closestPlayer)
+            //         break
+            //     case 9:
+            //         result = blazingSkeleton(closestPlayer)
+            //         break
+            //     case 10:
+            //         result = wraith(closestPlayer)
+            // }
+
+
+            var tempPlayers = this.state.players;
+            if (result.position) {
+                var tempMonsters = this.state.players[0].monsters;
+                var _iteratorNormalCompletion2 = true;
+                var _didIteratorError2 = false;
+                var _iteratorError2 = undefined;
+
+                try {
+                    for (var _iterator2 = tempMonsters[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                        var monmon = _step2.value;
+
+                        if (monmon == monster) {
+                            monmon.x = result.position.x;
+                            monmon.y = result.position.y;
+                            break;
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError2 = true;
+                    _iteratorError2 = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                            _iterator2.return();
+                        }
+                    } finally {
+                        if (_didIteratorError2) {
+                            throw _iteratorError2;
+                        }
+                    }
+                }
+
+                var _tempPlayers = this.state.players;
+                _tempPlayers[0].monsters = tempMonsters;
+            }
+
+            if (result.characters) {
+                var _iteratorNormalCompletion3 = true;
+                var _didIteratorError3 = false;
+                var _iteratorError3 = undefined;
+
+                try {
+                    for (var _iterator3 = result.characters[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                        var character = _step3.value;
+                        var _iteratorNormalCompletion4 = true;
+                        var _didIteratorError4 = false;
+                        var _iteratorError4 = undefined;
+
+                        try {
+                            for (var _iterator4 = tempPlayers[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+                                var player = _step4.value;
+
+                                if (character.id == player.id) {
+                                    player.HP = player.HP - character.damage;
+                                }
+                            }
+                        } catch (err) {
+                            _didIteratorError4 = true;
+                            _iteratorError4 = err;
+                        } finally {
+                            try {
+                                if (!_iteratorNormalCompletion4 && _iterator4.return) {
+                                    _iterator4.return();
+                                }
+                            } finally {
+                                if (_didIteratorError4) {
+                                    throw _iteratorError4;
+                                }
+                            }
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError3 = true;
+                    _iteratorError3 = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                            _iterator3.return();
+                        }
+                    } finally {
+                        if (_didIteratorError3) {
+                            throw _iteratorError3;
+                        }
+                    }
+                }
+            }
+
+            this.setState({ players: tempPlayers }, function () {
+                return _this4.processCharacters();
+            });
+            // console.log(result)
         }
 
         //  Checks the adjacent two squares of a given tile
@@ -32012,7 +32245,7 @@ var Board = function (_Component) {
     }, {
         key: 'checkAdjacentSquares',
         value: function checkAdjacentSquares(monster) {
-            var _this4 = this;
+            var _this5 = this;
 
             var coords = this.getTileAndSquareForCharacter(monster);
 
@@ -32033,7 +32266,7 @@ var Board = function (_Component) {
                             };
                             var relativeX = 8 + Number(coords.squareX) - player.x;
                             var relativeY = 4 + Number(coords.squareY) - player.y;
-                            _this4.state.players.map(function (tempPlayer) {
+                            _this5.state.players.map(function (tempPlayer) {
                                 if (tempPlayer.x === (coords.tileX - 1) * 4 + coords.squareX + 1 - relativeX && tempPlayer.y === (coords.tileY - 1) * 4 + coords.squareY + 1 - relativeY) {
                                     player.id = tempPlayer.id;
                                     leftPlayers.push(player);
@@ -32056,7 +32289,7 @@ var Board = function (_Component) {
                             };
                             var relativeX = Number(coords.squareX) - player.x;
                             var relativeY = 4 + Number(coords.squareY) - player.y;
-                            _this4.state.players.map(function (tempPlayer) {
+                            _this5.state.players.map(function (tempPlayer) {
                                 if (tempPlayer.x === (coords.tileX - 1) * 4 + coords.squareX + 1 - relativeX && tempPlayer.y === (coords.tileY - 1) * 4 + coords.squareY + 1 - relativeY) {
                                     player.id = tempPlayer.id;
                                     rightPlayers.push(player);
@@ -32079,7 +32312,7 @@ var Board = function (_Component) {
                             };
                             var relativeX = 4 + Number(coords.squareX) - player.x;
                             var relativeY = 8 + Number(coords.squareY) - player.y;
-                            _this4.state.players.map(function (tempPlayer) {
+                            _this5.state.players.map(function (tempPlayer) {
                                 if (tempPlayer.x === (coords.tileX - 1) * 4 + coords.squareX + 1 - relativeX && tempPlayer.y === (coords.tileY - 1) * 4 + coords.squareY + 1 - relativeY) {
                                     player.id = tempPlayer.id;
                                     topPlayers.push(player);
@@ -32102,7 +32335,7 @@ var Board = function (_Component) {
                             };
                             var relativeX = 4 + Number(coords.squareX) - player.x;
                             var relativeY = Number(coords.squareY) - player.y;
-                            _this4.state.players.map(function (tempPlayer) {
+                            _this5.state.players.map(function (tempPlayer) {
                                 if (tempPlayer.x === (coords.tileX - 1) * 4 + coords.squareX + 1 - relativeX && tempPlayer.y === (coords.tileY - 1) * 4 + coords.squareY + 1 - relativeY) {
                                     player.id = tempPlayer.id;
                                     bottomPlayers.push(player);
@@ -32149,20 +32382,20 @@ var Board = function (_Component) {
 
             var oneTilePlayers = [];
 
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
+            var _iteratorNormalCompletion5 = true;
+            var _didIteratorError5 = false;
+            var _iteratorError5 = undefined;
 
             try {
-                for (var _iterator = paths[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var player = _step.value;
-                    var _iteratorNormalCompletion3 = true;
-                    var _didIteratorError3 = false;
-                    var _iteratorError3 = undefined;
+                for (var _iterator5 = paths[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+                    var player = _step5.value;
+                    var _iteratorNormalCompletion7 = true;
+                    var _didIteratorError7 = false;
+                    var _iteratorError7 = undefined;
 
                     try {
-                        for (var _iterator3 = this.state.players[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-                            var char = _step3.value;
+                        for (var _iterator7 = this.state.players[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+                            var char = _step7.value;
 
                             if (char.id === player.id) {
                                 var charPosition = this.getTileAndSquareForCharacter(char);
@@ -32177,31 +32410,31 @@ var Board = function (_Component) {
                             }
                         }
                     } catch (err) {
-                        _didIteratorError3 = true;
-                        _iteratorError3 = err;
+                        _didIteratorError7 = true;
+                        _iteratorError7 = err;
                     } finally {
                         try {
-                            if (!_iteratorNormalCompletion3 && _iterator3.return) {
-                                _iterator3.return();
+                            if (!_iteratorNormalCompletion7 && _iterator7.return) {
+                                _iterator7.return();
                             }
                         } finally {
-                            if (_didIteratorError3) {
-                                throw _iteratorError3;
+                            if (_didIteratorError7) {
+                                throw _iteratorError7;
                             }
                         }
                     }
                 }
             } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
+                _didIteratorError5 = true;
+                _iteratorError5 = err;
             } finally {
                 try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
+                    if (!_iteratorNormalCompletion5 && _iterator5.return) {
+                        _iterator5.return();
                     }
                 } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
+                    if (_didIteratorError5) {
+                        throw _iteratorError5;
                     }
                 }
             }
@@ -32225,33 +32458,33 @@ var Board = function (_Component) {
             var playerTile = undefined;
             var playersOnTile = [];
 
-            var _iteratorNormalCompletion2 = true;
-            var _didIteratorError2 = false;
-            var _iteratorError2 = undefined;
+            var _iteratorNormalCompletion6 = true;
+            var _didIteratorError6 = false;
+            var _iteratorError6 = undefined;
 
             try {
-                outerloop: for (var _iterator2 = this.state.players[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                    var _player = _step2.value;
+                outerloop: for (var _iterator6 = this.state.players[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+                    var _player = _step6.value;
 
                     if (_player.id === closestPlayer.id) {
                         var playerCoords = this.getTileAndSquareForCharacter(_player);
-                        var _iteratorNormalCompletion4 = true;
-                        var _didIteratorError4 = false;
-                        var _iteratorError4 = undefined;
+                        var _iteratorNormalCompletion8 = true;
+                        var _didIteratorError8 = false;
+                        var _iteratorError8 = undefined;
 
                         try {
-                            for (var _iterator4 = this.state.dataSet[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-                                var tile = _step4.value;
+                            for (var _iterator8 = this.state.dataSet[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
+                                var tile = _step8.value;
 
                                 if (tile.x === playerCoords.tileX && tile.y === playerCoords.tileY) {
                                     playerTile = JSON.parse(JSON.stringify(tile.grid));
-                                    var _iteratorNormalCompletion5 = true;
-                                    var _didIteratorError5 = false;
-                                    var _iteratorError5 = undefined;
+                                    var _iteratorNormalCompletion9 = true;
+                                    var _didIteratorError9 = false;
+                                    var _iteratorError9 = undefined;
 
                                     try {
-                                        for (var _iterator5 = this.state.players[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
-                                            var player2 = _step5.value;
+                                        for (var _iterator9 = this.state.players[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
+                                            var player2 = _step9.value;
 
                                             var player2Coords = this.getTileAndSquareForCharacter(player2);
                                             if (player2Coords.tileX === playerCoords.tileX && player2Coords.tileY === playerCoords.tileY) {
@@ -32259,16 +32492,16 @@ var Board = function (_Component) {
                                             }
                                         }
                                     } catch (err) {
-                                        _didIteratorError5 = true;
-                                        _iteratorError5 = err;
+                                        _didIteratorError9 = true;
+                                        _iteratorError9 = err;
                                     } finally {
                                         try {
-                                            if (!_iteratorNormalCompletion5 && _iterator5.return) {
-                                                _iterator5.return();
+                                            if (!_iteratorNormalCompletion9 && _iterator9.return) {
+                                                _iterator9.return();
                                             }
                                         } finally {
-                                            if (_didIteratorError5) {
-                                                throw _iteratorError5;
+                                            if (_didIteratorError9) {
+                                                throw _iteratorError9;
                                             }
                                         }
                                     }
@@ -32277,32 +32510,32 @@ var Board = function (_Component) {
                                 }
                             }
                         } catch (err) {
-                            _didIteratorError4 = true;
-                            _iteratorError4 = err;
+                            _didIteratorError8 = true;
+                            _iteratorError8 = err;
                         } finally {
                             try {
-                                if (!_iteratorNormalCompletion4 && _iterator4.return) {
-                                    _iterator4.return();
+                                if (!_iteratorNormalCompletion8 && _iterator8.return) {
+                                    _iterator8.return();
                                 }
                             } finally {
-                                if (_didIteratorError4) {
-                                    throw _iteratorError4;
+                                if (_didIteratorError8) {
+                                    throw _iteratorError8;
                                 }
                             }
                         }
                     }
                 }
             } catch (err) {
-                _didIteratorError2 = true;
-                _iteratorError2 = err;
+                _didIteratorError6 = true;
+                _iteratorError6 = err;
             } finally {
                 try {
-                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                        _iterator2.return();
+                    if (!_iteratorNormalCompletion6 && _iterator6.return) {
+                        _iterator6.return();
                     }
                 } finally {
-                    if (_didIteratorError2) {
-                        throw _iteratorError2;
+                    if (_didIteratorError6) {
+                        throw _iteratorError6;
                     }
                 }
             }
@@ -32313,6 +32546,7 @@ var Board = function (_Component) {
             closestPlayer.playerTile = playerTile;
             closestPlayer.players = playersOnTile;
             closestPlayer.monster = JSON.parse(JSON.stringify(monster));
+            closestPlayer.dataSet = this.state.dataSet;
 
             return closestPlayer;
         }
@@ -32597,13 +32831,13 @@ var Board = function (_Component) {
             });
 
             var paths = [];
-            var _iteratorNormalCompletion6 = true;
-            var _didIteratorError6 = false;
-            var _iteratorError6 = undefined;
+            var _iteratorNormalCompletion10 = true;
+            var _didIteratorError10 = false;
+            var _iteratorError10 = undefined;
 
             try {
-                for (var _iterator6 = this.state.players[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
-                    var player = _step6.value;
+                for (var _iterator10 = this.state.players[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
+                    var player = _step10.value;
 
                     var grid = new _pathfinding2.default.Grid(bigArray);
                     var finder = new _pathfinding2.default.AStarFinder();
@@ -32613,21 +32847,23 @@ var Board = function (_Component) {
                             id: player.id,
                             player: JSON.parse(JSON.stringify(player)),
                             monster: JSON.parse(JSON.stringify(monster)),
-                            distance: path.length - 2
+                            distance: path.length - 2,
+                            dataSet: this.state.dataSet,
+                            path: path
                         });
                     }
                 }
             } catch (err) {
-                _didIteratorError6 = true;
-                _iteratorError6 = err;
+                _didIteratorError10 = true;
+                _iteratorError10 = err;
             } finally {
                 try {
-                    if (!_iteratorNormalCompletion6 && _iterator6.return) {
-                        _iterator6.return();
+                    if (!_iteratorNormalCompletion10 && _iterator10.return) {
+                        _iterator10.return();
                     }
                 } finally {
-                    if (_didIteratorError6) {
-                        throw _iteratorError6;
+                    if (_didIteratorError10) {
+                        throw _iteratorError10;
                     }
                 }
             }
@@ -32702,7 +32938,7 @@ var Board = function (_Component) {
     }, {
         key: 'addTile',
         value: function addTile(tile, position) {
-            var _this5 = this;
+            var _this6 = this;
 
             var tempSet = JSON.parse(JSON.stringify(this.state.cleanTileSet)); // Creates a deep copy of the array
             var tempPlayers = this.state.players;
@@ -32714,30 +32950,35 @@ var Board = function (_Component) {
                 tempPlayers.map(function (player) {
                     return player.x = player.x + 4;
                 });
-                this.state.monsters.map(function (monster) {
-                    return monster.x = monster.x + 4;
+                tempPlayers.map(function (player) {
+                    player.monsters.map(function (monster) {
+                        return monster.x = monster.x + 4;
+                    });
                 });
                 tile.x = position.x + 1;
                 tile.y = position.y;
                 tempSet.push(tile);
 
-                var _monster = {};
+                var _monster2 = {};
                 monsterFinder: for (var y in tile.grid) {
                     for (var x in tile.grid) {
                         if (tile.grid[y][x] === 2) {
-                            _monster.x = (Number(tile.x) - 1) * 4 + Number(x) + 1;
-                            _monster.y = (Number(tile.y) - 1) * 4 + Number(y) + 1;
+                            _monster2.x = (Number(tile.x) - 1) * 4 + Number(x) + 1;
+                            _monster2.y = (Number(tile.y) - 1) * 4 + Number(y) + 1;
                             break monsterFinder;
                         }
                     }
                 }
-                this.state.monsters.push(this.getMonster(_monster.x, _monster.y, this.state.players[0].id));
+                var _newMonster = this.getMonster(_monster2.x, _monster2.y);
+                if (_newMonster) {
+                    this.state.players[0].monsters.push(this.getMonster(_monster2.x, _monster2.y));
+                }
 
                 this.setState({
                     players: tempPlayers,
                     cleanTileSet: tempSet
                 }, function () {
-                    return _this5.processCharacters();
+                    return _this6.processCharacters();
                 });
                 return;
             } else if (position.y === 0) {
@@ -32747,30 +32988,35 @@ var Board = function (_Component) {
                 tempPlayers.map(function (player) {
                     return player.y = player.y + 4;
                 });
-                this.state.monsters.map(function (monster) {
-                    return monster.y = monster.y + 4;
+                tempPlayers.map(function (player) {
+                    player.monsters.map(function (monster) {
+                        return monster.y = monster.y + 4;
+                    });
                 });
                 tile.x = position.x;
                 tile.y = position.y + 1;
                 tempSet.push(tile);
 
-                var _monster2 = {};
+                var _monster3 = {};
                 monsterFinder: for (var _y17 in tile.grid) {
                     for (var _x17 in tile.grid) {
                         if (tile.grid[_y17][_x17] === 2) {
-                            _monster2.x = (Number(tile.x) - 1) * 4 + Number(_x17) + 1;
-                            _monster2.y = (Number(tile.y) - 1) * 4 + Number(_y17) + 1;
+                            _monster3.x = (Number(tile.x) - 1) * 4 + Number(_x17) + 1;
+                            _monster3.y = (Number(tile.y) - 1) * 4 + Number(_y17) + 1;
                             break monsterFinder;
                         }
                     }
                 }
-                this.state.monsters.push(this.getMonster(_monster2.x, _monster2.y, this.state.players[0].id));
+                var _newMonster2 = this.getMonster(_monster3.x, _monster3.y);
+                if (_newMonster2) {
+                    this.state.players[0].monsters.push(this.getMonster(_monster3.x, _monster3.y));
+                }
 
                 this.setState({
                     players: tempPlayers,
                     cleanTileSet: tempSet
                 }, function () {
-                    return _this5.processCharacters();
+                    return _this6.processCharacters();
                 });
                 return;
             }
@@ -32789,22 +33035,56 @@ var Board = function (_Component) {
                     }
                 }
             }
-            this.state.monsters.push(this.getMonster(monster.x, monster.y, this.state.players[0].id));
+            var newMonster = this.getMonster(monster.x, monster.y);
+            if (newMonster) {
+                this.state.players[0].monsters.push(this.getMonster(monster.x, monster.y));
+            }
 
             this.setState({
                 cleanTileSet: tempSet
             }, function () {
-                return _this5.processCharacters();
+                return _this6.processCharacters();
             });
         }
     }, {
         key: 'getMonster',
-        value: function getMonster(x, y, charId) {
-            var monNum = Math.floor(Math.random() * 10);
-            var newMonster = JSON.parse(JSON.stringify(this.state.allMonsters[monNum]));
+        value: function getMonster(x, y) {
+            if (this.state.players[0].monsters.length === 10) return null;
+            var monsters = JSON.parse(JSON.stringify(this.state.allMonsters));
+            var _iteratorNormalCompletion11 = true;
+            var _didIteratorError11 = false;
+            var _iteratorError11 = undefined;
+
+            try {
+                outerloop: for (var _iterator11 = this.state.players[0].monsters[Symbol.iterator](), _step11; !(_iteratorNormalCompletion11 = (_step11 = _iterator11.next()).done); _iteratorNormalCompletion11 = true) {
+                    var mon = _step11.value;
+
+                    for (var i = 0; i < monsters.length; i++) {
+                        if (mon.id === monsters[i].id) {
+                            monsters.splice(i, 1);
+                            continue outerloop;
+                        }
+                    }
+                }
+            } catch (err) {
+                _didIteratorError11 = true;
+                _iteratorError11 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion11 && _iterator11.return) {
+                        _iterator11.return();
+                    }
+                } finally {
+                    if (_didIteratorError11) {
+                        throw _iteratorError11;
+                    }
+                }
+            }
+
+            var monNum = Math.floor(Math.random() * monsters.length);
+            var newMonster = monsters[monNum];
             newMonster.x = x;
             newMonster.y = y;
-            newMonster.owner = charId;
             return newMonster;
         }
 
@@ -32826,245 +33106,28 @@ var Board = function (_Component) {
     }, {
         key: 'getPositionOfCharacter',
         value: function getPositionOfCharacter(char, dir, val) {
-            var _this6 = this;
+            var _this7 = this;
 
-            if (char[dir] + val < 1) return;
+            if (char[dir] + val < 1 || this.state.speed === 0) return;
 
             char[dir] = char[dir] + val;
 
             var position = this.getTileAndSquareForCharacter(char);
 
             var tileExists = false;
-            var _iteratorNormalCompletion7 = true;
-            var _didIteratorError7 = false;
-            var _iteratorError7 = undefined;
+            var _iteratorNormalCompletion12 = true;
+            var _didIteratorError12 = false;
+            var _iteratorError12 = undefined;
 
             try {
-                for (var _iterator7 = this.state.cleanTileSet[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
-                    var item = _step7.value;
+                for (var _iterator12 = this.state.cleanTileSet[Symbol.iterator](), _step12; !(_iteratorNormalCompletion12 = (_step12 = _iterator12.next()).done); _iteratorNormalCompletion12 = true) {
+                    var item = _step12.value;
 
                     if (position.tileX === item.x && position.tileY === item.y) {
                         tileExists = true;
                         if (item.grid[position.squareY][position.squareX] === 1) {
                             char[dir] = char[dir] - val;
                             break;
-                        }
-                    }
-                }
-            } catch (err) {
-                _didIteratorError7 = true;
-                _iteratorError7 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion7 && _iterator7.return) {
-                        _iterator7.return();
-                    }
-                } finally {
-                    if (_didIteratorError7) {
-                        throw _iteratorError7;
-                    }
-                }
-            }
-
-            if (!tileExists) char[dir] = char[dir] - val;
-
-            var tempPlayers = this.state.players;
-            tempPlayers[0] = char;
-            this.setState({ players: tempPlayers }, function () {
-                return _this6.processCharacters();
-            });
-        }
-
-        //  Checks each side of the current character, returns an object with values showing if they are on an unexplored edge
-
-    }, {
-        key: 'checkSidesOfCharacter',
-        value: function checkSidesOfCharacter() {
-            var sides = { top: false, right: false, bottom: false, left: false };
-            var playerPos = this.getTileAndSquareForCharacter(this.state.players[0]);
-            for (var side = 0; side < 4; side++) {
-                switch (side) {
-                    case 0:
-                        if (playerPos.squareY === 0) {
-                            var tileAlreadyExists = false;
-                            var _iteratorNormalCompletion8 = true;
-                            var _didIteratorError8 = false;
-                            var _iteratorError8 = undefined;
-
-                            try {
-                                for (var _iterator8 = this.state.cleanTileSet[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
-                                    var item = _step8.value;
-
-                                    if (item.y === playerPos.tileY - 1 && item.x === playerPos.tileX) {
-                                        tileAlreadyExists = true;
-                                        break;
-                                    }
-                                }
-                            } catch (err) {
-                                _didIteratorError8 = true;
-                                _iteratorError8 = err;
-                            } finally {
-                                try {
-                                    if (!_iteratorNormalCompletion8 && _iterator8.return) {
-                                        _iterator8.return();
-                                    }
-                                } finally {
-                                    if (_didIteratorError8) {
-                                        throw _iteratorError8;
-                                    }
-                                }
-                            }
-
-                            if (!tileAlreadyExists) sides.top = true;
-                        }
-                    case 1:
-                        if (playerPos.squareX === 3) {
-                            var _tileAlreadyExists = false;
-                            var _iteratorNormalCompletion9 = true;
-                            var _didIteratorError9 = false;
-                            var _iteratorError9 = undefined;
-
-                            try {
-                                for (var _iterator9 = this.state.cleanTileSet[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
-                                    var _item2 = _step9.value;
-
-                                    if (_item2.y === playerPos.tileY && _item2.x === playerPos.tileX + 1) {
-                                        _tileAlreadyExists = true;
-                                        break;
-                                    }
-                                }
-                            } catch (err) {
-                                _didIteratorError9 = true;
-                                _iteratorError9 = err;
-                            } finally {
-                                try {
-                                    if (!_iteratorNormalCompletion9 && _iterator9.return) {
-                                        _iterator9.return();
-                                    }
-                                } finally {
-                                    if (_didIteratorError9) {
-                                        throw _iteratorError9;
-                                    }
-                                }
-                            }
-
-                            if (!_tileAlreadyExists) sides.right = true;
-                        }
-                    case 2:
-                        if (playerPos.squareY === 3) {
-                            var _tileAlreadyExists2 = false;
-                            var _iteratorNormalCompletion10 = true;
-                            var _didIteratorError10 = false;
-                            var _iteratorError10 = undefined;
-
-                            try {
-                                for (var _iterator10 = this.state.cleanTileSet[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
-                                    var _item3 = _step10.value;
-
-                                    if (_item3.y === playerPos.tileY + 1 && _item3.x === playerPos.tileX) {
-                                        _tileAlreadyExists2 = true;
-                                        break;
-                                    }
-                                }
-                            } catch (err) {
-                                _didIteratorError10 = true;
-                                _iteratorError10 = err;
-                            } finally {
-                                try {
-                                    if (!_iteratorNormalCompletion10 && _iterator10.return) {
-                                        _iterator10.return();
-                                    }
-                                } finally {
-                                    if (_didIteratorError10) {
-                                        throw _iteratorError10;
-                                    }
-                                }
-                            }
-
-                            if (!_tileAlreadyExists2) sides.bottom = true;
-                        }
-                    case 3:
-                        if (playerPos.squareX === 0) {
-                            var _tileAlreadyExists3 = false;
-                            var _iteratorNormalCompletion11 = true;
-                            var _didIteratorError11 = false;
-                            var _iteratorError11 = undefined;
-
-                            try {
-                                for (var _iterator11 = this.state.cleanTileSet[Symbol.iterator](), _step11; !(_iteratorNormalCompletion11 = (_step11 = _iterator11.next()).done); _iteratorNormalCompletion11 = true) {
-                                    var _item4 = _step11.value;
-
-                                    if (_item4.y === playerPos.tileY && _item4.x === playerPos.tileX - 1) {
-                                        _tileAlreadyExists3 = true;
-                                        break;
-                                    }
-                                }
-                            } catch (err) {
-                                _didIteratorError11 = true;
-                                _iteratorError11 = err;
-                            } finally {
-                                try {
-                                    if (!_iteratorNormalCompletion11 && _iterator11.return) {
-                                        _iterator11.return();
-                                    }
-                                } finally {
-                                    if (_didIteratorError11) {
-                                        throw _iteratorError11;
-                                    }
-                                }
-                            }
-
-                            if (!_tileAlreadyExists3) sides.left = true;
-                        }
-                }
-            }
-            this.setState({ explore: sides });
-        }
-
-        //  Gets the position of every character and monster, and puts them on the 'dataSet' stored in state
-
-    }, {
-        key: 'processCharacters',
-        value: function processCharacters() {
-            var tempSet = JSON.parse(JSON.stringify(this.state.cleanTileSet)); // Creates a deep copy of the array
-
-            var _iteratorNormalCompletion12 = true;
-            var _didIteratorError12 = false;
-            var _iteratorError12 = undefined;
-
-            try {
-                outerloop: for (var _iterator12 = this.state.players[Symbol.iterator](), _step12; !(_iteratorNormalCompletion12 = (_step12 = _iterator12.next()).done); _iteratorNormalCompletion12 = true) {
-                    var char = _step12.value;
-
-
-                    var position = this.getTileAndSquareForCharacter(char);
-
-                    var _iteratorNormalCompletion14 = true;
-                    var _didIteratorError14 = false;
-                    var _iteratorError14 = undefined;
-
-                    try {
-                        for (var _iterator14 = tempSet[Symbol.iterator](), _step14; !(_iteratorNormalCompletion14 = (_step14 = _iterator14.next()).done); _iteratorNormalCompletion14 = true) {
-                            var item = _step14.value;
-
-                            if (position.tileX === item.x && position.tileY === item.y) {
-                                item.grid[position.squareY][position.squareX] = 11;
-                                item.players.push({ image: char.image, x: position.squareX, y: position.squareY });
-                                continue outerloop;
-                            }
-                        }
-                    } catch (err) {
-                        _didIteratorError14 = true;
-                        _iteratorError14 = err;
-                    } finally {
-                        try {
-                            if (!_iteratorNormalCompletion14 && _iterator14.return) {
-                                _iterator14.return();
-                            }
-                        } finally {
-                            if (_didIteratorError14) {
-                                throw _iteratorError14;
-                            }
                         }
                     }
                 }
@@ -33083,57 +33146,297 @@ var Board = function (_Component) {
                 }
             }
 
-            var _iteratorNormalCompletion13 = true;
-            var _didIteratorError13 = false;
-            var _iteratorError13 = undefined;
+            if (!tileExists) char[dir] = char[dir] - val;
+
+            var tempPlayers = this.state.players;
+            tempPlayers[0] = char;
+            this.setState({ players: tempPlayers, speed: this.state.speed - 1 }, function () {
+                return _this7.processCharacters();
+            });
+        }
+
+        //  Checks each side of the current character, returns an object with values showing if they are on an unexplored edge
+
+    }, {
+        key: 'checkSidesOfCharacter',
+        value: function checkSidesOfCharacter() {
+            var sides = { top: false, right: false, bottom: false, left: false };
+            var playerPos = this.getTileAndSquareForCharacter(this.state.players[0]);
+            for (var side = 0; side < 4; side++) {
+                switch (side) {
+                    case 0:
+                        if (playerPos.squareY === 0) {
+                            var tileAlreadyExists = false;
+                            var _iteratorNormalCompletion13 = true;
+                            var _didIteratorError13 = false;
+                            var _iteratorError13 = undefined;
+
+                            try {
+                                for (var _iterator13 = this.state.cleanTileSet[Symbol.iterator](), _step13; !(_iteratorNormalCompletion13 = (_step13 = _iterator13.next()).done); _iteratorNormalCompletion13 = true) {
+                                    var item = _step13.value;
+
+                                    if (item.y === playerPos.tileY - 1 && item.x === playerPos.tileX) {
+                                        tileAlreadyExists = true;
+                                        break;
+                                    }
+                                }
+                            } catch (err) {
+                                _didIteratorError13 = true;
+                                _iteratorError13 = err;
+                            } finally {
+                                try {
+                                    if (!_iteratorNormalCompletion13 && _iterator13.return) {
+                                        _iterator13.return();
+                                    }
+                                } finally {
+                                    if (_didIteratorError13) {
+                                        throw _iteratorError13;
+                                    }
+                                }
+                            }
+
+                            if (!tileAlreadyExists) sides.top = true;
+                        }
+                    case 1:
+                        if (playerPos.squareX === 3) {
+                            var _tileAlreadyExists = false;
+                            var _iteratorNormalCompletion14 = true;
+                            var _didIteratorError14 = false;
+                            var _iteratorError14 = undefined;
+
+                            try {
+                                for (var _iterator14 = this.state.cleanTileSet[Symbol.iterator](), _step14; !(_iteratorNormalCompletion14 = (_step14 = _iterator14.next()).done); _iteratorNormalCompletion14 = true) {
+                                    var _item2 = _step14.value;
+
+                                    if (_item2.y === playerPos.tileY && _item2.x === playerPos.tileX + 1) {
+                                        _tileAlreadyExists = true;
+                                        break;
+                                    }
+                                }
+                            } catch (err) {
+                                _didIteratorError14 = true;
+                                _iteratorError14 = err;
+                            } finally {
+                                try {
+                                    if (!_iteratorNormalCompletion14 && _iterator14.return) {
+                                        _iterator14.return();
+                                    }
+                                } finally {
+                                    if (_didIteratorError14) {
+                                        throw _iteratorError14;
+                                    }
+                                }
+                            }
+
+                            if (!_tileAlreadyExists) sides.right = true;
+                        }
+                    case 2:
+                        if (playerPos.squareY === 3) {
+                            var _tileAlreadyExists2 = false;
+                            var _iteratorNormalCompletion15 = true;
+                            var _didIteratorError15 = false;
+                            var _iteratorError15 = undefined;
+
+                            try {
+                                for (var _iterator15 = this.state.cleanTileSet[Symbol.iterator](), _step15; !(_iteratorNormalCompletion15 = (_step15 = _iterator15.next()).done); _iteratorNormalCompletion15 = true) {
+                                    var _item3 = _step15.value;
+
+                                    if (_item3.y === playerPos.tileY + 1 && _item3.x === playerPos.tileX) {
+                                        _tileAlreadyExists2 = true;
+                                        break;
+                                    }
+                                }
+                            } catch (err) {
+                                _didIteratorError15 = true;
+                                _iteratorError15 = err;
+                            } finally {
+                                try {
+                                    if (!_iteratorNormalCompletion15 && _iterator15.return) {
+                                        _iterator15.return();
+                                    }
+                                } finally {
+                                    if (_didIteratorError15) {
+                                        throw _iteratorError15;
+                                    }
+                                }
+                            }
+
+                            if (!_tileAlreadyExists2) sides.bottom = true;
+                        }
+                    case 3:
+                        if (playerPos.squareX === 0) {
+                            var _tileAlreadyExists3 = false;
+                            var _iteratorNormalCompletion16 = true;
+                            var _didIteratorError16 = false;
+                            var _iteratorError16 = undefined;
+
+                            try {
+                                for (var _iterator16 = this.state.cleanTileSet[Symbol.iterator](), _step16; !(_iteratorNormalCompletion16 = (_step16 = _iterator16.next()).done); _iteratorNormalCompletion16 = true) {
+                                    var _item4 = _step16.value;
+
+                                    if (_item4.y === playerPos.tileY && _item4.x === playerPos.tileX - 1) {
+                                        _tileAlreadyExists3 = true;
+                                        break;
+                                    }
+                                }
+                            } catch (err) {
+                                _didIteratorError16 = true;
+                                _iteratorError16 = err;
+                            } finally {
+                                try {
+                                    if (!_iteratorNormalCompletion16 && _iterator16.return) {
+                                        _iterator16.return();
+                                    }
+                                } finally {
+                                    if (_didIteratorError16) {
+                                        throw _iteratorError16;
+                                    }
+                                }
+                            }
+
+                            if (!_tileAlreadyExists3) sides.left = true;
+                        }
+                }
+            }
+            this.setState({ explore: sides });
+        }
+
+        //  Gets the position of every character and monster, and puts them on the 'dataSet' stored in state
+
+    }, {
+        key: 'processCharacters',
+        value: function processCharacters() {
+            var tempSet = JSON.parse(JSON.stringify(this.state.cleanTileSet)); // Creates a deep copy of the array
+
+            var _iteratorNormalCompletion17 = true;
+            var _didIteratorError17 = false;
+            var _iteratorError17 = undefined;
 
             try {
-                outerloop: for (var _iterator13 = this.state.monsters[Symbol.iterator](), _step13; !(_iteratorNormalCompletion13 = (_step13 = _iterator13.next()).done); _iteratorNormalCompletion13 = true) {
-                    var monster = _step13.value;
+                outerloop: for (var _iterator17 = this.state.players[Symbol.iterator](), _step17; !(_iteratorNormalCompletion17 = (_step17 = _iterator17.next()).done); _iteratorNormalCompletion17 = true) {
+                    var char = _step17.value;
 
 
-                    var position = this.getTileAndSquareForCharacter(monster);
+                    var position = this.getTileAndSquareForCharacter(char);
 
-                    var _iteratorNormalCompletion15 = true;
-                    var _didIteratorError15 = false;
-                    var _iteratorError15 = undefined;
+                    var _iteratorNormalCompletion19 = true;
+                    var _didIteratorError19 = false;
+                    var _iteratorError19 = undefined;
 
                     try {
-                        for (var _iterator15 = tempSet[Symbol.iterator](), _step15; !(_iteratorNormalCompletion15 = (_step15 = _iterator15.next()).done); _iteratorNormalCompletion15 = true) {
-                            var _item5 = _step15.value;
+                        for (var _iterator19 = tempSet[Symbol.iterator](), _step19; !(_iteratorNormalCompletion19 = (_step19 = _iterator19.next()).done); _iteratorNormalCompletion19 = true) {
+                            var item = _step19.value;
 
-                            if (position.tileX === _item5.x && position.tileY === _item5.y) {
-                                _item5.grid[position.squareY][position.squareX] = 21;
-                                _item5.players.push({ image: monster.image, x: position.squareX, y: position.squareY });
+                            if (position.tileX === item.x && position.tileY === item.y) {
+                                item.grid[position.squareY][position.squareX] = 11;
+                                item.players.push({ image: char.image, x: position.squareX, y: position.squareY });
                                 continue outerloop;
                             }
                         }
                     } catch (err) {
-                        _didIteratorError15 = true;
-                        _iteratorError15 = err;
+                        _didIteratorError19 = true;
+                        _iteratorError19 = err;
                     } finally {
                         try {
-                            if (!_iteratorNormalCompletion15 && _iterator15.return) {
-                                _iterator15.return();
+                            if (!_iteratorNormalCompletion19 && _iterator19.return) {
+                                _iterator19.return();
                             }
                         } finally {
-                            if (_didIteratorError15) {
-                                throw _iteratorError15;
+                            if (_didIteratorError19) {
+                                throw _iteratorError19;
                             }
                         }
                     }
                 }
             } catch (err) {
-                _didIteratorError13 = true;
-                _iteratorError13 = err;
+                _didIteratorError17 = true;
+                _iteratorError17 = err;
             } finally {
                 try {
-                    if (!_iteratorNormalCompletion13 && _iterator13.return) {
-                        _iterator13.return();
+                    if (!_iteratorNormalCompletion17 && _iterator17.return) {
+                        _iterator17.return();
                     }
                 } finally {
-                    if (_didIteratorError13) {
-                        throw _iteratorError13;
+                    if (_didIteratorError17) {
+                        throw _iteratorError17;
+                    }
+                }
+            }
+
+            var _iteratorNormalCompletion18 = true;
+            var _didIteratorError18 = false;
+            var _iteratorError18 = undefined;
+
+            try {
+
+                for (var _iterator18 = this.state.players[Symbol.iterator](), _step18; !(_iteratorNormalCompletion18 = (_step18 = _iterator18.next()).done); _iteratorNormalCompletion18 = true) {
+                    var _char = _step18.value;
+                    var _iteratorNormalCompletion20 = true;
+                    var _didIteratorError20 = false;
+                    var _iteratorError20 = undefined;
+
+                    try {
+                        outerloop: for (var _iterator20 = _char.monsters[Symbol.iterator](), _step20; !(_iteratorNormalCompletion20 = (_step20 = _iterator20.next()).done); _iteratorNormalCompletion20 = true) {
+                            var monster = _step20.value;
+
+
+                            var _position = this.getTileAndSquareForCharacter(monster);
+
+                            var _iteratorNormalCompletion21 = true;
+                            var _didIteratorError21 = false;
+                            var _iteratorError21 = undefined;
+
+                            try {
+                                for (var _iterator21 = tempSet[Symbol.iterator](), _step21; !(_iteratorNormalCompletion21 = (_step21 = _iterator21.next()).done); _iteratorNormalCompletion21 = true) {
+                                    var _item5 = _step21.value;
+
+                                    if (_position.tileX === _item5.x && _position.tileY === _item5.y) {
+                                        _item5.grid[_position.squareY][_position.squareX] = 21;
+                                        _item5.players.push({ image: monster.image, x: _position.squareX, y: _position.squareY });
+                                        continue outerloop;
+                                    }
+                                }
+                            } catch (err) {
+                                _didIteratorError21 = true;
+                                _iteratorError21 = err;
+                            } finally {
+                                try {
+                                    if (!_iteratorNormalCompletion21 && _iterator21.return) {
+                                        _iterator21.return();
+                                    }
+                                } finally {
+                                    if (_didIteratorError21) {
+                                        throw _iteratorError21;
+                                    }
+                                }
+                            }
+                        }
+                    } catch (err) {
+                        _didIteratorError20 = true;
+                        _iteratorError20 = err;
+                    } finally {
+                        try {
+                            if (!_iteratorNormalCompletion20 && _iterator20.return) {
+                                _iterator20.return();
+                            }
+                        } finally {
+                            if (_didIteratorError20) {
+                                throw _iteratorError20;
+                            }
+                        }
+                    }
+                }
+            } catch (err) {
+                _didIteratorError18 = true;
+                _iteratorError18 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion18 && _iterator18.return) {
+                        _iterator18.return();
+                    }
+                } finally {
+                    if (_didIteratorError18) {
+                        throw _iteratorError18;
                     }
                 }
             }
@@ -33143,8 +33446,9 @@ var Board = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            var _this7 = this;
+            var _this8 = this;
 
+            console.log(this.state.speed);
             var rows = 0;
             var cols = 0;
             this.state.dataSet.map(function (set) {
@@ -33152,8 +33456,8 @@ var Board = function (_Component) {
                 if (set.y > rows) rows = set.y;
             });
             return _react2.default.createElement(
-                _react2.default.Fragment,
-                null,
+                'div',
+                { style: { overflow: 'hidden' } },
                 _react2.default.createElement(_TimeTract2.default, null),
                 _react2.default.createElement(
                     'div',
@@ -33190,7 +33494,7 @@ var Board = function (_Component) {
                     _react2.default.createElement(
                         'button',
                         { onClick: function onClick() {
-                                return _this7.nextPlayer();
+                                return _this8.nextPlayer();
                             } },
                         'End turn'
                     ),
@@ -33201,7 +33505,7 @@ var Board = function (_Component) {
                         _react2.default.createElement(
                             'button',
                             { onClick: function onClick() {
-                                    return _this7.prepTileForAdding(3);
+                                    return _this8.prepTileForAdding(3);
                                 } },
                             'Explore left'
                         ),
@@ -33213,7 +33517,7 @@ var Board = function (_Component) {
                         _react2.default.createElement(
                             'button',
                             { onClick: function onClick() {
-                                    return _this7.prepTileForAdding(1);
+                                    return _this8.prepTileForAdding(1);
                                 } },
                             'Explore right'
                         ),
@@ -33225,7 +33529,7 @@ var Board = function (_Component) {
                         _react2.default.createElement(
                             'button',
                             { onClick: function onClick() {
-                                    return _this7.prepTileForAdding(0);
+                                    return _this8.prepTileForAdding(0);
                                 } },
                             'Explore top'
                         ),
@@ -33234,7 +33538,7 @@ var Board = function (_Component) {
                     this.state.explore.bottom && _react2.default.createElement(
                         'button',
                         { onClick: function onClick() {
-                                return _this7.prepTileForAdding(2);
+                                return _this8.prepTileForAdding(2);
                             } },
                         'Explore bottom'
                     )
@@ -33265,7 +33569,7 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(Board);
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33281,7 +33585,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Square = __webpack_require__(86);
+var _Square = __webpack_require__(87);
 
 var _Square2 = _interopRequireDefault(_Square);
 
@@ -33395,7 +33699,7 @@ var Tile = function (_Component) {
 exports.default = Tile;
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33487,38 +33791,38 @@ var Square = function (_Component) {
 exports.default = Square;
 
 /***/ }),
-/* 87 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(88);
-
-
-/***/ }),
 /* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = {
-    'Heap'                      : __webpack_require__(14),
-    'Node'                      : __webpack_require__(26),
-    'Grid'                      : __webpack_require__(91),
-    'Util'                      : __webpack_require__(6),
-    'DiagonalMovement'          : __webpack_require__(3),
-    'Heuristic'                 : __webpack_require__(10),
-    'AStarFinder'               : __webpack_require__(27),
-    'BestFirstFinder'           : __webpack_require__(92),
-    'BreadthFirstFinder'        : __webpack_require__(93),
-    'DijkstraFinder'            : __webpack_require__(94),
-    'BiAStarFinder'             : __webpack_require__(28),
-    'BiBestFirstFinder'         : __webpack_require__(95),
-    'BiBreadthFirstFinder'      : __webpack_require__(96),
-    'BiDijkstraFinder'          : __webpack_require__(97),
-    'IDAStarFinder'             : __webpack_require__(98),
-    'JumpPointFinder'           : __webpack_require__(99),
-};
+module.exports = __webpack_require__(89);
 
 
 /***/ }),
 /* 89 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = {
+    'Heap'                      : __webpack_require__(14),
+    'Node'                      : __webpack_require__(27),
+    'Grid'                      : __webpack_require__(92),
+    'Util'                      : __webpack_require__(6),
+    'DiagonalMovement'          : __webpack_require__(3),
+    'Heuristic'                 : __webpack_require__(10),
+    'AStarFinder'               : __webpack_require__(28),
+    'BestFirstFinder'           : __webpack_require__(93),
+    'BreadthFirstFinder'        : __webpack_require__(94),
+    'DijkstraFinder'            : __webpack_require__(95),
+    'BiAStarFinder'             : __webpack_require__(29),
+    'BiBestFirstFinder'         : __webpack_require__(96),
+    'BiBreadthFirstFinder'      : __webpack_require__(97),
+    'BiDijkstraFinder'          : __webpack_require__(98),
+    'IDAStarFinder'             : __webpack_require__(99),
+    'JumpPointFinder'           : __webpack_require__(100),
+};
+
+
+/***/ }),
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {// Generated by CoffeeScript 1.8.0
@@ -33891,10 +34195,10 @@ module.exports = {
 
 }).call(this);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(90)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(91)(module)))
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -33922,10 +34226,10 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Node = __webpack_require__(26);
+var Node = __webpack_require__(27);
 var DiagonalMovement = __webpack_require__(3);
 
 /**
@@ -34173,10 +34477,10 @@ module.exports = Grid;
 
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var AStarFinder = __webpack_require__(27);
+var AStarFinder = __webpack_require__(28);
 
 /**
  * Best-First-Search path-finder.
@@ -34207,7 +34511,7 @@ module.exports = BestFirstFinder;
 
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Util = __webpack_require__(6);
@@ -34292,10 +34596,10 @@ module.exports = BreadthFirstFinder;
 
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var AStarFinder = __webpack_require__(27);
+var AStarFinder = __webpack_require__(28);
 
 /**
  * Dijkstra path-finder.
@@ -34322,10 +34626,10 @@ module.exports = DijkstraFinder;
 
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var BiAStarFinder = __webpack_require__(28);
+var BiAStarFinder = __webpack_require__(29);
 
 /**
  * Bi-direcitional Best-First-Search path-finder.
@@ -34356,7 +34660,7 @@ module.exports = BiBestFirstFinder;
 
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Util = __webpack_require__(6);
@@ -34477,10 +34781,10 @@ module.exports = BiBreadthFirstFinder;
 
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var BiAStarFinder = __webpack_require__(28);
+var BiAStarFinder = __webpack_require__(29);
 
 /**
  * Bi-directional Dijkstra path-finder.
@@ -34507,12 +34811,12 @@ module.exports = BiDijkstraFinder;
 
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Util       = __webpack_require__(6);
 var Heuristic  = __webpack_require__(10);
-var Node       = __webpack_require__(26);
+var Node       = __webpack_require__(27);
 var DiagonalMovement = __webpack_require__(3);
 
 /**
@@ -34722,17 +35026,17 @@ module.exports = IDAStarFinder;
 
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
  * @author aniero / https://github.com/aniero
  */
 var DiagonalMovement = __webpack_require__(3);
-var JPFNeverMoveDiagonally = __webpack_require__(100);
-var JPFAlwaysMoveDiagonally = __webpack_require__(101);
-var JPFMoveDiagonallyIfNoObstacles = __webpack_require__(102);
-var JPFMoveDiagonallyIfAtMostOneObstacle = __webpack_require__(103);
+var JPFNeverMoveDiagonally = __webpack_require__(101);
+var JPFAlwaysMoveDiagonally = __webpack_require__(102);
+var JPFMoveDiagonallyIfNoObstacles = __webpack_require__(103);
+var JPFMoveDiagonallyIfAtMostOneObstacle = __webpack_require__(104);
 
 /**
  * Path finder using the Jump Point Search algorithm
@@ -34759,7 +35063,7 @@ module.exports = JumpPointFinder;
 
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -34885,7 +35189,7 @@ module.exports = JPFNeverMoveDiagonally;
 
 
 /***/ }),
-/* 101 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -35040,7 +35344,7 @@ module.exports = JPFAlwaysMoveDiagonally;
 
 
 /***/ }),
-/* 102 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -35220,7 +35524,7 @@ module.exports = JPFMoveDiagonallyIfNoObstacles;
 
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -35381,13 +35685,13 @@ module.exports = JPFMoveDiagonallyIfAtMostOneObstacle;
 
 
 /***/ }),
-/* 104 */
+/* 105 */
 /***/ (function(module, exports) {
 
 module.exports = [{"id":0,"image":"images/tiles/38.jpg","grid":[[0,0,0,0],[0,0,0,0],[0,2,0,0],[0,0,0,0]],"arrow":true,"skull":true,"name":null,"players":[]},{"id":1,"image":"images/tiles/39.jpg","grid":[[1,1,1,1],[0,0,0,0],[0,0,2,0],[1,0,0,1]],"arrow":true,"skull":false,"name":null,"players":[]},{"id":2,"image":"images/tiles/11.jpg","grid":[[1,1,1,1],[0,0,2,1],[0,0,0,1],[0,0,0,1]],"arrow":false,"skull":true,"name":"Crypt Corner 6-10","players":[]},{"id":3,"image":"images/tiles/37.jpg","grid":[[1,0,2,0],[1,0,0,0],[1,0,0,0],[1,0,0,0]],"arrow":false,"skull":false,"name":"Workshop","players":[]},{"id":4,"image":"images/tiles/42.jpg","grid":[[0,0,0,1],[0,2,0,1],[0,0,0,1],[0,0,0,1]],"arrow":true,"skull":true,"name":"Arcrane Circle","players":[]},{"id":5,"image":"images/tiles/40.jpg","grid":[[1,0,0,1],[1,2,0,0],[1,0,0,0],[1,0,0,1]],"arrow":false,"skull":true,"name":null,"players":[]},{"id":6,"image":"images/tiles/5.jpg","grid":[[0,0,0,1],[0,2,0,0],[0,0,0,0],[0,0,0,1]],"arrow":true,"skull":true,"name":null,"players":[]},{"id":7,"image":"images/tiles/3.jpg","grid":[[1,1,1,1],[0,0,0,0],[0,2,0,0],[0,0,0,0]],"arrow":true,"skull":true,"name":"Crypt of Sergei Von Zarovich","players":[]},{"id":8,"image":"images/tiles/28.jpg","grid":[[1,1,1,1],[0,0,0,1],[0,2,0,1],[0,0,0,1]],"arrow":true,"skull":false,"name":"Crypt of Artimus","players":[]},{"id":9,"image":"images/tiles/6.jpg","grid":[[0,0,0,0],[0,2,0,0],[0,0,0,0],[0,0,0,0]],"arrow":true,"skull":true,"name":null,"players":[]},{"id":10,"image":"images/tiles/21.jpg","grid":[[1,0,0,1],[0,0,2,1],[0,0,0,1],[1,0,0,1]],"arrow":false,"skull":true,"name":null,"players":[]},{"id":11,"image":"images/tiles/2.jpg","grid":[[1,1,1,1],[1,0,0,0],[1,0,2,0],[1,0,0,0]],"arrow":true,"skull":false,"name":"Prince Auriels Crypt","players":[]},{"id":12,"image":"images/tiles/41.jpg","grid":[[1,1,1,1],[1,0,0,0],[1,2,0,0],[1,0,0,0]],"arrow":true,"skull":true,"name":"Crypt Corner 11-15","players":[]},{"id":13,"image":"images/tiles/9.jpg","grid":[[0,2,0,1],[0,0,0,1],[0,0,0,1],[0,0,0,1]],"arrow":false,"skull":false,"name":"Dark Fountain","players":[]},{"id":14,"image":"images/tiles/36.jpg","grid":[[1,0,0,1],[0,2,0,1],[0,0,0,1],[1,0,0,1]],"arrow":false,"skull":true,"name":null,"players":[]},{"id":15,"image":"images/tiles/12.jpg","grid":[[1,0,0,1],[0,0,0,0],[0,2,0,0],[1,0,0,1]],"arrow":true,"skull":true,"name":null,"players":[]},{"id":16,"image":"images/tiles/1.jpg","grid":[[1,1,1,1],[0,0,0,1],[0,0,2,1],[0,0,0,1]],"arrow":true,"skull":true,"name":"Crypt Corner 16-20","players":[]},{"id":17,"image":"images/tiles/8.jpg","grid":[[1,0,0,1],[0,0,2,0],[0,0,0,0],[0,0,0,0]],"arrow":true,"skull":true,"name":"Kings Crypt","players":[]},{"id":18,"image":"images/tiles/17.jpg","grid":[[1,1,1,1],[0,0,0,0],[0,0,2,0],[0,0,0,0]],"arrow":true,"skull":true,"name":"Crypt of Barov and Ravenovia","players":[]},{"id":19,"image":"images/tiles/15.jpg","grid":[[1,1,1,1],[1,0,0,0],[1,0,0,2],[1,0,0,0]],"arrow":false,"skull":false,"name":"Rotting Nook","players":[]},{"id":20,"image":"images/tiles/7.jpg","grid":[[1,0,0,1],[0,0,0,1],[0,2,0,1],[0,0,0,1]],"arrow":true,"skull":true,"name":null,"players":[]},{"id":21,"image":"images/tiles/18.jpg","grid":[[1,0,0,1],[1,0,0,0],[1,0,0,2],[1,0,0,0]],"arrow":true,"skull":true,"name":"Ireena Kolyana's Crypt","players":[]},{"id":22,"image":"images/tiles/16.jpg","grid":[[1,0,0,0],[0,0,2,0],[0,0,0,0],[1,0,0,0]],"arrow":true,"skull":true,"name":null,"players":[]},{"id":23,"image":"images/tiles/14.jpg","grid":[[0,0,0,1],[0,0,0,1],[2,0,0,1],[0,0,0,1]],"arrow":true,"skull":true,"name":"Lonely Crypt ","players":[]},{"id":24,"image":"images/tiles/23.jpg","grid":[[1,0,0,0],[1,0,0,0],[1,2,0,0],[1,0,0,0]],"arrow":false,"skull":true,"name":"Chapel","players":[]},{"id":25,"image":"images/tiles/4.jpg","grid":[[1,0,0,1],[1,0,2,0],[1,0,0,0],[1,0,0,1]],"arrow":false,"skull":true,"name":null,"players":[]},{"id":26,"image":"images/tiles/13.jpg","grid":[[1,0,0,1],[1,0,0,1],[1,0,2,1],[1,0,0,1]],"arrow":false,"skull":false,"name":null,"players":[]},{"id":27,"image":"images/tiles/24.jpg","grid":[[1,0,0,1],[1,0,2,1],[1,0,0,1],[1,0,0,1]],"arrow":false,"skull":false,"name":null,"players":[]},{"id":28,"image":"images/tiles/22.jpg","grid":[[1,0,0,1],[1,0,2,1],[1,0,0,1],[1,0,0,1]],"arrow":true,"skull":false,"name":null,"players":[]},{"id":29,"image":"images/tiles/20.jpg","grid":[[1,1,1,1],[0,0,0,0],[0,2,0,0],[0,0,0,0]],"arrow":false,"skull":true,"name":"Strahds Crypt","players":[]},{"id":30,"image":"images/tiles/29.jpg","grid":[[1,1,1,1],[0,0,0,1],[2,0,0,1],[0,0,0,1]],"arrow":false,"skull":false,"name":"Secret Stairway","players":[]},{"id":31,"image":"images/tiles/27.jpg","grid":[[1,1,1,1],[1,2,0,0],[1,0,0,0],[1,0,0,0]],"arrow":false,"skull":true,"name":"Crypt Corner 1-5 ","players":[]},{"id":32,"image":"images/tiles/19.jpg","grid":[[1,0,0,1],[1,0,0,1],[1,0,2,1],[1,0,0,1]],"arrow":true,"skull":false,"name":null,"players":[]},{"id":33,"image":"images/tiles/10.jpg","grid":[[1,0,0,1],[1,0,2,1],[1,0,0,1],[1,0,0,1]],"arrow":false,"skull":true,"name":null,"players":[]},{"id":34,"image":"images/tiles/30.jpg","grid":[[1,0,0,1],[1,0,0,1],[1,2,0,1],[1,0,0,1]],"arrow":true,"skull":false,"name":null,"players":[]},{"id":35,"image":"images/tiles/26.jpg","grid":[[1,1,1,1],[0,0,0,2],[0,0,0,0],[0,0,0,0]],"arrow":false,"skull":true,"name":"Laboratory","players":[]},{"id":36,"image":"images/tiles/25.jpg","grid":[[1,0,0,1],[1,2,0,1],[1,0,0,1],[1,0,0,1]],"arrow":true,"skull":false,"name":null,"players":[]},{"id":37,"image":"images/tiles/33.jpg","grid":[[0,0,0,0],[0,0,2,0],[0,0,0,0],[0,0,0,0]],"arrow":true,"skull":true,"name":null,"players":[]},{"id":38,"image":"images/tiles/31.jpg","grid":[[1,1,1,1],[0,2,0,0],[0,0,0,0],[0,0,0,0]],"arrow":false,"skull":true,"name":"Fetid Den","players":[]},{"id":39,"image":"images/tiles/32.jpg","grid":[[1,0,0,0],[1,0,0,0],[1,0,2,0],[1,0,0,0]],"arrow":false,"skull":true,"name":null,"players":[]},{"id":40,"image":"images/tiles/35start.jpg","grid":[[0,0,0,0],[2,0,0,0],[0,0,0,0],[0,0,0,0]],"arrow":false,"skull":false,"name":"Start 2","players":[]},{"id":41,"image":"images/tiles/34start.jpg","grid":[[0,0,0,0],[0,0,0,2],[0,0,0,0],[1,1,1,1]],"arrow":false,"skull":false,"name":"Start","players":[]}]
 
 /***/ }),
-/* 105 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35399,7 +35703,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.randomEncounter = randomEncounter;
 exports.getAllMonsters = getAllMonsters;
 
-var _superagent = __webpack_require__(29);
+var _superagent = __webpack_require__(30);
 
 var _superagent2 = _interopRequireDefault(_superagent);
 
@@ -35418,7 +35722,7 @@ function getAllMonsters() {
 }
 
 /***/ }),
-/* 106 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -35587,7 +35891,7 @@ Emitter.prototype.hasListeners = function(event){
 
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35596,7 +35900,7 @@ Emitter.prototype.hasListeners = function(event){
 /**
  * Module of mixed-in functions shared between node and client code
  */
-const isObject = __webpack_require__(40);
+const isObject = __webpack_require__(41);
 
 /**
  * Expose `RequestBase`.
@@ -36297,7 +36601,7 @@ RequestBase.prototype._setTimeouts = function() {
 
 
 /***/ }),
-/* 108 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36307,7 +36611,7 @@ RequestBase.prototype._setTimeouts = function() {
  * Module dependencies.
  */
 
-const utils = __webpack_require__(109);
+const utils = __webpack_require__(110);
 
 /**
  * Expose `ResponseBase`.
@@ -36440,7 +36744,7 @@ ResponseBase.prototype._setStatusProperties = function(status){
 
 
 /***/ }),
-/* 109 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36512,7 +36816,7 @@ exports.cleanHeader = (header, changesOrigin) => {
 
 
 /***/ }),
-/* 110 */
+/* 111 */
 /***/ (function(module, exports) {
 
 function Agent() {
@@ -36538,7 +36842,7 @@ module.exports = Agent;
 
 
 /***/ }),
-/* 111 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36550,7 +36854,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.getAllCharacters = getAllCharacters;
 exports.getCardsByCharacter = getCardsByCharacter;
 
-var _superagent = __webpack_require__(29);
+var _superagent = __webpack_require__(30);
 
 var _superagent2 = _interopRequireDefault(_superagent);
 
@@ -36569,7 +36873,7 @@ function getCardsByCharacter(id) {
 }
 
 /***/ }),
-/* 112 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36580,7 +36884,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.randomTreasure = randomTreasure;
 
-var _superagent = __webpack_require__(29);
+var _superagent = __webpack_require__(30);
 
 var _superagent2 = _interopRequireDefault(_superagent);
 
@@ -36593,7 +36897,196 @@ function randomTreasure() {
 }
 
 /***/ }),
-/* 113 */
+/* 114 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = blazingSkeleton;
+
+// import {diceRoll} from './functions'
+var _require = __webpack_require__(17),
+    roll = _require.roll;
+
+var _require2 = __webpack_require__(17),
+    isSquareAdjacent = _require2.isSquareAdjacent;
+
+var _require3 = __webpack_require__(17),
+    totalPosition = _require3.totalPosition;
+
+var _require4 = __webpack_require__(17),
+    detailedPosition = _require4.detailedPosition;
+
+//Test data
+
+
+var playerDetails = {
+    adjacentTile: false,
+    id: 1,
+    playerTile: [[1, 1, 1, 1], [0, 11, 0, 0], [11, 0, 0, 1], [0, 0, 0, 1]],
+    players: [{ id: 1, name: 'Karl', AC: 20, x: 2, y: 2 }, { id: 2, name: 'Sam the Gimp', AC: 16, x: 1, y: 3 }],
+    monster: { id: 1, name: 'blazing skeleton', x: 1, y: 1 },
+    dataSet: [{ x: 1, y: 1, grid: [[1, 1, 1, 1], [0, 0, 0, 0], [0, 2, 1, 1], [0, 0, 0, 0]] }, { x: 1, y: 2, grid: [[0, 0, 0, 0], [0, 0, 0, 0], [0, 2, 0, 0], [0, 0, 0, 0]] }, { x: 2, y: 2, grid: [[0, 0, 0, 0], [0, 0, 0, 0], [0, 2, 0, 0], [0, 0, 0, 0]] }]
+};
+
+function blazingSkeleton(playerDetails) {
+    //values i need
+    var closestPlayer = playerDetails.id;
+    var heroes = playerDetails.players;
+    var tileAdjacent = playerDetails.adjacent;
+    var squareAdjacent = false;
+    var path = playerDetails.path;
+    var monster = playerDetails.monster;
+    var dataSet = playerDetails.dataSet;
+
+    if (playerDetails.players) {
+        closestPlayer = playerDetails.players.find(function (player) {
+            return player.id == playerDetails.id;
+        });
+    }
+
+    // console.log(closestPlayer)
+
+    //from pos finder function with player.x and player.y, monster.x and monster.y
+    //DETAILED POSITION
+    var playerPos = detailedPosition(closestPlayer);
+
+    var monPos = detailedPosition(playerDetails.monster);
+
+    // console.log('playerPos',playerPos)
+    // console.log('monPos',monPos)
+
+    //Checks for square adjacent
+
+    if (tileAdjacent) {
+        var squareAdjacent = isSquareAdjacent(playerPos.squareX, playerPos.squareY, monPos.squareX, monPos.squareY);
+    }
+
+    // console.log(closestPlayer)
+    // console.log(tileAdjacent)
+
+
+    // Blazing Skeleton attack stats
+    var ballOfFire = {
+        att: 7,
+        dmg: 2,
+        miss: 1
+    };
+
+    var diceRoll = null;
+
+    if (tileAdjacent || squareAdjacent) {
+        var characters = [];
+        for (var i = 0; i < heroes.length; i++) {
+            diceRoll = roll();
+            // console.log('dice roll:',diceRoll)
+            //if hit, burn them 2 dmg
+            if (diceRoll + ballOfFire.att > heroes[i].AC) {
+                // console.log('Oh no!', heroes[i].name + ' got hurt with ' + ballOfFire.dmg + ' damage!')
+                characters.push({
+                    id: heroes[i].id,
+                    damage: ballOfFire.dmg
+                });
+                //if miss, burn them 1 dmg
+            } else if (diceRoll + ballOfFire.att <= heroes[i].AC) {
+                // console.log('Oh no!', heroes[i].name + ' got hurt with ' + ballOfFire.miss + ' damage!')
+                characters.push({
+                    id: heroes[i].id,
+                    damage: ballOfFire.miss
+                });
+            }
+        }
+        // console.log('character data:',characters)
+        return {
+            characters: characters
+            //move closer
+        };
+    } else {
+        //convert to detailedPosition
+        var monsterTileCoords = detailedPosition(monster);
+        var monsterTile = undefined;
+
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+            for (var _iterator = dataSet[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                var tile = _step.value;
+
+                if (tile.x === monsterTileCoords.tileX && tile.y === monsterTileCoords.tileY) {
+                    monsterTile = tile;break;
+                }
+            }
+        } catch (err) {
+            _didIteratorError = true;
+            _iteratorError = err;
+        } finally {
+            try {
+                if (!_iteratorNormalCompletion && _iterator.return) {
+                    _iterator.return();
+                }
+            } finally {
+                if (_didIteratorError) {
+                    throw _iteratorError;
+                }
+            }
+        }
+
+        var offsetX = path[0][0];
+        var offsetY = path[0][1];
+
+        // let nextTile = undefined
+        var nextSquare = undefined;
+
+        outerloop: for (var _i in path) {
+            var squareX = monster.x - offsetX + path[_i][0];
+            var squareY = monster.y - offsetY + path[_i][1];
+            var _iteratorNormalCompletion2 = true;
+            var _didIteratorError2 = false;
+            var _iteratorError2 = undefined;
+
+            try {
+                for (var _iterator2 = dataSet[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                    var _tile = _step2.value;
+
+                    if (squareX > (_tile.x - 1) * 4 && squareX <= (_tile.x - 1) * 4 + 4 && squareY > (_tile.y - 1) * 4 && squareY <= (_tile.y - 1) * 4 + 4) {
+                        if (_tile != monsterTile) {
+                            // nextTile = tile
+                            nextSquare = {
+                                x: squareX,
+                                y: squareY
+                            };
+                            break outerloop;
+                        }
+                    }
+                }
+            } catch (err) {
+                _didIteratorError2 = true;
+                _iteratorError2 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                        _iterator2.return();
+                    }
+                } finally {
+                    if (_didIteratorError2) {
+                        throw _iteratorError2;
+                    }
+                }
+            }
+        }
+
+        return { position: nextSquare };
+    }
+}
+
+/***/ }),
+/* 115 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -36604,7 +37097,7 @@ function randomTreasure() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_history__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Router__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Router__ = __webpack_require__(32);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -36659,18 +37152,18 @@ BrowserRouter.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (BrowserRouter);
 
 /***/ }),
-/* 114 */
+/* 116 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(43);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -36963,7 +37456,7 @@ var createBrowserHistory = function createBrowserHistory() {
 /* harmony default export */ __webpack_exports__["a"] = (createBrowserHistory);
 
 /***/ }),
-/* 115 */
+/* 117 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -37039,7 +37532,7 @@ function resolvePathname(to) {
 /* harmony default export */ __webpack_exports__["a"] = (resolvePathname);
 
 /***/ }),
-/* 116 */
+/* 118 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -37083,18 +37576,18 @@ function valueEqual(a, b) {
 /* harmony default export */ __webpack_exports__["a"] = (valueEqual);
 
 /***/ }),
-/* 117 */
+/* 119 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(43);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 
@@ -37404,15 +37897,15 @@ var createHashHistory = function createHashHistory() {
 /* harmony default export */ __webpack_exports__["a"] = (createHashHistory);
 
 /***/ }),
-/* 118 */
+/* 120 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PathUtils__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__createTransitionManager__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__createTransitionManager__ = __webpack_require__(31);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -37572,7 +38065,7 @@ var createMemoryHistory = function createMemoryHistory() {
 /* harmony default export */ __webpack_exports__["a"] = (createMemoryHistory);
 
 /***/ }),
-/* 119 */
+/* 121 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -37583,7 +38076,7 @@ var createMemoryHistory = function createMemoryHistory() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_history__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Router__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Router__ = __webpack_require__(32);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -37637,18 +38130,18 @@ HashRouter.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (HashRouter);
 
 /***/ }),
-/* 120 */
+/* 122 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_MemoryRouter__ = __webpack_require__(121);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_MemoryRouter__ = __webpack_require__(123);
 // Written in this round about way for babel-transform-imports
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_MemoryRouter__["a" /* default */]);
 
 /***/ }),
-/* 121 */
+/* 123 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -37659,7 +38152,7 @@ HashRouter.propTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_history__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Router__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Router__ = __webpack_require__(33);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -37714,7 +38207,7 @@ MemoryRouter.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (MemoryRouter);
 
 /***/ }),
-/* 122 */
+/* 124 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -37722,8 +38215,8 @@ MemoryRouter.propTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Route__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Link__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Route__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Link__ = __webpack_require__(44);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37800,7 +38293,7 @@ NavLink.defaultProps = {
 /* harmony default export */ __webpack_exports__["a"] = (NavLink);
 
 /***/ }),
-/* 123 */
+/* 125 */
 /***/ (function(module, exports) {
 
 module.exports = Array.isArray || function (arr) {
@@ -37809,18 +38302,18 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 124 */
+/* 126 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Prompt__ = __webpack_require__(125);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Prompt__ = __webpack_require__(127);
 // Written in this round about way for babel-transform-imports
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_Prompt__["a" /* default */]);
 
 /***/ }),
-/* 125 */
+/* 127 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -37911,18 +38404,18 @@ Prompt.contextTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (Prompt);
 
 /***/ }),
-/* 126 */
+/* 128 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Redirect__ = __webpack_require__(127);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Redirect__ = __webpack_require__(129);
 // Written in this round about way for babel-transform-imports
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_Redirect__["a" /* default */]);
 
 /***/ }),
-/* 127 */
+/* 129 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -37935,7 +38428,7 @@ Prompt.contextTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_history__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__generatePath__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__generatePath__ = __webpack_require__(48);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -38051,18 +38544,18 @@ Redirect.contextTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (Redirect);
 
 /***/ }),
-/* 128 */
+/* 130 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_StaticRouter__ = __webpack_require__(129);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_StaticRouter__ = __webpack_require__(131);
 // Written in this round about way for babel-transform-imports
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_StaticRouter__["a" /* default */]);
 
 /***/ }),
-/* 129 */
+/* 131 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -38075,7 +38568,7 @@ Redirect.contextTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_history__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Router__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Router__ = __webpack_require__(33);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -38228,18 +38721,18 @@ StaticRouter.childContextTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (StaticRouter);
 
 /***/ }),
-/* 130 */
+/* 132 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Switch__ = __webpack_require__(131);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Switch__ = __webpack_require__(133);
 // Written in this round about way for babel-transform-imports
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_Switch__["a" /* default */]);
 
 /***/ }),
-/* 131 */
+/* 133 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -38251,7 +38744,7 @@ StaticRouter.childContextTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_warning__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_invariant__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__matchPath__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__matchPath__ = __webpack_require__(34);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -38331,40 +38824,40 @@ Switch.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (Switch);
 
 /***/ }),
-/* 132 */
+/* 134 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_generatePath__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_generatePath__ = __webpack_require__(48);
 // Written in this round about way for babel-transform-imports
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_generatePath__["a" /* default */]);
 
 /***/ }),
-/* 133 */
+/* 135 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_matchPath__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_matchPath__ = __webpack_require__(34);
 // Written in this round about way for babel-transform-imports
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_matchPath__["a" /* default */]);
 
 /***/ }),
-/* 134 */
+/* 136 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_withRouter__ = __webpack_require__(135);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_withRouter__ = __webpack_require__(137);
 // Written in this round about way for babel-transform-imports
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_withRouter__["a" /* default */]);
 
 /***/ }),
-/* 135 */
+/* 137 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -38372,9 +38865,9 @@ Switch.propTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_hoist_non_react_statics__ = __webpack_require__(136);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_hoist_non_react_statics__ = __webpack_require__(138);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_hoist_non_react_statics___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_hoist_non_react_statics__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Route__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Route__ = __webpack_require__(46);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -38413,7 +38906,7 @@ var withRouter = function withRouter(Component) {
 /* harmony default export */ __webpack_exports__["a"] = (withRouter);
 
 /***/ }),
-/* 136 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38488,7 +38981,7 @@ module.exports = hoistNonReactStatics;
 
 
 /***/ }),
-/* 137 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38659,7 +39152,7 @@ var EncounterTreasure = function (_Component) {
 exports.default = (0, _reactRedux.connect)()(EncounterTreasure);
 
 /***/ }),
-/* 138 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38729,7 +39222,7 @@ var Home2 = function (_React$Component) {
 exports.default = Home2;
 
 /***/ }),
-/* 139 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38845,7 +39338,7 @@ var Home = function (_Component) {
 exports.default = Home;
 
 /***/ }),
-/* 140 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38865,7 +39358,7 @@ var _reactRedux = __webpack_require__(7);
 
 var _actions = __webpack_require__(16);
 
-var _CharacterOrder = __webpack_require__(141);
+var _CharacterOrder = __webpack_require__(143);
 
 var _CharacterOrder2 = _interopRequireDefault(_CharacterOrder);
 
@@ -39035,7 +39528,7 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(Characters);
 
 /***/ }),
-/* 141 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39138,7 +39631,7 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(CharacterOrder);
 
 /***/ }),
-/* 142 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

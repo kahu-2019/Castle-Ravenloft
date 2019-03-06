@@ -35,6 +35,7 @@ class Board extends Component {
             },
 
             speed: 0,
+            speedModifier: 2,
 
             explore: {
                 top: false,
@@ -115,7 +116,7 @@ class Board extends Component {
         //  Removes Secret Stairway tile for the ending piece
         let endingPiece = temp.splice(29, 1)[0]
 
-        this.setState({ players: tempPlayers, dataSet: strahdsCrypt, cleanTileSet: strahdsCrypt, completeTileSet: temp, endingPiece, speed: tempPlayers[0].speed }, () => {
+        this.setState({ players: tempPlayers, dataSet: strahdsCrypt, cleanTileSet: strahdsCrypt, completeTileSet: temp, endingPiece, speed: tempPlayers[0].speed+this.state.speedModifier }, () => {
             this.processCharacters()
         })
     }
@@ -195,10 +196,9 @@ class Board extends Component {
     nextPlayer() {
         let temp = this.state.players
         temp.push(temp.shift())
-        this.setState({ players: temp, speed: temp[0].speed }, () => this.checkSidesOfCharacter())
+        this.setState({ players: temp, speed: temp[0].speed+this.state.speedModifier }, () => this.checkSidesOfCharacter())
     }
 
-<<<<<<< HEAD
     adjacentTester(){
 
         for(let monster of this.state.players[0].monsters){
@@ -271,11 +271,6 @@ class Board extends Component {
 
         this.setState({players: tempPlayers}, () => this.processCharacters())
         // console.log(result)
-=======
-    adjacentTester() {
-        let closestPlayer = this.checkAdjacentSquares(this.state.monsters[0])
-        console.log(closestPlayer)
->>>>>>> ee3a1908634d3df3e8c5815ba726ed50bddf5c00
     }
 
     //  Checks the adjacent two squares of a given tile
@@ -1090,7 +1085,7 @@ class Board extends Component {
             if (set.y > rows) rows = set.y
         })
         return (
-            <React.Fragment>
+            <div style={{overflow:'hidden'}}>
                 <TimeTract />
                 <div className='board-container'>
                     <div style={{
@@ -1120,7 +1115,7 @@ class Board extends Component {
                     {this.state.explore.top && <React.Fragment><button onClick={() => this.prepTileForAdding(0)}>Explore top</button><br /></React.Fragment>}
                     {this.state.explore.bottom && <button onClick={() => this.prepTileForAdding(2)}>Explore bottom</button>}
                 </div>
-            </React.Fragment>
+            </div>
         )
     }
 }

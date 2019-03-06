@@ -11,13 +11,8 @@ import Powers from "./Powers";
 class App extends Component {
   render() {
     return (
-<<<<<<< HEAD
-      <div style={{ overflow: 'hidden' }}>
-        <div>
-=======
       <div style={{ overflow: "hidden" }}>
-        <div className="container-fluid">
->>>>>>> ee3a1908634d3df3e8c5815ba726ed50bddf5c00
+        <div>
           <Router>
             <Fragment>
               <Route exact path="/" component={Home2} />
