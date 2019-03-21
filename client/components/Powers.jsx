@@ -331,7 +331,7 @@ class Powers extends Component {
                                 return (
                                     <Fragment key={i}>
                                                 <label className="form-check-label">
-                                                    <input className="form-check-input" type="radio" id={`inlineRadio1${i}`} value={JSON.stringify(daily)} name='dailyResult' onChange={this.handleChange} />
+                                                    <input className="form-check-input" type="radio" id={`inlineRadio1${i}`} value={JSON.stringify(daily)} name='dailyResult' onChange={this.handleChange} required/>
 
                                                     <div className="card">
                                                         
@@ -380,7 +380,7 @@ class Powers extends Component {
                                 return (
                                     <Fragment key={i}>
                                                 <label className="form-check-label">
-                                                    <input className="form-check-input" type="radio" id={`inlineRadio2${i}`} value={JSON.stringify(utility)} name='utilityResult' onChange={this.handleChange} />
+                                                    <input className="form-check-input" type="radio" id={`inlineRadio2${i}`} value={JSON.stringify(utility)} name='utilityResult' onChange={this.handleChange} required/>
                                                     <div className="card">
                                                             <div className="utilityCard">
                                                                 <div className='row'>
