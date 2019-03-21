@@ -3,6 +3,9 @@ import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
 import { getCardsByCharacter, addPowerCards } from '../actions';
 import SneakAttack from './default_powers/SneakAttack';
+import DragonsBreath from './default_powers/DragonsBreath';
+import HealingWord from './default_powers/HealingWord';
+import FeySted from './default_powers/FeySted';
 
 class Powers extends Component {
     constructor(props) {
@@ -277,80 +280,12 @@ class Powers extends Component {
                 {this.state.sneakAttack ?
                     <SneakAttack sneakAttack={this.state.sneakAttack}/>
                     : this.state.dragonsBreath ?
-                        <Fragment>
-                            <h3 className="orderList">You get this by default:</h3>
-                            <div className="row justify-content-center">
-                            <div className="card">               
-                                <div className="dailyCard">
-                                    <div className='row'>
-                                        <h5 className="card-title powerCardTitle">{this.state.dragonsBreath.title}</h5>
-                                        <p className="powerCardSubtitle">{this.state.dragonsBreath.subtitle}</p>
-                                        <div className="PowerCardInst">
-                                        <p>{this.state.dragonsBreath.instruction_1}</p>
-                                        <p>{this.state.dragonsBreath.instruction_2}</p>
-                                        </div>
-                                    </div>
-                                    {this.state.dragonsBreath.damage &&
-                                        <div className="powerCardNumberBox2">
-                                            <div className='row'>
-                                                <div className='col attribs-title card-text pcb'>Attack</div>
-                                                <div className='col attribs-title card-text pcb'>Damage</div>
-                                            </div>
-                                            <div className='row'>
-                                                <div className='col attribs card-text pcb'>+ {this.state.dragonsBreath.attack}</div>
-                                                <div className='col attribs card-text pcb'>{this.state.dragonsBreath.damage}</div>
-                                            </div>
-                                            {this.state.dragonsBreath.miss &&
-                                                        <Fragment>
-                                                            <div className="">Miss: {this.state.dragonsBreath.miss} Damage</div>
-                                                        </Fragment>
-                                                    }
-                                        </div>
-                                    }
-                                    <p><small className="powerCardUse2">CAN ONLY USE ONCE</small></p>
-                                </div>                
-                            </div>
-                            </div>
-                        </Fragment>
-                        : this.state.healingWord ?
-                            <Fragment>
-                                <h3 className="orderList">You get this by default:</h3>
-                                <div className="row justify-content-center">
-                                <div className="card">
-                                    <div className="utilityCard">
-                                        <div className='row'>
-                                            <h5 className="card-title powerCardTitle">{this.state.healingWord.title}</h5>
-                                            <p className="powerCardSubtitle"><b>{this.state.healingWord.subtitle}</b></p>
-                                            <div className="PowerCardInst">
-                                            <p>{this.state.healingWord.instruction_1}</p>
-                                            <p>{this.state.healingWord.instruction_2}</p>
-                                            </div>
-                                        </div>
-                                        <p><small className="powerCardUse">YOU MAY ONLY USE THIS POWER ONCE</small></p>
-                                    </div>
-                                </div>
-                                </div>
-                            </Fragment>
-                            : this.state.feySted ?
-                                <Fragment>
-                                    <h3 className="orderList">You get this Power by default:</h3>
-                                    <div className="row justify-content-center">
-                                    <div className="card">
-                                        <div className="utilityCard">
-                                            <div className='row'>
-                                                <h5 className="card-title powerCardTitle">{this.state.feySted.title}</h5>
-                                                <p className="powerCardSubtitle"><b>{this.state.feySted.subtitle}</b></p>
-                                                <div className="PowerCardInst">
-                                                <p>{this.state.feySted.instruction_1}</p>
-                                                <p>{this.state.feySted.instruction_2}</p>
-                                                </div>
-                                            </div>
-                                            <p><small className="powerCardUse">YOU MAY ONLY USE THIS POWER ONCE</small></p>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </Fragment>
-                                : ''}
+                    <DragonsBreath dragonsBreath={this.state.dragonsBreath}/>
+                    : this.state.healingWord ?
+                    <HealingWord healingWord={this.state.healingWord}/>
+                    : this.state.feySted ?
+                    <FeySted feySted={this.state.feySted}/>
+                    : ''}
                 <form onSubmit={this.onSubmit} action={`/powers/${this.state.nextCharId}`} id='powersForm'>
                     <div className="form-group">
                     <br/><br/>
