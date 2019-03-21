@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
 import { getCardsByCharacter, addPowerCards } from '../actions';
+import SneakAttack from './default_powers/SneakAttack';
 
 class Powers extends Component {
     constructor(props) {
@@ -272,25 +273,9 @@ class Powers extends Component {
                 <h2 className="orderList">{this.state.character.subtitle}</h2>
                 <p className="nameTitle"><img className="displayFace" src={`./images/icons/${this.state.character.name}.jpg`}/></p>
             </div>
+            {/* default powers */}
                 {this.state.sneakAttack ?
-                    <Fragment>
-                        <h3 className="orderList">You get this by default:</h3>
-                        <div className="row justify-content-center">
-                        <div className="card">
-                            <div className="utilityCard powerCardDefault">
-                                <div className='row'>
-                                    <h5 className="card-title powerCardTitle">{this.state.sneakAttack.title}</h5>
-                                    <p className="powerCardSubtitle"><b>{this.state.sneakAttack.subtitle}</b></p>
-                                    <div className="PowerCardInst">
-                                    <p>{this.state.sneakAttack.instruction_1}</p>
-                                    <p>{this.state.sneakAttack.instruction_2}</p>
-                                    </div>
-                                </div>
-                                <p><small className="powerCardUse">YOU MAY ONLY USE THIS POWER ONCE</small></p>
-                            </div>
-                            </div>
-                            </div>
-                    </Fragment>
+                    <SneakAttack sneakAttack={this.state.sneakAttack}/>
                     : this.state.dragonsBreath ?
                         <Fragment>
                             <h3 className="orderList">You get this by default:</h3>
