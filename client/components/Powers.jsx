@@ -225,6 +225,7 @@ class Powers extends Component {
       <Fragment>
           <h1>{this.state.character.name}</h1>
           <h2>{this.state.character.subtitle}</h2>
+          {/* Default Powers */}
           {this.state.sneakAttack ?  
                 <Fragment>
                 <h3>You get this by default</h3>
@@ -313,6 +314,7 @@ class Powers extends Component {
                 </div>
         </Fragment>
         : ''}
+
         <form onSubmit={this.onSubmit} action={`/powers/${this.state.nextCharId}`} id='powersForm'>
             <div className="form-group">
                     <h2 className='power-titles'>Daily</h2>
@@ -323,7 +325,7 @@ class Powers extends Component {
                             <div className="col">
                                 <div className="form-check form-check-inline">
                                     <label className="form-check-label">
-                                        <input className="form-check-input" type="radio" id={`inlineRadio1${i}`} value={JSON.stringify(daily)} name='dailyResult' onChange={this.handleChange}/>
+                                        <input className="form-check-input" type="radio" id={`inlineRadio1${i}`} value={JSON.stringify(daily)} name='dailyResult' onChange={this.handleChange} required/>
 
                                             <div className="card">
                                                 <div className='container-fluid'>
@@ -377,7 +379,7 @@ class Powers extends Component {
                             <div className="col">
                                 <div className="form-check form-check-inline">
                                     <label className="form-check-label">
-                                        <input className="form-check-input" type="radio" id={`inlineRadio2${i}`} value={JSON.stringify(utility)} name='utilityResult' onChange={this.handleChange}/>
+                                        <input className="form-check-input" type="radio" id={`inlineRadio2${i}`} value={JSON.stringify(utility)} name='utilityResult' onChange={this.handleChange} required/>
 
                                             <div className="card">
                                                 <div className='container-fluid'>
