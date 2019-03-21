@@ -1,29 +1,32 @@
-import { randomEncounter as apiGetRandomEncounter, getAllMonsters as apiAllMonsters } from "../api/encounter";
+import {
+  randomEncounter as apiGetRandomEncounter,
+  getAllMonsters as apiAllMonsters
+} from "../api/encounter";
 import {
   getAllCharacters as apiGetAllCharacters,
   getCardsByCharacter as apiGetCardsByCharacter
 } from "../api/characters";
 
-export function getAllMonsters(){
-    return dispatch => {
-        return apiAllMonsters().then(monsters => {
-            dispatch(saveAllMonsters(monsters))
-        })
-    }
+import { randomTreasure as apiGetRandomTreasure } from "../api/treasure";
+
+export function getAllMonsters() {
+  return dispatch => {
+    return apiAllMonsters().then(monsters => {
+      dispatch(saveAllMonsters(monsters));
+    });
+  };
 }
 
-export function saveAllMonsters(monsters){
-    return {
-        type: "SAVE_ALL_MONSTERS",
-        monsters
-    }
+export function saveAllMonsters(monsters) {
+  return {
+    type: "SAVE_ALL_MONSTERS",
+    monsters
+  };
 }
 
 export function getRandomEncounter() {
   return dispatch => {
     return apiGetRandomEncounter().then(randomEncounter => {
-      // dispatch(saveRandomEncounter(randomEncounter));
-      console.log("action", randomEncounter);
       return randomEncounter;
     });
   };
@@ -32,6 +35,20 @@ export function getRandomEncounter() {
 export function saveRandomEncounter(randomEncounter) {
   return dispatch => {
     type: "SAVE_RANDOM_ENCOUNTER", randomEncounter;
+  };
+}
+
+export function getRandomTreasure() {
+  return dispatch => {
+    return apiGetRandomTreasure().then(randomTreasure => {
+      return randomTreasure;
+    });
+  };
+}
+
+export function saveRandomTreasure(randomTreasure) {
+  return dispatch => {
+    type: "SAVE_RANDOM_TREASURE", randomTreasure;
   };
 }
 
@@ -80,11 +97,9 @@ export function addPowerCards(id, powerCards) {
     powerCards
   };
 }
-
-export function updateLevel(character_id) {
+export function scrollTextViewChange(scrollTextView) {
   return {
-    type: "UPDATE_ONE_CHARACTER",
-    character_id,
-
-  };
+    type: 'SCROLL_TEXT_VIEW',
+    scrollTextView
+  }
 }
