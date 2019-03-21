@@ -23,6 +23,7 @@ class Powers extends Component {
         this.onSubmit = this.onSubmit.bind(this)
         this.nextCharacter = this.nextCharacter.bind(this)
         this.submit = this.submit.bind(this)
+        this.formValidation = this.formValidation.bind(this)
     }
 
     componentDidMount() {
@@ -194,16 +195,59 @@ class Powers extends Component {
                 return cards
         }
 
-        this.submit(id, cards)
+        this.formValidation(id, cards)
 
     }
 
     submit(id, cards) {
+        this.props.dispatch(addPowerCards(id, cards))
+        this.nextCharacter()
+    }
+
+    formValidation(id,cards){
+        var isValid = {
+            atWill: false,
+            daily: false,
+            utility: false
+        }
+
         if (cards.atWill.length < 2) {
             alert("You must pick 2 At Will powers")
-        } else {
-            this.props.dispatch(addPowerCards(id, cards))
-            this.nextCharacter()
+        }  else{isValid.atWill = true}
+
+        if(cards.daily.length){
+            var dailyValid = formValidation(cards.daily)
+            if(!dailyValid){
+                alert("You must pick one daily power")
+            }else{
+                isValid.daily = true
+            }
+        } else if(!cards.daily.id){
+            alert("You must pick one daily power")
+        } else{isValid.daily = true}
+        
+        if(cards.utility.length){
+            var uitilityValid = formValidation(cards.utility)
+            if(!uitilityValid){
+                alert("You must pick one utility power")
+            }else{
+                isValid.utility = true
+            }
+        } else if(!cards.utility.id){
+            alert("You must pick one utility power")
+        } else{isValid.utility = true}
+
+        function formValidation(arr){
+            for(let i of arr){
+                if(!i.id){
+                    return false
+                }
+            }
+            return true
+        }
+
+        if(isValid.atWill && isValid.daily && isValid.utility){
+            this.submit(id,cards)
         }
     }
 
@@ -331,7 +375,7 @@ class Powers extends Component {
                                 return (
                                     <Fragment key={i}>
                                                 <label className="form-check-label">
-                                                    <input className="form-check-input" type="radio" id={`inlineRadio1${i}`} value={JSON.stringify(daily)} name='dailyResult' onChange={this.handleChange} required/>
+                                                    <input className="form-check-input" type="radio" id={`inlineRadio1${i}`} value={JSON.stringify(daily)} name='dailyResult' onChange={this.handleChange} />
 
                                                     <div className="card">
                                                         
@@ -380,7 +424,7 @@ class Powers extends Component {
                                 return (
                                     <Fragment key={i}>
                                                 <label className="form-check-label">
-                                                    <input className="form-check-input" type="radio" id={`inlineRadio2${i}`} value={JSON.stringify(utility)} name='utilityResult' onChange={this.handleChange} required/>
+                                                    <input className="form-check-input" type="radio" id={`inlineRadio2${i}`} value={JSON.stringify(utility)} name='utilityResult' onChange={this.handleChange} />
                                                     <div className="card">
                                                             <div className="utilityCard">
                                                                 <div className='row'>
